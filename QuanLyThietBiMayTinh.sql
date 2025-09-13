@@ -33,7 +33,8 @@ create table XaPhuong
 	on 
 			delete cascade
 		on 
-			update cascade
+			update cascade,
+	tenXaPhuong nvarchar(30) not null
 )
 create table NguoiDung
 (
@@ -90,8 +91,8 @@ create table DonDatHang
 			update cascade,
 	sdtGiaoHang char(11) not null,
 	soNha nvarchar(50) not null,
-	trangThai nvarchar(10) not null,
-	thanhToan nvarchar(10) not null,
+	trangThai nvarchar(20) not null,
+	thanhToan nvarchar(15) not null,
 	ngayDat datetime,
 	ngayThanhToan datetime,
 	ngayGiaoDuKien datetime
@@ -161,11 +162,11 @@ ALTER TABLE NguoiDung
 ADD CONSTRAINT chk_SDT CHECK (LEN(sdt) BETWEEN 9 AND 10 AND (sdt LIKE '09%' OR sdt LIKE '08%'));
 -- trạng thái: đang giao, đã giao, đã hủy.
 ALTER TABLE DonDatHang
-ADD CONSTRAINT chk_TrangThai CHECK (trangThai IN ('Đang giao', 'Đã giao', 'Đã hủy'));
+ADD CONSTRAINT chk_TrangThai CHECK (trangThai IN (N'Đang giao', N'Đã giao', N'Đã hủy'));
 
 -- thanhToan: đã thanh toán, chưa thanh toán.
 ALTER TABLE DonDatHang
-ADD CONSTRAINT chk_ThanhToan CHECK (thanhToan IN ('Đã thanh toán', 'Chưa thanh toán'));
+ADD CONSTRAINT chk_ThanhToan CHECK (thanhToan IN (N'Đã thanh toán', N'Chưa thanh toán'));
 -- dongia >= 0
 ALTER TABLE ChiTietDonHang
 ADD CONSTRAINT chk_DonGia CHECK (donGia >= 0);
@@ -177,9 +178,6 @@ ADD CONSTRAINT chk_NgayDat_NgayThanhToan CHECK (ngayDat <= ngayThanhToan),
 -- Ràng buộc tên đăng nhập không trùng lặp
 ALTER TABLE NguoiDung
 ADD CONSTRAINT uq_Email UNIQUE (email);
--- Ràng buộc email không trùng lặp
-ALTER TABLE NguoiDung
-ADD CONSTRAINT uq_Email UNIQUE (email);
 -- Ràng buộc link ảnh
 ALTER TABLE SanPham
 ADD CONSTRAINT chk_ImageURL CHECK (imageURL IS NULL OR imageURL LIKE '%.jpg' OR imageURL LIKE '%.png' OR imageURL LIKE '%.jpeg');
@@ -188,5 +186,254 @@ ALTER TABLE CongTy
 ADD CONSTRAINT chk_TenCongTy_NotEmpty CHECK (LEN(LTRIM(RTRIM(tenCongTy))) > 0);
 ALTER TABLE LoaiSanPham
 ADD CONSTRAINT chk_TenLoaiSanPham_NotEmpty CHECK (LEN(LTRIM(RTRIM(tenLoaiSanPham))) > 0);
+
+--========================================INSERT DATA=======================================-
+INSERT INTO Tinh (idTinh, tenTinh) VALUES
+('T001', N'Hà Nội'),
+('T002', N'TP Hồ Chí Minh'),
+('T003', N'Đà Nẵng'),
+('T004', N'Hải Phòng'),
+('T005', N'Cần Thơ');
+
+INSERT INTO Huyen (idHuyen, idTinh, tenHuyen) VALUES
+('H001', 'T001', N'Quận Hoàn Kiếm'),
+('H002', 'T001', N'Quận Ba Đình'),
+
+('H003', 'T002', N'Quận 1'),
+('H004', 'T002', N'Quận Bình Thạnh'),
+
+('H005', 'T003', N'Quận Hải Châu'),
+('H006', 'T003', N'Quận Thanh Khê'),
+
+('H007', 'T004', N'Quận Lê Chân'),
+('H008', 'T004', N'Quận Hồng Bàng'),
+
+('H009', 'T005', N'Quận Ninh Kiều'),
+('H010', 'T005', N'Quận Bình Thủy');
+
+INSERT INTO XaPhuong (idXaPhuong, idHuyen, tenXaPhuong) VALUES
+-- Hà Nội - Hoàn Kiếm
+('XP001', 'H001', N'Phường Hàng Bạc'),
+('XP002', 'H001', N'Phường Hàng Buồm'),
+('XP003', 'H001', N'Phường Tràng Tiền'),
+
+-- Hà Nội - Ba Đình
+('XP004', 'H002', N'Phường Ngọc Hà'),
+('XP005', 'H002', N'Phường Kim Mã'),
+('XP006', 'H002', N'Phường Điện Biên'),
+
+-- TP HCM - Quận 1
+('XP007', 'H003', N'Phường Bến Nghé'),
+('XP008', 'H003', N'Phường Bến Thành'),
+('XP009', 'H003', N'Phường Nguyễn Thái Bình'),
+
+-- TP HCM - Bình Thạnh
+('XP010', 'H004', N'Phường 1'),
+('XP011', 'H004', N'Phường 2'),
+('XP012', 'H004', N'Phường 3'),
+
+-- Đà Nẵng - Hải Châu
+('XP013', 'H005', N'Phường Hải Châu I'),
+('XP014', 'H005', N'Phường Hải Châu II'),
+('XP015', 'H005', N'Phường Bình Hiên'),
+
+-- Đà Nẵng - Thanh Khê
+('XP016', 'H006', N'Phường An Khê'),
+('XP017', 'H006', N'Phường Chính Gián'),
+('XP018', 'H006', N'Phường Tam Thuận'),
+
+-- Hải Phòng - Lê Chân
+('XP019', 'H007', N'Phường An Biên'),
+('XP020', 'H007', N'Phường An Dương'),
+('XP021', 'H007', N'Phường Dư Hàng'),
+
+-- Hải Phòng - Hồng Bàng
+('XP022', 'H008', N'Phường Hoàng Văn Thụ'),
+('XP023', 'H008', N'Phường Hạ Lý'),
+('XP024', 'H008', N'Phường Quán Toan'),
+
+-- Cần Thơ - Ninh Kiều
+('XP025', 'H009', N'Phường An Hòa'),
+('XP026', 'H009', N'Phường An Nghiệp'),
+('XP027', 'H009', N'Phường Tân An'),
+
+-- Cần Thơ - Bình Thủy
+('XP028', 'H010', N'Phường An Thới'),
+('XP029', 'H010', N'Phường Bình Thủy'),
+('XP030', 'H010', N'Phường Trà An');
+
+INSERT INTO NguoiDung (idNguoiDung, idXaPhuong, tenDangNhap, matKhau, email, sdt, soNha) VALUES
+-- Hà Nội
+('ND001', 'XP001', N'Nguyễn Văn An', 'An11111@', 'nguyenvanan.hn@gmail.com', '0912345678', N'12 Hàng Bạc'),
+('ND002', 'XP002', N'Trần Thị Bích', 'Bich11111@', 'tranthibich.hn@gmail.com', '0898765432', N'34 Hàng Buồm'),
+
+-- TP HCM
+('ND003', 'XP007', N'Lê Minh Phúc', 'Phuc11111@', 'leminhphuc.hcm@gmail.com', '0913344556', N'56 Bến Nghé'),
+('ND004', 'XP008', N'Phạm Thị Quỳnh', 'Quynh11111@', 'phamthiquynh.hcm@gmail.com', '0822233345', N'78 Bến Thành'),
+
+-- Hải Phòng
+('ND005', 'XP019', N'Hoàng Văn Dũng', 'Dung11111@', 'hoangvandung.hp@gmail.com', '0933344455', N'23 An Biên'),
+('ND006', 'XP020', N'Ngô Thị Hường', 'Huong11111@', 'ngothihuong.hp@gmail.com', '0834455667', N'45 An Dương'),
+
+-- Cần Thơ
+('ND007', 'XP025', N'Nguyễn Văn Hùng', 'Hung11111@', 'nguyenvanhung.ct@gmail.com', '0915566778', N'12 An Hòa'),
+('ND008', 'XP026', N'Trần Thị Hoa', 'Hoa11111@', 'tranthihoa.ct@gmail.com', '0891122334', N'34 An Nghiệp'),
+
+-- Đà Nẵng (10 người)
+('ND009', 'XP013', N'Nguyễn Văn Yên', 'Yen11111@', 'nguyenvanyen.dn@gmail.com', '0912233445', N'12 Hải Châu I'),
+('ND010', 'XP013', N'Trần Thị Ánh', 'Anh11111@', 'tranthianh.dn@gmail.com', '0891122335', N'34 Hải Châu I'),
+
+('ND011', 'XP014', N'Lê Văn Bình', 'Binh11111@', 'levanbinh.dn@gmail.com', '0919988777', N'56 Hải Châu II'),
+('ND012', 'XP014', N'Phạm Thị Cúc', 'Cuc11111@', 'phamthicuc.dn@gmail.com', '0812345679', N'78 Hải Châu II'),
+
+('ND013', 'XP015', N'Hoàng Văn Dũng', 'Dung11111@', 'hoangvandung.dn@gmail.com', '0922233345', N'23 Bình Hiên'),
+('ND014', 'XP015', N'Ngô Thị Vy', 'Vy11111@', 'ngothihuong.dn@gmail.com', '0834455668', N'45 Bình Hiên'),
+
+('ND015', 'XP016', N'Nguyễn Văn Khoa', 'Khoa11111@', 'nguyenvankhoa.dn@gmail.com', '0912345567', N'12 An Khê'),
+('ND016', 'XP016', N'Trần Thị Liên', 'Lien11111@', 'tranthilien.dn@gmail.com', '0892345567', N'34 An Khê'),
+
+('ND017', 'XP017', N'Lê Văn Mạnh', 'Manh11111@', 'levanmanh.dn@gmail.com', '0913344557', N'56 Chính Gián'),
+('ND018', 'XP017', N'Phạm Thị Nga', 'Nga11111@', 'phamthinga.dn@gmail.com', '0823344557', N'78 Chính Gián');
+
+INSERT INTO LoaiSanPham (idLoaiSanPham, tenLoaiSanPham) VALUES
+('LSP01', N'CPU'),
+('LSP02', N'Mainboard'),
+('LSP03', N'RAM'),
+('LSP04', N'Ổ cứng SSD/HDD'),
+('LSP05', N'Card đồ họa (GPU)'),
+('LSP06', N'Nguồn (PSU)'),
+('LSP07', N'Vỏ Case'),
+('LSP08', N'Tản nhiệt CPU');
+
+INSERT INTO CongTy (idCongTy, tenCongTy) VALUES
+('CT01', N'Intel'),
+('CT02', N'AMD'),
+('CT03', N'ASUS'),
+('CT04', N'MSI'),
+('CT05', N'Gigabyte'),
+('CT06', N'Corsair'),
+('CT07', N'Cooler Master'),
+('CT08', N'Kingston');
+
+
+INSERT INTO SanPham (idSanPham, idCongTy, idLoaiSanPham, tenSanPham, imageURL) VALUES
+-- CPU
+('SP01', 'CT01', 'LSP01', N'Intel Core i5-12400F', 'i5-12400f.jpg'),
+('SP02', 'CT01', 'LSP01', N'Intel Core i7-12700K', 'i7-12700k.jpg'),
+('SP03', 'CT02', 'LSP01', N'AMD Ryzen 5 5600X', 'ryzen5600x.jpg'),
+('SP04', 'CT02', 'LSP01', N'AMD Ryzen 7 5800X3D', 'ryzen5800x3d.jpg'),
+
+-- Mainboard
+('SP05', 'CT03', 'LSP02', N'ASUS ROG Strix B550-F', 'b550f.jpg'),
+('SP06', 'CT04', 'LSP02', N'MSI B660 Tomahawk', 'b660.jpg'),
+('SP07', 'CT05', 'LSP02', N'Gigabyte Z690 Aorus Elite', 'z690aorus.jpg'),
+
+-- RAM
+('SP08', 'CT08', 'LSP03', N'Kingston Fury Beast 16GB DDR4 3200', 'fury16.jpg'),
+('SP09', 'CT06', 'LSP03', N'Corsair Vengeance LPX 16GB DDR4 3600', 'vengeance16.jpg'),
+('SP10', 'CT06', 'LSP03', N'Corsair Vengeance RGB 32GB DDR5 5600', 'vengeance32.jpg'),
+
+-- SSD/HDD
+('SP11', 'CT08', 'LSP04', N'Kingston NV2 1TB NVMe SSD', 'nv21tb.jpg'),
+('SP12', 'CT06', 'LSP04', N'Corsair MP600 1TB NVMe SSD', 'mp600.jpg'),
+('SP13', 'CT05', 'LSP04', N'Gigabyte 2TB HDD 7200rpm', 'hdd2tb.jpg'),
+
+-- GPU
+('SP14', 'CT04', 'LSP05', N'MSI RTX 3060 Ventus 2X 12GB', 'rtx3060.jpg'),
+('SP15', 'CT05', 'LSP05', N'Gigabyte RTX 3070 Gaming OC 8GB', 'rtx3070.jpg'),
+('SP16', 'CT03', 'LSP05', N'ASUS TUF Gaming RTX 3080 10GB', 'rtx3080.jpg'),
+
+-- PSU
+('SP17', 'CT07', 'LSP06', N'Cooler Master MWE 650W 80+ Bronze', 'mwe650.jpg'),
+('SP18', 'CT06', 'LSP06', N'Corsair RM750x 750W 80+ Gold', 'rm750x.jpg'),
+
+-- Case
+('SP19', 'CT07', 'LSP07', N'Cooler Master MasterBox TD500', 'td500.jpg'),
+('SP20', 'CT03', 'LSP07', N'ASUS TUF Gaming GT301', 'gt301.jpg'),
+
+-- Tản nhiệt CPU
+('SP21', 'CT07', 'LSP08', N'Cooler Master Hyper 212 Black Edition', 'hyper212.jpg'),
+('SP22', 'CT06', 'LSP08', N'Corsair iCUE H100i Elite Liquid Cooler', 'h100i.jpg');
+
+
+INSERT INTO PhanQuyen (idPhanQuyen, tenPhanQuyen) VALUES
+('PQ01', N'Quản trị viên'),
+('PQ02', N'Nhân viên'),
+('PQ03', N'Khách hàng');
+
+INSERT INTO PhanQuyenNguoiDung (idNguoiDung, idPhanQuyen) VALUES
+('ND001', 'PQ03'), ('ND002', 'PQ03'),
+('ND003', 'PQ03'), ('ND004', 'PQ03'),
+('ND005', 'PQ03'), ('ND006', 'PQ03'),
+('ND007', 'PQ03'), ('ND008', 'PQ03'),
+('ND009', 'PQ03'), ('ND010', 'PQ03'),
+('ND011', 'PQ03'), ('ND012', 'PQ03'),
+('ND013', 'PQ03'), ('ND014', 'PQ03'),
+('ND015', 'PQ03'), ('ND016', 'PQ03'),
+('ND017', 'PQ03'), ('ND018', 'PQ03');
+
+INSERT INTO DonDatHang (idDonDat, idNguoiDung, sdtGiaoHang, soNha, trangThai, thanhToan, ngayDat, ngayThanhToan, ngayGiaoDuKien) VALUES
+('DH001', 'ND001', '0912345678', N'12 Hàng Bạc', N'Đang giao', N'Đã thanh toán', '2025-09-01', '2025-09-02', '2025-09-05'),
+('DH002', 'ND002', '0898765432', N'34 Hàng Buồm', N'Đã giao', N'Đã thanh toán', '2025-09-02', '2025-09-03', '2025-09-06'),
+('DH003', 'ND003', '0913344556', N'56 Bến Nghé', N'Đang giao', N'Chưa thanh toán', '2025-09-04', NULL, '2025-09-08'),
+('DH004', 'ND004', '0822233345', N'78 Bến Thành', N'Đã giao', N'Đã thanh toán', '2025-08-30', '2025-09-01', '2025-09-04'),
+('DH005', 'ND005', '0933344455', N'23 An Biên', N'Đang giao', N'Đã thanh toán', '2025-09-05', '2025-09-05', '2025-09-09'),
+('DH006', 'ND006', '0834455667', N'45 An Dương', N'Đã hủy', N'Chưa thanh toán', '2025-09-06', NULL, '2025-09-10'),
+('DH007', 'ND007', '0915566778', N'12 An Hòa', N'Đang giao', N'Đã thanh toán', '2025-09-07', '2025-09-08', '2025-09-12'),
+('DH008', 'ND008', '0891122334', N'34 An Nghiệp', N'Đã giao', N'Đã thanh toán', '2025-09-01', '2025-09-01', '2025-09-03'),
+('DH009', 'ND009', '0912233445', N'12 Hải Châu I', N'Đang giao', N'Đã thanh toán', '2025-09-08', '2025-09-09', '2025-09-13'),
+('DH010', 'ND010', '0891122335', N'34 Hải Châu I', N'Đã giao', N'Đã thanh toán', '2025-08-28', '2025-08-29', '2025-09-02'),
+('DH011', 'ND011', '0919988777', N'56 Hải Châu II', N'Đang giao', N'Chưa thanh toán', '2025-09-09', NULL, '2025-09-14'),
+('DH012', 'ND012', '0812345679', N'78 Hải Châu II', N'Đã giao', N'Đã thanh toán', '2025-08-25', '2025-08-26', '2025-08-30'),
+('DH013', 'ND013', '0922233345', N'23 Bình Hiên', N'Đang giao', N'Đã thanh toán', '2025-09-10', '2025-09-11', '2025-09-15'),
+('DH014', 'ND014', '0834455668', N'45 Bình Hiên', N'Đã giao', N'Đã thanh toán', '2025-09-03', '2025-09-04', '2025-09-07'),
+('DH015', 'ND015', '0912345567', N'12 An Khê', N'Đang giao', N'Đã thanh toán', '2025-09-11', '2025-09-11', '2025-09-16'),
+('DH016', 'ND016', '0892345567', N'34 An Khê', N'Đã hủy', N'Chưa thanh toán', '2025-09-07', NULL, '2025-09-18'),
+('DH017', 'ND017', '0913344557', N'56 Chính Gián', N'Đang giao', N'Đã thanh toán', '2025-09-02', '2025-09-02', '2025-09-19'),
+('DH018', 'ND018', '0823344557', N'78 Chính Gián', N'Đã giao', N'Đã thanh toán', '2025-09-04', '2025-09-05', '2025-09-09'),
+('DH019', 'ND009', '0912233445', N'12 Hải Châu I', N'Đang giao', N'Đã thanh toán', '2025-09-10', '2025-09-11', '2025-09-15'),
+('DH020', 'ND010', '0891122335', N'34 Hải Châu I', N'Đã giao', N'Đã thanh toán', '2025-09-07', '2025-09-08', '2025-09-12');
+
+INSERT INTO ChiTietDonHang (idDonDat, idSanPham, soluong, donGia) VALUES
+('DH001', 'SP01', 1, 4500000), -- CPU i5
+('DH001', 'SP08', 2, 1200000), -- RAM
+('DH002', 'SP03', 1, 5200000), -- Ryzen 5600X
+('DH002', 'SP05', 1, 3500000), -- Mainboard ASUS B550
+('DH003', 'SP14', 1, 8500000), -- RTX 3060
+('DH004', 'SP02', 1, 9500000), -- i7-12700K
+('DH004', 'SP06', 1, 3800000), -- MSI B660
+('DH005', 'SP15', 1, 13500000), -- RTX 3070
+('DH005', 'SP10', 2, 3100000), -- RAM DDR5
+('DH006', 'SP17', 1, 1500000), -- PSU Cooler Master
+('DH007', 'SP11', 1, 1100000), -- Kingston NV2 SSD
+('DH007', 'SP19', 1, 1800000), -- Case Cooler Master
+('DH008', 'SP04', 1, 8700000), -- Ryzen 5800X3D
+('DH008', 'SP07', 1, 4200000), -- Gigabyte Z690
+('DH009', 'SP12', 1, 2300000), -- Corsair MP600
+('DH009', 'SP22', 1, 3400000), -- Corsair AIO
+('DH010', 'SP13', 1, 1800000), -- HDD 2TB
+('DH011', 'SP16', 1, 18500000), -- RTX 3080
+('DH012', 'SP18', 1, 2800000), -- Corsair RM750x
+('DH013', 'SP20', 1, 2200000), -- Case ASUS
+('DH014', 'SP21', 1, 900000), -- Hyper 212
+('DH015', 'SP09', 2, 1350000), -- RAM Corsair LPX
+('DH016', 'SP01', 1, 4500000), -- i5
+('DH017', 'SP05', 1, 3500000), -- ASUS B550
+('DH018', 'SP14', 1, 8500000), -- RTX 3060
+('DH019', 'SP11', 1, 1100000), -- SSD Kingston
+('DH020', 'SP03', 1, 5200000); -- Ryzen 5600X
+
+INSERT INTO ChiTietGioHang (idChiTietGioHang, idNguoiDung, idSanPham, soLuongTrongGio) VALUES
+('GH001', 'ND001', 'SP01', 1),
+('GH002', 'ND001', 'SP08', 2),
+('GH003', 'ND002', 'SP03', 1),
+('GH004', 'ND002', 'SP05', 1),
+('GH005', 'ND009', 'SP14', 1),
+('GH006', 'ND009', 'SP19', 1),
+('GH007', 'ND010', 'SP11', 1),
+('GH008', 'ND011', 'SP02', 1),
+('GH009', 'ND012', 'SP22', 1),
+('GH010', 'ND013', 'SP16', 1);
+
 
 

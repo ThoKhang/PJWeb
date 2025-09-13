@@ -174,8 +174,19 @@ ALTER TABLE DonDatHang
 ADD CONSTRAINT chk_NgayDat_NgayThanhToan CHECK (ngayDat <= ngayThanhToan),
  CONSTRAINT chk_NgayThanhToan_NgayDuKienNhan CHECK (ngayThanhToan <= ngayGiaoDuKien),
  CONSTRAINT chk_NgayDat_NgayDuKienNhan CHECK (ngayDat <= ngayGiaoDuKien);
-
-
-
+-- Ràng buộc tên đăng nhập không trùng lặp
+ALTER TABLE NguoiDung
+ADD CONSTRAINT uq_Email UNIQUE (email);
+-- Ràng buộc email không trùng lặp
+ALTER TABLE NguoiDung
+ADD CONSTRAINT uq_Email UNIQUE (email);
+-- Ràng buộc link ảnh
+ALTER TABLE SanPham
+ADD CONSTRAINT chk_ImageURL CHECK (imageURL IS NULL OR imageURL LIKE '%.jpg' OR imageURL LIKE '%.png' OR imageURL LIKE '%.jpeg');
+-- Ràng buộc tránh cho tên công ty và tên sản phẩm chỉ là 1 dấu cách
+ALTER TABLE CongTy
+ADD CONSTRAINT chk_TenCongTy_NotEmpty CHECK (LEN(LTRIM(RTRIM(tenCongTy))) > 0);
+ALTER TABLE LoaiSanPham
+ADD CONSTRAINT chk_TenLoaiSanPham_NotEmpty CHECK (LEN(LTRIM(RTRIM(tenLoaiSanPham))) > 0);
 
 

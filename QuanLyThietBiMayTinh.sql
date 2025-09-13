@@ -145,12 +145,37 @@ create table ChiTietGioHang
 )
 --========================================Ràng buộc=======================================-
 -- ràng buộc email có @gmail.com
+ALTER TABLE NguoiDung
+ADD CONSTRAINT chk_Email CHECK (email LIKE '%@gmail.com');
+
 -- ràng buộc mật khẩu: tối thiểu 8 số, có chữ Hoa, số, ký tự đặc biệt.
+ALTER TABLE NguoiDung
+ADD CONSTRAINT chk_MatKhau CHECK (LEN(matKhau) >= 8 AND matKhau LIKE '%[A-Z]%' AND matKhau LIKE '%[0-9]%' AND matKhau LIKE '%[^a-zA-Z0-9]%');
+
 -- số lượng >= 0
+ALTER TABLE ChiTietDonHang
+ADD CONSTRAINT chk_SoLuong CHECK (soluong >= 0);
+
 -- số điện thoại từ 9 -> 10 số (viettel hoặc mobile)
+ALTER TABLE NguoiDung
+ADD CONSTRAINT chk_SDT CHECK (LEN(sdt) BETWEEN 9 AND 10 AND (sdt LIKE '09%' OR sdt LIKE '08%'));
 -- trạng thái: đang giao, đã giao, đã hủy.
+ALTER TABLE DonDatHang
+ADD CONSTRAINT chk_TrangThai CHECK (trangThai IN ('Đang giao', 'Đã giao', 'Đã hủy'));
+
 -- thanhToan: đã thanh toán, chưa thanh toán.
+ALTER TABLE DonDatHang
+ADD CONSTRAINT chk_ThanhToan CHECK (thanhToan IN ('Đã thanh toán', 'Chưa thanh toán'));
 -- dongia >= 0
--- còn nhiều điều kiện khác........
+ALTER TABLE ChiTietDonHang
+ADD CONSTRAINT chk_DonGia CHECK (donGia >= 0);
+--Ràng buộc ngày đặt hàng và ngày thanh toán
+ALTER TABLE DonDatHang
+ADD CONSTRAINT chk_NgayDat_NgayThanhToan CHECK (ngayDat <= ngayThanhToan),
+ CONSTRAINT chk_NgayThanhToan_NgayDuKienNhan CHECK (ngayThanhToan <= ngayGiaoDuKien),
+ CONSTRAINT chk_NgayDat_NgayDuKienNhan CHECK (ngayDat <= ngayGiaoDuKien);
+
+
+
 
 

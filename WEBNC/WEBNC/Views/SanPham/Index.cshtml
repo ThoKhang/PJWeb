@@ -1,0 +1,20 @@
+﻿@model IEnumerable<WEBNC.Models.SanPham>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Tên Sản Phẩm</th>
+            <th>Loại Sản Phẩm</th>
+            <th>Mã công ty</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td></td>
+                <td>@item.tenSanPham</td>
+                <td>@item.idLoaiSanPham</td>
+                <td>@item.idCongTy</td>
+            </tr>
+        }
+</table>

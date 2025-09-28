@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Demo</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Topbar Start -->
+    <div class="container-fluid px-5 d-none border-bottom d-lg-block">
+        <div class="row gx-0 align-items-center">
+            <div class="col-lg-4 text-lg-start mb-lg-0">
+                <div class="d-inline-flex align-items-center" style="height: 45px;">
+                    <a href="#" class="text-muted me-2"> Help</a><small> / </small>
+                    <a href="#" class="text-muted mx-2"> Support</a><small> / </small>
+                    <a href="#" class="text-muted ms-2"> Contact</a>
+                </div>
+            </div>
+            <div class="col-lg-4 ms-auto text-lg-end">
+                <div class="d-inline-flex align-items-center" style="height: 45px;">
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle text-muted ms-2" data-bs-toggle="dropdown"><small><i
+                                    class="fa fa-home me-2"></i> My Dashboard</small></a>
+                        <div class="dropdown-menu rounded">
+                            <a href="#" class="dropdown-item"> Đăng nhập</a>
+                            <a href="#" class="dropdown-item"> Giỏ Hàng</a>
+                            <a href="#" class="dropdown-item"> Thông báo</a>
+                            <a href="#" class="dropdown-item"> Thông tin cá nhân</a>
+                            <a href="#" class="dropdown-item"> Đăng xuất</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid px-5 py-4 d-none d-lg-block">
+        <div class="row gx-0 align-items-center text-center">
+            <div class="col-md-4 col-lg-3 text-center text-lg-start">
+                <div class="d-inline-flex align-items-center">
+                    <a href="./index.html" class="navbar-brand p-0">
+                        <h1 class="display-5 text-primary m-0"><i
+                                class="fas fa-shopping-bag text-secondary me-2"></i>Bán đồ điện tử</h1>
+                        <!-- <img src="img/logo.png" alt="Logo"> -->
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-6 text-center">
+                <div class="position-relative ps-4">
+                    <div class="d-flex border rounded-pill">
+                        <input class="form-control border-0 rounded-pill w-100 py-3" type="text"
+                            data-bs-target="#dropdownToggle123" placeholder="Tìm kiếm sản phẩm">
+                        <select class="form-select text-dark border-0 border-start rounded-0 p-3" style="width: 200px;">
+                            <option value="All Category">Danh mục</option>
+                            <option value="Pest Control-2">Category 1</option>
+                        </select>
+                        <button type="button" class="btn btn-primary rounded-pill py-3 px-5" style="border: 0;"><i
+                                class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3 text-center text-lg-end">
+                <div class="d-inline-flex align-items-center">
+                    <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3"><span
+                            class="rounded-circle btn-md-square border"><i class="fas fa-user"></i></a>
+                    <a href="#" class="text-muted d-flex align-items-center justify-content-center"><span
+                            class="rounded-circle btn-md-square border"><i class="fas fa-shopping-cart"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid nav-bar p-0">
+        <div class="row gx-0 bg-primary px-5 align-items-center">
+            <div class="col-lg-3 d-none d-lg-block">
+                <nav class="navbar navbar-light position-relative" style="width: 250px;">
+                    <button class="navbar-toggler border-0 fs-4 w-100 px-0 text-start" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#allCat">
+                        <h4 class="m-0 text-white"><i class="fa fa-bars me-2"></i>Danh mục</h4>
+                    </button>
+                    <div class="collapse navbar-collapse rounded-bottom" id="allCat">
+                        <div class="navbar-nav ms-auto py-0 shadow">
+                            <ul class="list-unstyled categories-bars">
+                                <li>
+                                    <div class="categories-bars-item">
+                                        <a href="#">Điện tử & Máy tính</a>
+                                        <span>(5)</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="categories-bars-item">
+                                        <a href="#">Laptop </a>
+                                        <span>(2)</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="categories-bars-item">
+                                        <a href="#">Điện thoại & Máy tính bảng</a>
+                                        <span>(8)</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="categories-bars-item">
+                                        <a href="#">Điện thoại thông minh & TV thông minh</a>
+                                        <span>(5)</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-12 col-lg-9">
+                <nav class="navbar navbar-expand-lg navbar-light bg-primary ">
+                    <a href="" class="navbar-brand d-block d-lg-none">
+                        <h1 class="display-5 text-secondary m-0"><i
+                                class="fas fa-shopping-bag text-white me-2"></i>Electro</h1>
+                        <!-- <img src="img/logo.png" alt="Logo"> -->
+                    </a>
+                    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarCollapse">
+                        <span class="fa fa-bars fa-1x"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <div class="navbar-nav ms-auto py-0">
+                            <a href="index.html" class="nav-item nav-link active">Home</a>
+                            <a href="shop.html" class="nav-item nav-link">Shop</a>
+                            <a href="single.html" class="nav-item nav-link">Single Page</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                <div class="dropdown-menu m-0">
+                                    <a href="bestseller.html" class="dropdown-item">Bestseller</a>
+                                    <a href="cart.html" class="dropdown-item">Cart Page</a>
+                                    <a href="cheackout.html" class="dropdown-item">Cheackout</a>
+                                    <a href="404.html" class="dropdown-item">404 Page</a>
+                                </div>
+                            </div>
+                            <a href="contact.html" class="nav-item nav-link me-2">Contact</a>
+                            <div class="nav-item dropdown d-block d-lg-none mb-3">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Danh mục</a>
+                                <div class="dropdown-menu m-0">
+                                    <ul class="list-unstyled categories-bars">
+                                        <li>
+                                            <div class="categories-bars-item">
+                                                <a href="#">Accessories</a>
+                                                <span>(3)</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="categories-bars-item">
+                                                <a href="#">Electronics & Computer</a>
+                                                <span>(5)</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="categories-bars-item">
+                                                <a href="#">Laptops & Desktops</a>
+                                                <span>(2)</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="categories-bars-item">
+                                                <a href="#">Mobiles & Tablets</a>
+                                                <span>(8)</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="categories-bars-item">
+                                                <a href="#">SmartPhone & Smart TV</a>
+                                                <span>(5)</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar & Hero End -->
+
+    <!-- Form Đăng ký -->
+    <div class="container d-flex align-items-center justify-content-center mt-5 pb-5" style="min-height: 80vh;">
+        <div class="card shadow-lg p-4 rounded-4" style="max-width: 850px; width: 100%;">
+            <h3 class="text-center mb-4">Đăng ký tài khoản</h3>
+            <form>
+                <div class="row g-3">
+                    <!-- Cột trái -->
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label">Họ và tên</label>
+                            <input type="text" class="form-control rounded-pill" id="fullName"
+                                placeholder="Nhập họ và tên">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control rounded-pill" id="email" placeholder="Nhập email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Tên đăng nhập</label>
+                            <input type="text" class="form-control rounded-pill" id="username"
+                                placeholder="Nhập tên đăng nhập">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mật khẩu</label>
+                            <input type="password" class="form-control rounded-pill" id="password"
+                                placeholder="Nhập mật khẩu">
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Xác nhận mật khẩu</label>
+                            <input type="password" class="form-control rounded-pill" id="confirmPassword"
+                                placeholder="Nhập lại mật khẩu">
+                        </div>
+                    </div>
+                    <!-- Cột phải -->
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Số điện thoại</label>
+                            <input type="tel" class="form-control rounded-pill" id="phone"
+                                placeholder="Nhập số điện thoại">
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Số nhà / Địa chỉ</label>
+                            <input type="text" class="form-control rounded-pill" id="address"
+                                placeholder="Nhập số nhà, tên đường">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ward" class="form-label">Xã / Phường</label>
+                            <select id="ward" class="form-select rounded-pill">
+                                <option selected disabled>-- Chọn xã / phường --</option>
+                                <option value="XP001">Hòa Minh</option>
+                                <option value="XP002">Hòa Khánh</option>
+                                <option value="XP003">Thanh Khê</option>
+                                <option value="XP004">Mỹ An</option>
+                                <option value="XP005">Khuê Trung</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- Nút đăng ký -->
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-primary w-100 rounded-pill">Đăng ký</button>
+                </div>
+            </form>
+            <p class="text-center mt-3">Đã có tài khoản? <a href="login.html">Đăng nhập</a></p>
+        </div>
+    </div>
+    <!-- End Form -->
+
+    <!-- Bootstrap JS -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+<!-- JavaScript Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+
+</html>

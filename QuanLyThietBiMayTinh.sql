@@ -78,8 +78,8 @@ create table SanPham
 			delete cascade
 		on 
 			update cascade,
-	tenSanPham nvarchar(50) not null,
-	imageURL varchar(30)
+	tenSanPham nvarchar(70) not null,
+	imageURL varchar(70)
 )
 create table DonDatHang
 (
@@ -303,7 +303,8 @@ INSERT INTO LoaiSanPham (idLoaiSanPham, tenLoaiSanPham) VALUES
 ('LSP05', N'Card đồ họa (GPU)'),
 ('LSP06', N'Nguồn (PSU)'),
 ('LSP07', N'Vỏ Case'),
-('LSP08', N'Tản nhiệt CPU');
+('LSP08', N'Tản nhiệt CPU'),
+('LSP09', N'Màn hình');
 
 INSERT INTO CongTy (idCongTy, tenCongTy) VALUES
 ('CT01', N'Intel'),
@@ -318,43 +319,47 @@ INSERT INTO CongTy (idCongTy, tenCongTy) VALUES
 
 INSERT INTO SanPham (idSanPham, idCongTy, idLoaiSanPham, tenSanPham, imageURL) VALUES
 -- CPU
-('SP01', 'CT01', 'LSP01', N'Intel Core i5-12400F', 'i5-12400f.jpg'),
-('SP02', 'CT01', 'LSP01', N'Intel Core i7-12700K', 'i7-12700k.jpg'),
-('SP03', 'CT02', 'LSP01', N'AMD Ryzen 5 5600X', 'ryzen5600x.jpg'),
-('SP04', 'CT02', 'LSP01', N'AMD Ryzen 7 5800X3D', 'ryzen5800x3d.jpg'),
+('SP01', 'CT01', 'LSP01', N'Intel Core i5-12400F', 'C:\PJWeb\Images\CPU_i5-12400f.jpg'),
+('SP02', 'CT01', 'LSP01', N'Intel Core i7-12700K', 'C:\PJWeb\Images\CPU_i7-12700k.jpg'),
+('SP03', 'CT02', 'LSP01', N'AMD Ryzen 5 5600X', 'C:\PJWeb\Images\CPU_Ryzen 5 5600X.jpg'),
+('SP04', 'CT02', 'LSP01', N'AMD Ryzen 7 5800X3D', 'C:\PJWeb\Images\CPU_Ryzen 7 5800X3D.jpg'),
 
 -- Mainboard
-('SP05', 'CT03', 'LSP02', N'ASUS ROG Strix B550-F', 'b550f.jpg'),
-('SP06', 'CT04', 'LSP02', N'MSI B660 Tomahawk', 'b660.jpg'),
-('SP07', 'CT05', 'LSP02', N'Gigabyte Z690 Aorus Elite', 'z690aorus.jpg'),
+('SP05', 'CT03', 'LSP02', N'ASUS ROG Strix B550-F', 'C:\PJWeb\Images\MAIN_ASUS ROG Strix B550-F.jpg'),
+('SP06', 'CT04', 'LSP02', N'MSI B660 Tomahawk', 'C:\PJWeb\Images\MAIN_Gigabyte Z690 Aorus Elite.png'),
+('SP07', 'CT05', 'LSP02', N'Gigabyte Z690 Aorus Elite', 'C:\PJWeb\Images\MAIN_MSI B660 Tomahawk.jpg'),
 
 -- RAM
-('SP08', 'CT08', 'LSP03', N'Kingston Fury Beast 16GB DDR4 3200', 'fury16.jpg'),
-('SP09', 'CT06', 'LSP03', N'Corsair Vengeance LPX 16GB DDR4 3600', 'vengeance16.jpg'),
-('SP10', 'CT06', 'LSP03', N'Corsair Vengeance RGB 32GB DDR5 5600', 'vengeance32.jpg'),
+('SP08', 'CT08', 'LSP03', N'Kingston Fury Beast 16GB DDR4 3200', 'C:\PJWeb\Images\RAM_Corsair Vengeance LPX 16GB DDR4 3600.jpg'),
+('SP09', 'CT06', 'LSP03', N'Corsair Vengeance LPX 16GB DDR4 3600', 'C:\PJWeb\Images\RAM_Kingston Fury Beast 16GB DDR4 3200.jpg'),
+('SP10', 'CT06', 'LSP03', N'Corsair Vengeance RGB 32GB DDR5 5600', 'C:\PJWeb\Images\RAM_Corsair Vengeance RGB 32GB DDR5 5600.jpg'),
 
 -- SSD/HDD
-('SP11', 'CT08', 'LSP04', N'Kingston NV2 1TB NVMe SSD', 'nv21tb.jpg'),
-('SP12', 'CT06', 'LSP04', N'Corsair MP600 1TB NVMe SSD', 'mp600.jpg'),
-('SP13', 'CT05', 'LSP04', N'Gigabyte 2TB HDD 7200rpm', 'hdd2tb.jpg'),
+('SP11', 'CT08', 'LSP04', N'Kingston NV2 1TB NVMe SSD', 'C:\PJWeb\Images\SSD_Kingston NV2 1TB NVMe SSD.jpg'),
+('SP12', 'CT06', 'LSP04', N'Corsair MP600 1TB NVMe SSD', 'C:\PJWeb\Images\SSD_Corsair MP600 1TB NVMe SSD.jpg'),
+('SP13', 'CT05', 'LSP04', N'Gigabyte 2TB HDD 7200rpm', 'C:\PJWeb\Images\HDD_Gigabyte 2TB HDD 7200rpm.jpg'),
 
 -- GPU
-('SP14', 'CT04', 'LSP05', N'MSI RTX 3060 Ventus 2X 12GB', 'rtx3060.jpg'),
-('SP15', 'CT05', 'LSP05', N'Gigabyte RTX 3070 Gaming OC 8GB', 'rtx3070.jpg'),
-('SP16', 'CT03', 'LSP05', N'ASUS TUF Gaming RTX 3080 10GB', 'rtx3080.jpg'),
+('SP14', 'CT04', 'LSP05', N'MSI RTX 3060 Ventus 2X 12GB', 'C:\PJWeb\Images\VGA_MSI RTX 3060 Ventus 2X 12GB.jpg'),
+('SP15', 'CT05', 'LSP05', N'Gigabyte RTX 3070 Gaming OC 8GB', 'C:\PJWeb\Images\VGA_Gigabyte RTX 3070 Gaming OC 8GB.jpg'),
+('SP16', 'CT03', 'LSP05', N'ASUS TUF Gaming RTX 3080 10GB', 'C:\PJWeb\Images\VGA_ASUS TUF Gaming RTX 3080 10GB.jpg'),
 
 -- PSU
-('SP17', 'CT07', 'LSP06', N'Cooler Master MWE 650W 80+ Bronze', 'mwe650.jpg'),
-('SP18', 'CT06', 'LSP06', N'Corsair RM750x 750W 80+ Gold', 'rm750x.jpg'),
+('SP17', 'CT07', 'LSP06', N'Cooler Master MWE 650W 80+ Bronze', 'C:\PJWeb\Images\PSU_Cooler Master MWE 650W 80+ Bronze.jpg'),
+('SP18', 'CT06', 'LSP06', N'Corsair RM750x 750W 80+ Gold', 'C:\PJWeb\Images\PSU_Corsair RM750x 750W 80+ Gold.jpg'),
 
 -- Case
-('SP19', 'CT07', 'LSP07', N'Cooler Master MasterBox TD500', 'td500.jpg'),
-('SP20', 'CT03', 'LSP07', N'ASUS TUF Gaming GT301', 'gt301.jpg'),
+('SP19', 'CT07', 'LSP07', N'Cooler Master MasterBox TD500', 'C:\PJWeb\Images\CASE_Cooler Master MasterBox TD500.jpg'),
+('SP20', 'CT03', 'LSP07', N'ASUS TUF Gaming GT301', 'C:\PJWeb\Images\CASE_ASUS TUF Gaming GT301.jpg'),
 
 -- Tản nhiệt CPU
-('SP21', 'CT07', 'LSP08', N'Cooler Master Hyper 212 Black Edition', 'hyper212.jpg'),
-('SP22', 'CT06', 'LSP08', N'Corsair iCUE H100i Elite Liquid Cooler', 'h100i.jpg');
+('SP21', 'CT07', 'LSP08', N'Cooler Master Hyper 212 Black Edition', 'C:\PJWeb\Images\TNHIET_Cooler Master Hyper 212 Black Edition.jpg'),
+('SP22', 'CT06', 'LSP08', N'Corsair iCUE H100i Elite Liquid Cooler', 'C:\PJWeb\Images\TNHIET_Corsair iCUE H100i Elite Liquid Cooler.jpg'),
 
+--Màn hình
+('SP23', 'CT03', 'LSP09', N'MASUS TUF Gaming VG259QM 24.5 inch, FHD, IPS, 280Hz, 1ms', 'C:\PJWeb\Images\MHinh_MSI G2712FDE.jpg'),
+('SP24', 'CT04', 'LSP09', N'MSI G2712FDE (27 inch, Full HD, 180Hz, Rapid IPS, 1ms, Black)', 'C:\PJWeb\Images\MHinh_MASUS TUF Gaming VG259QM.jpg'),
+('SP25', 'CT05', 'LSP09', N'Gigabyte G24F2 (23.8inch, FHD, IPS, 165Hz, 180Hz(OC), 1ms', 'C:\PJWeb\Images\MHinh_Gigabyte G24F2.jpg');
 
 INSERT INTO PhanQuyen (idPhanQuyen, tenPhanQuyen) VALUES
 ('PQ01', N'Quản trị viên'),

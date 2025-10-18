@@ -62,8 +62,7 @@
               "RelativeToolTip": "WEBNC\\Areas\\Customer\\Controllers\\HomeController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T01:25:37.711Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T01:25:37.711Z"
             },
             {
               "$type": "Document",
@@ -75,8 +74,7 @@
               "RelativeToolTip": "WEBNC\\Areas\\Admin\\Controllers\\SanPhamController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-14T15:26:48.773Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-14T15:26:48.773Z"
             },
             {
               "$type": "Document",
@@ -88,8 +86,7 @@
               "RelativeToolTip": "WEBNC\\Program.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAB0AAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-14T15:20:01.326Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-14T15:20:01.326Z"
             },
             {
               "$type": "Document",
@@ -99,7 +96,7 @@
               "RelativeDocumentMoniker": "WEBNC\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "WEBNC\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAADwvx8AAAAOAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-09-14T15:29:17.245Z",
               "EditorCaption": ""
@@ -114,8 +111,7 @@
               "RelativeToolTip": "WEBNC\\ScaffoldingReadMe.txt",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2025-09-29T01:28:22.827Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T01:28:22.827Z"
             },
             {
               "$type": "Document",
@@ -127,8 +123,7 @@
               "RelativeToolTip": "WEBNC\\Areas\\Admin\\Views\\SanPham\\Index.cshtml",
               "ViewState": "AgIAAAIAAAAAAAAAAADwvxMAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-14T15:30:55.885Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-14T15:30:55.885Z"
             },
             {
               "$type": "Document",
@@ -140,8 +135,7 @@
               "RelativeToolTip": "WEBNC\\WEBNC.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-09-14T15:20:09.5Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-14T15:20:09.5Z"
             },
             {
               "$type": "Document",
@@ -153,8 +147,7 @@
               "RelativeToolTip": "WEBNC.DataAccess\\Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-29T01:25:57.462Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-29T01:25:57.462Z"
             },
             {
               "$type": "Document",
@@ -166,8 +159,7 @@
               "RelativeToolTip": "WEBNC\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAACmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-09-14T15:17:55.806Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-14T15:17:55.806Z"
             }
           ]
         },

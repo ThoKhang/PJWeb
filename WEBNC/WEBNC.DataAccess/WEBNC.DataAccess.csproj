@@ -19,8 +19,4 @@
     <ProjectReference Include="..\WEBNC.Models\WEBNC.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repository\IRepository\" />
-  </ItemGroup>
-
 </Project>

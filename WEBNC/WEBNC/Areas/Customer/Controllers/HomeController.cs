@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Web.DataAccess.Repository.IRepository;
 using WEBNC.Models;
 
 namespace WEBNC.Areas.Customer.Controllers
@@ -7,6 +8,7 @@ namespace WEBNC.Areas.Customer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _unitOfWork;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -15,6 +17,7 @@ namespace WEBNC.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
+            //IEnumerable<SanPham> productList = _unitOfWor;
             return View();
         }
 

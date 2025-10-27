@@ -17,7 +17,6 @@ namespace WEBNC.DataAccess.Repository
         {
             _db = db;
         }
-
         public void Update(SanPham obj)
         {
             var objFromDb = _db.SanPham.SingleOrDefault(u => u.idSanPham == obj.idSanPham);

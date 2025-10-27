@@ -1,5 +1,7 @@
 ﻿using Web.DataAccess.Repository.IRepository;
 using WEBNC.Data;
+using WEBNC.DataAccess.Repository;
+using WEBNC.DataAccess.Repository.IRepository;
 
 namespace Web.DataAccess.Repository
 {
@@ -9,9 +11,9 @@ namespace Web.DataAccess.Repository
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
-            //sanpham = new SanPham(_db);
+            SanPham = new SanPhamRepository(_db);
         }
-        //public ISanPham sanpham { get; private set; }
+        public ISanPhamRepository SanPham { get; private set; }
 
         public void save()
         {

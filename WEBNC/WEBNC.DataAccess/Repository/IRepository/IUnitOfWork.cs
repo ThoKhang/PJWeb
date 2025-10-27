@@ -1,8 +1,11 @@
-﻿namespace Web.DataAccess.Repository.IRepository
+﻿using WEBNC.Data;
+using WEBNC.DataAccess.Repository.IRepository;
+
+namespace Web.DataAccess.Repository.IRepository
 {
     public interface IUnitOfWork
     {
-        //ICategoryRepository Category { get; }
+        ISanPhamRepository SanPham { get; }
         void save();
     }
 }

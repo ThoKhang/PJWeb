@@ -342,3 +342,4 @@ F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\WEBNC.genruntimeco
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\ref\WEBNC.dll
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\compressed\zxj0rn2mcv-nou1ph5ll2.gz
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\compressed\h6lmxd0ha3-u60dxi82b1.gz
+F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\WEBNC.MvcApplicationPartsAssemblyInfo.cs

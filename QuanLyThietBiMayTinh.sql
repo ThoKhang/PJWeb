@@ -186,6 +186,9 @@ ALTER TABLE CongTy
 ADD CONSTRAINT chk_TenCongTy_NotEmpty CHECK (LEN(LTRIM(RTRIM(tenCongTy))) > 0);
 ALTER TABLE LoaiSanPham
 ADD CONSTRAINT chk_TenLoaiSanPham_NotEmpty CHECK (LEN(LTRIM(RTRIM(tenLoaiSanPham))) > 0);
+--=======================================ALTER TABLE=======================================
+ALTER TABLE SanPham
+ADD gia decimal(18,2) not null default 0;
 
 --========================================INSERT DATA=======================================-
 INSERT INTO Tinh (idTinh, tenTinh) VALUES
@@ -317,49 +320,49 @@ INSERT INTO CongTy (idCongTy, tenCongTy) VALUES
 ('CT08', N'Kingston');
 
 
-INSERT INTO SanPham (idSanPham, idCongTy, idLoaiSanPham, tenSanPham, imageURL) VALUES
--- CPU: đủ ảnh
-('SP01', 'CT01', 'LSP01', N'Intel Core i5-12400F', 'CPU_i5-12400f.jpg'),
-('SP02', 'CT01', 'LSP01', N'Intel Core i7-12700K', 'CPU_i7-12700k.jpg'),
-('SP03', 'CT02', 'LSP01', N'AMD Ryzen 5 5600X', 'CPU_Ryzen_5_5600X.jpg'),
-('SP04', 'CT02', 'LSP01', N'AMD Ryzen 7 5800X3D', 'CPU_Ryzen_7_5800X3D.jpg'),
+INSERT INTO SanPham (idSanPham, idCongTy, idLoaiSanPham, tenSanPham, imageURL, gia) VALUES
+-- CPU
+('SP01', 'CT01', 'LSP01', N'Intel Core i5-12400F', 'CPU_i5-12400f.jpg', 4300000),
+('SP02', 'CT01', 'LSP01', N'Intel Core i7-12700K', 'CPU_i7-12700k.jpg', 7500000),
+('SP03', 'CT02', 'LSP01', N'AMD Ryzen 5 5600X', 'CPU_Ryzen_5_5600X.jpg', 4200000),
+('SP04', 'CT02', 'LSP01', N'AMD Ryzen 7 5800X3D', 'CPU_Ryzen_7_5800X3D.jpg', 8900000),
 
--- Mainboard: đủ ảnh
-('SP05', 'CT03', 'LSP02', N'ASUS ROG Strix B550-F', 'MAIN_ASUS_ROG_Strix_B550-F.jpg'),
-('SP06', 'CT04', 'LSP02', N'MSI B660 Tomahawk', 'MAIN_Gigabyte_Z690_Aorus_Elite.png'),
-('SP07', 'CT05', 'LSP02', N'Gigabyte Z690 Aorus Elite', 'MAIN_MSI_B660_Tomahawk.jpg'),
+-- Mainboard
+('SP05', 'CT03', 'LSP02', N'ASUS ROG Strix B550-F', 'MAIN_ASUS_ROG_Strix_B550-F.jpg', 4500000),
+('SP06', 'CT04', 'LSP02', N'MSI B660 Tomahawk', 'MAIN_Gigabyte_Z690_Aorus_Elite.png', 4900000),
+('SP07', 'CT05', 'LSP02', N'Gigabyte Z690 Aorus Elite', 'MAIN_MSI_B660_Tomahawk.jpg', 5600000),
 
--- RAM : đủ ảnh
-('SP08', 'CT08', 'LSP03', N'Kingston Fury Beast 16GB DDR4 3200', 'RAM_Corsair_Vengeance_LPX_16GB_DDR4_3600.jpg'),
-('SP09', 'CT06', 'LSP03', N'Corsair Vengeance LPX 16GB DDR4 3600', 'RAM_Kingston_Fury_Beast_16GB_DDR4_3200.jpg'),
-('SP10', 'CT06', 'LSP03', N'Corsair Vengeance RGB 32GB DDR5 5600', 'RAM_Corsair_Vengeance_RGB_32GB_DDR5_5600.jpg'),
+-- RAM
+('SP08', 'CT08', 'LSP03', N'Kingston Fury Beast 16GB DDR4 3200', 'RAM_Corsair_Vengeance_LPX_16GB_DDR4_3600.jpg', 1100000),
+('SP09', 'CT06', 'LSP03', N'Corsair Vengeance LPX 16GB DDR4 3600', 'RAM_Kingston_Fury_Beast_16GB_DDR4_3200.jpg', 1150000),
+('SP10', 'CT06', 'LSP03', N'Corsair Vengeance RGB 32GB DDR5 5600', 'RAM_Corsair_Vengeance_RGB_32GB_DDR5_5600.jpg', 3200000),
 
--- SSD/HDD : đủ ảnh
-('SP11', 'CT08', 'LSP04', N'Kingston NV2 1TB NVMe SSD', 'SSD_Kingston_NV2_1TB_NVMe_SSD.jpg'),
-('SP12', 'CT06', 'LSP04', N'Corsair MP600 1TB NVMe SSD', 'SSD_Corsair_MP600_1TB_NVMe_SSD.jpg'),
-('SP13', 'CT05', 'LSP04', N'Gigabyte 2TB HDD 7200rpm', 'HDD_Gigabyte_2TB_HDD_7200rpm.jpg'),
+-- SSD / HDD
+('SP11', 'CT08', 'LSP04', N'Kingston NV2 1TB NVMe SSD', 'SSD_Kingston_NV2_1TB_NVMe_SSD.jpg', 1600000),
+('SP12', 'CT06', 'LSP04', N'Corsair MP600 1TB NVMe SSD', 'SSD_Corsair_MP600_1TB_NVMe_SSD.jpg', 2500000),
+('SP13', 'CT05', 'LSP04', N'Gigabyte 2TB HDD 7200rpm', 'HDD_Gigabyte_2TB_HDD_7200rpm.jpg', 1400000),
 
--- GPU : đủ ảnh
-('SP14', 'CT04', 'LSP05', N'MSI RTX 3060 Ventus 2X 12GB', 'VGA_MSI_RTX_3060_Ventus_2X_12GB.jpg'),
-('SP15', 'CT05', 'LSP05', N'Gigabyte RTX 3070 Gaming OC 8GB', 'VGA_Gigabyte_RTX_3070_Gaming_OC_8GB.jpg'),
-('SP16', 'CT03', 'LSP05', N'ASUS TUF Gaming RTX 3080 10GB', 'VGA_ASUS_TUF_Gaming_RTX_3080_10GB.jpg'),
+-- GPU
+('SP14', 'CT04', 'LSP05', N'MSI RTX 3060 Ventus 2X 12GB', 'VGA_MSI_RTX_3060_Ventus_2X_12GB.jpg', 8700000),
+('SP15', 'CT05', 'LSP05', N'Gigabyte RTX 3070 Gaming OC 8GB', 'VGA_Gigabyte_RTX_3070_Gaming_OC_8GB.jpg', 11300000),
+('SP16', 'CT03', 'LSP05', N'ASUS TUF Gaming RTX 3080 10GB', 'VGA_ASUS_TUF_Gaming_RTX_3080_10GB.jpg', 16900000),
 
--- PSU: đủ ảnh
-('SP17', 'CT07', 'LSP06', N'Cooler Master MWE 650W 80+ Bronze', 'PSU_Cooler_Master_MWE_650W_80+_Bronze.jpg'),
-('SP18', 'CT06', 'LSP06', N'Corsair RM750x 750W 80+ Gold', 'PSU_Corsair_RM750x_750W_80+_Gold.jpg'),
+-- PSU
+('SP17', 'CT07', 'LSP06', N'Cooler Master MWE 650W 80+ Bronze', 'PSU_Cooler_Master_MWE_650W_80+_Bronze.jpg', 1300000),
+('SP18', 'CT06', 'LSP06', N'Corsair RM750x 750W 80+ Gold', 'PSU_Corsair_RM750x_750W_80+_Gold.jpg', 2600000),
 
--- Case: đủ ảnh
-('SP19', 'CT07', 'LSP07', N'Cooler Master MasterBox TD500', 'CASE_Cooler_Master_MasterBox_TD500.jpg'),
-('SP20', 'CT03', 'LSP07', N'ASUS TUF Gaming GT301', 'CASE_ASUS_TUF_Gaming_GT301.jpg'),
+-- Case
+('SP19', 'CT07', 'LSP07', N'Cooler Master MasterBox TD500', 'CASE_Cooler_Master_MasterBox_TD500.jpg', 1800000),
+('SP20', 'CT03', 'LSP07', N'ASUS TUF Gaming GT301', 'CASE_ASUS_TUF_Gaming_GT301.jpg', 2100000),
 
--- Tản nhiệt CPU : đủ ảnh
-('SP21', 'CT07', 'LSP08', N'Cooler Master Hyper 212 Black Edition', 'TNHIET_Cooler_Master_Hyper_212_Black_Edition.jpg'),
-('SP22', 'CT06', 'LSP08', N'Corsair iCUE H100i Elite Liquid Cooler', 'TNHIET_Corsair_iCUE_H100i_Elite_Liquid_Cooler.jpg'),
+-- Tản nhiệt CPU
+('SP21', 'CT07', 'LSP08', N'Cooler Master Hyper 212 Black Edition', 'TNHIET_Cooler_Master_Hyper_212_Black_Edition.jpg', 950000),
+('SP22', 'CT06', 'LSP08', N'Corsair iCUE H100i Elite Liquid Cooler', 'TNHIET_Corsair_iCUE_H100i_Elite_Liquid_Cooler.jpg', 3200000),
 
---Màn hình
-('SP23', 'CT03', 'LSP09', N'MASUS TUF Gaming VG259QM 24.5 inch, FHD, IPS, 280Hz, 1ms', 'MHinh_MSI_G2712FDE.jpg'),
-('SP24', 'CT04', 'LSP09', N'MSI G2712FDE (27 inch, Full HD, 180Hz, Rapid IPS, 1ms, Black)', 'MHinh_MASUS_TUF_Gaming_VG259QM.jpg'),
-('SP25', 'CT05', 'LSP09', N'Gigabyte G24F2 (23.8inch, FHD, IPS, 165Hz, 180Hz(OC), 1ms', 'MHinh_Gigabyte_G24F2.jpg');-- thiếu ảnh ni nè
+-- Màn hình
+('SP23', 'CT03', 'LSP09', N'ASUS TUF Gaming VG259QM 24.5 inch, FHD, IPS, 280Hz, 1ms', 'MHinh_MASUS_TUF_Gaming_VG259QM.jpg', 5600000),
+('SP24', 'CT04', 'LSP09', N'MSI G2712FDE (27 inch, Full HD, 180Hz, Rapid IPS, 1ms, Black)', 'MHinh_MSI_G2712FDE.jpg', 4700000),
+('SP25', 'CT05', 'LSP09', N'Gigabyte G24F2 (23.8inch, FHD, IPS, 165Hz, 180Hz(OC), 1ms', 'MHinh_Gigabyte_G24F2.jpg', 3600000);
 
 INSERT INTO PhanQuyen (idPhanQuyen, tenPhanQuyen) VALUES
 ('PQ01', N'Quản trị viên'),
@@ -439,6 +442,8 @@ INSERT INTO ChiTietGioHang (idChiTietGioHang, idNguoiDung, idSanPham, soLuongTro
 ('GH008', 'ND011', 'SP02', 1),
 ('GH009', 'ND012', 'SP22', 1),
 ('GH010', 'ND013', 'SP16', 1);
+
+select * from sanpham
 
 
 

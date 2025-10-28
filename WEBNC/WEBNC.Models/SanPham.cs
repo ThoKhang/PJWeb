@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WEBNC.Models
 {
@@ -11,6 +13,9 @@ namespace WEBNC.Models
         public string imageURL { get; set; }
         public string idCongTy { get; set; }
         public string idLoaiSanPham { get; set; }
+        [ForeignKey("idLoaiSanPham")]
+        [ValidateNever]
+        public LoaiSanPham LoaiSanPham { get; set; }
         public decimal gia { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace WEBNC.Areas.Customer.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            IEnumerable<SanPham> sanPhamList = _unitOfWork.SanPham.GetAll();
+            IEnumerable<SanPham> sanPhamList = _unitOfWork.SanPham.GetAll(includeProperties:"LoaiSanPham");
             return Json(new {data=sanPhamList});
         }
         public IActionResult Privacy()

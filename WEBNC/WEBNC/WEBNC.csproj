@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\images\CASE_ASUS_TUF_Gaming_GT301.jpg" />
     <None Include="wwwroot\images\CASE_Cooler_Master_MasterBox_TD500.jpg" />
     <None Include="wwwroot\images\CPU_i5-12400f.jpg" />
@@ -52,6 +48,10 @@
     <None Include="wwwroot\images\VGA_ASUS_TUF_Gaming_RTX_3080_10GB.jpg" />
     <None Include="wwwroot\images\VGA_Gigabyte_RTX_3070_Gaming_OC_8GB.jpg" />
     <None Include="wwwroot\images\VGA_MSI_RTX_3060_Ventus_2X_12GB.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>

@@ -62,32 +62,32 @@ F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\bootstrap\dist\css\boot
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
 wwwroot\css\site.css
 wwwroot\favicon.ico
-wwwroot\images\CASE_ASUS TUF Gaming GT301.jpg
-wwwroot\images\CASE_Cooler Master MasterBox TD500.jpg
+wwwroot\images\CASE_ASUS_TUF_Gaming_GT301.jpg
+wwwroot\images\CASE_Cooler_Master_MasterBox_TD500.jpg
 wwwroot\images\CPU_i5-12400f.jpg
 wwwroot\images\CPU_i7-12700k.jpg
-wwwroot\images\CPU_Ryzen 5 5600X.jpg
-wwwroot\images\CPU_Ryzen 7 5800X3D.jpg
-wwwroot\images\HDD_Gigabyte 2TB HDD 7200rpm.jpg
-wwwroot\images\MAIN_ASUS ROG Strix B550-F.jpg
-wwwroot\images\MAIN_Gigabyte Z690 Aorus Elite.png
-wwwroot\images\MAIN_MSI B660 Tomahawk.jpg
-wwwroot\images\MHinh_Gigabyte G24F2.jpg
-wwwroot\images\MHinh_MASUS TUF Gaming VG259QM.jpg
-wwwroot\images\MHinh_MSI G2712FDE.jpg
+wwwroot\images\CPU_Ryzen_5_5600X.jpg
+wwwroot\images\CPU_Ryzen_7_5800X3D.jpg
+wwwroot\images\HDD_Gigabyte_2TB_HDD_7200rpm.jpg
+wwwroot\images\MAIN_ASUS_ROG_Strix_B550-F.jpg
+wwwroot\images\MAIN_Gigabyte_Z690_Aorus_Elite.png
+wwwroot\images\MAIN_MSI_B660_Tomahawk.jpg
+wwwroot\images\MHinh_Gigabyte_G24F2.jpg
+wwwroot\images\MHinh_MASUS_TUF_Gaming_VG259QM.jpg
+wwwroot\images\MHinh_MSI_G2712FDE.jpg
 wwwroot\images\MHinhGigabyte G24F2.webp
-wwwroot\images\PSU_Cooler Master MWE 650W 80+ Bronze.jpg
-wwwroot\images\PSU_Corsair RM750x 750W 80+ Gold.jpg
-wwwroot\images\RAM_Corsair Vengeance LPX 16GB DDR4 3600.jpg
-wwwroot\images\RAM_Corsair Vengeance RGB 32GB DDR5 5600.jpg
-wwwroot\images\RAM_Kingston Fury Beast 16GB DDR4 3200.jpg
-wwwroot\images\SSD_Corsair MP600 1TB NVMe SSD.jpg
-wwwroot\images\SSD_Kingston NV2 1TB NVMe SSD.jpg
-wwwroot\images\TNHIET_Cooler Master Hyper 212 Black Edition.jpg
-wwwroot\images\TNHIET_Corsair iCUE H100i Elite Liquid Cooler.jpg
-wwwroot\images\VGA_ASUS TUF Gaming RTX 3080 10GB.jpg
-wwwroot\images\VGA_Gigabyte RTX 3070 Gaming OC 8GB.jpg
-wwwroot\images\VGA_MSI RTX 3060 Ventus 2X 12GB.jpg
+wwwroot\images\PSU_Cooler_Master_MWE_650W_80+_Bronze.jpg
+wwwroot\images\PSU_Corsair_RM750x_750W_80+_Gold.jpg
+wwwroot\images\RAM_Corsair_Vengeance_LPX_16GB_DDR4_3600.jpg
+wwwroot\images\RAM_Corsair_Vengeance_RGB_32GB_DDR5_5600.jpg
+wwwroot\images\RAM_Kingston_Fury_Beast_16GB_DDR4_3200.jpg
+wwwroot\images\SSD_Corsair_MP600_1TB_NVMe_SSD.jpg
+wwwroot\images\SSD_Kingston_NV2_1TB_NVMe_SSD.jpg
+wwwroot\images\TNHIET_Cooler_Master_Hyper_212_Black_Edition.jpg
+wwwroot\images\TNHIET_Corsair_iCUE_H100i_Elite_Liquid_Cooler.jpg
+wwwroot\images\VGA_ASUS_TUF_Gaming_RTX_3080_10GB.jpg
+wwwroot\images\VGA_Gigabyte_RTX_3070_Gaming_OC_8GB.jpg
+wwwroot\images\VGA_MSI_RTX_3060_Ventus_2X_12GB.jpg
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.css.map

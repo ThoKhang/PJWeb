@@ -1,8 +1,34 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Ảnh</th>
+            <th>Tên Sản Phẩm</th>
+            <th>Loại Sản Phẩm</th>
+        </tr>
+    </thead>
+    <tbody id="listsp">
+    </tbody>
+</table>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<script>
+    fetch('/customer/home/getall')
+        .then(response => response.json())
+        .then(sanpham => {
+            const data = sanpham.data;
+            console.log('SanPham:', data);
+            let htmls = '';
+            data.forEach(product => {
+                htmls += `
+                    <tr>
+                        <td><img style="width:80px;height:80px" src="/images/${product.imageURL}" alt="ảnh"></td>
+                        <td>${product.tenSanPham}</td>
+                        <td>${product.idLoaiSanPham}</td>
+                    </tr>`;
+            });
+
+            document.getElementById('listsp').innerHTML = htmls;
+        })
+        .catch(error => {
+            console.error('Lỗi:', error);
+        });
+</script>

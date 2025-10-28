@@ -15,13 +15,16 @@ namespace WEBNC.Areas.Customer.Controllers
             _logger = logger;
             _unitOfWork = unitOfWork;
         }
-        [HttpGet]
         public IActionResult Index()
         {
-            IEnumerable<SanPham> sanPhamList = _unitOfWork.SanPham.GetAll();
-            return Json(sanPhamList);
+            return View();
         }
-
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            IEnumerable<SanPham> sanPhamList = _unitOfWork.SanPham.GetAll();
+            return Json(new {data=sanPhamList});
+        }
         public IActionResult Privacy()
         {
             return View();

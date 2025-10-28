@@ -444,6 +444,5 @@ INSERT INTO ChiTietGioHang (idChiTietGioHang, idNguoiDung, idSanPham, soLuongTro
 ('GH010', 'ND013', 'SP16', 1);
 
 select * from sanpham
-
-
-
+select* from loaisanpham
+select * from congty

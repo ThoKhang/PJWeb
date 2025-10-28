@@ -11,5 +11,6 @@ namespace WEBNC.Models
         public string imageURL { get; set; }
         public string idCongTy { get; set; }
         public string idLoaiSanPham { get; set; }
+        public decimal gia { get; set; }
     }
 }

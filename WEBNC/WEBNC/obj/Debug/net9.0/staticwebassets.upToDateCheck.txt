@@ -25,6 +25,7 @@ F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\jquery\dist\jquery.js
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\bootstrap\dist\css\bootstrap.css
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\jquery\dist\jquery.min.map
+F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\css\style.css
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.js
@@ -60,7 +61,10 @@ F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\bootstrap\dist\css\boot
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
+F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\css\bootstrap.min.css
+wwwroot\css\bootstrap.min.css
 wwwroot\css\site.css
+wwwroot\css\style.css
 wwwroot\favicon.ico
 wwwroot\images\CASE_ASUS_TUF_Gaming_GT301.jpg
 wwwroot\images\CASE_Cooler_Master_MasterBox_TD500.jpg

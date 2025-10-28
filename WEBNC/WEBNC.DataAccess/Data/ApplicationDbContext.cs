@@ -10,5 +10,6 @@ namespace WEBNC.Data
         {
         }
         public DbSet<SanPham> SanPham { get; set; }
+        public DbSet<LoaiSanPham> LoaiSanPham { get; set; }
     }
 }

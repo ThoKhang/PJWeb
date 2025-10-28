@@ -10,17 +10,21 @@ namespace WEBNC.Areas.Customer.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,IUnitOfWork unitOfWork)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
-
         public IActionResult Index()
         {
-            //IEnumerable<SanPham> productList = _unitOfWor;
             return View();
         }
-
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            IEnumerable<SanPham> sanPhamList = _unitOfWork.SanPham.GetAll();
+            return Json(new {data=sanPhamList});
+        }
         public IActionResult Privacy()
         {
             return View();

@@ -26,7 +26,7 @@ namespace WEBNC.Areas.Customer.Controllers
             return Json(new {data=sanPhamList});
         }
         [HttpGet]
-        public IActionResult Details(string? id)
+        public IActionResult SanPham(string? id)
         {
             if (id == null || id == "")
                 return BadRequest();
@@ -34,6 +34,10 @@ namespace WEBNC.Areas.Customer.Controllers
             if (sanPham == null)
                 return NotFound();
             return Json(new {data=sanPham});
+        }
+        public IActionResult Details()
+        {
+            return View();
         }
         public IActionResult Privacy()
         {

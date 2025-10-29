@@ -25,6 +25,20 @@ namespace WEBNC.Areas.Customer.Controllers
             IEnumerable<SanPham> sanPhamList = _unitOfWork.SanPham.GetAll(includeProperties:"LoaiSanPham");
             return Json(new {data=sanPhamList});
         }
+        [HttpGet]
+        public IActionResult SanPham(string? id)
+        {
+            if (id == null || id == "")
+                return BadRequest();
+            var sanPham = _unitOfWork.SanPham.GetFirstOrDefault(item => item.idSanPham == id);
+            if (sanPham == null)
+                return NotFound();
+            return Json(new {data=sanPham});
+        }
+        public IActionResult Details()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

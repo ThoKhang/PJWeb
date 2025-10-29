@@ -68,6 +68,7 @@ F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\bootstrap\dist\css\boot
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\jquery-validation\dist\jquery.validate.js
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\owlcarousel\assets\owl.theme.default.min.css
+F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\js\details.js
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js
@@ -112,6 +113,7 @@ wwwroot\images\TNHIET_Corsair_iCUE_H100i_Elite_Liquid_Cooler.jpg
 wwwroot\images\VGA_ASUS_TUF_Gaming_RTX_3080_10GB.jpg
 wwwroot\images\VGA_Gigabyte_RTX_3070_Gaming_OC_8GB.jpg
 wwwroot\images\VGA_MSI_RTX_3060_Ventus_2X_12GB.jpg
+wwwroot\js\details.js
 wwwroot\js\home.js
 wwwroot\js\main.js
 wwwroot\js\site.js

@@ -20,5 +20,6 @@ namespace WEBNC.Models
         [ValidateNever]
         public LoaiSanPham LoaiSanPham { get; set; }
         public decimal gia { get; set; }
+        public string moTa { get; set; }
     }
 }

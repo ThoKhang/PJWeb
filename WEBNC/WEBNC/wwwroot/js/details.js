@@ -24,6 +24,7 @@
                             </div>
                         `;
                     document.getElementById('sanPham').innerHTML = htmls;
+                    document.querySelector('.moTa').innerHTML = data.moTa;
                     const nameElement = document.querySelector('.tenSanPham'); 
                     if (nameElement) {
                         nameElement.innerHTML = data.tenSanPham; 

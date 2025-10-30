@@ -10,23 +10,44 @@
     <link rel="stylesheet" href="~/WEBNC.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WEBNC</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+    <header >
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm border-bottom sticky-top">
+            <div class="container-fluid px-4 py-2">
+                <a class="navbar-brand fw-bold text-primary d-flex align-items-center" href="/">
+                    <i class="fas fa-store me-2 fs-4"></i> WEBNC
+                </a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+                        aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 d-flex align-items-center gap-4">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link fw-semibold text-dark px-3 py-2 rounded-3 transition-bg"
+                               asp-area="Customer" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home me-1"></i> Trang chủ
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="SanPham" asp-action="Index">Sản phẩm</a>
+                            <a class="nav-link fw-semibold text-dark px-3 py-2 rounded-3 transition-bg"
+                               asp-area="Admin" asp-controller="SanPham" asp-action="Index">
+                                <i class="fas fa-box-open me-1"></i> Sản phẩm
+                            </a>
                         </li>
                     </ul>
+                    <form class="d-flex align-items-center gap-2 mt-3 mt-lg-0 w-100 w-lg-auto" style="max-width: 500px;">
+                        <select class="form-select form-select-sm rounded-pill border-primary" style="width: 120px;">
+                            <option selected>Tất cả</option>
+                            <option>Điện thoại</option>
+                            <option>Laptop</option>
+                        </select>
+                        <input class="form-control form-control-sm rounded-pill flex-grow-1"
+                               type="search" placeholder="Tìm kiếm..." aria-label="Search">
+                        <button class="btn btn-primary btn-sm rounded-pill d-flex align-items-center justify-content-center"
+                                type="submit" style="width: 40px; height: 36px;">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </nav>
@@ -36,7 +57,6 @@
             @RenderBody()
         </main>
     </div>
-
     <footer style="background-color:#000; height:100px;">
         <div class="container">
             <a href="https://github.com/ThoKhang/PJWeb.git" style="color:white; text-align:center; line-height:100px; margin:0; text-decoration: none; display: block;">Git nhóm 5ae</a>

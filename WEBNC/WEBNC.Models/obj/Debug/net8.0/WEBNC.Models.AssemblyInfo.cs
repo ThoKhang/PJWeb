@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WEBNC.Models")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+19e2343ab17632ff2a94665af26af35444bf1959")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c624d9de9757f462d7425c61a23a6bd95d3b0c4")]
 [assembly: System.Reflection.AssemblyProductAttribute("WEBNC.Models")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WEBNC.Models")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

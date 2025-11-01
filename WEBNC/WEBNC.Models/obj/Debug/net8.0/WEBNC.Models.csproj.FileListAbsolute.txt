@@ -1,6 +1,7 @@
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC.Models\bin\Debug\net8.0\WEBNC.Models.deps.json
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC.Models\bin\Debug\net8.0\WEBNC.Models.dll
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC.Models\bin\Debug\net8.0\WEBNC.Models.pdb
+F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.csproj.AssemblyReference.cache
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.GeneratedMSBuildEditorConfig.editorconfig
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.AssemblyInfoInputs.cache
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.AssemblyInfo.cs
@@ -10,4 +11,3 @@ F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Model
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\refint\WEBNC.Models.dll
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.pdb
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\ref\WEBNC.Models.dll
-F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.csproj.AssemblyReference.cache

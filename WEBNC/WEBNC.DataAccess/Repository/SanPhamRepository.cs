@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,6 +32,38 @@ namespace WEBNC.DataAccess.Repository
                 }
             }
         }
+        public IEnumerable<SanPham> LayTop10SanPhamBanChay()
+        {
+            var query = _db.ChiTietDonHang
+                .Include(ct => ct.SanPham)
+                .Include(ct => ct.DonDatHang)
+                .Where(ct =>
+                    ct.DonDatHang.trangThai == "Đã giao" &&
+                    ct.DonDatHang.thanhToan == "Đã thanh toán")
+                .GroupBy(ct => new
+                {
+                    ct.SanPham.idSanPham,
+                    ct.SanPham.tenSanPham,
+                    ct.SanPham.imageURL,
+                    ct.SanPham.gia
+                })
+                .Select(g => new
+                {
+                    SanPham = g.Key,
+                    TongSoLuongBan = g.Sum(x => x.soluong)
+                })
+                .OrderByDescending(g => g.TongSoLuongBan)
+                .Take(10)
+                .AsEnumerable()
+                .Select(g => new SanPham
+                {
+                    idSanPham = g.SanPham.idSanPham,
+                    tenSanPham = g.SanPham.tenSanPham,
+                    imageURL = g.SanPham.imageURL,
+                    gia = g.SanPham.gia
+                });
 
+            return query.ToList();
+        }
     }
 }

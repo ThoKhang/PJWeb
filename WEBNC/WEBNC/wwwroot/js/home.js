@@ -8,7 +8,7 @@
         data.forEach(product => {
             htmls += `
                     <div class="col-md-6 col-lg-4 col-xl-3">
-                    <input type="hidden" name="maSanPham" value="${product.idSanPham}" />
+                    
                         <div class="product-item rounded wow fadeInUp" data-wow-delay="0.3s">
                             <div class="product-item-inner border rounded">
                                 <div class="product-item-inner-item">

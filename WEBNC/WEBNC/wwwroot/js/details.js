@@ -77,11 +77,11 @@
                         <div class="product-card product-item-inner-item position-relative">
                             <div class="product-details">
                                 <a href="/Customer/Home/Details?id=${product.idSanPham}" class="view-icon">
-                                    <img src="/images/${product.imageURL}" class="img-fluid w-100 rounded-top" alt="sản phẩm liên quan">
+                                    <img src="/images/${product.imageURL}" class="img-fluid w-100 rounded-top" alt="sản phẩm liên quan" style="width:auto;height:180px">
                                 </a>
                             </div>
                             <div class="product-card-info">
-                                <h4>${product.tenSanPham}</h4>
+                                <h4 style="height: 45px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${product.tenSanPham}</h4>
                                 <p class="price">${product.gia.toLocaleString('vi-VN')} ₫</p>
                                 <button class="add-to-cart-small">Thêm vào giỏ</button>
                             </div>
@@ -94,7 +94,36 @@
             .catch(err => console.error("Lỗi:", err));
 
 
-        } else {
+        fetch('https://localhost:7047/Customer/Home/TopSanPhamBanChay')
+            .then(response => response.json())
+            .then(result => {
+                const data = result.data;
+                let html = '';
+                data.forEach((sp, i) => {
+                    const giaGiam = sp.gia * 0.86;
+                    html += `
+                        <div class="featured-item">
+                            <a href="/Customer/Home/Details?id=${sp.idSanPham}" class="view-icon">
+                                <img src="/images/${sp.imageURL}" alt="${sp.tenSanPham}">
+                            </a>
+                            <div class="featured-info">
+                                <h4>${sp.tenSanPham}</h4>
+                                <p class="price">
+                                    ${giaGiam.toLocaleString()}₫ 
+                                    <span class="old-price">${sp.gia.toLocaleString()}₫</span>
+                                </p>
+                                <p class="rating">★★★★☆</p>
+                            </div>
+                        </div>
+                    `;
+                });
+                document.getElementById('sanPhamNoiBat').innerHTML = html;
+            })
+            .catch(error => console.error('Lỗi:', error));
+
+
+}
+else {
         console.warn('Product ID not found in URL parameters.');
         document.getElementById('sanPham').innerHTML = 'Không tìm thấy ID sản phẩm.';
 }

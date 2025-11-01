@@ -8,6 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
   </ItemGroup>
@@ -15,6 +19,35 @@
   <ItemGroup>
     <ProjectReference Include="..\WEBNC.DataAccess\WEBNC.DataAccess.csproj" />
     <ProjectReference Include="..\WEBNC.Models\WEBNC.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\CASE_ASUS_TUF_Gaming_GT301.jpg" />
+    <None Include="wwwroot\images\CASE_Cooler_Master_MasterBox_TD500.jpg" />
+    <None Include="wwwroot\images\CPU_i5-12400f.jpg" />
+    <None Include="wwwroot\images\CPU_i7-12700k.jpg" />
+    <None Include="wwwroot\images\CPU_Ryzen_5_5600X.jpg" />
+    <None Include="wwwroot\images\CPU_Ryzen_7_5800X3D.jpg" />
+    <None Include="wwwroot\images\HDD_Gigabyte_2TB_HDD_7200rpm.jpg" />
+    <None Include="wwwroot\images\MAIN_ASUS_ROG_Strix_B550-F.jpg" />
+    <None Include="wwwroot\images\MAIN_Gigabyte_Z690_Aorus_Elite.png" />
+    <None Include="wwwroot\images\MAIN_MSI_B660_Tomahawk.jpg" />
+    <None Include="wwwroot\images\MHinhGigabyte G24F2.webp" />
+    <None Include="wwwroot\images\MHinh_Gigabyte_G24F2.jpg" />
+    <None Include="wwwroot\images\MHinh_MASUS_TUF_Gaming_VG259QM.jpg" />
+    <None Include="wwwroot\images\MHinh_MSI_G2712FDE.jpg" />
+    <None Include="wwwroot\images\PSU_Cooler_Master_MWE_650W_80+_Bronze.jpg" />
+    <None Include="wwwroot\images\PSU_Corsair_RM750x_750W_80+_Gold.jpg" />
+    <None Include="wwwroot\images\RAM_Corsair_Vengeance_LPX_16GB_DDR4_3600.jpg" />
+    <None Include="wwwroot\images\RAM_Corsair_Vengeance_RGB_32GB_DDR5_5600.jpg" />
+    <None Include="wwwroot\images\RAM_Kingston_Fury_Beast_16GB_DDR4_3200.jpg" />
+    <None Include="wwwroot\images\SSD_Corsair_MP600_1TB_NVMe_SSD.jpg" />
+    <None Include="wwwroot\images\SSD_Kingston_NV2_1TB_NVMe_SSD.jpg" />
+    <None Include="wwwroot\images\TNHIET_Cooler_Master_Hyper_212_Black_Edition.jpg" />
+    <None Include="wwwroot\images\TNHIET_Corsair_iCUE_H100i_Elite_Liquid_Cooler.jpg" />
+    <None Include="wwwroot\images\VGA_ASUS_TUF_Gaming_RTX_3080_10GB.jpg" />
+    <None Include="wwwroot\images\VGA_Gigabyte_RTX_3070_Gaming_OC_8GB.jpg" />
+    <None Include="wwwroot\images\VGA_MSI_RTX_3060_Ventus_2X_12GB.jpg" />
   </ItemGroup>
 
   <ItemGroup>

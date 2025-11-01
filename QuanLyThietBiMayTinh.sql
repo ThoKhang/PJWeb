@@ -480,3 +480,18 @@ INSERT INTO ChiTietGioHang (idChiTietGioHang, idNguoiDung, idSanPham, soLuongTro
 select * from sanpham
 select* from loaisanpham
 select * from congty
+select * from dondathang
+
+SELECT TOP 10
+    sp.idSanPham,
+    sp.tenSanPham,
+    sp.imageURL,
+    sp.gia,
+    SUM(ctdh.soluong) AS tongSoLuongBan
+FROM DonDatHang ddh
+JOIN ChiTietDonHang ctdh ON ddh.idDonDat = ctdh.idDonDat
+JOIN SanPham sp ON ctdh.idSanPham = sp.idSanPham
+WHERE ddh.trangThai = N'Đã giao'
+  AND ddh.thanhToan = N'Đã thanh toán'
+GROUP BY sp.idSanPham, sp.tenSanPham, sp.imageURL, sp.gia
+ORDER BY tongSoLuongBan DESC;

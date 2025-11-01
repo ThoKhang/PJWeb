@@ -21,5 +21,6 @@ namespace WEBNC.Models
         public LoaiSanPham LoaiSanPham { get; set; }
         public decimal gia { get; set; }
         public string moTa { get; set; }
+        public string imageLienQuan { get; set; }
     }
 }

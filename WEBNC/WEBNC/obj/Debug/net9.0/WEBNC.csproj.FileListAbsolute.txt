@@ -363,4 +363,4 @@ F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\refint\WEBNC.dll
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\WEBNC.pdb
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\WEBNC.genruntimeconfig.cache
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\ref\WEBNC.dll
-F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\compressed\vqptk2whw0-kgbixc9yzu.gz
+F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\compressed\vqptk2whw0-m8day9d129.gz

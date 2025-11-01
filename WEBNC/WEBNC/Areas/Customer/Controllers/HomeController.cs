@@ -39,6 +39,12 @@ namespace WEBNC.Areas.Customer.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult TopSanPhamBanChay()
+        {
+            var topSanPham = _unitOfWork.SanPham.LayTop10SanPhamBanChay();
+            return Json(new { data = topSanPham });
+        }
         public IActionResult Privacy()
         {
             return View();

@@ -7,5 +7,6 @@ namespace WEBNC.DataAccess.Repository.IRepository
     public interface ISanPhamRepository: IRepository<SanPham>
     {
         void Update(SanPham obj);
+        IEnumerable<SanPham> LayTop10SanPhamBanChay();
     }
 }

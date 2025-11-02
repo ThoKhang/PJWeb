@@ -22,5 +22,8 @@ namespace WEBNC.Models
         public decimal gia { get; set; }
         public string moTa { get; set; }
         public string imageLienQuan { get; set; }
+        public string thongSoSanPham { get; set; }
+        public int soLuongCanDuoi { get; set; }
+        public int soLuongHienCon { get; set; }
     }
 }

@@ -102,20 +102,20 @@
                 data.forEach((sp, i) => {
                     const giaGiam = sp.gia * 0.86;
                     html += `
-                        <div class="featured-item">
+                        <div class="featured-item ">
                             <a href="/Customer/Home/Details?id=${sp.idSanPham}" class="view-icon">
                                 <img src="/images/${sp.imageURL}" alt="${sp.tenSanPham}">
                             </a>
                             <div class="featured-info">
                                 <h4>${sp.tenSanPham}</h4>
                                 <p class="price">
-                                    ${giaGiam.toLocaleString()}₫ 
-                                    <span class="old-price">${sp.gia.toLocaleString()}₫</span>
+                                    ${(sp.gia * 0.86).toLocaleString('vi-VN')}₫ 
+                                    <span class="old-price">${sp.gia.toLocaleString('vi-VN')}₫</span>
                                 </p>
                                 <p class="rating">★★★★☆</p>
                             </div>
                         </div>
-                    `;
+                        `;
                 });
                 document.getElementById('sanPhamNoiBat').innerHTML = html;
             })

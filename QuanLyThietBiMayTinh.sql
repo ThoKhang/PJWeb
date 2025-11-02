@@ -197,6 +197,11 @@ GO
 ALTER TABLE SanPham
 ADD imageLienQuan NVARCHAR(MAX);
 GO
+ALTER TABLE SanPham
+ADD thongSoSanPham NVARCHAR(MAX),
+	soLuongHienCon INT,
+	soLuongCanDuoi INT;
+GO 
 
 --========================================INSERT DATA=======================================-
 INSERT INTO Tinh (idTinh, tenTinh) VALUES
@@ -477,10 +482,221 @@ INSERT INTO ChiTietGioHang (idChiTietGioHang, idNguoiDung, idSanPham, soLuongTro
 ('GH009', 'ND012', 'SP22', 1),
 ('GH010', 'ND013', 'SP16', 1);
 
+
+-- CPU
+UPDATE SanPham SET thongSoSanPham = 
+N'- 6 nhân 12 luồng' + CHAR(13)+CHAR(10) +
+N'- Xung nhịp 2.5GHz (Boost 4.4GHz)' + CHAR(13)+CHAR(10) +
+N'- Socket LGA 1700' + CHAR(13)+CHAR(10) +
+N'- Bộ nhớ đệm 18MB'
+WHERE idSanPham = 'SP01';
+
+UPDATE SanPham SET thongSoSanPham = 
+N'- 12 nhân 20 luồng' + CHAR(13)+CHAR(10) +
+N'- Xung nhịp 3.6GHz (Boost 5.0GHz)' + CHAR(13)+CHAR(10) +
+N'- Socket LGA 1700' + CHAR(13)+CHAR(10) +
+N'- Hỗ trợ ép xung'
+WHERE idSanPham = 'SP02';
+
+UPDATE SanPham SET thongSoSanPham = 
+N'- 6 nhân 12 luồng' + CHAR(13)+CHAR(10) +
+N'- Kiến trúc Zen 3' + CHAR(13)+CHAR(10) +
+N'- Xung nhịp 3.7GHz (Boost 4.6GHz)' + CHAR(13)+CHAR(10) +
+N'- Socket AM4'
+WHERE idSanPham = 'SP03';
+
+UPDATE SanPham SET thongSoSanPham = 
+N'- 8 nhân 16 luồng' + CHAR(13)+CHAR(10) +
+N'- Xung nhịp 3.4GHz (Boost 4.5GHz)' + CHAR(13)+CHAR(10) +
+N'- Công nghệ 3D V-Cache' + CHAR(13)+CHAR(10) +
+N'- Socket AM4'
+WHERE idSanPham = 'SP04';
+
+-- Mainboard
+UPDATE SanPham SET thongSoSanPham = 
+N'- Chipset B550' + CHAR(13)+CHAR(10) +
+N'- Socket AM4' + CHAR(13)+CHAR(10) +
+N'- Hỗ trợ PCIe 4.0' + CHAR(13)+CHAR(10) +
+N'- 4 khe RAM DDR4 (Tối đa 128GB)'
+WHERE idSanPham = 'SP05';
+
+UPDATE SanPham SET thongSoSanPham = 
+N'- Chipset B660' + CHAR(13)+CHAR(10) +
+N'- Socket LGA 1700' + CHAR(13)+CHAR(10) +
+N'- Hỗ trợ PCIe Gen4' + CHAR(13)+CHAR(10) +
+N'- LAN 2.5G / USB 3.2 Gen2'
+WHERE idSanPham = 'SP06';
+
+UPDATE SanPham SET thongSoSanPham = 
+N'- Chipset Z690' + CHAR(13)+CHAR(10) +
+N'- Socket LGA 1700' + CHAR(13)+CHAR(10) +
+N'- Hỗ trợ DDR5 / PCIe 5.0' + CHAR(13)+CHAR(10) +
+N'- 3 khe M.2 NVMe'
+WHERE idSanPham = 'SP07';
+
+-- RAM
+UPDATE SanPham SET thongSoSanPham = 
+N'- Dung lượng 16GB (1x16GB)' + CHAR(13)+CHAR(10) +
+N'- Bus 3200MHz' + CHAR(13)+CHAR(10) +
+N'- Loại DDR4' + CHAR(13)+CHAR(10) +
+N'- Điện áp 1.35V'
+WHERE idSanPham = 'SP08';
+
+UPDATE SanPham SET thongSoSanPham = 
+N'- Dung lượng 16GB (2x8GB)' + CHAR(13)+CHAR(10) +
+N'- Bus 3600MHz' + CHAR(13)+CHAR(10) +
+N'- Loại DDR4' + CHAR(13)+CHAR(10) +
+N'- Tản nhiệt nhôm cao cấp'
+WHERE idSanPham = 'SP09';
+
+UPDATE SanPham SET thongSoSanPham = 
+N'- Dung lượng 32GB (2x16GB)' + CHAR(13)+CHAR(10) +
+N'- Bus 5600MHz' + CHAR(13)+CHAR(10) +
+N'- Loại DDR5' + CHAR(13)+CHAR(10) +
+N'- RGB tùy chỉnh'
+WHERE idSanPham = 'SP10';
+
+-- SSD / HDD
+UPDATE SanPham SET thongSoSanPham = 
+N'- Dung lượng 1TB' + CHAR(13)+CHAR(10) +
+N'- Chuẩn NVMe PCIe 4.0' + CHAR(13)+CHAR(10) +
+N'- Đọc: 3500MB/s, Ghi: 2100MB/s' + CHAR(13)+CHAR(10) +
+N'- Hệ số hình dạng M.2 2280'
+WHERE idSanPham = 'SP11';
+
+UPDATE SanPham SET thongSoSanPham = 
+N'- Dung lượng 1TB' + CHAR(13)+CHAR(10) +
+N'- Chuẩn NVMe PCIe 4.0 x4' + CHAR(13)+CHAR(10) +
+N'- Tốc độ đọc: 4950MB/s, ghi: 4250MB/s' + CHAR(13)+CHAR(10) +
+N'- Tản nhiệt nhôm'
+WHERE idSanPham = 'SP12';
+
+UPDATE SanPham SET thongSoSanPham = 
+N'- Dung lượng 2TB' + CHAR(13)+CHAR(10) +
+N'- Loại HDD 3.5 inch' + CHAR(13)+CHAR(10) +
+N'- Tốc độ quay 7200rpm' + CHAR(13)+CHAR(10) +
+N'- Cache 64MB'
+WHERE idSanPham = 'SP13';
+
+-- GPU
+UPDATE SanPham SET thongSoSanPham = 
+N'- GPU NVIDIA RTX 3060' + CHAR(13)+CHAR(10) +
+N'- VRAM 12GB GDDR6' + CHAR(13)+CHAR(10) +
+N'- Giao tiếp PCIe 4.0' + CHAR(13)+CHAR(10) +
+N'- Nguồn khuyến nghị 550W'
+WHERE idSanPham = 'SP14';
+
+UPDATE SanPham SET thongSoSanPham = 
+N'- GPU NVIDIA RTX 3070' + CHAR(13)+CHAR(10) +
+N'- VRAM 8GB GDDR6' + CHAR(13)+CHAR(10) +
+N'- Ray Tracing / DLSS 2.0' + CHAR(13)+CHAR(10) +
+N'- Nguồn khuyến nghị 650W'
+WHERE idSanPham = 'SP15';
+
+UPDATE SanPham SET thongSoSanPham = 
+N'- GPU NVIDIA RTX 3080' + CHAR(13)+CHAR(10) +
+N'- VRAM 10GB GDDR6X' + CHAR(13)+CHAR(10) +
+N'- Tản nhiệt 3 quạt TUF' + CHAR(13)+CHAR(10) +
+N'- Nguồn khuyến nghị 750W'
+WHERE idSanPham = 'SP16';
+
+-- PSU
+UPDATE SanPham SET thongSoSanPham = 
+N'- Công suất 650W' + CHAR(13)+CHAR(10) +
+N'- Chứng nhận 80+ Bronze' + CHAR(13)+CHAR(10) +
+N'- Quạt 120mm yên tĩnh' + CHAR(13)+CHAR(10) +
+N'- Bảo vệ OVP / OCP / SCP'
+WHERE idSanPham = 'SP17';
+
+UPDATE SanPham SET thongSoSanPham = 
+N'- Công suất 750W' + CHAR(13)+CHAR(10) +
+N'- Chứng nhận 80+ Gold' + CHAR(13)+CHAR(10) +
+N'- Dây cáp rời mềm' + CHAR(13)+CHAR(10) +
+N'- Quạt Zero RPM'
+WHERE idSanPham = 'SP18';
+
+-- Case
+UPDATE SanPham SET thongSoSanPham = 
+N'- Hỗ trợ main ATX / mATX / ITX' + CHAR(13)+CHAR(10) +
+N'- 3 quạt RGB đi kèm' + CHAR(13)+CHAR(10) +
+N'- Mặt kính cường lực' + CHAR(13)+CHAR(10) +
+N'- Kích thước: Mid Tower'
+WHERE idSanPham = 'SP19';
+
+UPDATE SanPham SET thongSoSanPham = 
+N'- Hỗ trợ main ATX / Micro-ATX' + CHAR(13)+CHAR(10) +
+N'- Lưới tản nhiệt mặt trước' + CHAR(13)+CHAR(10) +
+N'- Kính cường lực bên hông' + CHAR(13)+CHAR(10) +
+N'- 3 quạt LED TUF kèm theo'
+WHERE idSanPham = 'SP20';
+
+-- Tản nhiệt CPU
+UPDATE SanPham SET thongSoSanPham = 
+N'- Loại tản khí' + CHAR(13)+CHAR(10) +
+N'- Quạt 120mm PWM' + CHAR(13)+CHAR(10) +
+N'- Độ ồn thấp' + CHAR(13)+CHAR(10) +
+N'- Hỗ trợ Intel / AMD'
+WHERE idSanPham = 'SP21';
+
+UPDATE SanPham SET thongSoSanPham = 
+N'- Loại tản nước AIO 240mm' + CHAR(13)+CHAR(10) +
+N'- 2 quạt 120mm RGB' + CHAR(13)+CHAR(10) +
+N'- Điều khiển qua phần mềm iCUE' + CHAR(13)+CHAR(10) +
+N'- Hỗ trợ Intel & AMD'
+WHERE idSanPham = 'SP22';
+
+-- Màn hình
+UPDATE SanPham SET thongSoSanPham = 
+N'- Kích thước 24.5 inch' + CHAR(13)+CHAR(10) +
+N'- Tấm nền IPS' + CHAR(13)+CHAR(10) +
+N'- Tần số quét 280Hz' + CHAR(13)+CHAR(10) +
+N'- Thời gian phản hồi 1ms'
+WHERE idSanPham = 'SP23';
+
+UPDATE SanPham SET thongSoSanPham = 
+N'- Kích thước 27 inch' + CHAR(13)+CHAR(10) +
+N'- Độ phân giải Full HD' + CHAR(13)+CHAR(10) +
+N'- Tần số quét 180Hz' + CHAR(13)+CHAR(10) +
+N'- Tấm nền Rapid IPS'
+WHERE idSanPham = 'SP24';
+
+UPDATE SanPham SET thongSoSanPham = 
+N'- Kích thước 23.8 inch' + CHAR(13)+CHAR(10) +
+N'- Độ phân giải Full HD' + CHAR(13)+CHAR(10) +
+N'- Tần số quét 165Hz (OC 180Hz)' + CHAR(13)+CHAR(10) +
+N'- Tấm nền IPS / Thời gian phản hồi 1ms'
+WHERE idSanPham = 'SP25';
+
 select * from sanpham
 select* from loaisanpham
 select * from congty
 select * from dondathang
+
+GO
+
+CREATE PROC PR_THONGTINSANPHAM
+AS
+BEGIN
+	SELECT 
+		idSanPham,
+		idCongTy,
+		idLoaiSanPham,
+		tenSanPham,
+		imageURL,
+		thongSoSanPham,
+		soLuongHienCon,
+		soLuongCanDuoi,
+		CASE
+			WHEN soLuongCanDuoi = 0 THEN N'Hết'
+			WHEN soLuongCanDuoi < 10 THEN N'Gần hết'
+			ELSE N'Còn vô tư'
+		END AS N'Tình trạng'
+	FROM SanPham;
+END;
+GO
+
+-- Thực thi thủ tục để xem kết quả
+EXEC PR_THONGTINSANPHAM;
 
 SELECT TOP 10
     sp.idSanPham,

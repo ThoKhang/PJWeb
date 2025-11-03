@@ -43,7 +43,9 @@
                         });
                     });
 
-                    document.getElementById('maSP').innerHTML = "Mã sản phẩm : "+data.idSanPham;
+                    document.getElementById('maSP').innerHTML = "Mã sản phẩm : " + data.idSanPham;
+
+                    document.getElementById('thongSoSanPham').innerHTML = data.thongSoSanPham;
 
                     document.querySelectorAll('.moTa').forEach(item => {
                         item.innerHTML = data.moTa;
@@ -64,7 +66,7 @@
                 document.getElementById('sanPham').innerHTML = 'Đã xảy ra lỗi khi tải dữ liệu sản phẩm.';
             });
 
-
+        // lấy 3 sản phẩm đổ ra chỗ liên quan
         fetch('/customer/home/getall')
             .then(res => res.json())
             .then(sanpham => {

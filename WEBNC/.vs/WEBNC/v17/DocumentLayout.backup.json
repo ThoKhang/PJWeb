@@ -3,14 +3,6 @@
   "WorkspaceRootPath": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E9EA7EC6-29F7-4BE7-88CB-80C7B86DCDB9}|WEBNC.Models\\WEBNC.Models.csproj|f:\\2025-2026\\2026\\c#\\webnc\\pjweb\\webnc\\webnc.models\\sanpham.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E9EA7EC6-29F7-4BE7-88CB-80C7B86DCDB9}|WEBNC.Models\\WEBNC.Models.csproj|solutionrelative:webnc.models\\sanpham.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C617CF0A-306B-4B00-B490-B64513DEA71D}|WEBNC.DataAccess\\WEBNC.DataAccess.csproj|f:\\2025-2026\\2026\\c#\\webnc\\pjweb\\webnc\\webnc.dataaccess\\repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C617CF0A-306B-4B00-B490-B64513DEA71D}|WEBNC.DataAccess\\WEBNC.DataAccess.csproj|solutionrelative:webnc.dataaccess\\repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|f:\\2025-2026\\2026\\c#\\webnc\\pjweb\\webnc\\webnc\\wwwroot\\js\\details.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|solutionrelative:webnc\\wwwroot\\js\\details.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
@@ -19,8 +11,20 @@
       "RelativeMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|solutionrelative:webnc\\areas\\customer\\views\\home\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{C617CF0A-306B-4B00-B490-B64513DEA71D}|WEBNC.DataAccess\\WEBNC.DataAccess.csproj|f:\\2025-2026\\2026\\c#\\webnc\\pjweb\\webnc\\webnc.dataaccess\\repository\\sanphamrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C617CF0A-306B-4B00-B490-B64513DEA71D}|WEBNC.DataAccess\\WEBNC.DataAccess.csproj|solutionrelative:webnc.dataaccess\\repository\\sanphamrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|f:\\2025-2026\\2026\\c#\\webnc\\pjweb\\webnc\\webnc\\areas\\customer\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|solutionrelative:webnc\\areas\\customer\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9EA7EC6-29F7-4BE7-88CB-80C7B86DCDB9}|WEBNC.Models\\WEBNC.Models.csproj|f:\\2025-2026\\2026\\c#\\webnc\\pjweb\\webnc\\webnc.models\\sanpham.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9EA7EC6-29F7-4BE7-88CB-80C7B86DCDB9}|WEBNC.Models\\WEBNC.Models.csproj|solutionrelative:webnc.models\\sanpham.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C617CF0A-306B-4B00-B490-B64513DEA71D}|WEBNC.DataAccess\\WEBNC.DataAccess.csproj|f:\\2025-2026\\2026\\c#\\webnc\\pjweb\\webnc\\webnc.dataaccess\\repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C617CF0A-306B-4B00-B490-B64513DEA71D}|WEBNC.DataAccess\\WEBNC.DataAccess.csproj|solutionrelative:webnc.dataaccess\\repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C617CF0A-306B-4B00-B490-B64513DEA71D}|WEBNC.DataAccess\\WEBNC.DataAccess.csproj|f:\\2025-2026\\2026\\c#\\webnc\\pjweb\\webnc\\webnc.dataaccess\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -29,10 +33,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E9EA7EC6-29F7-4BE7-88CB-80C7B86DCDB9}|WEBNC.Models\\WEBNC.Models.csproj|f:\\2025-2026\\2026\\c#\\webnc\\pjweb\\webnc\\webnc.models\\chitietdonhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E9EA7EC6-29F7-4BE7-88CB-80C7B86DCDB9}|WEBNC.Models\\WEBNC.Models.csproj|solutionrelative:webnc.models\\chitietdonhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C617CF0A-306B-4B00-B490-B64513DEA71D}|WEBNC.DataAccess\\WEBNC.DataAccess.csproj|f:\\2025-2026\\2026\\c#\\webnc\\pjweb\\webnc\\webnc.dataaccess\\repository\\sanphamrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C617CF0A-306B-4B00-B490-B64513DEA71D}|WEBNC.DataAccess\\WEBNC.DataAccess.csproj|solutionrelative:webnc.dataaccess\\repository\\sanphamrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E9EA7EC6-29F7-4BE7-88CB-80C7B86DCDB9}|WEBNC.Models\\WEBNC.Models.csproj|f:\\2025-2026\\2026\\c#\\webnc\\pjweb\\webnc\\webnc.models\\dondathang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -98,7 +98,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -106,28 +106,40 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
+              "Title": "details.js",
+              "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\wwwroot\\js\\details.js",
+              "RelativeDocumentMoniker": "WEBNC\\wwwroot\\js\\details.js",
+              "ToolTip": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\wwwroot\\js\\details.js",
+              "RelativeToolTip": "WEBNC\\wwwroot\\js\\details.js",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAEIAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-11-03T16:05:35.702Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "HomeController.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\Areas\\Customer\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "WEBNC\\Areas\\Customer\\Controllers\\HomeController.cs",
               "ToolTip": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\Areas\\Customer\\Controllers\\HomeController.cs",
               "RelativeToolTip": "WEBNC\\Areas\\Customer\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAwwC8AAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAABcAAAAAAAAAAAAwwC4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-29T01:25:37.711Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "SanPham.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.Models\\SanPham.cs",
               "RelativeDocumentMoniker": "WEBNC.Models\\SanPham.cs",
               "ToolTip": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.Models\\SanPham.cs",
               "RelativeToolTip": "WEBNC.Models\\SanPham.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-27T17:42:43.397Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-27T17:42:43.397Z"
             },
             {
               "$type": "Document",
@@ -143,7 +155,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "Repository.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\Repository\\Repository.cs",
               "RelativeDocumentMoniker": "WEBNC.DataAccess\\Repository\\Repository.cs",
@@ -151,12 +163,11 @@
               "RelativeToolTip": "WEBNC.DataAccess\\Repository\\Repository.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAD4vygAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-01T15:51:10.122Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-01T15:51:10.122Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "WEBNC.DataAccess\\Data\\ApplicationDbContext.cs",
@@ -168,32 +179,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "details.js",
-              "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\wwwroot\\js\\details.js",
-              "RelativeDocumentMoniker": "WEBNC\\wwwroot\\js\\details.js",
-              "ToolTip": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\wwwroot\\js\\details.js",
-              "RelativeToolTip": "WEBNC\\wwwroot\\js\\details.js",
-              "ViewState": "AgIAADcAAAAAAAAAAADwv1sAAABLAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-10-29T14:44:27.019Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Details.cshtml",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\Areas\\Customer\\Views\\Home\\Details.cshtml",
               "RelativeDocumentMoniker": "WEBNC\\Areas\\Customer\\Views\\Home\\Details.cshtml",
               "ToolTip": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\Areas\\Customer\\Views\\Home\\Details.cshtml",
               "RelativeToolTip": "WEBNC\\Areas\\Customer\\Views\\Home\\Details.cshtml",
-              "ViewState": "AgIAAIQCAAAAAAAAAADgv5sCAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAALQCAAAAAAAAAAAkwNQCAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-10-29T13:56:05.64Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "SanPhamRepository.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\Repository\\SanPhamRepository.cs",
               "RelativeDocumentMoniker": "WEBNC.DataAccess\\Repository\\SanPhamRepository.cs",
@@ -205,7 +203,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "ChiTietDonHang.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.Models\\ChiTietDonHang.cs",
               "RelativeDocumentMoniker": "WEBNC.Models\\ChiTietDonHang.cs",

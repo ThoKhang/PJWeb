@@ -50,8 +50,4 @@
     <None Include="wwwroot\images\VGA_MSI_RTX_3060_Ventus_2X_12GB.jpg" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
 </Project>

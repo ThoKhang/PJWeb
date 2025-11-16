@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Web.DataAccess.Repository;
 using Web.DataAccess.Repository.IRepository;
 using WEBNC.Data;
+using WEBNC.Services.VnPay;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,8 @@ builder.Services.AddCors(options =>
                 .AllowAnyHeader();
         });
 });
-
+//Add API VNPAY
+builder.Services.AddScoped<IVnPayService, VnPayService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

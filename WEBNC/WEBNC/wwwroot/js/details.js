@@ -1,4 +1,4 @@
-﻿    const urlParams = new URLSearchParams(window.location.search);
+const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
     if (id) {
         fetch(`/customer/home/SanPham?id=${id}`)
@@ -59,6 +59,10 @@
                     priceElements.forEach(element => {
                         element.innerHTML = `$${formattedPrice}`;
                     });
+                    const amountInput = document.querySelector('input[name="Amount"]');
+                    if (amountInput) {
+                        amountInput.value = data.gia;
+                    }
                 }
             })
             .catch(error => {

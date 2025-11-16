@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\WEBNC.csproj": {}
+    "D:\\HK125\\LTWNC\\PJWeb\\WEBNC\\WEBNC\\WEBNC.csproj": {}
   },
   "projects": {
-    "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\WEBNC.DataAccess.csproj": {
+    "D:\\HK125\\LTWNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\WEBNC.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\WEBNC.DataAccess.csproj",
+        "projectUniqueName": "D:\\HK125\\LTWNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\WEBNC.DataAccess.csproj",
         "projectName": "WEBNC.DataAccess",
-        "projectPath": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\WEBNC.DataAccess.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\obj\\",
+        "projectPath": "D:\\HK125\\LTWNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\WEBNC.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\chaut\\.nuget\\packages\\",
+        "outputPath": "D:\\HK125\\LTWNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\chaut\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,8 +32,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj": {
-                "projectPath": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj"
+              "D:\\HK125\\LTWNC\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj": {
+                "projectPath": "D:\\HK125\\LTWNC\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj"
               }
             }
           }
@@ -85,24 +85,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj": {
+    "D:\\HK125\\LTWNC\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj",
+        "projectUniqueName": "D:\\HK125\\LTWNC\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj",
         "projectName": "WEBNC.Models",
-        "projectPath": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.Models\\obj\\",
+        "projectPath": "D:\\HK125\\LTWNC\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj",
+        "packagesPath": "C:\\Users\\chaut\\.nuget\\packages\\",
+        "outputPath": "D:\\HK125\\LTWNC\\PJWeb\\WEBNC\\WEBNC.Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\chaut\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -156,24 +156,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\WEBNC.csproj": {
+    "D:\\HK125\\LTWNC\\PJWeb\\WEBNC\\WEBNC\\WEBNC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\WEBNC.csproj",
+        "projectUniqueName": "D:\\HK125\\LTWNC\\PJWeb\\WEBNC\\WEBNC\\WEBNC.csproj",
         "projectName": "WEBNC",
-        "projectPath": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\WEBNC.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\obj\\",
+        "projectPath": "D:\\HK125\\LTWNC\\PJWeb\\WEBNC\\WEBNC\\WEBNC.csproj",
+        "packagesPath": "C:\\Users\\chaut\\.nuget\\packages\\",
+        "outputPath": "D:\\HK125\\LTWNC\\PJWeb\\WEBNC\\WEBNC\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\chaut\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -188,11 +188,11 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\WEBNC.DataAccess.csproj": {
-                "projectPath": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\WEBNC.DataAccess.csproj"
+              "D:\\HK125\\LTWNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\WEBNC.DataAccess.csproj": {
+                "projectPath": "D:\\HK125\\LTWNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\WEBNC.DataAccess.csproj"
               },
-              "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj": {
-                "projectPath": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj"
+              "D:\\HK125\\LTWNC\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj": {
+                "projectPath": "D:\\HK125\\LTWNC\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj"
               }
             }
           }
@@ -251,7 +251,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

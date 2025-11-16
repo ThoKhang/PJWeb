@@ -699,7 +699,14 @@
                         <input type="number" value="1" min="1">
                         <button>+</button>
                     </div>
-                    <button class="btn-buy">Mua ngay</button>
+                    <form method="post" asp-action="CreatePaymentUrlVnpay" asp-controller="Payment">
+                        <input type="hidden" name="Name" value="@(User?.Identity?.Name ?? "guest")" />
+                        <input type="hidden" id="Amount" name="Amount" value="0" />
+                        <input type="hidden" name="OrderDescription" value="Thanh toán VNPAY" />
+                        <input type="hidden" name="OrderType" value="Order" />
+                        <button type="submit" class="btn-buy">Mua ngay</button>
+                    </form>
+                    
                     <button class="btn-cart">Thêm vào giỏ</button>
                 </div>
             </div>

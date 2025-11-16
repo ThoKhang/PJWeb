@@ -10,3 +10,15 @@ F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC.Utility\obj\Debug\net8.0\WEBNC.Util
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC.Utility\obj\Debug\net8.0\refint\WEBNC.Utility.dll
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC.Utility\obj\Debug\net8.0\WEBNC.Utility.pdb
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC.Utility\obj\Debug\net8.0\ref\WEBNC.Utility.dll
+D:\HK125\LTWNC\PJWeb\WEBNC\WEBNC.Utility\bin\Debug\net8.0\WEBNC.Utility.deps.json
+D:\HK125\LTWNC\PJWeb\WEBNC\WEBNC.Utility\bin\Debug\net8.0\WEBNC.Utility.dll
+D:\HK125\LTWNC\PJWeb\WEBNC\WEBNC.Utility\bin\Debug\net8.0\WEBNC.Utility.pdb
+D:\HK125\LTWNC\PJWeb\WEBNC\WEBNC.Utility\obj\Debug\net8.0\WEBNC.Utility.GeneratedMSBuildEditorConfig.editorconfig
+D:\HK125\LTWNC\PJWeb\WEBNC\WEBNC.Utility\obj\Debug\net8.0\WEBNC.Utility.AssemblyInfoInputs.cache
+D:\HK125\LTWNC\PJWeb\WEBNC\WEBNC.Utility\obj\Debug\net8.0\WEBNC.Utility.AssemblyInfo.cs
+D:\HK125\LTWNC\PJWeb\WEBNC\WEBNC.Utility\obj\Debug\net8.0\WEBNC.Utility.csproj.CoreCompileInputs.cache
+D:\HK125\LTWNC\PJWeb\WEBNC\WEBNC.Utility\obj\Debug\net8.0\WEBNC.Utility.sourcelink.json
+D:\HK125\LTWNC\PJWeb\WEBNC\WEBNC.Utility\obj\Debug\net8.0\WEBNC.Utility.dll
+D:\HK125\LTWNC\PJWeb\WEBNC\WEBNC.Utility\obj\Debug\net8.0\refint\WEBNC.Utility.dll
+D:\HK125\LTWNC\PJWeb\WEBNC\WEBNC.Utility\obj\Debug\net8.0\WEBNC.Utility.pdb
+D:\HK125\LTWNC\PJWeb\WEBNC\WEBNC.Utility\obj\Debug\net8.0\ref\WEBNC.Utility.dll

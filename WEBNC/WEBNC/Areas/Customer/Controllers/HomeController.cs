@@ -5,6 +5,7 @@ using WEBNC.Models;
 
 namespace WEBNC.Areas.Customer.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

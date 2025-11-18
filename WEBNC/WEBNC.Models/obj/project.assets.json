@@ -4163,23 +4163,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ADMIN\\.nuget\\packages\\": {},
+    "C:\\Users\\vduon\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj",
+      "projectUniqueName": "C:\\Users\\vduon\\Downloads\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj",
       "projectName": "WEBNC.Models",
-      "projectPath": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj",
-      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.Models\\obj\\",
+      "projectPath": "C:\\Users\\vduon\\Downloads\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj",
+      "packagesPath": "C:\\Users\\vduon\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vduon\\Downloads\\PJWeb\\WEBNC\\WEBNC.Models\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\vduon\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

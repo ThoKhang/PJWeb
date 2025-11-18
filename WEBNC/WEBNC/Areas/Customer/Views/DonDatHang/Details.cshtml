@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "Chi tiết đơn hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<input type="hidden" id="hiddenOrderId" value="@ViewBag.OrderId" />
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
+        <h2 class="text-primary">
+            <i class="fas fa-file-invoice"></i> Chi Tiết Đơn Hàng <span id="lblOrderId" class="text-dark">#...</span>
+        </h2>
+        <div>
+            <a href="/Customer/DonDatHang/Index" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> Quay lại
+            </a>
+        </div>
+    </div>
+
+    <div id="loadingSpinner" class="text-center my-5">
+        <div class="spinner-border text-primary" role="status"></div>
+        <p class="mt-2">Đang tải thông tin...</p>
+    </div>
+
+    <div id="orderContent" style="display:none;">
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Ngày đặt:</strong> <span id="lblNgayDat"></span></p>
+                        <p><strong>Trạng thái:</strong> <span id="lblTrangThai" class="fw-bold"></span></p>
+                        <p><strong>SĐT Giao hàng:</strong> <span id="lblSdt"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Địa chỉ:</strong> <span id="lblDiaChi"></span></p>
+                        <p><strong>Tổng cộng:</strong> <span id="lblTongTien" class="text-danger fw-bold fs-4"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="mb-3 text-secondary">Sản phẩm trong đơn</h4>
+        <table class="table table-hover table-bordered align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th class="text-center">Hình ảnh</th>
+                    <th>Tên sản phẩm</th>
+                    <th class="text-center">Số lượng</th>
+                    <th class="text-end">Đơn giá</th>
+                    <th class="text-end">Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody id="tblDetailsBody">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="errorAlert" class="alert alert-danger text-center mt-4" style="display:none;"></div>
+</div>
+
+@section Scripts {
+   
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const orderId = document.getElementById('hiddenOrderId').value;
+            if (orderId) loadDetails(orderId);
+            else showError("Không tìm thấy mã đơn hàng.");
+        });
+
+        function loadDetails(id) {
+            fetch(`/Customer/DonDatHang/GetOrderDetails?id=${id}`)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('loadingSpinner').style.display = 'none';
+
+                    if (!data.success) {
+                        showError(data.message);
+                        return;
+                    }
+
+                    document.getElementById('orderContent').style.display = 'block';
+                    fillInfo(data.orderInfo);
+                    renderItems(data.orderDetails);
+                })
+                .catch(err => showError("Lỗi kết nối server."));
+        }
+
+        function fillInfo(info) {
+            const formatter = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
+            const dateObj = new Date(info.ngayDat);
+
+            document.getElementById('lblOrderId').innerText = "#" + info.idDonDat;
+            document.getElementById('lblNgayDat').innerText = dateObj.toLocaleDateString('vi-VN') + ' ' + dateObj.toLocaleTimeString('vi-VN');
+            document.getElementById('lblTrangThai').innerText = info.trangThai;
+            document.getElementById('lblSdt').innerText = info.sdt;
+            document.getElementById('lblDiaChi').innerText = info.diaChi;
+            document.getElementById('lblTongTien').innerText = formatter.format(info.tongTien);
+        }
+
+        function renderItems(items) {
+            let html = '';
+            const formatter = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
+
+            items.forEach(item => {
+                // Đường dẫn ảnh: Nếu item.hinhAnh có giá trị thì dùng, ko thì dùng ảnh placeholder
+                let imgPath = item.hinhAnh ? `/images/${item.hinhAnh}` : 'https://via.placeholder.com/50';
+
+                html += `
+                    <tr>
+                        <td class="text-center">
+                            <img src="${imgPath}" style="width: 60px; height: 60px; object-fit: cover;" class="rounded border">
+                        </td>
+                        <td class="fw-bold text-primary">${item.tenSanPham}</td>
+                        <td class="text-center">${item.soLuong}</td>
+                        <td class="text-end">${formatter.format(item.donGia)}</td>
+                        <td class="text-end fw-bold">${formatter.format(item.thanhTien)}</td>
+                    </tr>
+                `;
+            });
+            document.getElementById('tblDetailsBody').innerHTML = html;
+        }
+
+        function showError(msg) {
+            document.getElementById('loadingSpinner').style.display = 'none';
+            const alertBox = document.getElementById('errorAlert');
+            alertBox.style.display = 'block';
+            alertBox.innerText = msg;
+        }
+    </script>
+}

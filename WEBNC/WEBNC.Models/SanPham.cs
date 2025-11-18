@@ -22,8 +22,10 @@ namespace WEBNC.Models
         public decimal gia { get; set; }
         public string moTa { get; set; }
         public string imageLienQuan { get; set; }
-        public string thongSoSanPham { get; set; }
-        public int soLuongCanDuoi { get; set; }
-        public int soLuongHienCon { get; set; }
+
+        // Phải bỏ 3 dòng này phần code Đơn đặt hàng của tau mới chạy được do lỗi với hàm getAll (Dương)
+        //public string thongSoSanPham { get; set; }
+        //public int soLuongCanDuoi { get; set; }
+        //public int soLuongHienCon { get; set; }
     }
 }

@@ -29,9 +29,13 @@
 
     <!-- Template Stylesheet -->
     <link href="~/css/style.css" rel="stylesheet">
+    <link href="~/css/slide.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
 </head>
 <body>
-    <header >
+    <header style="margin-bottom:3px" >
         <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm border-bottom sticky-top">
             <div class="container-fluid px-4 py-2">
                 <a class="navbar-brand fw-bold text-primary d-flex align-items-center" href="/">
@@ -74,7 +78,7 @@
         </nav>
     </header>
     <!-- FULL WIDTH CONTENT -->
-    @RenderSection("FullWidthContent", required: false)
+    @RenderSection("FullWidthSlider", required: false)
 
     <!-- NORMAL CONTENT -->
     <div class="container">

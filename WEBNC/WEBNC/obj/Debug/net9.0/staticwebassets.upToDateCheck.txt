@@ -122,6 +122,10 @@ wwwroot\images\HDD_WD2T_1.jpg
 wwwroot\images\HDD_WD2T_2.jpg
 wwwroot\images\HDD_WD2T_3.jpeg
 wwwroot\images\HDD_WD2T_4.jpg
+wwwroot\images\images_slide\slide1.jpg
+wwwroot\images\images_slide\slide2.jpg
+wwwroot\images\images_slide\slide3.jpg
+wwwroot\images\images_slide\slide4.jpg
 wwwroot\images\MAIN_ASUS_ROG_Strix_B550-F.jpg
 wwwroot\images\MAIN_b550f_1.jpg
 wwwroot\images\MAIN_b550f_2.jpg

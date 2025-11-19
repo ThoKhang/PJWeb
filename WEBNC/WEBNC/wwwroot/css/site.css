@@ -1,4 +1,4 @@
-html {
+﻿html {
   font-size: 14px;
 }
 
@@ -45,4 +45,42 @@ body {
 .form-control:focus {
     box-shadow: 0 0 6px rgba(13, 110, 253, 0.4);
     border-color: #0d6efd;
+}
+
+/* Bỏ giới hạn width của wrapper ====slide======================*/
+.elfsight-app-49c63b95-3e97-493f-a278-44b368f92e3f,
+.elfsight-app-49c63b95-3e97-493f-a278-44b368f92e3f > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Phá layout flex căn giữa */
+.eapp-slider-slider-inner-wrapper,
+.eapp-slider-slider-inner,
+.eapp-slider-slider-container,
+.eapp-slider-app-container {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Xóa padding DIV Builder và WidgetBackground */
+div[class*="WidgetBackground_Content"],
+div[class*="WidgetBackground__ContentContainer"],
+div[class*="BuilderContent"],
+div[class*="WidgetBackground__Wrapper"] {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Bắt nền slider full theo chiều ngang */
+div[class*="Banner_Container"],
+div[class*="Slider_InnerWrapper"],
+div[class*="Slider_Outer"],
+div[class*="Slide_Style"] {
+    width: 100% !important;
+    max-width: 100% !important;
 }

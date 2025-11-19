@@ -267,7 +267,6 @@ F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\scopedcss\Views\Sh
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\scopedcss\bundle\WEBNC.styles.css
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\scopedcss\projectbundle\WEBNC.bundle.scp.css
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\compressed\zxj0rn2mcv-nou1ph5ll2.gz
-F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\compressed\h6lmxd0ha3-u60dxi82b1.gz
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\compressed\l42brbhpov-61n19gt1b8.gz
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\compressed\vqptk2whw0-i4mebrwtnb.gz
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\compressed\afxint59z4-rm7fr7ors1.gz
@@ -363,4 +362,6 @@ F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\refint\WEBNC.dll
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\WEBNC.pdb
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\WEBNC.genruntimeconfig.cache
 F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\ref\WEBNC.dll
-F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\compressed\fruw8u6iv0-impmxmfktv.gz
+F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\compressed\fruw8u6iv0-9o4v3qifsd.gz
+F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\compressed\h6lmxd0ha3-u4w4udcuv1.gz
+F:\2025-2026\2026\C#\WEBNC\PJWeb\WEBNC\WEBNC\obj\Debug\net9.0\compressed\7m57bn391m-1yhidlrv4t.gz

@@ -1,0 +1,104 @@
+﻿@{
+    ViewData["Title"] = "Đơn đặt hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-primary border-bottom pb-3">
+                <i class="fas fa-user-check"></i> Xin chào, tên khách hàng
+            </h2>
+        </div>
+    </div>
+
+    <div id="loadingSpinner" class="text-center my-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Đang tải...</span>
+        </div>
+        <p class="mt-2">Đang lấy dữ liệu đơn hàng...</p>
+    </div>
+
+    <div class="table-responsive mt-4" id="orderTableContainer" style="display:none;">
+        <table class="table table-hover table-bordered table-striped align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Mã Đơn</th>
+                    <th scope="col">Ngày Đặt</th>
+                    <th scope="col">Tổng Tiền</th>
+                    <th scope="col">Trạng Thái</th>
+                    <th scope="col" class="text-center">Thao Tác</th>
+                </tr>
+            </thead>
+            <tbody id="tblDonHangBody">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="noDataMessage" class="alert alert-info mt-4 text-center" style="display:none;">
+        Bạn chưa có đơn hàng nào. <a href="/" class="alert-link">Mua sắm ngay!</a>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            loadOrderHistory();
+        });
+
+        function loadOrderHistory() {
+            fetch('/Customer/DonDatHang/GetMyOrders')
+                .then(response => response.json())
+                .then(res => {
+                    document.getElementById('loadingSpinner').style.display = 'none';
+                    const data = res.data;
+
+                    if (!data || data.length === 0) {
+                        document.getElementById('noDataMessage').style.display = 'block';
+                        return;
+                    }
+
+                    document.getElementById('orderTableContainer').style.display = 'block';
+                    renderTable(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('loadingSpinner').innerHTML = '<p class="text-danger">Lỗi kết nối server.</p>';
+                });
+        }
+
+        function renderTable(data) {
+            let html = '';
+            const formatter = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
+
+            data.forEach(item => {
+                const dateObj = new Date(item.ngayDat);
+                const dateString = dateObj.toLocaleDateString('vi-VN');
+
+                // Xử lý trạng thái
+                let statusText = item.trangThai ? item.trangThai : "Chờ cập nhật";
+                let badgeClass = "bg-secondary";
+
+                // Thêm màu cho trạng thái
+                if (statusText === 'Đã giao') badgeClass = "bg-success";
+                else if (statusText.includes('Đang')) badgeClass = "bg-warning text-dark";
+                else if (statusText === 'Đã hủy') badgeClass = "bg-danger";
+
+                html += `
+                    <tr>
+                        <td class="fw-bold">#${item.idDonDat}</td>
+                        <td>${dateString}</td>
+                        <td class="text-danger fw-bold">${formatter.format(item.tongTien)}</td>
+                        <td><span class="badge ${badgeClass}">${statusText}</span></td>
+                        <td class="text-center">
+                            <a href="/Customer/DonDatHang/Details?id=${item.idDonDat}" class="btn btn-primary btn-sm">
+                                <i class="fas fa-eye"></i> Xem
+                            </a>
+                        </td>
+                    </tr>
+                `;
+            });
+            document.getElementById('tblDonHangBody').innerHTML = html;
+        }
+    </script>
+}

@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|f:\\2025-2026\\2026\\c#\\webnc\\pjweb\\webnc\\webnc\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|solutionrelative:webnc\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|f:\\2025-2026\\2026\\c#\\webnc\\pjweb\\webnc\\webnc\\webnc.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|solutionrelative:webnc\\webnc.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|f:\\2025-2026\\2026\\c#\\webnc\\pjweb\\webnc\\webnc\\areas\\customer\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|solutionrelative:webnc\\areas\\customer\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|f:\\2025-2026\\2026\\c#\\webnc\\pjweb\\webnc\\webnc\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|solutionrelative:webnc\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|f:\\2025-2026\\2026\\c#\\webnc\\pjweb\\webnc\\webnc\\wwwroot\\css\\slide.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
@@ -102,7 +106,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -110,7 +114,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "WEBNC",
+              "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\WEBNC.csproj",
+              "RelativeDocumentMoniker": "WEBNC\\WEBNC.csproj",
+              "ToolTip": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\WEBNC.csproj",
+              "RelativeToolTip": "WEBNC\\WEBNC.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-19T17:37:35.04Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "slide.css",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\wwwroot\\css\\slide.css",
               "RelativeDocumentMoniker": "WEBNC\\wwwroot\\css\\slide.css",
@@ -123,7 +139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "style.css",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\wwwroot\\css\\style.css",
               "RelativeDocumentMoniker": "WEBNC\\wwwroot\\css\\style.css",
@@ -136,7 +152,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "WEBNC.DataAccess\\Data\\ApplicationDbContext.cs",
@@ -148,7 +164,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Details.cshtml",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\Areas\\Customer\\Views\\Home\\Details.cshtml",
               "RelativeDocumentMoniker": "WEBNC\\Areas\\Customer\\Views\\Home\\Details.cshtml",
@@ -161,7 +177,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "SanPhamRepository.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\Repository\\SanPhamRepository.cs",
               "RelativeDocumentMoniker": "WEBNC.DataAccess\\Repository\\SanPhamRepository.cs",
@@ -173,13 +189,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "WEBNC\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "WEBNC\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB8AAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAAABsAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-10-30T12:45:52.037Z",
               "EditorCaption": ""
@@ -190,16 +206,16 @@
               "Title": "Index.cshtml",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\Areas\\Customer\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "WEBNC\\Areas\\Customer\\Views\\Home\\Index.cshtml",
-              "ToolTip": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\Areas\\Customer\\Views\\Home\\Index.cshtml*",
-              "RelativeToolTip": "WEBNC\\Areas\\Customer\\Views\\Home\\Index.cshtml*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAEAAAAAAAAAA==",
+              "ToolTip": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\Areas\\Customer\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "WEBNC\\Areas\\Customer\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAK4FAAAAAAAAAAAAAMMFAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-10-27T18:19:30.721Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "site.css",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\wwwroot\\css\\site.css",
               "RelativeDocumentMoniker": "WEBNC\\wwwroot\\css\\site.css",
@@ -212,7 +228,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "DonDatHang.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.Models\\DonDatHang.cs",
               "RelativeDocumentMoniker": "WEBNC.Models\\DonDatHang.cs",
@@ -224,7 +240,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Repository.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\Repository\\Repository.cs",
               "RelativeDocumentMoniker": "WEBNC.DataAccess\\Repository\\Repository.cs",
@@ -237,7 +253,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "SanPham.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.Models\\SanPham.cs",
               "RelativeDocumentMoniker": "WEBNC.Models\\SanPham.cs",
@@ -249,7 +265,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "HomeController.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\Areas\\Customer\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "WEBNC\\Areas\\Customer\\Controllers\\HomeController.cs",
@@ -261,7 +277,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "ChiTietDonHang.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.Models\\ChiTietDonHang.cs",
               "RelativeDocumentMoniker": "WEBNC.Models\\ChiTietDonHang.cs",
@@ -273,7 +289,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "SanPhamController.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\Areas\\Admin\\Controllers\\SanPhamController.cs",
               "RelativeDocumentMoniker": "WEBNC\\Areas\\Admin\\Controllers\\SanPhamController.cs",
@@ -285,7 +301,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "CongTy.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.Models\\CongTy.cs",
               "RelativeDocumentMoniker": "WEBNC.Models\\CongTy.cs",
@@ -297,7 +313,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "ISanPhamRepository.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\Repository\\IRepository\\ISanPhamRepository.cs",
               "RelativeDocumentMoniker": "WEBNC.DataAccess\\Repository\\IRepository\\ISanPhamRepository.cs",
@@ -309,7 +325,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "IUnitOfWork.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\Repository\\IRepository\\IUnitOfWork.cs",
               "RelativeDocumentMoniker": "WEBNC.DataAccess\\Repository\\IRepository\\IUnitOfWork.cs",
@@ -321,7 +337,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "UnitOfWork.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\Repository\\UnitOfWork.cs",
               "RelativeDocumentMoniker": "WEBNC.DataAccess\\Repository\\UnitOfWork.cs",
@@ -333,7 +349,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "IRepository.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC.DataAccess\\Repository\\IRepository\\IRepository.cs",
               "RelativeDocumentMoniker": "WEBNC.DataAccess\\Repository\\IRepository\\IRepository.cs",
@@ -345,7 +361,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "home.js",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\wwwroot\\js\\home.js",
               "RelativeDocumentMoniker": "WEBNC\\wwwroot\\js\\home.js",
@@ -357,7 +373,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "Program.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\Program.cs",
               "RelativeDocumentMoniker": "WEBNC\\Program.cs",
@@ -369,7 +385,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "Index.cshtml",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\Areas\\Admin\\Views\\SanPham\\Index.cshtml",
               "RelativeDocumentMoniker": "WEBNC\\Areas\\Admin\\Views\\SanPham\\Index.cshtml",
@@ -381,7 +397,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "appsettings.json",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\WEBNC\\PJWeb\\WEBNC\\WEBNC\\appsettings.json",
               "RelativeDocumentMoniker": "WEBNC\\appsettings.json",

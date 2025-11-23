@@ -3,7 +3,7 @@ using WEBNC.Models;
 
 namespace WEBNC.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

@@ -1,7 +1,4 @@
-﻿using WEBNC.Data;
-using WEBNC.DataAccess.Repository.IRepository;
-
-namespace Web.DataAccess.Repository.IRepository
+﻿namespace WEBNC.DataAccess.Repository.IRepository
 {
     public interface IUnitOfWork
     {

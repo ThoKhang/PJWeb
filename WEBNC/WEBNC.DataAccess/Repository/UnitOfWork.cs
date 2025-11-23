@@ -1,10 +1,7 @@
-﻿using Web.DataAccess.Repository.IRepository;
-using WEBNC.Data;
-using WEBNC.DataAccess.Repository;
+﻿using WEBNC.Data;
 using WEBNC.DataAccess.Repository.IRepository;
-using WEBNC.Models;
 
-namespace Web.DataAccess.Repository
+namespace WEBNC.DataAccess.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {

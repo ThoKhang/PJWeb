@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using Web.DataAccess.Repository;
-using Web.DataAccess.Repository.IRepository;
 using WEBNC.Data;
+using Microsoft.AspNetCore.Identity;
+using WEBNC.DataAccess.Repository.IRepository;
+using WEBNC.DataAccess.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,9 +22,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-// Th�m session 
+// Th�m session 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -49,9 +52,13 @@ app.UseRouting();
 
 app.UseSession();
 
+// giúp kích hoạt xác thực
+app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",

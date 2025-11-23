@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Web.DataAccess.Repository.IRepository;
 using WEBNC.Models;
 using Microsoft.AspNetCore.Http; // Dùng cho Session
-using System.Linq; // Dùng cho Select, Sum
+using System.Linq;
+using WEBNC.DataAccess.Repository.IRepository; // Dùng cho Select, Sum
 
 namespace WEBNC.Areas.Customer.Controllers
 {

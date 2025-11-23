@@ -1,14 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Web.DataAccess.Repository.IRepository;
 using WEBNC.Data;
+using WEBNC.DataAccess.Repository.IRepository;
 
-namespace Web.DataAccess.Repository
+namespace WEBNC.DataAccess.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {

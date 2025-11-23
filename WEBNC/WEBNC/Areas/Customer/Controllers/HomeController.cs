@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Web.DataAccess.Repository.IRepository;
+using WEBNC.DataAccess.Repository.IRepository;
 using WEBNC.Models;
 
 namespace WEBNC.Areas.Customer.Controllers

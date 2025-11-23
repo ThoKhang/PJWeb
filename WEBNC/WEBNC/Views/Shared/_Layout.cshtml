@@ -59,20 +59,23 @@
                                 <i class="fas fa-box-open me-1"></i> Sản phẩm
                             </a>
                         </li>
+                        <li>
+                            <form class="d-flex align-items-center gap-2 mt-3 mt-lg-0 w-100 w-lg-auto" style="max-width: 500px;">
+                                <select class="form-select form-select-sm rounded-pill border-primary" style="width: 120px;">
+                                    <option selected>Tất cả</option>
+                                    <option>Điện thoại</option>
+                                    <option>Laptop</option>
+                                </select>
+                                <input class="form-control form-control-sm rounded-pill flex-grow-1"
+                                       type="search" placeholder="Tìm kiếm..." aria-label="Search">
+                                <button class="btn btn-primary btn-sm rounded-pill d-flex align-items-center justify-content-center"
+                                        type="submit" style="width: 40px; height: 36px;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </form>
+                        </li>
+                        <partial name="_LoginPartial" />
                     </ul>
-                    <form class="d-flex align-items-center gap-2 mt-3 mt-lg-0 w-100 w-lg-auto" style="max-width: 500px;">
-                        <select class="form-select form-select-sm rounded-pill border-primary" style="width: 120px;">
-                            <option selected>Tất cả</option>
-                            <option>Điện thoại</option>
-                            <option>Laptop</option>
-                        </select>
-                        <input class="form-control form-control-sm rounded-pill flex-grow-1"
-                               type="search" placeholder="Tìm kiếm..." aria-label="Search">
-                        <button class="btn btn-primary btn-sm rounded-pill d-flex align-items-center justify-content-center"
-                                type="submit" style="width: 40px; height: 36px;">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </form>
                 </div>
             </div>
         </nav>

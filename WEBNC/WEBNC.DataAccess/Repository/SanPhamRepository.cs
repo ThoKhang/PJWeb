@@ -1,10 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Web.DataAccess.Repository;
 using WEBNC.Data;
 using WEBNC.DataAccess.Repository.IRepository;
 using WEBNC.Models;

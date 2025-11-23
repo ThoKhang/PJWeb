@@ -3,28 +3,28 @@
   "WorkspaceRootPath": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C617CF0A-306B-4B00-B490-B64513DEA71D}|WEBNC.DataAccess\\WEBNC.DataAccess.csproj|f:\\2025-2026\\2026\\c#\\pjweb\\webnc\\webnc.dataaccess\\migrations\\20251123155710_identity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C617CF0A-306B-4B00-B490-B64513DEA71D}|WEBNC.DataAccess\\WEBNC.DataAccess.csproj|solutionrelative:webnc.dataaccess\\migrations\\20251123155710_identity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|f:\\2025-2026\\2026\\c#\\pjweb\\webnc\\webnc\\areas\\identity\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|solutionrelative:webnc\\areas\\identity\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|f:\\2025-2026\\2026\\c#\\pjweb\\webnc\\webnc\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|solutionrelative:webnc\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|f:\\2025-2026\\2026\\c#\\pjweb\\webnc\\webnc\\areas\\identity\\pages\\account\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|solutionrelative:webnc\\areas\\identity\\pages\\account\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|f:\\2025-2026\\2026\\c#\\pjweb\\webnc\\webnc\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|solutionrelative:webnc\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC.DataAccess\\Migrations\\20251123154737_identity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:WEBNC.DataAccess\\Migrations\\20251123154737_identity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|f:\\2025-2026\\2026\\c#\\pjweb\\webnc\\webnc\\areas\\identity\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|solutionrelative:webnc\\areas\\identity\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|f:\\2025-2026\\2026\\c#\\pjweb\\webnc\\webnc\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|solutionrelative:webnc\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|f:\\2025-2026\\2026\\c#\\pjweb\\webnc\\webnc\\areas\\identity\\pages\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|solutionrelative:webnc\\areas\\identity\\pages\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|f:\\2025-2026\\2026\\c#\\pjweb\\webnc\\webnc\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|solutionrelative:webnc\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B14BC1AD-540C-4D25-81BF-A4F7EF624947}|WEBNC\\WEBNC.csproj|f:\\2025-2026\\2026\\c#\\pjweb\\webnc\\webnc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -142,7 +142,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -150,39 +150,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "20251123155710_identity.cs",
-              "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC.DataAccess\\Migrations\\20251123155710_identity.cs",
-              "RelativeDocumentMoniker": "WEBNC.DataAccess\\Migrations\\20251123155710_identity.cs",
-              "ToolTip": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC.DataAccess\\Migrations\\20251123155710_identity.cs",
-              "RelativeToolTip": "WEBNC.DataAccess\\Migrations\\20251123155710_identity.cs",
-              "ViewState": "AgIAAIYAAAAAAAAAAAAgwJsAAAA2AAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "Login.cshtml.cs",
+              "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
+              "RelativeDocumentMoniker": "WEBNC\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
+              "ToolTip": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
+              "RelativeToolTip": "WEBNC\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAUwIMAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-23T15:57:10.816Z",
+              "WhenOpened": "2025-11-23T16:31:41.523Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "20251123154737_identity.cs",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC.DataAccess\\Migrations\\20251123154737_identity.cs",
               "RelativeDocumentMoniker": "WEBNC.DataAccess\\Migrations\\20251123154737_identity.cs",
               "ToolTip": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC.DataAccess\\Migrations\\20251123154737_identity.cs",
               "RelativeToolTip": "WEBNC.DataAccess\\Migrations\\20251123154737_identity.cs",
-              "ViewState": "AgIAAKgBAAAAAAAAAAAAALcBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAI0BAAAAAAAAAAAAALcBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-23T15:47:38.452Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Login.cshtml",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "WEBNC\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
               "ToolTip": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
               "RelativeToolTip": "WEBNC\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAAAIwDIAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-11-23T15:06:27.773Z",
               "EditorCaption": ""
@@ -215,7 +215,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "WEBNC\\Views\\Shared\\_Layout.cshtml",
@@ -228,20 +228,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "_LoginPartial.cshtml",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC\\Views\\Shared\\_LoginPartial.cshtml",
               "RelativeDocumentMoniker": "WEBNC\\Views\\Shared\\_LoginPartial.cshtml",
               "ToolTip": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC\\Views\\Shared\\_LoginPartial.cshtml",
               "RelativeToolTip": "WEBNC\\Views\\Shared\\_LoginPartial.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-11-23T15:04:22.842Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Register.cshtml",
               "DocumentMoniker": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
               "RelativeDocumentMoniker": "WEBNC\\Areas\\Identity\\Pages\\Account\\Register.cshtml",

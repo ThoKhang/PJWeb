@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WEBNC.DataAccess")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c74eea36932d0280be0cb745893cb841898cc9ca")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+12bd8d65eab238d125c98a03966ad437d378b960")]
 [assembly: System.Reflection.AssemblyProductAttribute("WEBNC.DataAccess")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WEBNC.DataAccess")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

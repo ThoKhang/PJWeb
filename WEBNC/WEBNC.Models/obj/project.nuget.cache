@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "j28fWUoLkEY=",
+  "dgSpecHash": "5iGxYUrydJU=",
   "success": true,
   "projectFilePath": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ADMIN\\.nuget\\packages\\entityframework\\6.1.0\\entityframework.6.1.0.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnet.identity.core\\2.2.4\\microsoft.aspnet.identity.core.2.2.4.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnet.identity.entityframework\\2.2.4\\microsoft.aspnet.identity.entityframework.2.2.4.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.3.0\\microsoft.aspnetcore.authentication.abstractions.2.3.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.3.0\\microsoft.aspnetcore.authentication.core.2.3.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.authorization\\2.3.0\\microsoft.aspnetcore.authorization.2.3.0.nupkg.sha512",
@@ -76,5 +79,42 @@
     "C:\\Users\\ADMIN\\.nuget\\packages\\system.xml.readerwriter\\4.0.11\\system.xml.readerwriter.4.0.11.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\system.xml.xdocument\\4.0.11\\system.xml.xdocument.4.0.11.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "message": "Package 'EntityFramework 6.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "projectPath": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj",
+      "warningLevel": 1,
+      "filePath": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj",
+      "libraryId": "EntityFramework",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "message": "Package 'Microsoft.AspNet.Identity.Core 2.2.4' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "projectPath": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj",
+      "warningLevel": 1,
+      "filePath": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj",
+      "libraryId": "Microsoft.AspNet.Identity.Core",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "message": "Package 'Microsoft.AspNet.Identity.EntityFramework 2.2.4' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "projectPath": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj",
+      "warningLevel": 1,
+      "filePath": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj",
+      "libraryId": "Microsoft.AspNet.Identity.EntityFramework",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

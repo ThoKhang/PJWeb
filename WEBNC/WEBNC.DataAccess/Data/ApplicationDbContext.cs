@@ -14,6 +14,10 @@ namespace WEBNC.Data
         public DbSet<CongTy> CongTy { get; set; }
         public DbSet<DonDatHang> DonDatHang { get; set; }
         public DbSet<ChiTietDonHang> ChiTietDonHang { get; set; }
+        //public DbSet<NguoiDung> NguoiDung { get; set; }
+        public DbSet<XaPhuong> XaPhuong { get; set; }
+        public DbSet<Huyen> Huyen { get; set; }
+        public DbSet<Tinh> Tinh { get; set; }
 
         // Định nghĩa khóa chính kép cho ChiTietDonHang
         protected override void OnModelCreating(ModelBuilder modelBuilder)

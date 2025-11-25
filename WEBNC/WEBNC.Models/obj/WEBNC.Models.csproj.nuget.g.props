@@ -15,6 +15,5 @@
   </ItemGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgNewtonsoft_Json Condition=" '$(PkgNewtonsoft_Json)' == '' ">C:\Users\ADMIN\.nuget\packages\newtonsoft.json\9.0.1</PkgNewtonsoft_Json>
-    <PkgEntityFramework Condition=" '$(PkgEntityFramework)' == '' ">C:\Users\ADMIN\.nuget\packages\entityframework\6.1.0</PkgEntityFramework>
   </PropertyGroup>
 </Project>

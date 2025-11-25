@@ -1,4 +1,4 @@
-﻿//using Microsoft.AspNet.Identity.EntityFramework;
+﻿//using Microsoft.AspNetCore.Identity;
 //using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 //using System;
 //using System.Collections.Generic;
@@ -10,7 +10,7 @@
 
 //namespace WEBNC.Models
 //{
-//    public class NguoiDung : IdentityUser
+//    public class ApplicationUser : IdentityUser
 //    {
 //        [Required]
 //        public string hoTen { get; set; }

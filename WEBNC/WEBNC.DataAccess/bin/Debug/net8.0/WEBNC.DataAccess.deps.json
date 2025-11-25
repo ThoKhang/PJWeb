@@ -1370,7 +1370,8 @@
       },
       "WEBNC.Models/1.0.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.Mvc.Core": "2.3.0"
+          "Microsoft.AspNetCore.Mvc.Core": "2.3.0",
+          "Microsoft.Extensions.Identity.Stores": "8.0.22"
         },
         "runtime": {
           "WEBNC.Models.dll": {

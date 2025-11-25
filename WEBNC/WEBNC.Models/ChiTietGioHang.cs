@@ -1,24 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace WEBNC.Models
 {
     public class ChiTietGioHang
     {
-        public int idChiTietGioHang { get; set; }
+        [Key]
+        public string idChiTietGioHang { get; set; } 
 
-        public int idNguoiDung { get; set; }
+        public string idNguoiDung { get; set; } 
 
-        public int idSanPham { get; set; }
+        //[ForeignKey("idNguoiDung")]
+        //[ValidateNever]
+        //public ApplicationUser user { get; set; } 
+
+        public string idSanPham { get; set; } 
+        [ValidateNever]
+        public virtual SanPham SanPham { get; set; }
 
         public int soLuongTrongGio { get; set; }
-
-        // Navigation properties (nếu bạn cần)
-        //public virtual NguoiDung NguoiDung { get; set; }
-        public virtual SanPham SanPham { get; set; }
     }
 }
-

@@ -616,3 +616,41 @@ WHERE ddh.trangThai = N'Đã giao'
   AND ddh.thanhToan = N'Đã thanh toán'
 GROUP BY sp.idSanPham, sp.tenSanPham, sp.imageURL, sp.gia
 ORDER BY tongSoLuongBan DESC;
+
+--chỉ chạy khi add migration
+ALTER TABLE AspNetUsers
+ADD idPhuongXa CHAR(5) NULL;
+GO
+ALTER TABLE AspNetUsers
+ADD CONSTRAINT FK_AspNetUsers_XaPhuong_idPhuongXa
+FOREIGN KEY (idPhuongXa) REFERENCES XaPhuong(idXaPhuong);
+GO
+
+ALTER TABLE AspNetUsers
+ADD idChiTietGioHang NVARCHAR(450) NULL;
+GO
+ALTER TABLE AspNetUsers
+ADD CONSTRAINT FK_AspNetUsers_ChiTietGioHang
+FOREIGN KEY (idChiTietGioHang)
+REFERENCES ChiTietGioHang(idChiTietGioHang);
+GO
+
+--kiểm tra số cột trong aspnetuser
+SELECT COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'AspNetUsers';
+
+--kiểm tra khóa ngoại 
+SELECT 
+    f.name AS ForeignKey,
+    OBJECT_NAME(f.parent_object_id) AS TableName,
+    COL_NAME(fc.parent_object_id, fc.parent_column_id) AS ColumnName
+FROM sys.foreign_keys AS f
+INNER JOIN sys.foreign_key_columns AS fc
+    ON f.object_id = fc.constraint_object_id
+WHERE f.parent_object_id = OBJECT_ID('AspNetUsers');
+
+--chỉ chạy khi add migration
+
+
+

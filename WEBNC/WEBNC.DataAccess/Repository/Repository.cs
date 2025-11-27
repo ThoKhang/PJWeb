@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using WEBNC.Data;
 using WEBNC.DataAccess.Repository.IRepository;
 
 namespace WEBNC.DataAccess.Repository

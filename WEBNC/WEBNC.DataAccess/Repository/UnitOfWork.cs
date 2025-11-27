@@ -1,5 +1,4 @@
-﻿using WEBNC.Data;
-using WEBNC.DataAccess.Repository.IRepository;
+﻿using WEBNC.DataAccess.Repository.IRepository;
 
 namespace WEBNC.DataAccess.Repository
 {

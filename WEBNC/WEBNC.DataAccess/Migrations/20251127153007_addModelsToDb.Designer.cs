@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace WEBNC.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251127134841_addModelsTodb")]
-    partial class addModelsTodb
+    [Migration("20251127153007_addModelsToDb")]
+    partial class addModelsToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -519,7 +519,6 @@ namespace WEBNC.DataAccess.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("hoTen")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("idPhuongXa")

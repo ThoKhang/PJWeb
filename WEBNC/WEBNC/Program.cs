@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WEBNC.DataAccess.Repository.IRepository;
 using WEBNC.DataAccess.Repository;
+using WEBNC.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +25,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // IDENTITY + API + RAZOR PAGES UI CÙNG LÚC – HOÀN HẢO!
 // ──────────────────────────────────────────────────────────────
 builder.Services
-    .AddIdentityApiEndpoints<IdentityUser>()
+    .AddIdentityApiEndpoints<ApplicationUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -64,7 +65,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // API Endpoints (token cho mobile/SPA)
-app.MapGroup("/api/identity").MapIdentityApi<IdentityUser>();
+app.MapGroup("/api/identity").MapIdentityApi<ApplicationUser>();
 
 // Razor Pages – form đẹp bạn tự design
 app.MapRazorPages();   // ← BẮT BUỘC CÓ DÒNG NÀY TRONG app.Build() nữa!

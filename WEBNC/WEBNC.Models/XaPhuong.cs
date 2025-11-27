@@ -12,6 +12,7 @@ namespace WEBNC.Models
     public class XaPhuong
     {
         [Key]
+        [Column(TypeName = "char(5)")]
         public string idXaPhuong { get; set; }
 
         public string idHuyen { get; set; }

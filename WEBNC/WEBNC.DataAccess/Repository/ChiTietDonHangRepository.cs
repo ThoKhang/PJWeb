@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WEBNC.Data;
 using WEBNC.DataAccess.Repository.IRepository;
 using WEBNC.Models;
 

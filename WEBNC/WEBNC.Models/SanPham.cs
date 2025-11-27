@@ -7,7 +7,9 @@ namespace WEBNC.Models
     public class SanPham
     {
         [Key]
+        [Column(TypeName = "char(5)")]
         public string idSanPham { get; set; }
+
         [Required]
         public string tenSanPham { get; set; }
         public string imageURL { get; set; }

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WEBNC.DataAccess.Repository.IRepository;
 using WEBNC.DataAccess.Repository;
+using WEBNC.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +25,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // IDENTITY + API + RAZOR PAGES UI CÙNG LÚC – HOÀN HẢO!
 // ──────────────────────────────────────────────────────────────
 builder.Services
-    .AddIdentityApiEndpoints<IdentityUser>()
+    .AddIdentityApiEndpoints<ApplicationUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -48,6 +49,52 @@ builder.Services.AddSingleton<TimeProvider>(TimeProvider.System);
 
 var app = builder.Build();
 
+//đăng nhập
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+    string email = "phamminhhuy0901tk@gmail.com";
+    string password = "Abc123!@#";
+
+    // tạo role nếu cần
+    if (!await roleManager.RoleExistsAsync("Admin"))
+        await roleManager.CreateAsync(new IdentityRole("Admin"));
+
+    // nếu user tồn tại, xóa đi để reset lại
+    var oldUser = await userManager.FindByEmailAsync(email);
+    if (oldUser != null)
+        await userManager.DeleteAsync(oldUser);
+
+    // tạo user mới
+    var user = new ApplicationUser
+    {
+        UserName = email,
+        Email = email,
+        EmailConfirmed = true,
+        idPhuongXa = "XP001",
+        hoTen = "Phạm Minh Huy",
+        soNha = "24 Bắc Đẩu"
+    };
+
+    var result = await userManager.CreateAsync(user, password);
+
+    if (result.Succeeded)
+    {
+        await userManager.AddToRoleAsync(user, "Admin");
+    }
+    else
+    {
+        foreach (var err in result.Errors)
+        {
+            Console.WriteLine(err.Description);
+        }
+    }
+}
+//đăng nhập
+
 app.UseCors("AllowAll");
 
 if (!app.Environment.IsDevelopment())
@@ -64,7 +111,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // API Endpoints (token cho mobile/SPA)
-app.MapGroup("/api/identity").MapIdentityApi<IdentityUser>();
+app.MapGroup("/api/identity").MapIdentityApi<ApplicationUser>();
 
 // Razor Pages – form đẹp bạn tự design
 app.MapRazorPages();   // ← BẮT BUỘC CÓ DÒNG NÀY TRONG app.Build() nữa!

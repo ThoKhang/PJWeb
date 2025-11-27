@@ -49,6 +49,52 @@ builder.Services.AddSingleton<TimeProvider>(TimeProvider.System);
 
 var app = builder.Build();
 
+//đăng nhập
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+    string email = "phamminhhuy0901tk@gmail.com";
+    string password = "Abc123!@#";
+
+    // tạo role nếu cần
+    if (!await roleManager.RoleExistsAsync("Admin"))
+        await roleManager.CreateAsync(new IdentityRole("Admin"));
+
+    // nếu user tồn tại, xóa đi để reset lại
+    var oldUser = await userManager.FindByEmailAsync(email);
+    if (oldUser != null)
+        await userManager.DeleteAsync(oldUser);
+
+    // tạo user mới
+    var user = new ApplicationUser
+    {
+        UserName = email,
+        Email = email,
+        EmailConfirmed = true,
+        idPhuongXa = "XP001",
+        hoTen = "Phạm Minh Huy",
+        soNha = "24 Bắc Đẩu"
+    };
+
+    var result = await userManager.CreateAsync(user, password);
+
+    if (result.Succeeded)
+    {
+        await userManager.AddToRoleAsync(user, "Admin");
+    }
+    else
+    {
+        foreach (var err in result.Errors)
+        {
+            Console.WriteLine(err.Description);
+        }
+    }
+}
+//đăng nhập
+
 app.UseCors("AllowAll");
 
 if (!app.Environment.IsDevelopment())

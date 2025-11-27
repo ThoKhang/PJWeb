@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WEBNC.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class addModelsTodb : Migration
+    public partial class addModelsToDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -205,7 +205,7 @@ namespace WEBNC.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    hoTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    hoTen = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     soNha = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     idPhuongXa = table.Column<string>(type: "char(5)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

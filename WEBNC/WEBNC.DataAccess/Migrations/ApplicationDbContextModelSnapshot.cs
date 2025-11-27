@@ -545,20 +545,20 @@ namespace WEBNC.DataAccess.Migrations
                             Id = "USER1",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "B3D2E5C5-A1E4-4D71-8B2E-C5D4B3A2C1D2",
-                            Email = "admin@webnc.com",
+                            Email = "phamminhhuy0901tk@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@WEBNC.COM",
-                            NormalizedUserName = "ADMIN@WEBNC.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPLiGv3yqV5d5TzFv2n7hR3N4Q2O1FjM4U7C9Vd3w0g5O8kR8J5Xo5D3/Kq7X",
-                            PhoneNumber = "0901234567",
+                            NormalizedEmail = "PHAMMINHHUY0901TK@GMAIL.COM",
+                            NormalizedUserName = "PHAMMINHHUY0901TK@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAECostYXDzWMxjeRK8BZV9Y2l5j9jgqJ8h65CSvX0UQnI657xBoFczZpIOGj8p8Fm1Q==",
+                            PhoneNumber = "0987654321",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "A2C1D2A4-F2D5-4E80-9A1F-A6B3A9B2F2A1",
                             TwoFactorEnabled = false,
-                            UserName = "admin@webnc.com",
-                            hoTen = "Admin Hệ Thống",
+                            UserName = "phamminhhuy0901tk@gmail.com",
+                            hoTen = "Phạm Minh Huy",
                             idPhuongXa = "XP001",
-                            soNha = "123 Ngõ Test"
+                            soNha = "24 Bắc Đẩu"
                         });
                 });
 

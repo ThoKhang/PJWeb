@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using WEBNC.Data;
 using WEBNC.DataAccess.Repository.IRepository;
 using WEBNC.DataAccess.Repository;
 

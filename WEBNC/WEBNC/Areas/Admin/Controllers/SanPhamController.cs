@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WEBNC.Data;
 using WEBNC.DataAccess.Repository.IRepository;
 
 namespace WEBNC.Areas.Admin.Controllers

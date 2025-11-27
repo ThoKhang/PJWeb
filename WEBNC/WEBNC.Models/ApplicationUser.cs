@@ -7,14 +7,13 @@ namespace WEBNC.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        [Required]
-        public string hoTen { get; set; }
+        public string? hoTen { get; set; }
 
         public string? soNha { get; set; }
 
         [Required]
         [Column(TypeName = "char(5)")]
-        public string idPhuongXa { get; set; }
+        public string? idPhuongXa { get; set; }
 
         [ForeignKey("idPhuongXa")]
         [ValidateNever]

@@ -83,47 +83,64 @@ if (id) {
                     element.innerHTML = `${formattedPrice} ₫`;
                 });
 
-                // Thêm vào giỏ hàng
+                // --- Thêm vào giỏ hàng (đặt SAU khi HTML đã render) ---
                 const btnAddToCart = document.querySelector('.btn-cart');
                 const qtyInput = document.querySelector('.qty');
 
                 if (btnAddToCart && qtyInput) {
+                    btnAddToCart.addEventListener("click", async () => {
+                        try {
+                            const quantity = Number(qtyInput.value) || 1;
 
-                    btnAddToCart.addEventListener("click", () => {
+                            // disable nút để tránh click nhiều lần
+                            btnAddToCart.disabled = true;
 
-                        const quantity = Number(qtyInput.value);
+                            const res = await fetch("/api/customer/products/giohang", {
+                                method: "POST",
+                                credentials: "include",         // <--- quan trọng: gửi cookie Identity
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    idSanPham: id,                // id phải có (lấy từ URL trước đó)
+                                    soLuongTrongGio: quantity
+                                })
+                            });
 
-                        fetch("https://localhost:7047/api/customer/products/giohang", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({
-                                idSanPham: id,
-                                soLuongTrongGio: quantity
-                            })
-                        })
-                            .then(response => {
-                                // ❗ Nếu chưa đăng nhập → API trả 401
-                                if (response.status === 401) {
+                            // Nếu chưa đăng nhập -> API trả 401 => redirect client tới Login với returnUrl
+                            if (res.status === 401) {
+                                const returnUrl = `/Customer/Home/Details?id=${encodeURIComponent(id)}`;
+                                window.location.href = `/Identity/Account/Login?returnUrl=${encodeURIComponent(returnUrl)}`;
+                                return;
+                            }
 
-                                    // returnUrl sau khi login sẽ quay về trang sản phẩm
-                                    const returnUrl = `/Customer/Home/Details?id=${id}`;
+                            // Nếu server trả lỗi khác
+                            if (!res.ok) {
+                                const text = await res.text().catch(() => null);
+                                console.error("AddToCart failed:", res.status, text);
+                                alert("Thêm giỏ hàng thất bại. Vui lòng thử lại.");
+                                return;
+                            }
 
-                                    // Redirect sang trang login
-                                    window.location.href = `/Identity/Account/Login?returnUrl=${encodeURIComponent(returnUrl)}`;
-                                    return; // ngừng xử lý
-                                }
-                                return response.json(); // parse JSON nếu OK
-                            })
-                            .then(data => {
-                                if (data) {
-                                    alert(data.message);
-                                    console.log("Kết quả API:", data);
-                                }
-                            })
-                            .catch(err => console.error("Lỗi AddToCart:", err));
+                            // Chắc chắn parse JSON chỉ khi response có JSON
+                            const contentType = res.headers.get("content-type") || "";
+                            if (contentType.includes("application/json")) {
+                                const data = await res.json();
+                                alert(data?.message ?? "Đã thêm vào giỏ hàng");
+                                console.log("Kết quả API:", data);
+                            } else {
+                                // fallback nếu server trả empty/redirect html
+                                alert("Đã thêm vào giỏ hàng");
+                            }
+                        } catch (err) {
+                            console.error("Lỗi AddToCart:", err);
+                            alert("Có lỗi xảy ra. Vui lòng thử lại sau.");
+                        } finally {
+                            btnAddToCart.disabled = false;
+                        }
                     });
+                } else {
+                    console.warn("Không tìm thấy .btn-cart hoặc .qty (chắc đặt code chưa đúng chỗ).");
                 }
 
             }
@@ -186,31 +203,6 @@ if (id) {
                 `;
             });
             document.getElementById('sanPhamNoiBat').innerHTML = html;
-            // --- nút thêm vào giỏ ---
-            const btnAddToCart = document.querySelector('.btn-cart');
-            if (btnAddToCart) {
-                btnAddToCart.addEventListener('click', () => {
-
-                    const quantity = Number(document.querySelector('.qty').value);
-
-                    fetch('https://localhost:7047/api/customer/products/giohang', {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            idSanPham: id,
-                            soLuongTrongGio: quantity
-                        })
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            alert(data.message);
-                            console.log(data);
-                        })
-                        .catch(err => console.error('Lỗi AddToCart:', err));
-                });
-            }
 
         });
 } else {

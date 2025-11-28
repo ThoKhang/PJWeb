@@ -42,8 +42,8 @@ namespace WEBNC.Areas.Customer.Controllers.API
             var topSanPham = _unitOfWork.SanPham.LayTop10SanPhamBanChay();
             return Ok(new { data = topSanPham });
         }
-        [HttpPost("giohang/tang")]
-        [ValidateAntiForgeryToken]
+        [HttpPost("giohang")]
+        //[ValidateAntiForgeryToken]
         [Authorize]
         public IActionResult AddToCart([FromBody] ChiTietGioHang gioHang)
         {
@@ -90,44 +90,5 @@ namespace WEBNC.Areas.Customer.Controllers.API
                 });
             }
         }
-
-        [HttpPut("giohang/giam")]
-        [Authorize]
-        public IActionResult GiamSoLuong([FromBody] ChiTietGioHang gioHang)
-        {
-            if (gioHang == null || string.IsNullOrEmpty(gioHang.idSanPham))
-                return BadRequest(new { message = "Dữ liệu không hợp lệ." });
-
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-
-            var gioHangDb = _unitOfWork.chiTietGioHang.GetFirstOrDefault(
-                u => u.idNguoiDung == claim.Value &&
-                     u.idSanPham == gioHang.idSanPham
-            );
-
-            if (gioHangDb == null)
-                return NotFound(new { message = "Không tìm thấy sản phẩm trong giỏ hàng" });
-
-            // Nếu số lượng = 1 → xóa luôn
-            if (gioHangDb.soLuongTrongGio <= 1)
-            {
-                _unitOfWork.chiTietGioHang.Remove(gioHangDb);
-                _unitOfWork.save();
-                return Ok(new { message = "Đã xóa sản phẩm khỏi giỏ hàng" });
-            }
-
-            // Nếu số lượng > 1 → giảm 1
-            _unitOfWork.chiTietGioHang.DecrementCount(gioHangDb, 1);
-            _unitOfWork.chiTietGioHang.Update(gioHangDb);
-            _unitOfWork.save();
-
-            return Ok(new
-            {
-                message = "Đã giảm số lượng",
-                data = gioHangDb
-            });
-        }
-
     }
 }

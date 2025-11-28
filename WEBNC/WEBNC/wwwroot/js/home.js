@@ -1,4 +1,4 @@
-﻿fetch('/customer/home/getall')
+﻿fetch('https://localhost:7047/api/customer/products')
     .then(response => response.json())
     .then(sanpham => {
         const data = sanpham.data;
@@ -99,7 +99,6 @@
         document.getElementById('ourSanPham').innerHTML = htmls;
         document.getElementById('newSanPham').innerHTML = htmls;
         document.getElementById('listStart').innerHTML = listStart;
-
     })
     .catch(error => {
         console.error('Lỗi:', error);

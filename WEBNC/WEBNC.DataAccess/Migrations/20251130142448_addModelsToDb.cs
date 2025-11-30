@@ -137,18 +137,18 @@ namespace WEBNC.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Huyen",
+                name: "XaPhuong",
                 columns: table => new
                 {
-                    idHuyen = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    idXaPhuong = table.Column<string>(type: "char(5)", nullable: false),
                     idTinh = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    tenHuyen = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    tenXaPhuong = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Huyen", x => x.idHuyen);
+                    table.PrimaryKey("PK_XaPhuong", x => x.idXaPhuong);
                     table.ForeignKey(
-                        name: "FK_Huyen_Tinh_idTinh",
+                        name: "FK_XaPhuong_Tinh_idTinh",
                         column: x => x.idTinh,
                         principalTable: "Tinh",
                         principalColumn: "idTinh",
@@ -182,32 +182,13 @@ namespace WEBNC.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "XaPhuong",
-                columns: table => new
-                {
-                    idXaPhuong = table.Column<string>(type: "char(5)", nullable: false),
-                    idHuyen = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    tenXaPhuong = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_XaPhuong", x => x.idXaPhuong);
-                    table.ForeignKey(
-                        name: "FK_XaPhuong_Huyen_idHuyen",
-                        column: x => x.idHuyen,
-                        principalTable: "Huyen",
-                        principalColumn: "idHuyen",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     hoTen = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     soNha = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    idPhuongXa = table.Column<string>(type: "char(5)", nullable: false),
+                    idPhuongXa = table.Column<string>(type: "char(5)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -416,28 +397,11 @@ namespace WEBNC.DataAccess.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Huyen",
-                columns: new[] { "idHuyen", "idTinh", "tenHuyen" },
-                values: new object[,]
-                {
-                    { "H001", "T001", "Quận Hoàn Kiếm" },
-                    { "H002", "T001", "Quận Ba Đình" },
-                    { "H003", "T002", "Quận 1" },
-                    { "H004", "T002", "Quận Bình Thạnh" },
-                    { "H005", "T003", "Quận Hải Châu" },
-                    { "H006", "T003", "Quận Thanh Khê" },
-                    { "H007", "T004", "Quận Lê Chân" },
-                    { "H008", "T004", "Quận Hồng Bàng" },
-                    { "H009", "T005", "Quận Ninh Kiều" },
-                    { "H010", "T005", "Quận Bình Thủy" }
-                });
-
-            migrationBuilder.InsertData(
                 table: "SanPham",
                 columns: new[] { "idSanPham", "gia", "idCongTy", "idLoaiSanPham", "imageLienQuan", "imageURL", "moTa", "soLuongCanDuoi", "soLuongHienCon", "tenSanPham", "thongSoSanPham" },
                 values: new object[,]
                 {
-                    { "SP01", 4300000m, "CT01", "LSP01", "[\"CPU_12400F_1.png\", \"CPU_12400F_2.jpg\", \"CPU_12400F_3.png\", \"CPU_12400F_4.png\"]", "CPU_12400F_1.png", "Intel Core i5-12400F mang lại hiệu năng tuyệt vời cho nhu cầu chơi game và làm việc văn phòng. Sở hữu 6 nhân 12 luồng, tốc độ xử lý cao và tương thích với socket LGA 1700.", 10, 45, "CPU_12400F_1.png", "- 6 nhân 12 luồng\r\n- Xung nhịp 2.5GHz (Boost 4.4GHz)\r\n- Socket LGA 1700\r\n- Bộ nhớ đệm 18MB" },
+                    { "SP01", 4300000m, "CT01", "LSP01", "[\"CPU_12400F_1.png\", \"CPU_12400F_2.jpg\", \"CPU_12400F_3.png\", \"CPU_12400F_4.png\"]", "CPU_12400F_1", "Intel Core i5-12400F mang lại hiệu năng tuyệt vời cho nhu cầu chơi game và làm việc văn phòng. Sở hữu 6 nhân 12 luồng, tốc độ xử lý cao và tương thích với socket LGA 1700.", 10, 45, "CPU_12400F_1", "- 6 nhân 12 luồng\r\n- Xung nhịp 2.5GHz (Boost 4.4GHz)\r\n- Socket LGA 1700\r\n- Bộ nhớ đệm 18MB" },
                     { "SP02", 7500000m, "CT01", "LSP01", "[\"CPU_12700k_1.png\", \"CPU_12700k_2.png\", \"CPU_12700k_3.png\", \"CPU_12700k_4.png\"]", "CPU_i7-12700k.jpg", "CPU Intel Core i7-12700K thuộc dòng Alder Lake mạnh mẽ, hỗ trợ ép xung, 12 nhân 20 luồng, mang đến hiệu năng vượt trội cho cả gaming và công việc sáng tạo.", 5, 20, "Intel Core i7-12700K", "- 12 nhân 20 luồng\r\n- Xung nhịp 3.6GHz (Boost 5.0GHz)\r\n- Socket LGA 1700\r\n- Hỗ trợ ép xung" },
                     { "SP03", 4200000m, "CT02", "LSP01", "[\"CPU_5600x_1.png\", \"CPU_5600x_2.jpg\", \"CPU_5600x_3.jpg\", \"CPU_5600x_4.jpg\"]", "CPU_Ryzen_5_5600X.jpg", "AMD Ryzen 5 5600X sử dụng kiến trúc Zen 3 mới, mang lại hiệu năng đơn nhân và đa nhân vượt trội. Lựa chọn tối ưu cho game thủ và dân đồ họa.", 15, 50, "AMD Ryzen 5 5600X", "- 6 nhân 12 luồng\r\n- Kiến trúc Zen 3\r\n- Xung nhịp 3.7GHz (Boost 4.6GHz)\r\n- Socket AM4" },
                     { "SP04", 8900000m, "CT02", "LSP01", "[\"CPU_7800x3d_1.jpg\", \"CPU_7800x3d_2.jpg\", \"CPU_7800x3d_3.jpg\", \"CPU_7800x3d_4.jpg\"]", "CPU_Ryzen_7_5800X3D.jpg", "Ryzen 7 5800X3D với công nghệ 3D V-Cache độc quyền của AMD giúp tăng hiệu năng game đáng kể, là CPU lý tưởng cho trải nghiệm chơi game cao cấp.", 5, 12, "AMD Ryzen 7 5800X3D", "- 8 nhân 16 luồng\r\n- Xung nhịp 3.4GHz (Boost 4.5GHz)\r\n- Công nghệ 3D V-Cache\r\n- Socket AM4" },
@@ -463,6 +427,48 @@ namespace WEBNC.DataAccess.Migrations
                     { "SP24", 4700000m, "CT04", "LSP09", "[\"MHINH_MSI_1.png\", \"MHINH_MSI_2.png\", \"MHINH_MSI_3.png\", \"MHINH_MSI_4.png\"]", "MHinh_MSI_G2712FDE.jpg", "MSI G2712FDE mang đến trải nghiệm hình ảnh sống động, tấm nền IPS cao cấp và tần số quét 180Hz cực nhanh.", 10, 35, "MSI G2712FDE (27 inch, Full HD, 180Hz, Rapid IPS, 1ms, Black)", "- Kích thước 27 inch\r\n- Độ phân giải Full HD\r\n- Tần số quét 180Hz\r\n- Tấm nền Rapid IPS" },
                     { "SP25", 3600000m, "CT05", "LSP09", "[\"MHINH_GGB_1.png\", \"MHINH_GGB_2.png\", \"MHINH_GGB_3.png\", \"MHINH_GGB_4.png\"]", "MHinh_Gigabyte_G24F2.jpg", "Màn hình Gigabyte G24F2 có thiết kế mỏng nhẹ, tần số quét 165Hz, hỗ trợ ép xung 180Hz, rất lý tưởng cho game thủ FPS.", 15, 40, "Gigabyte G24F2 (23.8inch, FHD, IPS, 165Hz, 180Hz(OC), 1ms)", "- Kích thước 23.8 inch\r\n- Độ phân giải Full HD\r\n- Tần số quét 165Hz (OC 180Hz)\r\n- Tấm nền IPS / Thời gian phản hồi 1ms" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "XaPhuong",
+                columns: new[] { "idXaPhuong", "idTinh", "tenXaPhuong" },
+                values: new object[,]
+                {
+                    { "XP001", "T001", "Phường Hàng Bạc" },
+                    { "XP002", "T001", "Phường Hàng Buồm" },
+                    { "XP003", "T001", "Phường Tràng Tiền" },
+                    { "XP004", "T001", "Phường Ngọc Hà" },
+                    { "XP005", "T001", "Phường Kim Mã" },
+                    { "XP006", "T001", "Phường Điện Biên" },
+                    { "XP007", "T002", "Phường Bến Nghé" },
+                    { "XP008", "T002", "Phường Bến Thành" },
+                    { "XP009", "T002", "Phường Nguyễn Thái Bình" },
+                    { "XP010", "T002", "Phường 1" },
+                    { "XP011", "T002", "Phường 2" },
+                    { "XP012", "T002", "Phường 3" },
+                    { "XP013", "T003", "Phường Hải Châu I" },
+                    { "XP014", "T003", "Phường Hải Châu II" },
+                    { "XP015", "T003", "Phường Bình Hiên" },
+                    { "XP016", "T003", "Phường An Khê" },
+                    { "XP017", "T003", "Phường Chính Gián" },
+                    { "XP018", "T003", "Phường Tam Thuận" },
+                    { "XP019", "T004", "Phường An Biên" },
+                    { "XP020", "T004", "Phường An Dương" },
+                    { "XP021", "T004", "Phường Dư Hàng" },
+                    { "XP022", "T004", "Phường Hoàng Văn Thụ" },
+                    { "XP023", "T004", "Phường Hạ Lý" },
+                    { "XP024", "T004", "Phường Quán Toan" },
+                    { "XP025", "T005", "Phường An Hòa" },
+                    { "XP026", "T005", "Phường An Nghiệp" },
+                    { "XP027", "T005", "Phường Tân An" },
+                    { "XP028", "T005", "Phường An Thới" },
+                    { "XP029", "T005", "Phường Bình Thủy" },
+                    { "XP030", "T005", "Phường Trà An" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "hoTen", "idPhuongXa", "soNha" },
+                values: new object[] { "USER1", 0, "B3D2E5C5-A1E4-4D71-8B2E-C5D4B3A2C1D2", "phamminhhuy0901tk@gmail.com", true, false, null, "PHAMMINHHUY0901TK@GMAIL.COM", "PHAMMINHHUY0901TK@GMAIL.COM", "AQAAAAIAAYagAAAAECostYXDzWMxjeRK8BZV9Y2l5j9jgqJ8h65CSvX0UQnI657xBoFczZpIOGj8p8Fm1Q==", "0987654321", false, "A2C1D2A4-F2D5-4E80-9A1F-A6B3A9B2F2A1", false, "phamminhhuy0901tk@gmail.com", "Phạm Minh Huy", "XP001", "24 Bắc Đẩu" });
 
             migrationBuilder.InsertData(
                 table: "ChiTietDonHang",
@@ -497,48 +503,6 @@ namespace WEBNC.DataAccess.Migrations
                     { "DH019", "SP11", 1100000m, 1 },
                     { "DH020", "SP03", 5200000m, 1 }
                 });
-
-            migrationBuilder.InsertData(
-                table: "XaPhuong",
-                columns: new[] { "idXaPhuong", "idHuyen", "tenXaPhuong" },
-                values: new object[,]
-                {
-                    { "XP001", "H001", "Phường Hàng Bạc" },
-                    { "XP002", "H001", "Phường Hàng Buồm" },
-                    { "XP003", "H001", "Phường Tràng Tiền" },
-                    { "XP004", "H002", "Phường Ngọc Hà" },
-                    { "XP005", "H002", "Phường Kim Mã" },
-                    { "XP006", "H002", "Phường Điện Biên" },
-                    { "XP007", "H003", "Phường Bến Nghé" },
-                    { "XP008", "H003", "Phường Bến Thành" },
-                    { "XP009", "H003", "Phường Nguyễn Thái Bình" },
-                    { "XP010", "H004", "Phường 1" },
-                    { "XP011", "H004", "Phường 2" },
-                    { "XP012", "H004", "Phường 3" },
-                    { "XP013", "H005", "Phường Hải Châu I" },
-                    { "XP014", "H005", "Phường Hải Châu II" },
-                    { "XP015", "H005", "Phường Bình Hiên" },
-                    { "XP016", "H006", "Phường An Khê" },
-                    { "XP017", "H006", "Phường Chính Gián" },
-                    { "XP018", "H006", "Phường Tam Thuận" },
-                    { "XP019", "H007", "Phường An Biên" },
-                    { "XP020", "H007", "Phường An Dương" },
-                    { "XP021", "H007", "Phường Dư Hàng" },
-                    { "XP022", "H008", "Phường Hoàng Văn Thụ" },
-                    { "XP023", "H008", "Phường Hạ Lý" },
-                    { "XP024", "H008", "Phường Quán Toan" },
-                    { "XP025", "H009", "Phường An Hòa" },
-                    { "XP026", "H009", "Phường An Nghiệp" },
-                    { "XP027", "H009", "Phường Tân An" },
-                    { "XP028", "H010", "Phường An Thới" },
-                    { "XP029", "H010", "Phường Bình Thủy" },
-                    { "XP030", "H010", "Phường Trà An" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "hoTen", "idPhuongXa", "soNha" },
-                values: new object[] { "USER1", 0, "B3D2E5C5-A1E4-4D71-8B2E-C5D4B3A2C1D2", "phamminhhuy0901tk@gmail.com", true, false, null, "PHAMMINHHUY0901TK@GMAIL.COM", "PHAMMINHHUY0901TK@GMAIL.COM", "AQAAAAIAAYagAAAAECostYXDzWMxjeRK8BZV9Y2l5j9jgqJ8h65CSvX0UQnI657xBoFczZpIOGj8p8Fm1Q==", "0987654321", false, "A2C1D2A4-F2D5-4E80-9A1F-A6B3A9B2F2A1", false, "phamminhhuy0901tk@gmail.com", "Phạm Minh Huy", "XP001", "24 Bắc Đẩu" });
 
             migrationBuilder.InsertData(
                 table: "ChiTietGioHang",
@@ -617,11 +581,6 @@ namespace WEBNC.DataAccess.Migrations
                 column: "idSanPham");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Huyen_idTinh",
-                table: "Huyen",
-                column: "idTinh");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_SanPham_idCongTy",
                 table: "SanPham",
                 column: "idCongTy");
@@ -632,9 +591,9 @@ namespace WEBNC.DataAccess.Migrations
                 column: "idLoaiSanPham");
 
             migrationBuilder.CreateIndex(
-                name: "IX_XaPhuong_idHuyen",
+                name: "IX_XaPhuong_idTinh",
                 table: "XaPhuong",
-                column: "idHuyen");
+                column: "idTinh");
         }
 
         /// <inheritdoc />
@@ -681,9 +640,6 @@ namespace WEBNC.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "LoaiSanPham");
-
-            migrationBuilder.DropTable(
-                name: "Huyen");
 
             migrationBuilder.DropTable(
                 name: "Tinh");

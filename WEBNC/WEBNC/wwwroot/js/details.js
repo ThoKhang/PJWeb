@@ -98,26 +98,39 @@ if (id) {
                                 soLuongTrongGio: quantity
                             })
                         });
+
+                        // Nếu chưa đăng nhập → chuyển đến login
                         if (res.status === 401) {
-
                             const returnUrl = `/Customer/Home/Details?id=${encodeURIComponent(id)}`;
-
                             window.location.href =
                                 `/Identity/Account/Login?returnUrl=${encodeURIComponent(returnUrl)}`;
-
-                            return; 
+                            return;
                         }
 
-                        // kiểm tra server có trả lỗi không
+                        // Server trả lỗi (500, 400,...)
                         if (!res.ok) {
                             const text = await res.text().catch(() => null);
                             console.error("AddToCart error:", res.status, text);
-                            alert("Thêm giỏ hàng thất bại. Vui lòng thử lại.");
+
+                            Swal.fire({
+                                icon: "error",
+                                title: "Thêm giỏ hàng thất bại",
+                                text: "Vui lòng thử lại!",
+                            });
+
                             return;
                         }
-                        const result = await res.json();
-                        alert(result.message);
 
+                        // Thành công
+                        const result = await res.json();
+
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Đã thêm vào giỏ hàng",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
                     });
 
                 } else {

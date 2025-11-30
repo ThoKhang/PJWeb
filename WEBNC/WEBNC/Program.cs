@@ -7,7 +7,7 @@ using WEBNC.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // ════════════════════════════════════════════
-// 1. CORS (cho API gọi từ JS)
+// 1. CORS
 // ════════════════════════════════════════════
 builder.Services.AddCors(options =>
 {
@@ -26,35 +26,36 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // ════════════════════════════════════════════
-// 3. Identity + API + Cookie Authentication
+// 3. Identity + Cookie Authentication
 // ════════════════════════════════════════════
 builder.Services
     .AddIdentityApiEndpoints<ApplicationUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-// ⚡ BẮT BUỘC CHO COOKIE AUTH
+// BẮT MVC DÙNG COOKIE Identity (QUAN TRỌNG)
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = IdentityConstants.ApplicationScheme;
+});
+
+//Cấu hình cookie đăng nhập
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    // Đường dẫn login của Razor Pages Identity
     options.LoginPath = "/Identity/Account/Login";
     options.LogoutPath = "/Identity/Account/Logout";
     options.AccessDeniedPath = "/Identity/Account/AccessDenied";
 
-    // Thời gian cookie tồn tại
     options.ExpireTimeSpan = TimeSpan.FromDays(14);
-
-    // Cookie sẽ được gửi trong mọi request
     options.Cookie.HttpOnly = true;
     options.Cookie.SameSite = SameSiteMode.Lax;
-    options.SlidingExpiration = true; // tự gia hạn khi người dùng hoạt động
+    options.SlidingExpiration = true;
 });
 
-// ⚡ BẮT BUỘC CHO RAZOR PAGES UI (Login/Logout…)
-builder.Services.AddAuthentication();
+// Razor Pages Identity UI
 builder.Services.AddRazorPages();
 
-// Authorization + RoleManager
+// Authorization
 builder.Services.AddAuthorization();
 
 // ════════════════════════════════════════════
@@ -76,9 +77,9 @@ builder.Services.AddSingleton<TimeProvider>(TimeProvider.System);
 
 var app = builder.Build();
 
-// ─────────────────────────────────────────────────────
+// ════════════════════════════════════════════
 // 6. Auto tạo tài khoản Admin lần đầu
-// ─────────────────────────────────────────────────────
+// ════════════════════════════════════════════
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -124,25 +125,24 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-
 app.UseSession();
 
-// ⚡ COOKIE Authentication + Role Authorization
+// Authentication + Authorization
 app.UseAuthentication();
 app.UseAuthorization();
 
 // ════════════════════════════════════════════
-// 8. API Identity (cho token/mobile)
+// 8. API Identity
 // ════════════════════════════════════════════
 app.MapGroup("/api/identity").MapIdentityApi<ApplicationUser>();
 
 // ════════════════════════════════════════════
-// 9. Razor Pages Identity (UI Login & Register)
+// 9. Razor Pages Identity (Login/Register)
 // ════════════════════════════════════════════
 app.MapRazorPages();
 
 // ════════════════════════════════════════════
-// 10. MVC Controllers (web)
+// 10. MVC Controllers
 // ════════════════════════════════════════════
 app.MapControllers();
 

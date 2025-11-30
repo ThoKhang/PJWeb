@@ -1,4 +1,6 @@
-﻿@model IEnumerable<WEBNC.Models.ChiTietGioHang>
+﻿@{
+    Layout = "_Layout";
+}
 
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
@@ -26,66 +28,15 @@
                         <th scope="col">Handle</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        var total = item.SanPham.gia * item.soLuongTrongGio;
 
-                        <tr>
-                            <th scope="row">
-                                <p class="mb-0 py-4">@item.SanPham.tenSanPham</p>
-                            </th>
-
-                            <td>
-                                <p class="mb-0 py-4">@item.SanPham.LoaiSanPham?.tenLoaiSanPham</p>
-                            </td>
-
-                            <td>
-                                <p class="mb-0 py-4">@item.SanPham.gia.ToString("N0") ₫</p>
-                            </td>
-
-                            <td>
-                                <div class="input-group quantity py-4" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-
-                                    <input type="text" class="form-control form-control-sm text-center border-0"
-                                           value="@item.soLuongTrongGio">
-
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-
-                            <td>
-                                <p class="mb-0 py-4">@total.ToString("N0") ₫</p>
-                            </td>
-
-                            <td class="py-4">
-                                <button class="btn btn-md rounded-circle bg-light border">
-                                    <i class="fa fa-times text-danger"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    }
+                <tbody id="cart-body">
+                    <!-- JS sẽ render vào đây -->
                 </tbody>
+
             </table>
         </div>
 
         <!-- CART TOTAL -->
-        @{
-            // tính subtotal
-            decimal subtotal = Model.Sum(x => x.SanPham.gia * x.soLuongTrongGio);
-            decimal shipping = subtotal > 0 ? 30000 : 0; // 30k tiền ship
-            decimal totalAll = subtotal + shipping;
-        }
-
         <div class="row g-4 justify-content-end">
             <div class="col-8"></div>
 
@@ -96,18 +47,18 @@
 
                         <div class="d-flex justify-content-between mb-4">
                             <h5 class="mb-0 me-4">Subtotal:</h5>
-                            <p class="mb-0">@subtotal.ToString("N0") ₫</p>
+                            <p class="mb-0 subtotal-value">0 ₫</p>
                         </div>
 
                         <div class="d-flex justify-content-between">
                             <h5 class="mb-0 me-4">Shipping</h5>
-                            <p class="mb-0">@shipping.ToString("N0") ₫</p>
+                            <p class="mb-0 shipping-value">0 ₫</p>
                         </div>
                     </div>
 
                     <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
                         <h5 class="mb-0 ps-4 me-4">Total</h5>
-                        <p class="mb-0 pe-4">@totalAll.ToString("N0") ₫</p>
+                        <p class="mb-0 pe-4 total-value">0 ₫</p>
                     </div>
 
                     <button class="btn btn-primary rounded-pill px-4 py-3 text-uppercase mb-4 ms-4"
@@ -120,3 +71,86 @@
     </div>
 </div>
 <!-- Cart Page End -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        fetch("/api/cart", { credentials: "include" })
+            .then(res => {
+                if (res.status === 401) {
+                    window.location.href = "/Identity/Account/Login?returnUrl=/Customer/Cart/Index";
+                    return;
+                }
+                return res.json();
+            })
+            .then(json => {
+                if (!json) return;
+
+                const items = json.data || [];
+                const tbody = document.getElementById("cart-body");
+                tbody.innerHTML = "";
+
+                let subtotal = 0;
+
+                items.forEach(item => {
+
+                    const total = item.sanPham.gia * item.soLuongTrongGio;
+                    subtotal += total;
+
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <th scope="row">
+                            <p class="mb-0 py-4">${item.sanPham.tenSanPham}</p>
+                        </th>
+
+                        <td>
+                            <p class="mb-0 py-4">${item.sanPham.loaiSanPham?.tenLoaiSanPham ?? ""}</p>
+                        </td>
+
+                        <td>
+                            <p class="mb-0 py-4">${item.sanPham.gia.toLocaleString()} ₫</p>
+                        </td>
+
+                        <td>
+                            <div class="input-group quantity py-4" style="width: 100px;">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+
+                                <input type="text" class="form-control form-control-sm text-center border-0"
+                                       value="${item.soLuongTrongGio}">
+
+                                <div class="input-group-btn">
+                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            <p class="mb-0 py-4">${total.toLocaleString()} ₫</p>
+                        </td>
+
+                        <td class="py-4">
+                            <button class="btn btn-md rounded-circle bg-light border">
+                                <i class="fa fa-times text-danger"></i>
+                            </button>
+                        </td>
+                    `;
+
+                    tbody.appendChild(tr);
+                });
+
+                const shipping = subtotal > 0 ? 30000 : 0;
+                const totalAll = subtotal + shipping;
+
+                document.querySelector(".subtotal-value").textContent = subtotal.toLocaleString() + " ₫";
+                document.querySelector(".shipping-value").textContent = shipping.toLocaleString() + " ₫";
+                document.querySelector(".total-value").textContent = totalAll.toLocaleString() + " ₫";
+            });
+
+    });
+</script>

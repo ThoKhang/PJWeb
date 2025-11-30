@@ -9,7 +9,7 @@ namespace WEBNC.Models
         [Key]
         [ValidateNever]
         public string idChiTietGioHang { get; set; }
-
+        [ValidateNever]
         public string idNguoiDung { get; set; }
         [ForeignKey("idNguoiDung")]
         [ValidateNever]

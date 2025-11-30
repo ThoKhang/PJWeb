@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace WEBNC.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251127161747_addModelsToDb")]
+    [Migration("20251130142448_addModelsToDb")]
     partial class addModelsToDb
     {
         /// <inheritdoc />
@@ -236,103 +236,6 @@ namespace WEBNC.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ChiTietGioHang", b =>
-                {
-                    b.Property<string>("idChiTietGioHang")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("idNguoiDung")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("idSanPham")
-                        .IsRequired()
-                        .HasColumnType("char(5)");
-
-                    b.Property<int>("soLuongTrongGio")
-                        .HasColumnType("int");
-
-                    b.HasKey("idChiTietGioHang");
-
-                    b.HasIndex("idNguoiDung");
-
-                    b.HasIndex("idSanPham");
-
-                    b.ToTable("ChiTietGioHang");
-
-                    b.HasData(
-                        new
-                        {
-                            idChiTietGioHang = "GH001",
-                            idNguoiDung = "USER1",
-                            idSanPham = "SP01",
-                            soLuongTrongGio = 1
-                        },
-                        new
-                        {
-                            idChiTietGioHang = "GH002",
-                            idNguoiDung = "USER1",
-                            idSanPham = "SP08",
-                            soLuongTrongGio = 2
-                        },
-                        new
-                        {
-                            idChiTietGioHang = "GH003",
-                            idNguoiDung = "USER1",
-                            idSanPham = "SP03",
-                            soLuongTrongGio = 1
-                        },
-                        new
-                        {
-                            idChiTietGioHang = "GH004",
-                            idNguoiDung = "USER1",
-                            idSanPham = "SP05",
-                            soLuongTrongGio = 1
-                        },
-                        new
-                        {
-                            idChiTietGioHang = "GH005",
-                            idNguoiDung = "USER1",
-                            idSanPham = "SP14",
-                            soLuongTrongGio = 1
-                        },
-                        new
-                        {
-                            idChiTietGioHang = "GH006",
-                            idNguoiDung = "USER1",
-                            idSanPham = "SP19",
-                            soLuongTrongGio = 1
-                        },
-                        new
-                        {
-                            idChiTietGioHang = "GH007",
-                            idNguoiDung = "USER1",
-                            idSanPham = "SP11",
-                            soLuongTrongGio = 1
-                        },
-                        new
-                        {
-                            idChiTietGioHang = "GH008",
-                            idNguoiDung = "USER1",
-                            idSanPham = "SP02",
-                            soLuongTrongGio = 1
-                        },
-                        new
-                        {
-                            idChiTietGioHang = "GH009",
-                            idNguoiDung = "USER1",
-                            idSanPham = "SP22",
-                            soLuongTrongGio = 1
-                        },
-                        new
-                        {
-                            idChiTietGioHang = "GH010",
-                            idNguoiDung = "USER1",
-                            idSanPham = "SP16",
-                            soLuongTrongGio = 1
-                        });
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -522,7 +425,6 @@ namespace WEBNC.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("idPhuongXa")
-                        .IsRequired()
                         .HasColumnType("char(5)");
 
                     b.Property<string>("soNha")
@@ -562,6 +464,103 @@ namespace WEBNC.DataAccess.Migrations
                             hoTen = "Phạm Minh Huy",
                             idPhuongXa = "XP001",
                             soNha = "24 Bắc Đẩu"
+                        });
+                });
+
+            modelBuilder.Entity("WEBNC.Models.ChiTietGioHang", b =>
+                {
+                    b.Property<string>("idChiTietGioHang")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("idNguoiDung")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("idSanPham")
+                        .IsRequired()
+                        .HasColumnType("char(5)");
+
+                    b.Property<int>("soLuongTrongGio")
+                        .HasColumnType("int");
+
+                    b.HasKey("idChiTietGioHang");
+
+                    b.HasIndex("idNguoiDung");
+
+                    b.HasIndex("idSanPham");
+
+                    b.ToTable("ChiTietGioHang");
+
+                    b.HasData(
+                        new
+                        {
+                            idChiTietGioHang = "GH001",
+                            idNguoiDung = "USER1",
+                            idSanPham = "SP01",
+                            soLuongTrongGio = 1
+                        },
+                        new
+                        {
+                            idChiTietGioHang = "GH002",
+                            idNguoiDung = "USER1",
+                            idSanPham = "SP08",
+                            soLuongTrongGio = 2
+                        },
+                        new
+                        {
+                            idChiTietGioHang = "GH003",
+                            idNguoiDung = "USER1",
+                            idSanPham = "SP03",
+                            soLuongTrongGio = 1
+                        },
+                        new
+                        {
+                            idChiTietGioHang = "GH004",
+                            idNguoiDung = "USER1",
+                            idSanPham = "SP05",
+                            soLuongTrongGio = 1
+                        },
+                        new
+                        {
+                            idChiTietGioHang = "GH005",
+                            idNguoiDung = "USER1",
+                            idSanPham = "SP14",
+                            soLuongTrongGio = 1
+                        },
+                        new
+                        {
+                            idChiTietGioHang = "GH006",
+                            idNguoiDung = "USER1",
+                            idSanPham = "SP19",
+                            soLuongTrongGio = 1
+                        },
+                        new
+                        {
+                            idChiTietGioHang = "GH007",
+                            idNguoiDung = "USER1",
+                            idSanPham = "SP11",
+                            soLuongTrongGio = 1
+                        },
+                        new
+                        {
+                            idChiTietGioHang = "GH008",
+                            idNguoiDung = "USER1",
+                            idSanPham = "SP02",
+                            soLuongTrongGio = 1
+                        },
+                        new
+                        {
+                            idChiTietGioHang = "GH009",
+                            idNguoiDung = "USER1",
+                            idSanPham = "SP22",
+                            soLuongTrongGio = 1
+                        },
+                        new
+                        {
+                            idChiTietGioHang = "GH010",
+                            idNguoiDung = "USER1",
+                            idSanPham = "SP16",
+                            soLuongTrongGio = 1
                         });
                 });
 
@@ -901,88 +900,6 @@ namespace WEBNC.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("WEBNC.Models.Huyen", b =>
-                {
-                    b.Property<string>("idHuyen")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("idTinh")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("tenHuyen")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("idHuyen");
-
-                    b.HasIndex("idTinh");
-
-                    b.ToTable("Huyen");
-
-                    b.HasData(
-                        new
-                        {
-                            idHuyen = "H001",
-                            idTinh = "T001",
-                            tenHuyen = "Quận Hoàn Kiếm"
-                        },
-                        new
-                        {
-                            idHuyen = "H002",
-                            idTinh = "T001",
-                            tenHuyen = "Quận Ba Đình"
-                        },
-                        new
-                        {
-                            idHuyen = "H003",
-                            idTinh = "T002",
-                            tenHuyen = "Quận 1"
-                        },
-                        new
-                        {
-                            idHuyen = "H004",
-                            idTinh = "T002",
-                            tenHuyen = "Quận Bình Thạnh"
-                        },
-                        new
-                        {
-                            idHuyen = "H005",
-                            idTinh = "T003",
-                            tenHuyen = "Quận Hải Châu"
-                        },
-                        new
-                        {
-                            idHuyen = "H006",
-                            idTinh = "T003",
-                            tenHuyen = "Quận Thanh Khê"
-                        },
-                        new
-                        {
-                            idHuyen = "H007",
-                            idTinh = "T004",
-                            tenHuyen = "Quận Lê Chân"
-                        },
-                        new
-                        {
-                            idHuyen = "H008",
-                            idTinh = "T004",
-                            tenHuyen = "Quận Hồng Bàng"
-                        },
-                        new
-                        {
-                            idHuyen = "H009",
-                            idTinh = "T005",
-                            tenHuyen = "Quận Ninh Kiều"
-                        },
-                        new
-                        {
-                            idHuyen = "H010",
-                            idTinh = "T005",
-                            tenHuyen = "Quận Bình Thủy"
-                        });
-                });
-
             modelBuilder.Entity("WEBNC.Models.LoaiSanPham", b =>
                 {
                     b.Property<string>("idLoaiSanPham")
@@ -1103,11 +1020,11 @@ namespace WEBNC.DataAccess.Migrations
                             idCongTy = "CT01",
                             idLoaiSanPham = "LSP01",
                             imageLienQuan = "[\"CPU_12400F_1.png\", \"CPU_12400F_2.jpg\", \"CPU_12400F_3.png\", \"CPU_12400F_4.png\"]",
-                            imageURL = "CPU_12400F_1.png",
+                            imageURL = "CPU_12400F_1",
                             moTa = "Intel Core i5-12400F mang lại hiệu năng tuyệt vời cho nhu cầu chơi game và làm việc văn phòng. Sở hữu 6 nhân 12 luồng, tốc độ xử lý cao và tương thích với socket LGA 1700.",
                             soLuongCanDuoi = 10,
                             soLuongHienCon = 45,
-                            tenSanPham = "CPU_12400F_1.png",
+                            tenSanPham = "CPU_12400F_1",
                             thongSoSanPham = "- 6 nhân 12 luồng\r\n- Xung nhịp 2.5GHz (Boost 4.4GHz)\r\n- Socket LGA 1700\r\n- Bộ nhớ đệm 18MB"
                         },
                         new
@@ -1494,7 +1411,7 @@ namespace WEBNC.DataAccess.Migrations
                     b.Property<string>("idXaPhuong")
                         .HasColumnType("char(5)");
 
-                    b.Property<string>("idHuyen")
+                    b.Property<string>("idTinh")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -1504,7 +1421,7 @@ namespace WEBNC.DataAccess.Migrations
 
                     b.HasKey("idXaPhuong");
 
-                    b.HasIndex("idHuyen");
+                    b.HasIndex("idTinh");
 
                     b.ToTable("XaPhuong");
 
@@ -1512,181 +1429,181 @@ namespace WEBNC.DataAccess.Migrations
                         new
                         {
                             idXaPhuong = "XP001",
-                            idHuyen = "H001",
+                            idTinh = "T001",
                             tenXaPhuong = "Phường Hàng Bạc"
                         },
                         new
                         {
                             idXaPhuong = "XP002",
-                            idHuyen = "H001",
+                            idTinh = "T001",
                             tenXaPhuong = "Phường Hàng Buồm"
                         },
                         new
                         {
                             idXaPhuong = "XP003",
-                            idHuyen = "H001",
+                            idTinh = "T001",
                             tenXaPhuong = "Phường Tràng Tiền"
                         },
                         new
                         {
                             idXaPhuong = "XP004",
-                            idHuyen = "H002",
+                            idTinh = "T001",
                             tenXaPhuong = "Phường Ngọc Hà"
                         },
                         new
                         {
                             idXaPhuong = "XP005",
-                            idHuyen = "H002",
+                            idTinh = "T001",
                             tenXaPhuong = "Phường Kim Mã"
                         },
                         new
                         {
                             idXaPhuong = "XP006",
-                            idHuyen = "H002",
+                            idTinh = "T001",
                             tenXaPhuong = "Phường Điện Biên"
                         },
                         new
                         {
                             idXaPhuong = "XP007",
-                            idHuyen = "H003",
+                            idTinh = "T002",
                             tenXaPhuong = "Phường Bến Nghé"
                         },
                         new
                         {
                             idXaPhuong = "XP008",
-                            idHuyen = "H003",
+                            idTinh = "T002",
                             tenXaPhuong = "Phường Bến Thành"
                         },
                         new
                         {
                             idXaPhuong = "XP009",
-                            idHuyen = "H003",
+                            idTinh = "T002",
                             tenXaPhuong = "Phường Nguyễn Thái Bình"
                         },
                         new
                         {
                             idXaPhuong = "XP010",
-                            idHuyen = "H004",
+                            idTinh = "T002",
                             tenXaPhuong = "Phường 1"
                         },
                         new
                         {
                             idXaPhuong = "XP011",
-                            idHuyen = "H004",
+                            idTinh = "T002",
                             tenXaPhuong = "Phường 2"
                         },
                         new
                         {
                             idXaPhuong = "XP012",
-                            idHuyen = "H004",
+                            idTinh = "T002",
                             tenXaPhuong = "Phường 3"
                         },
                         new
                         {
                             idXaPhuong = "XP013",
-                            idHuyen = "H005",
+                            idTinh = "T003",
                             tenXaPhuong = "Phường Hải Châu I"
                         },
                         new
                         {
                             idXaPhuong = "XP014",
-                            idHuyen = "H005",
+                            idTinh = "T003",
                             tenXaPhuong = "Phường Hải Châu II"
                         },
                         new
                         {
                             idXaPhuong = "XP015",
-                            idHuyen = "H005",
+                            idTinh = "T003",
                             tenXaPhuong = "Phường Bình Hiên"
                         },
                         new
                         {
                             idXaPhuong = "XP016",
-                            idHuyen = "H006",
+                            idTinh = "T003",
                             tenXaPhuong = "Phường An Khê"
                         },
                         new
                         {
                             idXaPhuong = "XP017",
-                            idHuyen = "H006",
+                            idTinh = "T003",
                             tenXaPhuong = "Phường Chính Gián"
                         },
                         new
                         {
                             idXaPhuong = "XP018",
-                            idHuyen = "H006",
+                            idTinh = "T003",
                             tenXaPhuong = "Phường Tam Thuận"
                         },
                         new
                         {
                             idXaPhuong = "XP019",
-                            idHuyen = "H007",
+                            idTinh = "T004",
                             tenXaPhuong = "Phường An Biên"
                         },
                         new
                         {
                             idXaPhuong = "XP020",
-                            idHuyen = "H007",
+                            idTinh = "T004",
                             tenXaPhuong = "Phường An Dương"
                         },
                         new
                         {
                             idXaPhuong = "XP021",
-                            idHuyen = "H007",
+                            idTinh = "T004",
                             tenXaPhuong = "Phường Dư Hàng"
                         },
                         new
                         {
                             idXaPhuong = "XP022",
-                            idHuyen = "H008",
+                            idTinh = "T004",
                             tenXaPhuong = "Phường Hoàng Văn Thụ"
                         },
                         new
                         {
                             idXaPhuong = "XP023",
-                            idHuyen = "H008",
+                            idTinh = "T004",
                             tenXaPhuong = "Phường Hạ Lý"
                         },
                         new
                         {
                             idXaPhuong = "XP024",
-                            idHuyen = "H008",
+                            idTinh = "T004",
                             tenXaPhuong = "Phường Quán Toan"
                         },
                         new
                         {
                             idXaPhuong = "XP025",
-                            idHuyen = "H009",
+                            idTinh = "T005",
                             tenXaPhuong = "Phường An Hòa"
                         },
                         new
                         {
                             idXaPhuong = "XP026",
-                            idHuyen = "H009",
+                            idTinh = "T005",
                             tenXaPhuong = "Phường An Nghiệp"
                         },
                         new
                         {
                             idXaPhuong = "XP027",
-                            idHuyen = "H009",
+                            idTinh = "T005",
                             tenXaPhuong = "Phường Tân An"
                         },
                         new
                         {
                             idXaPhuong = "XP028",
-                            idHuyen = "H010",
+                            idTinh = "T005",
                             tenXaPhuong = "Phường An Thới"
                         },
                         new
                         {
                             idXaPhuong = "XP029",
-                            idHuyen = "H010",
+                            idTinh = "T005",
                             tenXaPhuong = "Phường Bình Thủy"
                         },
                         new
                         {
                             idXaPhuong = "XP030",
-                            idHuyen = "H010",
+                            idTinh = "T005",
                             tenXaPhuong = "Phường Trà An"
                         });
                 });
@@ -1708,25 +1625,6 @@ namespace WEBNC.DataAccess.Migrations
                     b.Navigation("DonDatHang");
 
                     b.Navigation("SanPham");
-                });
-
-            modelBuilder.Entity("ChiTietGioHang", b =>
-                {
-                    b.HasOne("WEBNC.Models.ApplicationUser", "user")
-                        .WithMany()
-                        .HasForeignKey("idNguoiDung")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WEBNC.Models.SanPham", "SanPham")
-                        .WithMany()
-                        .HasForeignKey("idSanPham")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SanPham");
-
-                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1785,21 +1683,28 @@ namespace WEBNC.DataAccess.Migrations
                     b.HasOne("WEBNC.Models.XaPhuong", "xaPhuong")
                         .WithMany()
                         .HasForeignKey("idPhuongXa")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("xaPhuong");
                 });
 
-            modelBuilder.Entity("WEBNC.Models.Huyen", b =>
+            modelBuilder.Entity("WEBNC.Models.ChiTietGioHang", b =>
                 {
-                    b.HasOne("WEBNC.Models.Tinh", "Tinh")
-                        .WithMany("Huyens")
-                        .HasForeignKey("idTinh")
+                    b.HasOne("WEBNC.Models.ApplicationUser", "user")
+                        .WithMany()
+                        .HasForeignKey("idNguoiDung")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Tinh");
+                    b.HasOne("WEBNC.Models.SanPham", "SanPham")
+                        .WithMany()
+                        .HasForeignKey("idSanPham")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SanPham");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("WEBNC.Models.SanPham", b =>
@@ -1823,13 +1728,13 @@ namespace WEBNC.DataAccess.Migrations
 
             modelBuilder.Entity("WEBNC.Models.XaPhuong", b =>
                 {
-                    b.HasOne("WEBNC.Models.Huyen", "Huyen")
-                        .WithMany("XaPhuongs")
-                        .HasForeignKey("idHuyen")
+                    b.HasOne("WEBNC.Models.Tinh", "tinh")
+                        .WithMany("xaPhuongs")
+                        .HasForeignKey("idTinh")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Huyen");
+                    b.Navigation("tinh");
                 });
 
             modelBuilder.Entity("WEBNC.Models.CongTy", b =>
@@ -1842,14 +1747,9 @@ namespace WEBNC.DataAccess.Migrations
                     b.Navigation("ChiTietDonHang");
                 });
 
-            modelBuilder.Entity("WEBNC.Models.Huyen", b =>
-                {
-                    b.Navigation("XaPhuongs");
-                });
-
             modelBuilder.Entity("WEBNC.Models.Tinh", b =>
                 {
-                    b.Navigation("Huyens");
+                    b.Navigation("xaPhuongs");
                 });
 #pragma warning restore 612, 618
         }

@@ -26,7 +26,7 @@ namespace WEBNC.DataAccess.Data.SeedData
                     idSanPham = "SP01",
                     idCongTy = "CT01",
                     idLoaiSanPham = "LSP01",
-                    tenSanPham = "CPU_12400F_1.png",
+                    tenSanPham = "CPU_12400F_1",
                     imageURL = "CPU_12400F_1.png",
                     gia = 4300000m,
                     soLuongHienCon = 45,

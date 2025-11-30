@@ -67,13 +67,9 @@
                                href="#" role="button" data-bs-toggle="dropdown">
                                 <i class="fas fa-th-large"></i> Danh mục
                             </a>
-                            <ul class="dropdown-menu border-0 shadow-lg mt-2">
-                                <li><a class="dropdown-item py-2" href="#"><i class="fas fa-mobile-alt me-2 text-primary"></i> Điện thoại</a></li>
-                                <li><a class="dropdown-item py-2" href="#"><i class="fas fa-laptop me-2 text-primary"></i> Laptop</a></li>
-                                <li><a class="dropdown-item py-2" href="#"><i class="fas fa-tablet-alt me-2 text-primary"></i> Máy tính bảng</a></li>
-                                <li><a class="dropdown-item py-2" href="#"><i class="fas fa-headphones me-2 text-primary"></i> Phụ kiện</a></li>
+                            <ul class="dropdown-menu border-0 shadow-lg mt-2 loaiSanPham">
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item py-2 text-primary fw-bold" href="#">Xem tất cả →</a></li>
+                                <li><a class="dropdown-item py-2 text-primary fw-bold" asp-area="Customer" asp-controller="Home" asp-action="Index">Xem tất cả →</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -197,6 +193,7 @@
     <script src="~/js/main.js"></script>
 
     <script src="~/js/home.js"></script>
+    <script src="~/js/loaiSanPham.js"></script>
     <script>
         document.getElementById("cart-link").addEventListener("click", function (e) {
             e.preventDefault();
@@ -213,6 +210,8 @@
             });
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

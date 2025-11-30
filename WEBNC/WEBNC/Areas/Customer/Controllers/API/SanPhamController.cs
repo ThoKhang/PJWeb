@@ -8,12 +8,12 @@ namespace WEBNC.Areas.Customer.Controllers.API
 {
     [ApiController]
     [Route("api/customer/products")]
-    public class HomeController : ControllerBase
+    public class SanPhamController : ControllerBase
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<SanPhamController> _logger;
         private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
+        public SanPhamController(ILogger<SanPhamController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;

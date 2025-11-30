@@ -15,11 +15,11 @@ namespace WEBNC.Models
         [Column(TypeName = "char(5)")]
         public string idXaPhuong { get; set; }
 
-        public string idHuyen { get; set; }
+        public string idTinh { get; set; }
 
-        [ForeignKey("idHuyen")]
+        [ForeignKey("idTinh")]
         [ValidateNever]
-        public Huyen Huyen { get; set; }
+        public Tinh tinh { get; set; }
 
         public string tenXaPhuong { get; set; }
     }

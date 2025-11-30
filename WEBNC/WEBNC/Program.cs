@@ -33,11 +33,11 @@ builder.Services
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-// BẮT MVC DÙNG COOKIE Identity (QUAN TRỌNG)
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultScheme = IdentityConstants.ApplicationScheme;
-});
+// BẮT MVC DÙNG COOKIE Identity
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultScheme = IdentityConstants.ApplicationScheme;
+//});
 
 //Cấu hình cookie đăng nhập
 builder.Services.ConfigureApplicationCookie(options =>
@@ -76,40 +76,6 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddSingleton<TimeProvider>(TimeProvider.System);
 
 var app = builder.Build();
-
-// ════════════════════════════════════════════
-// 6. Auto tạo tài khoản Admin lần đầu
-// ════════════════════════════════════════════
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-
-    string email = "phamminhhuy0901tk@gmail.com";
-    string password = "Abc123!@#";
-
-    if (!await roleManager.RoleExistsAsync("Admin"))
-        await roleManager.CreateAsync(new IdentityRole("Admin"));
-
-    var oldUser = await userManager.FindByEmailAsync(email);
-    if (oldUser != null)
-        await userManager.DeleteAsync(oldUser);
-
-    var user = new ApplicationUser
-    {
-        UserName = email,
-        Email = email,
-        EmailConfirmed = true,
-        idPhuongXa = "XP001",
-        hoTen = "Phạm Minh Huy",
-        soNha = "24 Bắc Đẩu"
-    };
-
-    var result = await userManager.CreateAsync(user, password);
-    if (result.Succeeded)
-        await userManager.AddToRoleAsync(user, "Admin");
-}
 
 // ════════════════════════════════════════════
 // 7. Middleware

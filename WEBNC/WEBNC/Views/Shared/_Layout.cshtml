@@ -100,7 +100,8 @@
 
                         <!-- Giỏ hàng -->
                         <li class="nav-item position-relative">
-                            <a class="nav-link text-dark fs-4 hover-text-primary position-relative" asp-area="Customer" asp-controller="Cart" asp-action="Index">
+                            <a id="cart-link" class="nav-link text-dark fs-4 hover-text-primary position-relative"
+                               href="/Customer/Cart/Index">
                                 <i class="fas fa-shopping-cart"></i>
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
                                       style="font-size: 0.65rem;">
@@ -196,6 +197,22 @@
     <script src="~/js/main.js"></script>
 
     <script src="~/js/home.js"></script>
+    <script>
+        document.getElementById("cart-link").addEventListener("click", function (e) {
+            e.preventDefault();
+
+            fetch("/Customer/Cart/Index", {
+                method: "GET",
+                credentials: "include"
+            }).then(res => {
+                if (res.status === 401) {
+                    window.location.href = "/Identity/Account/Login?returnUrl=/Customer/Cart/Index";
+                } else {
+                    window.location.href = "/Customer/Cart/Index";
+                }
+            });
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

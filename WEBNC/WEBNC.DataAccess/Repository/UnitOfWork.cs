@@ -12,12 +12,15 @@ namespace WEBNC.DataAccess.Repository
             DonDatHang = new DonDatHangRepository(_db);
             ChiTietDonHang = new ChiTietDonHangRepository(_db);
             chiTietGioHang = new ChitietgiohangRepository(_db);
+            LoaiSanPham = new LoaiSanPhamRepository(_db);
         }
         public ISanPhamRepository SanPham { get; private set; }
         public IDonDatHangRepository DonDatHang { get; private set; }
         public IChiTietDonHangRepository ChiTietDonHang { get; private set; }
 
         public IChiTietGioHangRepository chiTietGioHang { get; private set; }
+
+        public ILoaiSanPhamRepository LoaiSanPham { get; private set; }
 
         public void save()
         {

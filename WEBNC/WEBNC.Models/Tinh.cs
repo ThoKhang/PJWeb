@@ -16,6 +16,6 @@ namespace WEBNC.Models
         public string tenTinh { get; set; }
 
         [ValidateNever]
-        public ICollection<Huyen> Huyens { get; set; }
+        public ICollection<XaPhuong> xaPhuongs { get; set; }
     }
 }

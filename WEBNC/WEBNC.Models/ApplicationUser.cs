@@ -11,7 +11,6 @@ namespace WEBNC.Models
 
         public string? soNha { get; set; }
 
-        [Required]
         [Column(TypeName = "char(5)")]
         public string? idPhuongXa { get; set; }
 

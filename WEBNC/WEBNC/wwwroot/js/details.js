@@ -17,6 +17,7 @@ if (id) {
             } catch (e) {
                 console.error("Lỗi parse imageLienQuan:", e);
             }
+
             if (data) {
                 htmls = `
                     <div class="main-image">
@@ -36,31 +37,7 @@ if (id) {
                 htmls += `</div>`;
                 document.getElementById('sanPham').innerHTML = htmls;
 
-                //tăng giảm số lượng
-                const minusBtn = document.querySelector('.minus');
-                const plusBtn = document.querySelector('.plus');
-                const quantityInput = document.querySelector('.qty');
-
-                if (minusBtn && plusBtn && quantityInput) {
-
-                    minusBtn.addEventListener("click", () => {
-                        const current = Number(quantityInput.value);
-                        const min = Number(quantityInput.min) || 1;
-
-                        if (current > min) {
-                            quantityInput.value = current - 1;
-                        }
-                    });
-
-                    plusBtn.addEventListener("click", () => {
-                        quantityInput.value = Number(quantityInput.value) + 1;
-                    });
-
-                } else {
-                    console.warn("Không tìm thấy .minus .plus hoặc .qty");
-                }
-
-                // thumbnail click
+                // --- thumbnail click ---
                 const mainImg = document.querySelector(".main-image img");
                 document.querySelectorAll(".thumb-img").forEach(thumb => {
                     thumb.addEventListener("click", () => {
@@ -83,47 +60,68 @@ if (id) {
                     element.innerHTML = `${formattedPrice} ₫`;
                 });
 
-                // Thêm vào giỏ hàng
+                //tăng giảm số lượng
+                const minusBtn = document.querySelector('.minus');
+                const plusBtn = document.querySelector('.plus');
+                const quantityInput = document.querySelector('.qty');
+
+                if (minusBtn && plusBtn && quantityInput) {
+
+                    minusBtn.addEventListener("click", () => {
+                        let val = Number(quantityInput.value);
+                        if (val > 1) quantityInput.value = val - 1;
+                    });
+
+                    plusBtn.addEventListener("click", () => {
+                        let val = Number(quantityInput.value);
+                        quantityInput.value = val + 1;
+                    });
+
+                } else {
+                    console.warn("Không tìm thấy .minus .plus hoặc .qty");
+                }
+                // thêm vào giỏ hàng
                 const btnAddToCart = document.querySelector('.btn-cart');
-                const qtyInput = document.querySelector('.qty');
 
-                if (btnAddToCart && qtyInput) {
+                if (btnAddToCart && quantityInput) {
 
-                    btnAddToCart.addEventListener("click", () => {
+                    btnAddToCart.addEventListener("click", async () => {
 
-                        const quantity = Number(qtyInput.value);
+                        const quantity = Number(quantityInput.value) || 1;
 
-                        fetch("https://localhost:7047/api/customer/products/giohang", {
+                        const res = await fetch("https://localhost:7047/api/cart/add", {
                             method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
+                            credentials: "include",        // gửi cookie identity
+                            headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({
                                 idSanPham: id,
                                 soLuongTrongGio: quantity
                             })
-                        })
-                            .then(response => {
-                                // ❗ Nếu chưa đăng nhập → API trả 401
-                                if (response.status === 401) {
+                        });
+                        if (res.status === 401) {
 
-                                    // returnUrl sau khi login sẽ quay về trang sản phẩm
-                                    const returnUrl = `/Customer/Home/Details?id=${id}`;
+                            const returnUrl = `/Customer/Home/Details?id=${encodeURIComponent(id)}`;
 
-                                    // Redirect sang trang login
-                                    window.location.href = `/Identity/Account/Login?returnUrl=${encodeURIComponent(returnUrl)}`;
-                                    return; // ngừng xử lý
-                                }
-                                return response.json(); // parse JSON nếu OK
-                            })
-                            .then(data => {
-                                if (data) {
-                                    alert(data.message);
-                                    console.log("Kết quả API:", data);
-                                }
-                            })
-                            .catch(err => console.error("Lỗi AddToCart:", err));
+                            window.location.href =
+                                `/Identity/Account/Login?returnUrl=${encodeURIComponent(returnUrl)}`;
+
+                            return; 
+                        }
+
+                        // kiểm tra server có trả lỗi không
+                        if (!res.ok) {
+                            const text = await res.text().catch(() => null);
+                            console.error("AddToCart error:", res.status, text);
+                            alert("Thêm giỏ hàng thất bại. Vui lòng thử lại.");
+                            return;
+                        }
+                        const result = await res.json();
+                        alert(result.message);
+
                     });
+
+                } else {
+                    console.warn("Không tìm thấy .btn-cart hoặc .qty");
                 }
 
             }
@@ -133,7 +131,7 @@ if (id) {
             document.getElementById('sanPham').innerHTML = 'Đã xảy ra lỗi khi tải dữ liệu sản phẩm.';
         });
 
-    // 3 sản phẩm liên quan
+    // 3 sản phẩm liên quan 
     fetch('https://localhost:7047/api/customer/products')
         .then(res => res.json())
         .then(sanpham => {
@@ -161,7 +159,7 @@ if (id) {
             document.getElementById('sanPhamLQ').innerHTML = sanPhamLQ;
         });
 
-    // Top sản phẩm
+    // Top sản phẩm 
     fetch('https://localhost:7047/api/customer/products/top')
         .then(response => response.json())
         .then(result => {
@@ -186,34 +184,9 @@ if (id) {
                 `;
             });
             document.getElementById('sanPhamNoiBat').innerHTML = html;
-            // --- nút thêm vào giỏ ---
-            const btnAddToCart = document.querySelector('.btn-cart');
-            if (btnAddToCart) {
-                btnAddToCart.addEventListener('click', () => {
-
-                    const quantity = Number(document.querySelector('.qty').value);
-
-                    fetch('https://localhost:7047/api/customer/products/giohang', {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            idSanPham: id,
-                            soLuongTrongGio: quantity
-                        })
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            alert(data.message);
-                            console.log(data);
-                        })
-                        .catch(err => console.error('Lỗi AddToCart:', err));
-                });
-            }
 
         });
+
 } else {
     document.getElementById('sanPham').innerHTML = 'Không tìm thấy ID sản phẩm.';
 }
-

@@ -6,7 +6,9 @@ using WEBNC.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// CORS
+// ════════════════════════════════════════════
+// 1. CORS
+// ════════════════════════════════════════════
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -17,27 +19,48 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddControllersWithViews();
 
-// Database
+// ════════════════════════════════════════════
+// 2. Database
+// ════════════════════════════════════════════
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// ──────────────────────────────────────────────────────────────
-// IDENTITY + API + RAZOR PAGES UI CÙNG LÚC – HOÀN HẢO!
-// ──────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════
+// 3. Identity + Cookie Authentication
+// ════════════════════════════════════════════
 builder.Services
     .AddIdentityApiEndpoints<ApplicationUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-// 2 DÒNG BẮT BUỘC ĐỂ RAZOR PAGES UI (Login/Register custom) HOẠT ĐỘNG
-builder.Services.AddAuthentication();   // ← FIX lỗi "Unable to find the required services"
-builder.Services.AddRazorPages();       // ← Cho phép dùng trang Login/Register bạn tự viết
+// BẮT MVC DÙNG COOKIE Identity
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultScheme = IdentityConstants.ApplicationScheme;
+//});
 
-// Authorization + RoleManager
+//Cấu hình cookie đăng nhập
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Identity/Account/Login";
+    options.LogoutPath = "/Identity/Account/Logout";
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+
+    options.ExpireTimeSpan = TimeSpan.FromDays(14);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SameSite = SameSiteMode.Lax;
+    options.SlidingExpiration = true;
+});
+
+// Razor Pages Identity UI
+builder.Services.AddRazorPages();
+
+// Authorization
 builder.Services.AddAuthorization();
 
-// Các dịch vụ khác
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+// ════════════════════════════════════════════
+// 4. Session
+// ════════════════════════════════════════════
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -45,56 +68,18 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+// ════════════════════════════════════════════
+// 5. DI
+// ════════════════════════════════════════════
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddSingleton<TimeProvider>(TimeProvider.System);
 
 var app = builder.Build();
 
-//đăng nhập
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-
-    string email = "phamminhhuy0901tk@gmail.com";
-    string password = "Abc123!@#";
-
-    // tạo role nếu cần
-    if (!await roleManager.RoleExistsAsync("Admin"))
-        await roleManager.CreateAsync(new IdentityRole("Admin"));
-
-    // nếu user tồn tại, xóa đi để reset lại
-    var oldUser = await userManager.FindByEmailAsync(email);
-    if (oldUser != null)
-        await userManager.DeleteAsync(oldUser);
-
-    // tạo user mới
-    var user = new ApplicationUser
-    {
-        UserName = email,
-        Email = email,
-        EmailConfirmed = true,
-        idPhuongXa = "XP001",
-        hoTen = "Phạm Minh Huy",
-        soNha = "24 Bắc Đẩu"
-    };
-
-    var result = await userManager.CreateAsync(user, password);
-
-    if (result.Succeeded)
-    {
-        await userManager.AddToRoleAsync(user, "Admin");
-    }
-    else
-    {
-        foreach (var err in result.Errors)
-        {
-            Console.WriteLine(err.Description);
-        }
-    }
-}
-//đăng nhập
-
+// ════════════════════════════════════════════
+// 7. Middleware
+// ════════════════════════════════════════════
 app.UseCors("AllowAll");
 
 if (!app.Environment.IsDevelopment())
@@ -107,16 +92,26 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseSession();
+
+// Authentication + Authorization
 app.UseAuthentication();
 app.UseAuthorization();
 
-// API Endpoints (token cho mobile/SPA)
+// ════════════════════════════════════════════
+// 8. API Identity
+// ════════════════════════════════════════════
 app.MapGroup("/api/identity").MapIdentityApi<ApplicationUser>();
 
-// Razor Pages – form đẹp bạn tự design
-app.MapRazorPages();   // ← BẮT BUỘC CÓ DÒNG NÀY TRONG app.Build() nữa!
+// ════════════════════════════════════════════
+// 9. Razor Pages Identity (Login/Register)
+// ════════════════════════════════════════════
+app.MapRazorPages();
 
+// ════════════════════════════════════════════
+// 10. MVC Controllers
+// ════════════════════════════════════════════
 app.MapControllers();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");

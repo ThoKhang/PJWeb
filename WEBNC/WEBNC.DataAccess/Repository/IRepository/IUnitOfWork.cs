@@ -6,6 +6,7 @@
         IDonDatHangRepository DonDatHang { get; }
         IChiTietDonHangRepository ChiTietDonHang { get; }
         IChiTietGioHangRepository chiTietGioHang { get; }
+        ILoaiSanPhamRepository LoaiSanPham { get; }
         void save();
     }
 }

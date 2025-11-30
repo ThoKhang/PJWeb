@@ -17,7 +17,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<ChiTietDonHang> ChiTietDonHang { get; set; }
     public DbSet<ChiTietGioHang> ChiTietGioHang { get; set; }
     public DbSet<XaPhuong> XaPhuong { get; set; }
-    public DbSet<Huyen> Huyen { get; set; }
+    //public DbSet<Huyen> Huyen { get; set; }
     public DbSet<Tinh> Tinh { get; set; }
 
     //protected override void OnModelCreating(ModelBuilder modelBuilder)

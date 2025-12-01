@@ -9,11 +9,11 @@ namespace WEBNC.Areas.Customer.Controllers.API
     [Route("api/[controller]")]
     [ApiController]
     [Authorize] // bắt buộc đăng nhập mới xem giỏ hàng
-    public class Cart : ControllerBase
+    public class CartController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public Cart(IUnitOfWork unitOfWork)
+        public CartController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

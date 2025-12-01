@@ -7,7 +7,7 @@ namespace WEBNC.Areas.Customer.Controllers.MVC
 {
     [Area("Customer")]
     [Authorize]
-    public class Cart : Controller
+    public class CartController : Controller
     {
         public IActionResult Index()
         {

@@ -26,10 +26,9 @@
                                 </div>
                             </div>
                             <div class="product-item-add border border-top-0 rounded-bottom text-center p-4 pt-0">
-                                <a href="#"
-                                   class="btn btn-primary border-secondary rounded-pill py-2 px-4 mb-4">
-                                    <i class="fas fa-shopping-cart me-2"></i> Add To Cart
-                                </a>
+                                <button class="btn btn-primary border-secondary rounded-pill py-2 px-4 mb-4 btnAddToCart" data-id="${product.idSanPham}">
+                                    <i class="fas fa-shopping-cart me-2"></i> Thêm vào giỏ hàng
+                                </button>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex">
                                         <i class="fas fa-star text-primary"></i>
@@ -39,16 +38,14 @@
                                         <i class="fas fa-star"></i>
                                     </div>
                                     <div class="d-flex">
-                                        <a href="#"
-                                           class="text-primary d-flex align-items-center justify-content-center me-3">
-                                            <span class="rounded-circle btn-sm-square border">
-                                                <i class="fas fa-random"></i></i>
-                                        </a>
-                                        <a href="#"
-                                           class="text-primary d-flex align-items-center justify-content-center me-0">
-                                            <span class="rounded-circle btn-sm-square border">
-                                                <i class="fas fa-heart"></i>
-                                        </a>
+                                        <span class="text-primary d-flex align-items-center justify-content-center me-3">
+                                        <span class="rounded-circle btn-sm-square border"><i class="fas fa-random"></i></span>
+                                        </span>
+
+                                        <span class="text-primary d-flex align-items-center justify-content-center me-0">
+                                            <span class="rounded-circle btn-sm-square border"><i class="fas fa-heart"></i></span>
+                                        </span>
+
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +96,60 @@
         document.getElementById('ourSanPham').innerHTML = htmls;
         document.getElementById('newSanPham').innerHTML = htmls;
         document.getElementById('listStart').innerHTML = listStart;
+
+
     })
     .catch(error => {
         console.error('Lỗi:', error);
     });
+
+// ====== ADD TO CART  ======
+document.addEventListener("click", async (e) => {
+
+    const btn = e.target.closest(".btnAddToCart");
+    if (!btn) return;
+
+    e.preventDefault();
+
+    const productId = btn.dataset.id;  
+    const quantity = 1;              
+
+    if (!productId) {
+        console.error("Không có productId trong nút AddToCart");
+        return;
+    }
+
+    const res = await fetch("https://localhost:7047/api/cart/add", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            idSanPham: productId,
+            soLuongTrongGio: quantity
+        })
+    });
+
+    if (res.status === 401) {
+        const returnUrl = location.pathname + location.search;
+        window.location.href =
+            `/Identity/Account/Login?returnUrl=${encodeURIComponent(returnUrl)}`;
+        return;
+    }
+
+    if (!res.ok) {
+        Swal.fire({
+            icon: "error",
+            title: "Thêm giỏ hàng thất bại",
+            text: "Vui lòng thử lại!",
+        });
+        return;
+    }
+
+    Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Đã thêm vào giỏ hàng",
+        showConfirmButton: false,
+        timer: 1500
+    });
+});

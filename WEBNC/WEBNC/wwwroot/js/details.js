@@ -1,14 +1,22 @@
 ﻿const urlParams = new URLSearchParams(window.location.search);
-const id = urlParams.get('id');
+let id = urlParams.get('id');
 
 if (id) {
+    document.addEventListener("click", (e) => {
+        console.log("REAL TARGET:", e.target);
+    });
+
+    console.log("Clicked:", btn);
+
     fetch(`https://localhost:7047/api/customer/products/${id}`)
         .then(response => response.json())
         .then(sanpham => {
 
             let htmls = "";
             const data = sanpham.data;
-
+            if (!id) {
+                id = data.idSanPham;
+            }
             let images = [];
             try {
                 if (data.imageLienQuan) {
@@ -80,62 +88,51 @@ if (id) {
                 } else {
                     console.warn("Không tìm thấy .minus .plus hoặc .qty");
                 }
-                // thêm vào giỏ hàng
-                const btnAddToCart = document.querySelector('.btn-cart');
 
-                if (btnAddToCart && quantityInput) {
+                /// thêm vào giỏ hàng
+                document.addEventListener("click", async (e) => {
 
-                    btnAddToCart.addEventListener("click", async () => {
+                    const btn = e.target.closest(".btnAddToCart, .btn-cart");
+                    if (!btn) return;
 
-                        const quantity = Number(quantityInput.value) || 1;
+                    e.preventDefault();
+                    const productId = btn.dataset.id || id;
+                    const quantity = typeof quantityInput !== "undefined" && quantityInput? Number(quantityInput.value) || 1: 1;
 
-                        const res = await fetch("https://localhost:7047/api/cart/add", {
-                            method: "POST",
-                            credentials: "include",        // gửi cookie identity
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({
-                                idSanPham: id,
-                                soLuongTrongGio: quantity
-                            })
-                        });
-
-                        // Nếu chưa đăng nhập → chuyển đến login
-                        if (res.status === 401) {
-                            const returnUrl = `/Customer/Home/Details?id=${encodeURIComponent(id)}`;
-                            window.location.href =
-                                `/Identity/Account/Login?returnUrl=${encodeURIComponent(returnUrl)}`;
-                            return;
-                        }
-
-                        // Server trả lỗi (500, 400,...)
-                        if (!res.ok) {
-                            const text = await res.text().catch(() => null);
-                            console.error("AddToCart error:", res.status, text);
-
-                            Swal.fire({
-                                icon: "error",
-                                title: "Thêm giỏ hàng thất bại",
-                                text: "Vui lòng thử lại!",
-                            });
-
-                            return;
-                        }
-
-                        // Thành công
-                        const result = await res.json();
-
-                        Swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: "Đã thêm vào giỏ hàng",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
+                    const res = await fetch("https://localhost:7047/api/cart/add", {
+                        method: "POST",
+                        credentials: "include",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            idSanPham: productId,
+                            soLuongTrongGio: quantity
+                        })
                     });
 
-                } else {
-                    console.warn("Không tìm thấy .btn-cart hoặc .qty");
-                }
+                    if (res.status === 401) {
+                        const returnUrl = location.pathname + location.search;
+                        window.location.href =
+                            `/Identity/Account/Login?returnUrl=${encodeURIComponent(returnUrl)}`;
+                        return;
+                    }
+
+                    if (!res.ok) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Thêm giỏ hàng thất bại",
+                            text: "Vui lòng thử lại!",
+                        });
+                        return;
+                    }
+
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Đã thêm vào giỏ hàng",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                });
 
             }
         })

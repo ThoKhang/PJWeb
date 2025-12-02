@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Đơn đặt hàng";
+    ViewData["Title"] = "Lịch sử đơn hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-12">
             <h2 class="text-primary border-bottom pb-3">
-                <i class="fas fa-user-check"></i> Xin chào, tên khách hàng
+                <i class="fas fa-user-check"></i> Xin chào, @(User.Identity?.Name ?? "Khách hàng")
             </h2>
         </div>
     </div>
@@ -16,7 +16,7 @@
         <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Đang tải...</span>
         </div>
-        <p class="mt-2">Đang lấy dữ liệu đơn hàng...</p>
+        <p class="mt-2 text-muted">Đang lấy dữ liệu đơn hàng...</p>
     </div>
 
     <div class="table-responsive mt-4" id="orderTableContainer" style="display:none;">
@@ -36,25 +36,34 @@
     </div>
 
     <div id="noDataMessage" class="alert alert-info mt-4 text-center" style="display:none;">
-        Bạn chưa có đơn hàng nào. <a href="/" class="alert-link">Mua sắm ngay!</a>
+        <i class="fas fa-shopping-cart"></i> Bạn chưa có đơn hàng nào. <a href="/" class="alert-link">Mua sắm ngay!</a>
     </div>
 </div>
 
 @section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             loadOrderHistory();
         });
 
         function loadOrderHistory() {
-            fetch('/Customer/DonDatHang/GetMyOrders')
-                .then(response => response.json())
+            fetch('/api/DonDatHang/get-my-orders')
+                .then(response => {
+                    if (response.status === 401) {
+                        window.location.href = "/Identity/Account/Login";
+                        return;
+                    }
+                    return response.json();
+                })
                 .then(res => {
                     document.getElementById('loadingSpinner').style.display = 'none';
-                    const data = res.data;
+                    const data = res && res.data ? res.data : [];
 
-                    if (!data || data.length === 0) {
+                    if (data.length === 0) {
                         document.getElementById('noDataMessage').style.display = 'block';
+                        document.getElementById('orderTableContainer').style.display = 'none';
                         return;
                     }
 
@@ -63,7 +72,8 @@
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    document.getElementById('loadingSpinner').innerHTML = '<p class="text-danger">Lỗi kết nối server.</p>';
+                    document.getElementById('loadingSpinner').innerHTML =
+                        '<p class="text-danger"><i class="fas fa-exclamation-triangle"></i> Lỗi kết nối server.</p>';
                 });
         }
 
@@ -72,33 +82,93 @@
             const formatter = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
 
             data.forEach(item => {
-                const dateObj = new Date(item.ngayDat);
-                const dateString = dateObj.toLocaleDateString('vi-VN');
+                // 1. Xử lý ngày tháng
+                let dateString = "---";
+                if(item.ngayDat){
+                    const dateObj = new Date(item.ngayDat);
+                    dateString = dateObj.toLocaleDateString('vi-VN') + ' ' + dateObj.toLocaleTimeString('vi-VN', {hour:'2-digit', minute:'2-digit'});
+                }
 
-                // Xử lý trạng thái
-                let statusText = item.trangThai ? item.trangThai : "Chờ cập nhật";
+                // 2. Xử lý trạng thái và màu sắc
+                let statusText = item.trangThai || "Chờ xác nhận";
                 let badgeClass = "bg-secondary";
 
-                // Thêm màu cho trạng thái
-                if (statusText === 'Đã giao') badgeClass = "bg-success";
-                else if (statusText.includes('Đang')) badgeClass = "bg-warning text-dark";
-                else if (statusText === 'Đã hủy') badgeClass = "bg-danger";
+                if (statusText === 'Đã giao' || statusText === 'Hoàn thành') badgeClass = "bg-success";
+                else if (statusText.includes('Đang')) badgeClass = "bg-primary";
+                else if (statusText === 'Chờ xác nhận') badgeClass = "bg-warning text-dark";
+                else if (statusText.includes('hủy')) badgeClass = "bg-danger";
 
+                // 3. Xử lý Nút thao tác
+                // Luôn có nút Xem
+                let actionButtons = `
+                    <a href="/Customer/DonDatHang/Details/${item.idDonDat}" class="btn btn-primary btn-sm me-1">
+                        <i class="fas fa-eye"></i> Xem
+                    </a>
+                `;
+
+                // Nếu là 'Chờ xác nhận' -> Thêm nút Hủy
+                if (statusText === 'Chờ xác nhận') {
+                    actionButtons += `
+                        <button onclick="cancelOrder('${item.idDonDat}')" class="btn btn-danger btn-sm">
+                            <i class="fas fa-times"></i> Hủy
+                        </button>
+                    `;
+                }
+
+                // Render dòng
                 html += `
                     <tr>
-                        <td class="fw-bold">#${item.idDonDat}</td>
+                        <td class="fw-bold text-primary">#${item.idDonDat}</td>
                         <td>${dateString}</td>
                         <td class="text-danger fw-bold">${formatter.format(item.tongTien)}</td>
                         <td><span class="badge ${badgeClass}">${statusText}</span></td>
                         <td class="text-center">
-                            <a href="/Customer/DonDatHang/Details?id=${item.idDonDat}" class="btn btn-primary btn-sm">
-                                <i class="fas fa-eye"></i> Xem
-                            </a>
+                            ${actionButtons}
                         </td>
                     </tr>
                 `;
             });
             document.getElementById('tblDonHangBody').innerHTML = html;
+        }
+
+        // --- HÀM HỦY ĐƠN HÀNG ---
+        function cancelOrder(id) {
+            Swal.fire({
+                title: 'Bạn chắc chắn muốn hủy?',
+                text: "Đơn hàng sẽ bị hủy và không thể hoàn tác!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Đồng ý hủy',
+                cancelButtonText: 'Thôi'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Gọi API Backend để hủy
+                    fetch(`/api/DonDatHang/cancel/${id}`, {
+                        method: 'POST'
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire(
+                                'Đã hủy!',
+                                'Đơn hàng đã được hủy thành công.',
+                                'success'
+                            ).then(() => {
+                                // Tải lại bảng để cập nhật trạng thái
+                                loadOrderHistory();
+                            });
+                        } else {
+                            Swal.fire('Lỗi', data.message || "Không thể hủy đơn hàng.", 'error');
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        Swal.fire('Lỗi', 'Lỗi kết nối server.', 'error');
+                    });
+                }
+            })
         }
     </script>
 }

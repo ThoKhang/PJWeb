@@ -16,7 +16,6 @@ namespace WEBNC.Models
         public string idDonDat { get; set; }
 
         [Required]
-        [Column(TypeName = "char(5)")]
         public string idNguoiDung { get; set; }
 
         //[ForeignKey("idNguoiDung")]

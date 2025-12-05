@@ -1,0 +1,151 @@
+﻿@{
+    ViewData["Title"] = "Messenger AI Chat";
+}
+
+<style>
+    .chat-container {
+        width: 100%;
+        max-width: 600px;
+        margin: 20px auto;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        height: 80vh;
+        box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .chat-header {
+        background: #0084ff;
+        color: white;
+        padding: 15px;
+        font-size: 20px;
+        font-weight: bold;
+        border-radius: 12px 12px 0 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .chat-body {
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+        background: #f0f2f5;
+    }
+
+    .chat-message {
+        max-width: 75%;
+        margin-bottom: 10px;
+        padding: 10px 14px;
+        border-radius: 22px;
+        font-size: 15px;
+        line-height: 1.4;
+        display: inline-block;
+    }
+
+    /* User (Client) message */
+    .msg-user {
+        background: #0084ff;
+        color: white;
+        margin-left: auto;
+        border-bottom-right-radius: 4px;
+    }
+
+    /* AI message */
+    .msg-ai {
+        background: white;
+        color: black;
+        border: 1px solid #ddd;
+        margin-right: auto;
+        border-bottom-left-radius: 4px;
+    }
+
+    .chat-input {
+        padding: 10px;
+        border-top: 1px solid #ddd;
+        display: flex;
+        gap: 10px;
+        background: white;
+        border-radius: 0 0 12px 12px;
+    }
+
+        .chat-input input {
+            flex: 1;
+            border-radius: 25px;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+        }
+
+        .chat-input button {
+            background: #0084ff;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+        }
+</style>
+
+<div class="chat-container">
+
+    <!-- Header -->
+    <div class="chat-header">
+        <i class="fab fa-facebook-messenger fa-lg"></i>
+        Messenger AI
+    </div>
+
+    <!-- Chat body -->
+    <div id="chatBody" class="chat-body"></div>
+
+    <!-- Input -->
+    <div class="chat-input">
+        <input id="messageInput" placeholder="Nhập tin nhắn..." />
+        <button onclick="sendMessage()">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+
+</div>
+
+<script>
+    function loadHistory() {
+        fetch("/api/chat/history")
+            .then(res => res.json())
+            .then(messages => {
+                const body = document.getElementById("chatBody");
+                body.innerHTML = "";
+
+                messages.forEach(m => {
+                    let css = m.role === "user" ? "msg-user" : "msg-ai";
+
+                    body.innerHTML += `
+                        <div class="chat-message ${css}">
+                            ${m.message}
+                        </div>
+                    `;
+                });
+
+                body.scrollTop = body.scrollHeight;
+            });
+    }
+
+    loadHistory();
+
+    function sendMessage() {
+        let msg = document.getElementById("messageInput").value;
+        if (msg.trim() === "") return;
+
+        fetch("/api/chat/send", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: msg })
+        })
+        .then(res => res.json())
+        .then(data => {
+            loadHistory();
+            document.getElementById("messageInput").value = "";
+        });
+    }
+</script>

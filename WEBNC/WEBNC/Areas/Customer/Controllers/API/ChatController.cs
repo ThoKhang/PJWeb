@@ -4,6 +4,7 @@ using System.Security.Claims;
 using WEBNC.DataAccess.Repository.IRepository;
 using WEBNC.Models;
 using Newtonsoft.Json;
+using System.Net.Http.Json; // Cần thiết cho PostAsJsonAsync hoặc tạo JsonContent
 
 [ApiController]
 [Route("api/chat")]
@@ -12,13 +13,14 @@ public class ChatController : ControllerBase
     private readonly IUnitOfWork _unitOfWork;
     private readonly HttpClient _http;
 
+    // Khởi tạo HttpClient trong constructor (được khuyến nghị hơn)
     public ChatController(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
+        // Khởi tạo HttpClient một lần
         _http = new HttpClient();
     }
 
-    // Gửi tin nhắn
     [HttpPost("send")]
     [Authorize]
     public async Task<IActionResult> Send([FromBody] ChatRequest req)
@@ -26,11 +28,13 @@ public class ChatController : ControllerBase
         string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
         // 1. Lấy session hoặc tạo mới
-        var session = _unitOfWork.ChatSession
+        // Khai báo biến 'session' ở đây để có phạm vi (scope) toàn bộ phương thức
+        ChatSession session = _unitOfWork.ChatSession
             .GetFirstOrDefault(s => s.userId == userId);
 
         if (session == null)
         {
+            // Chỉ gán giá trị, KHÔNG DÙNG 'var' lần nữa
             session = new ChatSession
             {
                 userId = userId,
@@ -39,102 +43,101 @@ public class ChatController : ControllerBase
 
             _unitOfWork.ChatSession.Add(session);
             _unitOfWork.save();
-
-            // Tạo SYSTEM MESSAGE để AI nói tiếng Việt
-            _unitOfWork.ChatMessage.Add(new ChatMessage
-            {
-                idSession = session.idSession,
-                role = "system",
-                message = "Bạn là trợ lý AI nói tiếng Việt. Hãy trả lời rõ ràng, dễ hiểu và tự nhiên."
-            });
-
-            _unitOfWork.save();
         }
 
-        // 2. Lưu tin nhắn user
-        _unitOfWork.ChatMessage.Add(new ChatMessage
+        // 2. Lưu tin nhắn user (Sử dụng session đã được gán giá trị ở bước 1)
+        var userMsg = new ChatMessage
         {
-            idSession = session.idSession,
+            idSession = session.idSession, // Đã khắc phục lỗi CS0103
             role = "user",
             message = req.Message
-        });
+        };
+
+        _unitOfWork.ChatMessage.Add(userMsg);
         _unitOfWork.save();
 
-        // 3. LẤY TOÀN BỘ LỊCH SỬ CHAT ĐỂ GỬI CHO AI
-        var history = _unitOfWork.ChatMessage
-            .GetAll(m => m.idSession == session.idSession)
-            .OrderBy(m => m.idMessage)
-            .ToList();
 
-        // Ghép hội thoại thành 1 prompt lớn
-        string fullPrompt = "";
+        // === 3. Gửi đến AI (Ollama) và STREAMING PHẢN HỒI (Cải thiện tốc độ) ===
 
-        foreach (var msg in history)
-        {
-            fullPrompt += $"{msg.role}: {msg.message}\n";
-        }
+        // Thiết lập header để phản hồi dạng stream/raw
+        Response.ContentType = "application/octet-stream";
+        Response.Headers.Add("X-Content-Type-Options", "nosniff");
 
-        fullPrompt += "assistant: ";
-
-        // 4. Gửi PROMPT sang Ollama
         var body = new
         {
             model = "phi3:mini",
-            prompt = fullPrompt,
-            stream = true
+            prompt = req.Message,
+            stream = true // QUAN TRỌNG
         };
 
-        var response = await _http.PostAsJsonAsync("http://localhost:11434/api/generate", body);
-        var raw = await response.Content.ReadAsStringAsync();
+        // Gửi Request và nhận phản hồi
+        using var requestMessage = new HttpRequestMessage(HttpMethod.Post, "http://localhost:11434/api/generate");
+        requestMessage.Content = JsonContent.Create(body);
 
-        string aiReply = "";
+        using var response = await _http.SendAsync(requestMessage, HttpCompletionOption.ResponseHeadersRead);
+        response.EnsureSuccessStatusCode();
 
-        // 5. Xử lý streaming JSON từng dòng của Ollama
-        foreach (var line in raw.Split('\n'))
+        using var stream = await response.Content.ReadAsStreamAsync();
+        using var reader = new StreamReader(stream);
+
+        string aiReply = ""; // Chuỗi này sẽ tổng hợp toàn bộ câu trả lời
+
+        // Đọc từng dòng (chunk) và stream về Frontend
+        while (!reader.EndOfStream)
         {
+            var line = await reader.ReadLineAsync();
             if (string.IsNullOrWhiteSpace(line)) continue;
 
             try
             {
                 var chunk = JsonConvert.DeserializeObject<dynamic>(line);
                 if (chunk != null && chunk.response != null)
-                    aiReply += (string)chunk.response;
+                {
+                    string part = (string)chunk.response;
+                    aiReply += part;
+
+                    // Ghi phần phản hồi (chunk) trực tiếp về Response của Client
+                    var bytes = System.Text.Encoding.UTF8.GetBytes(part);
+                    await Response.Body.WriteAsync(bytes);
+                    await Response.Body.FlushAsync(); // Đẩy dữ liệu ra ngay lập tức
+                }
             }
             catch
             {
-                // bỏ chunk lỗi
+                // bỏ qua chunk lỗi
             }
         }
 
-        // 6. Lưu tin nhắn AI
-        _unitOfWork.ChatMessage.Add(new ChatMessage
+        // === 4. LƯU TIN NHẮN AI VÀO DB SAU KHI STREAM XONG ===
+        var aiMsg = new ChatMessage
         {
             idSession = session.idSession,
             role = "ai",
-            message = aiReply
-        });
+            message = aiReply // Dùng chuỗi đã tổng hợp
+        };
 
+        _unitOfWork.ChatMessage.Add(aiMsg);
         _unitOfWork.save();
 
-        return Ok(new { reply = aiReply });
+        // Trả về một kết quả rỗng (vì dữ liệu đã được stream hết)
+        return new EmptyResult();
     }
 
-    // Lịch sử chat
+    // Lấy lịch sử chat
     [HttpGet("history")]
     [Authorize]
     public IActionResult History()
     {
         string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        var session = _unitOfWork.ChatSession
-            .GetFirstOrDefault(s => s.userId == userId);
+        var session = _unitOfWork.ChatSession.GetFirstOrDefault(s => s.userId == userId);
 
         if (session == null)
             return Ok(new List<ChatMessage>());
 
         var messages = _unitOfWork.ChatMessage
             .GetAll(m => m.idSession == session.idSession)
-            .OrderBy(m => m.idMessage)
+            .OrderBy(m => m.idMessage) // DÙNG idMessage để order
             .ToList();
 
         return Ok(messages);

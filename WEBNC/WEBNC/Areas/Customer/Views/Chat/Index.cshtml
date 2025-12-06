@@ -34,6 +34,17 @@
         background: #f0f2f5;
     }
 
+    /* NEW: Wrapper classes for alignment */
+    .msg-user-wrapper {
+        display: flex;
+        justify-content: flex-end; /* Căn phải cho tin nhắn user */
+    }
+
+    .msg-ai-wrapper {
+        display: flex;
+        justify-content: flex-start; /* Căn trái cho tin nhắn AI */
+    }
+
     .chat-message {
         max-width: 75%;
         margin-bottom: 10px;
@@ -42,13 +53,13 @@
         font-size: 15px;
         line-height: 1.4;
         display: inline-block;
+        word-wrap: break-word;
     }
 
     /* User (Client) message */
     .msg-user {
         background: #0084ff;
         color: white;
-        margin-left: auto;
         border-bottom-right-radius: 4px;
     }
 
@@ -57,7 +68,6 @@
         background: white;
         color: black;
         border: 1px solid #ddd;
-        margin-right: auto;
         border-bottom-left-radius: 4px;
     }
 
@@ -85,23 +95,24 @@
             border-radius: 50%;
             width: 45px;
             height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
         }
 </style>
 
 <div class="chat-container">
 
-    <!-- Header -->
     <div class="chat-header">
         <i class="fab fa-facebook-messenger fa-lg"></i>
         Messenger AI
     </div>
 
-    <!-- Chat body -->
     <div id="chatBody" class="chat-body"></div>
 
-    <!-- Input -->
     <div class="chat-input">
-        <input id="messageInput" placeholder="Nhập tin nhắn..." />
+        <input id="messageInput" placeholder="Nhập tin nhắn..." onkeyup="if(event.key === 'Enter') sendMessage()" />
         <button onclick="sendMessage()">
             <i class="fas fa-paper-plane"></i>
         </button>
@@ -110,42 +121,123 @@
 </div>
 
 <script>
+    // Biến để giữ phần tử tin nhắn AI đang được stream
+    let currentAiMessageElement = null;
+
+    /**
+     * Hàm thêm tin nhắn vào giao diện (Giúp tin nhắn hiển thị ngay lập tức)
+     * param {string} msg - Nội dung tin nhắn
+     * param {string} role - Vai trò ("user" hoặc "ai")
+     */
+    function appendMessage(msg, role) {
+        const body = document.getElementById("chatBody");
+
+        let css = role === "user" ? "msg-user" : "msg-ai";
+        let wrapperClass = role === "user" ? 'msg-user-wrapper' : 'msg-ai-wrapper';
+
+        const messageWrapper = document.createElement('div');
+        messageWrapper.className = wrapperClass;
+
+        // Dùng innerHTML để thêm nội dung tin nhắn
+        messageWrapper.innerHTML = `
+            <div class="chat-message ${css}">
+                ${msg}
+            </div>
+        `;
+
+        body.appendChild(messageWrapper);
+    }
+
+    /**
+     * Hàm tải lịch sử chat từ server và hiển thị lại
+     */
     function loadHistory() {
         fetch("/api/chat/history")
             .then(res => res.json())
             .then(messages => {
                 const body = document.getElementById("chatBody");
-                body.innerHTML = "";
+                body.innerHTML = ""; // Xóa nội dung cũ trước khi tải lại
 
                 messages.forEach(m => {
-                    let css = m.role === "user" ? "msg-user" : "msg-ai";
-
-                    body.innerHTML += `
-                        <div class="chat-message ${css}">
-                            ${m.message}
-                        </div>
-                    `;
+                    appendMessage(m.message, m.role);
                 });
 
-                body.scrollTop = body.scrollHeight;
-            });
+                body.scrollTop = body.scrollHeight; // Cuộn xuống cuối
+            })
+            .catch(error => console.error('Error loading history:', error));
     }
 
+    // Tải lịch sử khi trang vừa load
     loadHistory();
 
+    /**
+     * Hàm gửi tin nhắn và xử lý Stream
+     */
     function sendMessage() {
-        let msg = document.getElementById("messageInput").value;
-        if (msg.trim() === "") return;
+        let msg = document.getElementById("messageInput").value.trim();
+        const inputElement = document.getElementById("messageInput");
 
+        if (msg === "") return;
+
+        // 1. Hiển thị tin nhắn User ngay lập tức
+        appendMessage(msg, "user");
+        inputElement.value = "";
+
+        // 2. Tạo phần tử cho tin nhắn AI placeholder "..."
+        appendMessage("...", "ai");
+        // Lấy phần tử cuối cùng (là tin nhắn AI placeholder)
+        currentAiMessageElement = document.querySelector("#chatBody").lastChild.querySelector('.chat-message');
+
+        // Cuộn xuống
+        document.getElementById("chatBody").scrollTop = document.getElementById("chatBody").scrollHeight;
+
+        // 3. Gửi đến API và xử lý Stream
         fetch("/api/chat/send", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ message: msg })
         })
-        .then(res => res.json())
-        .then(data => {
+        .then(async res => {
+            if (!res.ok) {
+                // Nếu server trả về lỗi (ví dụ 401, 500...), tải lại lịch sử
+                // để giữ lại tin nhắn user đã gửi và thông báo lỗi
+                loadHistory();
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+
+            // Đọc response như một luồng văn bản (Text Stream)
+            const reader = res.body.getReader();
+            const decoder = new TextDecoder("utf-8");
+            let buffer = ""; // Buffer để tổng hợp các chunk
+
+            // Vòng lặp để đọc từng chunk từ stream
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) {
+                    // KẾT THÚC STREAM THÀNH CÔNG!
+                    // KHÔNG CẦN GỌI loadHistory() NỮA.
+                    if (currentAiMessageElement.textContent === "...") {
+                        currentAiMessageElement.textContent = "Không nhận được phản hồi.";
+                    }
+                    break;
+                }
+
+                // Chuyển chunk bytes thành chuỗi
+                // Thêm { stream: true } để giải mã liên tục
+                buffer += decoder.decode(value, { stream: true });
+
+                // Cập nhật nội dung vào phần tử tin nhắn AI
+                currentAiMessageElement.textContent = buffer;
+
+                // Cuộn xuống mỗi khi có chunk mới
+                document.getElementById("chatBody").scrollTop = document.getElementById("chatBody").scrollHeight;
+            }
+        })
+        .catch(error => {
+            console.error('Lỗi khi stream tin nhắn:', error);
+            alert("Có lỗi xảy ra khi stream tin nhắn. Vui lòng kiểm tra Server và Ollama.");
+            // Tải lại lịch sử để giữ lại tin nhắn user và xóa placeholder "..." nếu cần
             loadHistory();
-            document.getElementById("messageInput").value = "";
         });
     }
 </script>

@@ -198,9 +198,20 @@
             body: JSON.stringify({ message: msg })
         })
         .then(async res => {
+
+            // --- LOGIC MỚI: KIỂM TRA CHƯA ĐĂNG NHẬP (STATUS 401) ---
+            if (res.status === 401) {
+                // Tương tự logic thêm giỏ hàng, chuyển hướng đến trang đăng nhập
+                const returnUrl = window.location.pathname + window.location.search;
+                window.location.href =
+                    `/Identity/Account/Login?returnUrl=${encodeURIComponent(returnUrl)}`;
+                return;
+            }
+            // -------------------------------------------------------------
+
+
             if (!res.ok) {
-                // Nếu server trả về lỗi (ví dụ 401, 500...), tải lại lịch sử
-                // để giữ lại tin nhắn user đã gửi và thông báo lỗi
+                // Nếu server trả về lỗi (ví dụ 500...), tải lại lịch sử
                 loadHistory();
                 throw new Error(`HTTP error! status: ${res.status}`);
             }
@@ -215,7 +226,6 @@
                 const { done, value } = await reader.read();
                 if (done) {
                     // KẾT THÚC STREAM THÀNH CÔNG!
-                    // KHÔNG CẦN GỌI loadHistory() NỮA.
                     if (currentAiMessageElement.textContent === "...") {
                         currentAiMessageElement.textContent = "Không nhận được phản hồi.";
                     }
@@ -223,7 +233,6 @@
                 }
 
                 // Chuyển chunk bytes thành chuỗi
-                // Thêm { stream: true } để giải mã liên tục
                 buffer += decoder.decode(value, { stream: true });
 
                 // Cập nhật nội dung vào phần tử tin nhắn AI
@@ -235,7 +244,11 @@
         })
         .catch(error => {
             console.error('Lỗi khi stream tin nhắn:', error);
-            alert("Có lỗi xảy ra khi stream tin nhắn. Vui lòng kiểm tra Server và Ollama.");
+            // Chỉ hiển thị cảnh báo lỗi nếu không phải lỗi 401 (vì 401 đã chuyển hướng)
+            if (error.message && !error.message.includes('401')) {
+                 alert("Có lỗi xảy ra khi stream tin nhắn. Vui lòng kiểm tra Server và Ollama.");
+            }
+
             // Tải lại lịch sử để giữ lại tin nhắn user và xóa placeholder "..." nếu cần
             loadHistory();
         });

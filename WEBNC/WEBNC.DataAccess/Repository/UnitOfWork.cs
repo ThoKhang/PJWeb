@@ -1,4 +1,5 @@
 ﻿using WEBNC.DataAccess.Repository.IRepository;
+using WEBNC.Models;
 
 namespace WEBNC.DataAccess.Repository
 {
@@ -13,6 +14,9 @@ namespace WEBNC.DataAccess.Repository
             ChiTietDonHang = new ChiTietDonHangRepository(_db);
             chiTietGioHang = new ChitietgiohangRepository(_db);
             LoaiSanPham = new LoaiSanPhamRepository(_db);
+            ChatSession = new ChatSessionRepository(_db);
+            ChatMessage = new ChatMessageRepository(_db);
+
         }
         public ISanPhamRepository SanPham { get; private set; }
         public IDonDatHangRepository DonDatHang { get; private set; }
@@ -21,6 +25,9 @@ namespace WEBNC.DataAccess.Repository
         public IChiTietGioHangRepository chiTietGioHang { get; private set; }
 
         public ILoaiSanPhamRepository LoaiSanPham { get; private set; }
+
+        public IChatSessionRepository ChatSession { get; private set; }
+        public IChatMessageRepository ChatMessage { get; private set; }
 
         public void save()
         {

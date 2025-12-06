@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using WEBNC.DataAccess.Repository.IRepository;
+using WEBNC.DataAccess.Data;
 using WEBNC.DataAccess.Repository;
+using WEBNC.DataAccess.Repository.IRepository;
 using WEBNC.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -74,6 +75,7 @@ builder.Services.AddSession(options =>
 // ════════════════════════════════════════════
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddSingleton<TimeProvider>(TimeProvider.System);
+builder.Services.AddScoped<ChatManager>();
 
 var app = builder.Build();
 
@@ -111,6 +113,10 @@ app.MapRazorPages();
 // 10. MVC Controllers
 // ════════════════════════════════════════════
 app.MapControllers();
+
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

@@ -4,8 +4,14 @@ using WEBNC.DataAccess.Data;
 using WEBNC.DataAccess.Repository;
 using WEBNC.DataAccess.Repository.IRepository;
 using WEBNC.Models;
+using WEBNC.Models.Momo;
+using WEBNC.Services;
+using WEBNC.Services.Momo;
 
 var builder = WebApplication.CreateBuilder(args);
+//Momo API Payment
+builder.Services.Configure<MomoOptionModel>(builder.Configuration.GetSection("MomoAPI"));
+builder.Services.AddScoped<IMomoService, MomoService>();
 
 // ════════════════════════════════════════════
 // 1. CORS
@@ -123,3 +129,7 @@ app.MapControllerRoute(
     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+//Connect Momo API
+builder.Services.Configure<MomoOptionModel>(builder.Configuration.GetSection("MomoAPI"));
+builder.Services.AddScoped<IMomoService, MomoService>();
+

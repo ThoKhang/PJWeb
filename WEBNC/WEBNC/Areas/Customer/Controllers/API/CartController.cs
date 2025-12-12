@@ -63,11 +63,37 @@ namespace WEBNC.Areas.Customer.Controllers.API
             {
                 return Unauthorized(new { message = "Bạn chưa đăng nhập" });
             }
-
             var chiTietGioHang = _unitOfWork.chiTietGioHang
-                .GetAll(u => u.idNguoiDung == claim.Value, includeProperties: "SanPham");
+                .GetAll(u => u.idNguoiDung == claim.Value, includeProperties: "SanPham,SanPham.LoaiSanPham");
 
             return Ok(new { data = chiTietGioHang });
         }
+        [HttpGet]
+        [Route("/api/cart/count")]
+        public IActionResult GetCartCount()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+                return Ok(new { count = 0 });
+
+            int count = _unitOfWork.chiTietGioHang.GetAll(u => u.idNguoiDung == userId).Count();
+
+            return Ok(new { count });
+        }
+        [HttpDelete]
+        [Route("/api/cart/{id}")]
+        public IActionResult DeleteCart(string id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized(new { success = false, message = "Bạn chưa đăng nhập" });
+            var cartItem = _unitOfWork.chiTietGioHang.GetFirstOrDefault(x => x.idNguoiDung == userId && x.idSanPham == id);
+            if (cartItem == null)
+                return NotFound(new { success = false, message = "Không tìm thấy sản phẩm trong giỏ hàng" });
+            _unitOfWork.chiTietGioHang.Remove(cartItem);
+            _unitOfWork.save();
+            return Ok(new { success = true, message = "Đã xóa sản phẩm khỏi giỏ hàng" });
+        }
+
     }
 }

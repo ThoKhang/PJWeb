@@ -99,10 +99,10 @@
                             <a id="cart-link" class="nav-link text-dark fs-4 hover-text-primary position-relative"
                                href="/Customer/Cart/Index">
                                 <i class="fas fa-shopping-cart"></i>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                                      style="font-size: 0.65rem;">
-                                    3
-                                    <span class="visually-hidden">sản phẩm</span>
+                                <span id="cart-count-badge"
+                                      class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                      style="font-size: 0.65rem; display:none;">
+                                    0
                                 </span>
                             </a>
                         </li>
@@ -211,6 +211,24 @@
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("/api/cart/count", { credentials: "include" })
+                .then(res => res.json())
+                .then(json => {
+                    const badge = document.getElementById("cart-count-badge");
+                    if (!badge) return;
+                    const count = json.count || 0;
+                    if (count > 0) {
+                        badge.style.display = "inline-block";
+                        badge.textContent = count;
+                    } else {
+                        badge.style.display = "none";
+                    }
+                });
+        });
+    </script>
+
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

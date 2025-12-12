@@ -81,7 +81,6 @@ namespace WEBNC.Areas.Customer.Controllers.API
                 // Thêm mới
                 _unitOfWork.chiTietGioHang.Add(gioHang);
                 _unitOfWork.save();
-
                 return Ok(new
                 {
                     message = "Đã thêm sản phẩm vào giỏ hàng",

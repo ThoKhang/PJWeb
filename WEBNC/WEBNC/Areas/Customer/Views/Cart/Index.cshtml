@@ -1,15 +1,24 @@
-﻿@{
+@{
     Layout = "_Layout";
 }
 
 <!-- Single Page Header start -->
-<div class="container-fluid page-header py-5">
-    <h1 class="text-center text-white display-6">Giỏ hàng</h1>
-    <ol class="breadcrumb justify-content-center mb-0">
-        <li class="breadcrumb-item"><a href="/Customer/Home">Home</a></li>
-        <li class="breadcrumb-item active text-white">Cart</li>
-    </ol>
+<div class="container-fluid luxury-page-header">
+    <div class="container text-center py-5">
+        <h1 class="display-3 text-gold fw-bold text-shadow mb-3">GIỎ HÀNG</h1>
+
+        <ol class="breadcrumb justify-content-center mb-0 p-2 rounded-3">
+            <li class="breadcrumb-item">
+                <a href="/Customer/Home" class="text-white-50 text-decoration-none fw-semibold">Home</a>
+            </li>
+            <li class="breadcrumb-item active fw-semibold" aria-current="page">
+                Cart
+            </li>
+        </ol>
+    </div>
 </div>
+
+
 <!-- Single Page Header End -->
 <!-- Cart Page Start -->
 <div class="container-fluid py-5">
@@ -60,11 +69,16 @@
                         <h5 class="mb-0 ps-4 me-4">Total</h5>
                         <p class="mb-0 pe-4 total-value">0 ₫</p>
                     </div>
+                    <form method="post" asp-area="Customer" asp-action="CreatePaymentMomo" asp-controller="Payment">
+                        <input type="hidden" name="Amount" value="0" />
+                        <input type="hidden" name="OrderId" value="@Guid.NewGuid().ToString()" />
+                        <input type="hidden" name="OrderInfo" value="Thanh Toán Momo tại cửa hàng" />
+                        <input type="hidden" name="FullName" value="@(User.Identity?.Name ?? "Khách hàng")" />
+                        <button class="btn btn-primary rounded-pill px-4 py-3 text-uppercase mb-4 ms-4" type="submit">
+                            Proceed Checkout
+                        </button>
+                    </form>
 
-                    <button class="btn btn-primary rounded-pill px-4 py-3 text-uppercase mb-4 ms-4"
-                            type="button">
-                        Proceed Checkout
-                    </button>
                 </div>
             </div>
         </div>

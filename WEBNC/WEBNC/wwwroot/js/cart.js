@@ -1,4 +1,9 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("cancel") === "1") {
+        const reason = params.get("msg") || "Giao dịch đã hủy";
+        alert(reason);
+    }
 
     fetch("/api/cart", { credentials: "include" })
         .then(res => {
@@ -75,6 +80,16 @@
             document.querySelector(".subtotal-value").textContent = subtotal.toLocaleString() + " ₫";
             document.querySelector(".shipping-value").textContent = shipping.toLocaleString() + " ₫";
             document.querySelector(".total-value").textContent = totalAll.toLocaleString() + " ₫";
+
+            const amountInput = document.querySelector('input[name="Amount"]');
+            if (amountInput) {
+                amountInput.value = totalAll;
+            }
+
+            const submitBtn = document.querySelector('form[action*="CreatePaymentMomo"] button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.disabled = totalAll <= 0;
+            }
         });
 
 });

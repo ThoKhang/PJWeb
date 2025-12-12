@@ -63,9 +63,8 @@ namespace WEBNC.Areas.Customer.Controllers.API
             {
                 return Unauthorized(new { message = "Bạn chưa đăng nhập" });
             }
-
             var chiTietGioHang = _unitOfWork.chiTietGioHang
-                .GetAll(u => u.idNguoiDung == claim.Value, includeProperties: "SanPham");
+                .GetAll(u => u.idNguoiDung == claim.Value, includeProperties: "SanPham,SanPham.LoaiSanPham");
 
             return Ok(new { data = chiTietGioHang });
         }

@@ -20,11 +20,22 @@ namespace WEBNC.Areas.Customer.Controllers.API
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAll(string? loai = "")
         {
-            IEnumerable<SanPham> sanPhamList = _unitOfWork.SanPham.GetAll(includeProperties: "LoaiSanPham");
-            return Ok(new { data = sanPhamList });
+            if (string.IsNullOrEmpty(loai))
+            {
+                var all = _unitOfWork.SanPham.GetAll(includeProperties: "LoaiSanPham");
+                return Ok(new { data = all });
+            }
+
+            var filtered = _unitOfWork.SanPham.GetAll(
+                u => u.LoaiSanPham.tenLoaiSanPham == loai,
+                includeProperties: "LoaiSanPham"
+            );
+
+            return Ok(new { data = filtered });
         }
+
         [HttpGet("{id}")]
         public IActionResult SanPhamById(string? id)
         {

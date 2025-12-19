@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace WEBNC.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251219081232_addThongBaoToDb")]
+    partial class addThongBaoToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1796,44 +1799,6 @@ namespace WEBNC.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("WEBNC.Models.YeuCauDoiTra", b =>
-                {
-                    b.Property<int>("idYeuCau")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idYeuCau"));
-
-                    b.Property<string>("idDonDat")
-                        .IsRequired()
-                        .HasColumnType("char(5)");
-
-                    b.Property<string>("lyDo")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<DateTime>("ngayTao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("trangThai")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("userId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("idYeuCau");
-
-                    b.HasIndex("idDonDat");
-
-                    b.HasIndex("userId");
-
-                    b.ToTable("YeuCauDoiTra");
-                });
-
             modelBuilder.Entity("ChiTietDonHang", b =>
                 {
                     b.HasOne("WEBNC.Models.DonDatHang", "DonDatHang")
@@ -2032,25 +1997,6 @@ namespace WEBNC.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("tinh");
-                });
-
-            modelBuilder.Entity("WEBNC.Models.YeuCauDoiTra", b =>
-                {
-                    b.HasOne("WEBNC.Models.DonDatHang", "DonDatHang")
-                        .WithMany()
-                        .HasForeignKey("idDonDat")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WEBNC.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DonDatHang");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WEBNC.Models.CongTy", b =>

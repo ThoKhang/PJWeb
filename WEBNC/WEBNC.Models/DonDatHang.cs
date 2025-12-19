@@ -40,6 +40,7 @@ namespace WEBNC.Models
         public DateTime? ngayDat { get; set; }
         public DateTime? ngayThanhToan { get; set; }
         public DateTime? ngayGiaoDuKien { get; set; }
+        public bool daThanhToan { get; set; } = false;
 
         public ICollection<ChiTietDonHang> ChiTietDonHang { get; set; }
     }

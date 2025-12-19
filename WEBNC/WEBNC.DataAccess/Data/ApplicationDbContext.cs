@@ -21,6 +21,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Tinh> Tinh { get; set; }
     public DbSet<ChatSession> ChatSessions { get; set; }
     public DbSet<ChatMessage> ChatMessages { get; set; }
+    public DbSet<ThanhToan> ThanhToan { get; set; }
+    public DbSet<DanhGiaSanPham> DanhGiaSanPham { get; set; }
+    public DbSet<ThongBao> ThongBao { get; set; }
+    public DbSet<YeuCauDoiTra> YeuCauDoiTra { get; set; }
 
 
     //protected override void OnModelCreating(ModelBuilder modelBuilder)

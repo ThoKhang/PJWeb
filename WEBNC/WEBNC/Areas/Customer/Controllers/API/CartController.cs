@@ -94,6 +94,33 @@ namespace WEBNC.Areas.Customer.Controllers.API
             _unitOfWork.save();
             return Ok(new { success = true, message = "Đã xóa sản phẩm khỏi giỏ hàng" });
         }
-
+        [HttpPut]
+        [Route("plus")]
+        public IActionResult plus(String idSanPham)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var cart = _unitOfWork.chiTietGioHang.GetFirstOrDefault( i =>i.idNguoiDung==userId && i.idSanPham == idSanPham);
+            if (cart == null)
+                return NotFound();
+            _unitOfWork.chiTietGioHang.IncrementCount(cart, 1);
+            _unitOfWork.chiTietGioHang.Update(cart);
+            _unitOfWork.save();
+            return Ok( new { soLuong = cart.soLuongTrongGio });
+        }
+        [HttpPut]
+        [Route("minus")]
+        public IActionResult minus(String idSanPham)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var cart = _unitOfWork.chiTietGioHang.GetFirstOrDefault(i => i.idNguoiDung == userId && i.idSanPham == idSanPham);
+            if (cart.soLuongTrongGio <= 1)
+                return BadRequest();
+            if (cart == null)
+                return NotFound();
+            _unitOfWork.chiTietGioHang.DecrementCount(cart, 1);
+            _unitOfWork.chiTietGioHang.Update(cart);
+            _unitOfWork.save();
+            return Ok(new {soLuong=cart.soLuongTrongGio});
+        }
     }
 }

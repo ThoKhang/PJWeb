@@ -22,7 +22,12 @@ if (id) {
 
         const data = sanpham.data;
         renderDetails(data);
+        //initQuantity();
+        renderDetails(data);
         initQuantity();
+
+        console.log("INIT quantity:", document.querySelector(".qty"));
+
 
         const btnAddToCart = document.querySelector('.btn-cart');
         if (btnAddToCart) {

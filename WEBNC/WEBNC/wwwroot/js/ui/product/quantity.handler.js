@@ -1,26 +1,32 @@
-﻿export function initQuantity() {
+﻿let minusBtn;
+let plusBtn;
+let quantityInput;
 
-    const minusBtn = document.querySelector('.minus');
-    const plusBtn = document.querySelector('.plus');
-    const quantityInput = document.querySelector('.qty');
+export function initQuantity() {
+    minusBtn = document.querySelector(".minus");
+    plusBtn = document.querySelector(".plus");
+    quantityInput = document.querySelector(".qty");
 
-    if (minusBtn && plusBtn && quantityInput) {
-
-        minusBtn.addEventListener("click", () => {
-            let val = Number(quantityInput.value);
-            if (val > 1) quantityInput.value = val - 1;
-        });
-
-        plusBtn.addEventListener("click", () => {
-            let val = Number(quantityInput.value);
-            quantityInput.value = val + 1;
-        });
-
-    } else {
-        console.warn("Không tìm thấy .minus .plus hoặc .qty");
+    if (!minusBtn || !plusBtn || !quantityInput) {
+        console.warn("Không tìm thấy nút quantity");
+        return;
     }
+
+    quantityInput.value = Number(quantityInput.value) || 1;
+
+    minusBtn.onclick = () => {
+        let val = Number(quantityInput.value) || 1;
+        if (val > 1) {
+            quantityInput.value = val - 1;
+        }
+    };
+
+    plusBtn.onclick = () => {
+        let val = Number(quantityInput.value) || 1;
+        quantityInput.value = val + 1; 
+    };
 }
 
 export function getQuantity() {
-    return Number(document.querySelector('.qty')?.value || 1);
+    return Number(quantityInput?.value || 1);
 }

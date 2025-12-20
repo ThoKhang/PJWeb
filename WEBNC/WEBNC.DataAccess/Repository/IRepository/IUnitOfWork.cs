@@ -10,6 +10,7 @@ namespace WEBNC.DataAccess.Repository.IRepository
         IChatSessionRepository ChatSession { get; }
         IChatMessageRepository ChatMessage { get; }
         IThanhToanRepository ThanhToan { get; }
+        IXaPhuongRepository XaPhuong { get; }
         void save();
     }
 }

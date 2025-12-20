@@ -12,22 +12,32 @@ namespace WEBNC.Models
     {
         [Key]
         public int idDanhGia { get; set; }
+
         [Required]
         public string idSanPham { get; set; }
+
         [ForeignKey("idSanPham")]
         public SanPham SanPham { get; set; }
+
         [Required]
-        public string userId { get; set; }
+        public string? userId { get; set; }
+
         [ForeignKey("userId")]
         public ApplicationUser User { get; set; }
+
         [Column(TypeName = "char(5)")]
-        public string idDonDat { get; set; }
+        public string ?idDonDat { get; set; }
+
         [ForeignKey("idDonDat")]
-        public DonDatHang DonDatHang { get; set; }
+        public DonDatHang? DonDatHang { get; set; }
+
         [Range(1, 5)]
         public int soSao { get; set; }
+
         [StringLength(500)]
         public string noiDung { get; set; }
         public DateTime ngayDanhGia { get; set; } = DateTime.Now;
+        public ICollection<HinhAnhDanhGia>? HinhAnhDanhGias { get; set; }
     }
+
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,7 +13,6 @@ namespace WEBNC.Models
         [Key]
         public int idThanhToan { get; set; }
 
-        [Column(TypeName = "char(5)")]
         public string idDonDat { get; set; }
 
         [ForeignKey("idDonDat")]

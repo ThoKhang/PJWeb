@@ -13,6 +13,7 @@ namespace WEBNC.Models.Momo
         public string PayType { get; set; }
         public string ResponseTime { get; set; }
         public string Signature { get; set; }
+        public string ExtraData { get; set; }
 
     }
 }

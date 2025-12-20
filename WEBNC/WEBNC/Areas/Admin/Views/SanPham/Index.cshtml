@@ -1,20 +1,66 @@
-﻿@model IEnumerable<WEBNC.Models.SanPham>
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Tên Sản Phẩm</th>
-            <th>Loại Sản Phẩm</th>
-            <th>Mã công ty</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td></td>
-                <td>@item.tenSanPham</td>
-                <td>@item.idLoaiSanPham</td>
-                <td>@item.idCongTy</td>
-            </tr>
-        }
-</table>
+﻿@model List<WEBNC.Models.SanPham>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Quản lý sản phẩm";
+    var q = ViewBag.Q as string;
+}
+
+<div class="card p-4">
+    <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center mb-3">
+        <div>
+            <div class="fw-bold fs-4">Quản lý sản phẩm</div>
+            <div class="text-muted">Thêm / sửa / xóa sản phẩm</div>
+        </div>
+
+        <div class="d-flex flex-wrap gap-2">
+            <form method="get" class="d-flex gap-2">
+                <input name="q" value="@q" class="form-control rounded-4" placeholder="Tìm mã / tên sản phẩm..." />
+                <button class="btn btn-outline-secondary rounded-4">Tìm</button>
+            </form>
+
+            <a class="btn btn-brand text-white rounded-4"
+               asp-area="Admin" asp-controller="SanPham" asp-action="Create">
+                + Thêm mới
+            </a>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr class="text-muted">
+                    <th>Mã</th>
+                    <th>Tên</th>
+                    <th>Công ty</th>
+                    <th>Loại</th>
+                    <th class="text-end">Giá</th>
+                    <th class="text-center">SL</th>
+                    <th class="text-end">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var sp in Model)
+                {
+                    <tr>
+                        <td><span class="badge badge-soft rounded-pill">@sp.idSanPham</span></td>
+                        <td class="fw-semibold">@sp.tenSanPham</td>
+                        <td>@sp.congTy?.tenCongTy</td>
+                        <td>@sp.LoaiSanPham?.tenLoaiSanPham</td>
+                        <td class="text-end">@string.Format("{0:N0}", sp.gia)</td>
+                        <td class="text-center">@sp.soLuongHienCon</td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-primary rounded-4"
+                               asp-area="Admin" asp-controller="SanPham" asp-action="Edit" asp-route-id="@sp.idSanPham">
+                                Sửa
+                            </a>
+                            <a class="btn btn-sm btn-outline-danger rounded-4"
+                               asp-area="Admin" asp-controller="SanPham" asp-action="Delete" asp-route-id="@sp.idSanPham">
+                                Xóa
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,5 +1,29 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model WEBNC.Models.SanPham
 @{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Xóa sản phẩm";
 }
+
+<div class="card p-4">
+    <div class="fw-bold fs-4 text-danger">Xác nhận xóa</div>
+    <div class="text-muted mb-3">Bạn có chắc muốn xóa sản phẩm này không?</div>
+
+    <div class="border rounded-4 p-3 bg-light">
+        <div><b>Mã:</b> @Model.idSanPham</div>
+        <div><b>Tên:</b> @Model.tenSanPham</div>
+        <div><b>Giá:</b> @string.Format("{0:N0}", Model.gia)</div>
+        <div><b>Công ty:</b> @Model.congTy?.tenCongTy</div>
+        <div><b>Loại:</b> @Model.LoaiSanPham?.tenLoaiSanPham</div>
+    </div>
+
+    <form method="post"
+          asp-area="Admin" asp-controller="SanPham" asp-action="Delete" asp-route-id="@Model.idSanPham"
+          class="mt-4">
+        @Html.AntiForgeryToken()
+        <div class="d-flex gap-2">
+            <button class="btn btn-danger rounded-4 px-4">Xóa</button>
+            <a class="btn btn-light rounded-4 px-4"
+               asp-area="Admin" asp-controller="SanPham" asp-action="Index">Hủy</a>
+        </div>
+    </form>
+</div>

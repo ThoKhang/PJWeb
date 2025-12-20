@@ -1,20 +1,41 @@
 ﻿@{
-    string current = (ViewContext.RouteData.Values["controller"]?.ToString() ?? "");
+    string currentArea = ViewContext.RouteData.Values["area"]?.ToString() ?? "";
+    string currentController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    string currentAction = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
 }
+
 <div class="sidebar p-4">
-    <div class="d-flex align-items-center gap-2 mb-3">
-        <div class="rounded-circle bg-white text-primary fw-bold d-flex align-items-center justify-content-center"
-             style="width:42px;height:42px;">
-            A
-        </div>
-        <div>
-            <div class="fw-bold">Admin Panel</div>
-            <div style="opacity:.9;font-size:.9rem;">Quản trị hệ thống</div>
-        </div>
+    <div class="fw-bold fs-5 mb-3">ADMIN</div>
+
+    <div class="small text-white-50 mb-3">
+        @currentArea / @currentController / @currentAction
     </div>
-    <hr class="border border-white border-opacity-25">
-    <a class="@(current=="SanPham"?"active":"")"
-       asp-area="Admin" asp-controller="SanPham" asp-action="Index">
-        📦 Quản lý sản phẩm
+
+    <a class="@(currentController == "Home" ? "active" : "")"
+       asp-area="Admin" asp-controller="Home" asp-action="Index">
+        🏠 Dashboard
     </a>
+
+    <a class="@(currentController == "SanPham" ? "active" : "")"
+       asp-area="Admin" asp-controller="SanPham" asp-action="Index">
+        📦 Sản phẩm
+    </a>
+
+    @* Bạn làm tiếp CRUD các mục này thì chỉ cần mở comment *@
+    @*
+    <a class="@(currentController == "LoaiSanPham" ? "active" : "")"
+       asp-area="Admin" asp-controller="LoaiSanPham" asp-action="Index">
+        🧩 Loại sản phẩm
+    </a>
+
+    <a class="@(currentController == "CongTy" ? "active" : "")"
+       asp-area="Admin" asp-controller="CongTy" asp-action="Index">
+        🏢 Công ty
+    </a>
+
+    <a class="@(currentController == "DonDatHang" ? "active" : "")"
+       asp-area="Admin" asp-controller="DonDatHang" asp-action="Index">
+        🧾 Đơn đặt hàng
+    </a>
+    *@
 </div>

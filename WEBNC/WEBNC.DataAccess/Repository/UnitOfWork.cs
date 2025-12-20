@@ -18,6 +18,7 @@ namespace WEBNC.DataAccess.Repository
             ChatMessage = new ChatMessageRepository(_db);
             DanhGia = new DanhGiaRepository(_db);
             HinhAnhDanhGia = new HinhAnhDanhGiaRepository(_db);
+            XaPhuong = new XaPhuongRepository(_db);
         }
         public ISanPhamRepository SanPham { get; private set; }
         public IDonDatHangRepository DonDatHang { get; private set; }
@@ -34,6 +35,7 @@ namespace WEBNC.DataAccess.Repository
 
         public IHinhAnhDanhGiaRepository HinhAnhDanhGia {get; private set; }
 
+        public IXaPhuongRepository XaPhuong { get; private set; }
         public void save()
         {
             _db.SaveChanges();

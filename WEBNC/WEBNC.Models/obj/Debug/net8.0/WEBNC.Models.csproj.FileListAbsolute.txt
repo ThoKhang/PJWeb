@@ -63,3 +63,16 @@ F:\2025-2026\2026\C#\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.dll
 F:\2025-2026\2026\C#\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\refint\WEBNC.Models.dll
 F:\2025-2026\2026\C#\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.pdb
 F:\2025-2026\2026\C#\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\ref\WEBNC.Models.dll
+C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\bin\Debug\net8.0\WEBNC.Models.deps.json
+C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\bin\Debug\net8.0\WEBNC.Models.dll
+C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\bin\Debug\net8.0\WEBNC.Models.pdb
+C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.csproj.AssemblyReference.cache
+C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.AssemblyInfoInputs.cache
+C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.AssemblyInfo.cs
+C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.csproj.CoreCompileInputs.cache
+C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.sourcelink.json
+C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.dll
+C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\refint\WEBNC.Models.dll
+C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.pdb
+C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\ref\WEBNC.Models.dll

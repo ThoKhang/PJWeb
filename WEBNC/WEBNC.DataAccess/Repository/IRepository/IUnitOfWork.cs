@@ -9,7 +9,12 @@
         ILoaiSanPhamRepository LoaiSanPham { get; }
         IChatSessionRepository ChatSession { get; }
         IChatMessageRepository ChatMessage { get; }
+<<<<<<< HEAD
         IXaPhuongRepository XaPhuong { get; }
+=======
+        IDanhGiaRepository DanhGia { get; }
+        IHinhAnhDanhGiaRepository HinhAnhDanhGia { get; }
+>>>>>>> develop
         void save();
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace WEBNC.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251220042824_addHinhAnhToDb")]
+    partial class addHinhAnhToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -447,17 +450,17 @@ namespace WEBNC.DataAccess.Migrations
                             Id = "USER1",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "B3D2E5C5-A1E4-4D71-8B2E-C5D4B3A2C1D2",
-                            Email = "minhhuy91@gmail.com",
+                            Email = "Huy91@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            NormalizedEmail = "MINHHUY91@GMAIL.COM",
-                            NormalizedUserName = "MINHHUY91@GMAIL.COM",
+                            NormalizedEmail = "Huy91@gmail.com",
+                            NormalizedUserName = "Huy91@gmail.com",
                             PasswordHash = "AQAAAAIAAYagAAAAECostYXDzWMxjeRK8BZV9Y2l5j9jgqJ8h65CSvX0UQnI657xBoFczZpIOGj8p8Fm1Q==",
                             PhoneNumber = "0987654321",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "A2C1D2A4-F2D5-4E80-9A1F-A6B3A9B2F2A1",
                             TwoFactorEnabled = false,
-                            UserName = "minhhuy91@gmail.com",
+                            UserName = "Huy91@gmail.com",
                             hoTen = "Phạm Minh Huy",
                             idPhuongXa = "XP001",
                             soNha = "24 Bắc Đẩu"
@@ -711,53 +714,6 @@ namespace WEBNC.DataAccess.Migrations
                     b.HasIndex("userId");
 
                     b.ToTable("DanhGiaSanPham");
-
-                    b.HasData(
-                        new
-                        {
-                            idDanhGia = 1,
-                            idSanPham = "SP01",
-                            ngayDanhGia = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            noiDung = "Sản phẩm rất tốt, đúng mô tả.",
-                            soSao = 5,
-                            userId = "USER1"
-                        },
-                        new
-                        {
-                            idDanhGia = 2,
-                            idSanPham = "SP02",
-                            ngayDanhGia = new DateTime(2025, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            noiDung = "Chất lượng ổn, giao hàng nhanh.",
-                            soSao = 4,
-                            userId = "USER1"
-                        },
-                        new
-                        {
-                            idDanhGia = 3,
-                            idSanPham = "SP03",
-                            ngayDanhGia = new DateTime(2025, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            noiDung = "Rất hài lòng, sẽ ủng hộ tiếp.",
-                            soSao = 5,
-                            userId = "USER1"
-                        },
-                        new
-                        {
-                            idDanhGia = 4,
-                            idSanPham = "SP04",
-                            ngayDanhGia = new DateTime(2025, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            noiDung = "Sản phẩm tạm ổn trong tầm giá.",
-                            soSao = 3,
-                            userId = "USER1"
-                        },
-                        new
-                        {
-                            idDanhGia = 5,
-                            idSanPham = "SP05",
-                            ngayDanhGia = new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            noiDung = "Dùng ổn, đóng gói cẩn thận.",
-                            soSao = 4,
-                            userId = "USER1"
-                        });
                 });
 
             modelBuilder.Entity("WEBNC.Models.DonDatHang", b =>

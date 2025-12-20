@@ -38,6 +38,9 @@
     <div id="noDataMessage" class="alert alert-info mt-4 text-center" style="display:none;">
         <i class="fas fa-shopping-cart"></i> Bạn chưa có đơn hàng nào. <a href="/" class="alert-link">Mua sắm ngay!</a>
     </div>
+    <div class="binhLuan">
+        
+    </div>
 </div>
 
 @section Scripts {
@@ -113,6 +116,9 @@
                             <i class="fas fa-times"></i> Hủy
                         </button>
                     `;
+                }
+                if(statusText==='Đã giao'){
+                    document.querySelector('.binhLuan').innerHTML=`<a class="btn btn-primary" href="/Customer/DanhGia/Index">Bình luận ngay</a>`;
                 }
 
                 // Render dòng

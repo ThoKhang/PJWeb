@@ -468,7 +468,7 @@ namespace WEBNC.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "hoTen", "idPhuongXa", "soNha" },
-                values: new object[] { "USER1", 0, "B3D2E5C5-A1E4-4D71-8B2E-C5D4B3A2C1D2", "phamminhhuy0901tk@gmail.com", true, false, null, "PHAMMINHHUY0901TK@GMAIL.COM", "PHAMMINHHUY0901TK@GMAIL.COM", "AQAAAAIAAYagAAAAECostYXDzWMxjeRK8BZV9Y2l5j9jgqJ8h65CSvX0UQnI657xBoFczZpIOGj8p8Fm1Q==", "0987654321", false, "A2C1D2A4-F2D5-4E80-9A1F-A6B3A9B2F2A1", false, "phamminhhuy0901tk@gmail.com", "Phạm Minh Huy", "XP001", "24 Bắc Đẩu" });
+                values: new object[] { "USER1", 0, "B3D2E5C5-A1E4-4D71-8B2E-C5D4B3A2C1D2", "minhhuy091@gmail.com", true, false, null, "MINHHUY91@GMAIL.COM", "MINHHUY91@GMAIL.COM", "AQAAAAIAAYagAAAAECostYXDzWMxjeRK8BZV9Y2l5j9jgqJ8h65CSvX0UQnI657xBoFczZpIOGj8p8Fm1Q==", "0987654321", false, "A2C1D2A4-F2D5-4E80-9A1F-A6B3A9B2F2A1", false, "minhhuy91@gmail.com", "Phạm Minh Huy", "XP001", "24 Bắc Đẩu" });
 
             migrationBuilder.InsertData(
                 table: "ChiTietDonHang",

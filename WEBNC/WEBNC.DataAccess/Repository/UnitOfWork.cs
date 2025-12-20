@@ -1,4 +1,4 @@
-﻿using WEBNC.DataAccess.Repository.IRepository;
+﻿﻿using WEBNC.DataAccess.Repository.IRepository;
 using WEBNC.Models;
 
 namespace WEBNC.DataAccess.Repository
@@ -20,6 +20,12 @@ namespace WEBNC.DataAccess.Repository
 
             DanhGia = new DanhGiaRepository(_db);
             HinhAnhDanhGia = new HinhAnhDanhGiaRepository(_db);
+            ThanhToan = new ThanhToanRepository(_db);
+            XaPhuong = new XaPhuongRepository(_db);
+
+
+            DanhGia = new DanhGiaRepository(_db);
+            HinhAnhDanhGia = new HinhAnhDanhGiaRepository(_db);
         }
         public ISanPhamRepository SanPham { get; private set; }
         public IDonDatHangRepository DonDatHang { get; private set; }
@@ -31,12 +37,12 @@ namespace WEBNC.DataAccess.Repository
 
         public IChatSessionRepository ChatSession { get; private set; }
         public IChatMessageRepository ChatMessage { get; private set; }
+        public IThanhToanRepository ThanhToan { get; private set; }
         public IXaPhuongRepository XaPhuong { get; private set; }
 
         public IDanhGiaRepository DanhGia { get; private set; }
 
         public IHinhAnhDanhGiaRepository HinhAnhDanhGia {get; private set; }
-
         public void save()
         {
             _db.SaveChanges();

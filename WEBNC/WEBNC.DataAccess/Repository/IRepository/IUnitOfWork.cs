@@ -1,4 +1,4 @@
-﻿namespace WEBNC.DataAccess.Repository.IRepository
+namespace WEBNC.DataAccess.Repository.IRepository
 {
     public interface IUnitOfWork
     {
@@ -9,6 +9,7 @@
         ILoaiSanPhamRepository LoaiSanPham { get; }
         IChatSessionRepository ChatSession { get; }
         IChatMessageRepository ChatMessage { get; }
+        IThanhToanRepository ThanhToan { get; }
         void save();
     }
 }

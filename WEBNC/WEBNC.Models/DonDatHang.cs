@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,7 +12,6 @@ namespace WEBNC.Models
     public class DonDatHang
     {
         [Key]
-        [Column(TypeName = "char(5)")]
         public string idDonDat { get; set; }
 
         [Required]

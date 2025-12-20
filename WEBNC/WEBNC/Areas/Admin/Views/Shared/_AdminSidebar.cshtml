@@ -1,41 +1,36 @@
 ﻿@{
-    string currentArea = ViewContext.RouteData.Values["area"]?.ToString() ?? "";
-    string currentController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
-    string currentAction = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
+    var controller = (ViewContext.RouteData.Values["controller"]?.ToString() ?? "");
+    string Active(string c) => string.Equals(controller, c, StringComparison.OrdinalIgnoreCase) ? "active" : "";
 }
 
-<div class="sidebar p-4">
-    <div class="fw-bold fs-5 mb-3">ADMIN</div>
-
-    <div class="small text-white-50 mb-3">
-        @currentArea / @currentController / @currentAction
+<div class="sb-head">
+    <div class="sb-brand">
+        <div class="sb-logo">A</div>
+        <div class="sb-title">
+            <b>ADMIN PANEL</b>
+            <span>Quản trị hệ thống</span>
+        </div>
     </div>
 
-    <a class="@(currentController == "Home" ? "active" : "")"
-       asp-area="Admin" asp-controller="Home" asp-action="Index">
-        🏠 Dashboard
+    <button id="btnSidebarClose" class="sb-close" type="button" title="Đóng menu">✕</button>
+</div>
+
+<div class="sb-menu">
+    <a class="sb-link @Active("Dashboard")"
+       asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+        <div class="sb-ico">🏠</div>
+        <div class="sb-meta">
+            <b>Dashboard</b>
+            <span>Tổng quan hệ thống</span>
+        </div>
     </a>
 
-    <a class="@(currentController == "SanPham" ? "active" : "")"
+    <a class="sb-link @Active("SanPham")"
        asp-area="Admin" asp-controller="SanPham" asp-action="Index">
-        📦 Sản phẩm
+        <div class="sb-ico">📦</div>
+        <div class="sb-meta">
+            <b>Sản phẩm</b>
+            <span>Thêm / sửa / xóa</span>
+        </div>
     </a>
-
-    @* Bạn làm tiếp CRUD các mục này thì chỉ cần mở comment *@
-    @*
-    <a class="@(currentController == "LoaiSanPham" ? "active" : "")"
-       asp-area="Admin" asp-controller="LoaiSanPham" asp-action="Index">
-        🧩 Loại sản phẩm
-    </a>
-
-    <a class="@(currentController == "CongTy" ? "active" : "")"
-       asp-area="Admin" asp-controller="CongTy" asp-action="Index">
-        🏢 Công ty
-    </a>
-
-    <a class="@(currentController == "DonDatHang" ? "active" : "")"
-       asp-area="Admin" asp-controller="DonDatHang" asp-action="Index">
-        🧾 Đơn đặt hàng
-    </a>
-    *@
 </div>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WEBNC.DataAccess.Data;
 using WEBNC.Models;
 
 namespace WEBNC.Areas.Admin.Controllers.MVC
@@ -8,33 +9,42 @@ namespace WEBNC.Areas.Admin.Controllers.MVC
     [Area("Admin")]
     public class SanPhamController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _db;
 
-        public SanPhamController(ApplicationDbContext context)
+        public SanPhamController(ApplicationDbContext db)
         {
-            _context = context;
+            _db = db;
         }
 
         public async Task<IActionResult> Index(string? q)
         {
-            var query = _context.SanPham
+            q = q?.Trim();
+            ViewBag.Q = q;
+
+            var query = _db.SanPham
                 .Include(x => x.congTy)
                 .Include(x => x.LoaiSanPham)
+                .AsNoTracking()
                 .AsQueryable();
 
-            if (!string.IsNullOrWhiteSpace(q))
+            if (!string.IsNullOrEmpty(q))
             {
-                q = q.Trim();
-                query = query.Where(x => x.idSanPham.Contains(q) || x.tenSanPham.Contains(q));
+                query = query.Where(x =>
+                    x.idSanPham.Contains(q) ||
+                    x.tenSanPham.Contains(q) ||
+                    (x.congTy != null && x.congTy.tenCongTy.Contains(q)) ||
+                    (x.LoaiSanPham != null && x.LoaiSanPham.tenLoaiSanPham.Contains(q))
+                );
             }
 
-            ViewBag.Q = q;
-            return View(await query.OrderBy(x => x.idSanPham).ToListAsync());
+            var data = await query.OrderBy(x => x.idSanPham).ToListAsync();
+            return View(data);
         }
 
+        // ====== CREATE ======
         public async Task<IActionResult> Create()
         {
-            await LoadDropdowns();
+            await LoadDropDowns();
             return View(new SanPham());
         }
 
@@ -44,30 +54,32 @@ namespace WEBNC.Areas.Admin.Controllers.MVC
         {
             if (!ModelState.IsValid)
             {
-                await LoadDropdowns();
+                await LoadDropDowns();
                 return View(model);
             }
 
-            bool exists = await _context.SanPham.AnyAsync(x => x.idSanPham == model.idSanPham);
+            // tránh trùng id
+            bool exists = await _db.SanPham.AnyAsync(x => x.idSanPham == model.idSanPham);
             if (exists)
             {
-                ModelState.AddModelError("idSanPham", "Mã sản phẩm đã tồn tại.");
-                await LoadDropdowns(model.idCongTy, model.idLoaiSanPham);
+                ModelState.AddModelError("idSanPham", "Mã sản phẩm đã tồn tại!");
+                await LoadDropDowns();
                 return View(model);
             }
 
-            _context.SanPham.Add(model);
-            await _context.SaveChangesAsync();
+            _db.SanPham.Add(model);
+            await _db.SaveChangesAsync();
             TempData["ok"] = "Thêm sản phẩm thành công!";
             return RedirectToAction(nameof(Index));
         }
 
+        // ====== EDIT ======
         public async Task<IActionResult> Edit(string id)
         {
-            var sp = await _context.SanPham.FindAsync(id);
+            var sp = await _db.SanPham.FindAsync(id);
             if (sp == null) return NotFound();
 
-            await LoadDropdowns(sp.idCongTy, sp.idLoaiSanPham);
+            await LoadDropDowns();
             return View(sp);
         }
 
@@ -79,21 +91,24 @@ namespace WEBNC.Areas.Admin.Controllers.MVC
 
             if (!ModelState.IsValid)
             {
-                await LoadDropdowns(model.idCongTy, model.idLoaiSanPham);
+                await LoadDropDowns();
                 return View(model);
             }
 
-            _context.Update(model);
-            await _context.SaveChangesAsync();
+            _db.SanPham.Update(model);
+            await _db.SaveChangesAsync();
+
             TempData["ok"] = "Cập nhật sản phẩm thành công!";
             return RedirectToAction(nameof(Index));
         }
 
+        // ====== DELETE ======
         public async Task<IActionResult> Delete(string id)
         {
-            var sp = await _context.SanPham
+            var sp = await _db.SanPham
                 .Include(x => x.congTy)
                 .Include(x => x.LoaiSanPham)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.idSanPham == id);
 
             if (sp == null) return NotFound();
@@ -104,24 +119,25 @@ namespace WEBNC.Areas.Admin.Controllers.MVC
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var sp = await _context.SanPham.FindAsync(id);
+            var sp = await _db.SanPham.FindAsync(id);
             if (sp == null) return NotFound();
 
-            _context.SanPham.Remove(sp);
-            await _context.SaveChangesAsync();
+            _db.SanPham.Remove(sp);
+            await _db.SaveChangesAsync();
+
             TempData["ok"] = "Xóa sản phẩm thành công!";
             return RedirectToAction(nameof(Index));
         }
 
-        private async Task LoadDropdowns(string? selectedCongTy = null, string? selectedLoai = null)
+        private async Task LoadDropDowns()
         {
-            ViewBag.CongTy = new SelectList(
-                await _context.CongTy.OrderBy(x => x.tenCongTy).ToListAsync(),
-                "idCongTy", "tenCongTy", selectedCongTy);
+            ViewBag.CongTy = await _db.CongTy.AsNoTracking()
+                .Select(x => new SelectListItem { Value = x.idCongTy, Text = x.tenCongTy })
+                .ToListAsync();
 
-            ViewBag.LoaiSanPham = new SelectList(
-                await _context.LoaiSanPham.OrderBy(x => x.tenLoaiSanPham).ToListAsync(),
-                "idLoaiSanPham", "tenLoaiSanPham", selectedLoai);
+            ViewBag.Loai = await _db.LoaiSanPham.AsNoTracking()
+                .Select(x => new SelectListItem { Value = x.idLoaiSanPham, Text = x.tenLoaiSanPham })
+                .ToListAsync();
         }
     }
 }

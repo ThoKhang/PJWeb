@@ -1,0 +1,189 @@
+﻿@{
+    ViewData["Title"] = "Đánh giá sản phẩm";
+}
+
+<div class="container mt-4">
+
+    <h3 class="mb-3">⭐ Đánh giá sản phẩm</h3>
+
+    <div class="mb-3">
+        <strong>Điểm trung bình:</strong>
+        <span id="diemTrungBinh" class="text-warning fs-4 ms-2">
+            0 ★
+        </span>
+    </div>
+
+    <hr />
+
+    <div class="card mb-4">
+        <div class="card-header fw-bold">
+            Viết đánh giá của bạn
+        </div>
+
+        <div class="card-body">
+            <form id="formDanhGia" enctype="multipart/form-data">
+
+                <input type="hidden" id="idSanPham" value="@Context.Request.Query["idSanPham"]" />
+
+                <div class="mb-3">
+                    <label class="form-label">Số sao</label>
+                    <select id="soSao" class="form-select" required>
+                        <option value="">-- Chọn sao --</option>
+                        <option value="5">★★★★★ Rất hài lòng</option>
+                        <option value="4">★★★★ Tốt</option>
+                        <option value="3">★★★ Bình thường</option>
+                        <option value="2">★★ Chưa tốt</option>
+                        <option value="1">★ Kém</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Nội dung đánh giá</label>
+                    <textarea id="noiDung"
+                              class="form-control"
+                              rows="3"
+                              placeholder="Hãy chia sẻ cảm nhận của bạn..."></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Hình ảnh (có thể chọn nhiều)</label>
+                    <input type="file"
+                           id="hinhAnhs"
+                           class="form-control"
+                           multiple />
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Gửi đánh giá
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- DANH SÁCH ĐÁNH GIÁ -->
+    <h4 class="mb-3">💬 Nhận xét từ khách hàng</h4>
+
+    <div id="danhSachDanhGia">
+        <p class="text-muted">Đang tải đánh giá...</p>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        const idSanPham = document.getElementById("idSanPham").value;
+
+             // LOAD DANH GIÁ
+            async function loadDanhGia() {
+                const res = await fetch(`/api/DanhGia?idSanPham=${idSanPham}`);
+                const data = await res.json();
+
+                const container = document.getElementById("danhSachDanhGia");
+                container.innerHTML = "";
+
+                // data là OBJECT
+                const danhGiaList = data.danhGiaList || [];
+
+                if (danhGiaList.length === 0) {
+                    document.getElementById("diemTrungBinh").innerText = "0 ★";
+                    container.innerHTML = "<p class='text-muted'>Chưa có đánh giá nào.</p>";
+                    return;
+                }
+
+                // lấy sẵn từ API
+                document.getElementById("diemTrungBinh").innerText =
+                    data.diemTrungBinh + " ★";
+
+                danhGiaList.forEach(dg => {
+                    let html = `
+                        <div class="border rounded p-3 mb-3">
+                            <div class="d-flex justify-content-between">
+                                <strong>${dg.userName ?? "Ẩn danh"}</strong>
+                                <span class="text-warning">${dg.soSao} ★</span>
+                            </div>
+                            <p class="mt-2 mb-1">${dg.noiDung ?? ""}</p>
+                            <small class="text-muted">
+                                ${new Date(dg.ngayDanhGia).toLocaleString()}
+                            </small>
+                    `;
+
+                    // ảnh (array string)
+                    if (dg.hinhAnhs && dg.hinhAnhs.length > 0) {
+                        html += `<div class="mt-2">`;
+                        dg.hinhAnhs.forEach(imgUrl => {
+                            html += `
+                                <img src="${imgUrl}"
+                                     class="rounded me-2 mb-2"
+                                     style="width:80px;height:80px;object-fit:cover" />
+                            `;
+                        });
+                        html += `</div>`;
+                    }
+
+                    html += `</div>`;
+                    container.innerHTML += html;
+                });
+            }
+
+
+        // GỬI ĐÁNH GIÁ
+        document.getElementById("formDanhGia").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            let formData = new FormData();
+            formData.append("idSanPham", idSanPham);
+            formData.append("soSao", document.getElementById("soSao").value);
+            formData.append("noiDung", document.getElementById("noiDung").value);
+
+            const files = document.getElementById("hinhAnhs").files;
+            for (let i = 0; i < files.length; i++) {
+                formData.append("hinhAnhs", files[i]);
+            }
+
+            const res = await fetch("/api/DanhGia", {
+                method: "POST",
+                body: formData
+            });
+
+            if (res.ok) {
+                        const Toast = Swal.mixin({
+                          toast: true,
+                          position: "top-end",
+                          showConfirmButton: false,
+                          timer: 3000,
+                          timerProgressBar: true,
+                          didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                          }
+                        });
+                        Toast.fire({
+                          icon: "success",
+                          title: "Đánh giá thành công!"
+                        });
+                document.getElementById("formDanhGia").reset();
+                loadDanhGia();
+            } else {
+                Swal.fire({
+                  title: "Không thể bình luận!",
+                  showClass: {
+                    popup: `
+                      animate__animated
+                      animate__fadeInUp
+                      animate__faster
+                    `
+                  },
+                  hideClass: {
+                    popup: `
+                      animate__animated
+                      animate__fadeOutDown
+                      animate__faster
+                    `
+                  }
+                });
+            }
+        });
+
+        loadDanhGia();
+    </script>
+}

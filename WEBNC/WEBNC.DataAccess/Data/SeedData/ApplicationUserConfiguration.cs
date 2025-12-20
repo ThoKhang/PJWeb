@@ -12,8 +12,8 @@ namespace WEBNC.DataAccess.Data.SeedData
             const string USER_ID = "USER1";
 
             // Email
-            const string EMAIL = "phamminhhuy0901tk@gmail.com";
-            const string NORMALIZED_EMAIL = "PHAMMINHHUY0901TK@GMAIL.COM";
+            const string EMAIL = "minhhuy91@gmail.com";
+            const string NORMALIZED_EMAIL = "MINHHUY91@GMAIL.COM";
 
             // GUID chuẩn (KHÔNG được bỏ dấu '-')
             const string STATIC_SECURITY_STAMP = "A2C1D2A4-F2D5-4E80-9A1F-A6B3A9B2F2A1";

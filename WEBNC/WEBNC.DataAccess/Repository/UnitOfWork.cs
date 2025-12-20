@@ -16,7 +16,8 @@ namespace WEBNC.DataAccess.Repository
             LoaiSanPham = new LoaiSanPhamRepository(_db);
             ChatSession = new ChatSessionRepository(_db);
             ChatMessage = new ChatMessageRepository(_db);
-
+            DanhGia = new DanhGiaRepository(_db);
+            HinhAnhDanhGia = new HinhAnhDanhGiaRepository(_db);
         }
         public ISanPhamRepository SanPham { get; private set; }
         public IDonDatHangRepository DonDatHang { get; private set; }
@@ -28,6 +29,10 @@ namespace WEBNC.DataAccess.Repository
 
         public IChatSessionRepository ChatSession { get; private set; }
         public IChatMessageRepository ChatMessage { get; private set; }
+
+        public IDanhGiaRepository DanhGia { get; private set; }
+
+        public IHinhAnhDanhGiaRepository HinhAnhDanhGia {get; private set; }
 
         public void save()
         {

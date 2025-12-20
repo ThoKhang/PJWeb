@@ -1,0 +1,20 @@
+﻿@{
+    string current = (ViewContext.RouteData.Values["controller"]?.ToString() ?? "");
+}
+<div class="sidebar p-4">
+    <div class="d-flex align-items-center gap-2 mb-3">
+        <div class="rounded-circle bg-white text-primary fw-bold d-flex align-items-center justify-content-center"
+             style="width:42px;height:42px;">
+            A
+        </div>
+        <div>
+            <div class="fw-bold">Admin Panel</div>
+            <div style="opacity:.9;font-size:.9rem;">Quản trị hệ thống</div>
+        </div>
+    </div>
+    <hr class="border border-white border-opacity-25">
+    <a class="@(current=="SanPham"?"active":"")"
+       asp-area="Admin" asp-controller="SanPham" asp-action="Index">
+        📦 Quản lý sản phẩm
+    </a>
+</div>

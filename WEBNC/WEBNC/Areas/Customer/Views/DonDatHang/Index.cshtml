@@ -54,8 +54,8 @@
         function loadOrderHistory() {
             fetch('/api/DonDatHang/get-my-orders')
                 .then(response => {
-                    if (response.status === 401) {
-                        window.location.href = "/Identity/Account/Login";
+                     if (response.status === 401) {
+                        window.location.href = "/Identity/Account/Login?returnUrl=/Customer/Cart/Index";
                         return;
                     }
                     return response.json();
@@ -118,21 +118,32 @@
                     `;
                 }
                 if(statusText==='Đã giao'){
-                    document.querySelector('.binhLuan').innerHTML=`<a class="btn btn-primary" href="/Customer/DanhGia/Index">Bình luận ngay</a>`;
+                    html += `
+                        <tr>
+                            <td class="fw-bold text-primary">#${item.idDonDat}</td>
+                            <td>${dateString}</td>
+                            <td class="text-danger fw-bold">${formatter.format(item.tongTien)}</td>
+                            <td><span class="badge ${badgeClass}">${statusText}</span></td>
+                            <td class="text-center">
+                                ${actionButtons} <a class="btn btn-primary  btn-sm me-1" href="/Customer/DonDatHang/Details/${item.idDonDat}">Bình luận ngay</a>
+                            </td>
+                        </tr>
+                    `;
                 }
-
-                // Render dòng
-                html += `
-                    <tr>
-                        <td class="fw-bold text-primary">#${item.idDonDat}</td>
-                        <td>${dateString}</td>
-                        <td class="text-danger fw-bold">${formatter.format(item.tongTien)}</td>
-                        <td><span class="badge ${badgeClass}">${statusText}</span></td>
-                        <td class="text-center">
-                            ${actionButtons}
-                        </td>
-                    </tr>
-                `;
+                else{
+                    // Render dòng
+                    html += `
+                        <tr>
+                            <td class="fw-bold text-primary">#${item.idDonDat}</td>
+                            <td>${dateString}</td>
+                            <td class="text-danger fw-bold">${formatter.format(item.tongTien)}</td>
+                            <td><span class="badge ${badgeClass}">${statusText}</span></td>
+                            <td class="text-center">
+                                ${actionButtons}
+                            </td>
+                        </tr>
+                    `;
+                }
             });
             document.getElementById('tblDonHangBody').innerHTML = html;
         }

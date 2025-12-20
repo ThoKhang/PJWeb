@@ -30,7 +30,12 @@ builder.Services.AddControllersWithViews();
 // 2. Database
 // ════════════════════════════════════════════
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+           .EnableSensitiveDataLogging()
+           .LogTo(Console.WriteLine);
+});
+
 
 // ════════════════════════════════════════════
 // 3. Identity + Cookie Authentication

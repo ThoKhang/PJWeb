@@ -25,6 +25,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<DanhGiaSanPham> DanhGiaSanPham { get; set; }
     public DbSet<ThongBao> ThongBao { get; set; }
     public DbSet<YeuCauDoiTra> YeuCauDoiTra { get; set; }
+    public DbSet<HinhAnhDanhGia> HinhAnhDanhGia { get; set; }
 
 
     //protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -51,13 +52,15 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         base.OnModelCreating(modelBuilder);
 
-        // Khóa chính kép ChiTietDonHang (Giữ nguyên)
         modelBuilder.Entity<ChiTietDonHang>()
             .HasKey(c => new { c.idDonDat, c.idSanPham });
 
-        // Cấu hình khác (Giữ nguyên)
         modelBuilder.Entity<SanPham>()
             .Property(s => s.gia)
+            .HasPrecision(18, 2);
+
+        modelBuilder.Entity<ThanhToan>()
+            .Property(t => t.soTien)
             .HasPrecision(18, 2);
 
         modelBuilder.Entity<ApplicationUser>()
@@ -65,8 +68,19 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .WithMany()
             .HasForeignKey(u => u.idPhuongXa)
             .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<DonDatHang>()
+            .HasOne(d => d.nguoiDung)        
+            .WithMany(u => u.DonDatHangs)    
+            .HasForeignKey(d => d.idNguoiDung)
+            .OnDelete(DeleteBehavior.NoAction);
 
-        //                 ÁP DỤNG TẤT CẢ CONFIGURATION
+        modelBuilder.Entity<ChiTietDonHang>()
+         .HasOne(c => c.DonDatHang)
+         .WithMany(d => d.ChiTietDonHang)
+         .HasForeignKey(c => c.idDonDat);
+
+
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
+
 }

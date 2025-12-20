@@ -17,5 +17,6 @@ namespace WEBNC.Models
         [ForeignKey("idPhuongXa")]
         [ValidateNever]
         public XaPhuong xaPhuong { get; set; }
+        public ICollection<DonDatHang> DonDatHangs { get; set; }
     }
 }

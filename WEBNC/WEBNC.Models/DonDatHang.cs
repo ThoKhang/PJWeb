@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,10 +17,12 @@ namespace WEBNC.Models
         public string idDonDat { get; set; }
 
         [Required]
-        public string idNguoiDung { get; set; }
+        [Column(TypeName = "nvarchar(450)")]
+        public string? idNguoiDung { get; set; }
 
-        //[ForeignKey("idNguoiDung")]
-        //public NhanVien nhanVien { get; set; }
+        [ForeignKey("idNguoiDung")]
+        [ValidateNever]
+        public ApplicationUser? nguoiDung { get; set; }
 
         [Required]
         [Column(TypeName = "char(11)")]

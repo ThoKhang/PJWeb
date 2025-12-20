@@ -60,6 +60,7 @@
 
   <ItemGroup>
     <Folder Include="ViewModels\" />
+    <Folder Include="wwwroot\images\danhgia\" />
   </ItemGroup>
 
 </Project>

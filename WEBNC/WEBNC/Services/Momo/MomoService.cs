@@ -19,9 +19,8 @@ namespace WEBNC.Services.Momo
         }
         public async Task<MomoCreatePaymentResponseModel> CreatePaymentMomo(OrderInfoModel model, string? returnUrlOverride = null, string? notifyUrlOverride = null)
         {
-            var userIdForExtra = model.OrderInfo;
             model.OrderId = DateTime.UtcNow.Ticks.ToString();
-            var orderInfoText = "Thanh toán đơn hàng của " + model.FullName;
+            model.OrderInfo = "Khách hàng: " + model.FullName + ". Nội dung: " + model.OrderInfo;
             var amountStr = Convert.ToInt64(model.Amount).ToString(CultureInfo.InvariantCulture);
             var returnUrl = string.IsNullOrEmpty(returnUrlOverride) ? _options.Value.ReturnUrl : returnUrlOverride;
             var notifyUrl = string.IsNullOrEmpty(notifyUrlOverride) ? _options.Value.NotifyUrl : notifyUrlOverride;
@@ -31,10 +30,10 @@ namespace WEBNC.Services.Momo
                 $"&requestId={model.OrderId}" +
                 $"&amount={amountStr}" +
                 $"&orderId={model.OrderId}" +
-                $"&orderInfo={orderInfoText}" +
+                $"&orderInfo={model.OrderInfo}" +
                 $"&returnUrl={returnUrl}" +
                 $"&notifyUrl={notifyUrl}" +
-                $"&extraData={userIdForExtra}";
+                $"&extraData=";
             var signature = ComputeHmacSha256(rawData, _options.Value.SecretKey);
             var client = new RestClient(_options.Value.MomoApiUrl);
             var request = new RestRequest() { Method = RestSharp.Method.Post };
@@ -48,12 +47,12 @@ namespace WEBNC.Services.Momo
                 returnUrl = returnUrl,
                 orderId = model.OrderId,
                 amount = amountStr,
-                orderInfo = orderInfoText,
+                orderInfo = model.OrderInfo,
                 requestId = model.OrderId,
-                extraData = userIdForExtra,
+                extraData = "",
                 signature = signature
             };
-            request.AddJsonBody(requestData);
+            request.AddParameter("application/json", JsonConvert.SerializeObject(requestData), ParameterType.RequestBody);
             var response = await client.ExecuteAsync(request);
             var momoResponse = JsonConvert.DeserializeObject<MomoCreatePaymentResponseModel>(response.Content);
             if (momoResponse == null || string.IsNullOrEmpty(momoResponse.PayUrl))
@@ -62,16 +61,16 @@ namespace WEBNC.Services.Momo
                 var v2Request = new RestRequest() { Method = RestSharp.Method.Post };
                 v2Request.AddHeader("Content-Type", "application/json; charset=UTF-8");
                 var v2Raw =
-                $"accessKey={_options.Value.AccessKey}" +
-                $"&amount={amountStr}" +
-                $"&extraData={userIdForExtra}" +
-                $"&ipnUrl={notifyUrl}" +
-                $"&orderId={model.OrderId}" +
-                $"&orderInfo={orderInfoText}" +
-                $"&partnerCode={_options.Value.PartnerCode}" +
-                $"&redirectUrl={returnUrl}" +
-                $"&requestId={model.OrderId}" +
-                $"&requestType=captureWallet";
+                    $"accessKey={_options.Value.AccessKey}" +
+                    $"&amount={amountStr}" +
+                    $"&extraData=" +
+                    $"&ipnUrl={notifyUrl}" +
+                    $"&orderId={model.OrderId}" +
+                    $"&orderInfo={model.OrderInfo}" +
+                    $"&partnerCode={_options.Value.PartnerCode}" +
+                    $"&redirectUrl={returnUrl}" +
+                    $"&requestId={model.OrderId}" +
+                    $"&requestType=captureWallet";
                 var v2Sig = ComputeHmacSha256(v2Raw, _options.Value.SecretKey);
                 var v2Data = new
                 {
@@ -81,9 +80,9 @@ namespace WEBNC.Services.Momo
                     redirectUrl = returnUrl,
                     orderId = model.OrderId,
                     amount = amountStr,
-                    orderInfo = orderInfoText,
+                    orderInfo = model.OrderInfo,
                     requestId = model.OrderId,
-                    extraData = userIdForExtra,
+                    extraData = "",
                     signature = v2Sig,
                     accessKey = _options.Value.AccessKey
                 };
@@ -110,7 +109,6 @@ namespace WEBNC.Services.Momo
             var payType = Get("payType");
             var responseTime = Get("responseTime");
             var signature = Get("signature");
-            var extraData = Get("extraData");
 
             return new MomoExecuteResponseModel()
             {
@@ -124,8 +122,7 @@ namespace WEBNC.Services.Momo
                 TransId = transId,
                 PayType = payType,
                 ResponseTime = responseTime,
-                Signature = signature,
-                ExtraData = extraData
+                Signature = signature
             };
         }
 

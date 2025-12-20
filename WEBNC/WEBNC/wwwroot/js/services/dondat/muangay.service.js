@@ -38,7 +38,8 @@ export function handleBuyNow(id, quantity = 1) {
             });
 
             if (res.status === 401) {
-                window.location.href = `/Identity/Account/Login?returnUrl=${encodeURIComponent(window.location.href)}`;
+                const currentPath = window.location.pathname + window.location.search;
+                window.location.href = `/Identity/Account/Login?returnUrl=${encodeURIComponent(currentPath)}`;
                 return;
             }
 

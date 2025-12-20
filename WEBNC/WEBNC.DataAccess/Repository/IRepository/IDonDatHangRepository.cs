@@ -1,4 +1,4 @@
-using WEBNC.Models;
+﻿using WEBNC.Models;
 
 namespace WEBNC.DataAccess.Repository.IRepository
 {
@@ -6,6 +6,5 @@ namespace WEBNC.DataAccess.Repository.IRepository
     {
         void Update(DonDatHang obj);
         IEnumerable<DonDatHang> LayDonTheoNguoiDung(string idNguoiDung);
-        string GenerateNewOrderId();
     }
 }

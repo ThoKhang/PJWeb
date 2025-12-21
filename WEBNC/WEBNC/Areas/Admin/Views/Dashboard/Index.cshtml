@@ -1,0 +1,57 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Dashboard";
+
+    int total = (int)(ViewBag.TotalProduct ?? 0);
+    int low = (int)(ViewBag.LowStock ?? 0);
+    int outS = (int)(ViewBag.OutStock ?? 0);
+}
+
+<div class="admin-card p-3 p-lg-4">
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+        <div>
+            <div class="fw-bold fs-3">Dashboard</div>
+            <div class="text-muted" style="color:var(--muted)!important;">Tổng quan nhanh hệ thống</div>
+        </div>
+        <span class="pill">Cập nhật: @DateTime.Now.ToString("dd/MM/yyyy HH:mm")</span>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-12 col-lg-4">
+            <div class="admin-card soft p-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="text-muted" style="color:var(--muted)!important;font-weight:700;">Tổng sản phẩm</div>
+                    <div class="fw-bold fs-3">@total</div>
+                </div>
+                <span class="pill pill-ok">OK</span>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-4">
+            <div class="admin-card soft p-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="text-muted" style="color:var(--muted)!important;font-weight:700;">Sắp hết hàng</div>
+                    <div class="fw-bold fs-3">@low</div>
+                </div>
+                <span class="pill pill-warn">Cảnh báo</span>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-4">
+            <div class="admin-card soft p-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <div class="text-muted" style="color:var(--muted)!important;font-weight:700;">Hết hàng</div>
+                    <div class="fw-bold fs-3">@outS</div>
+                </div>
+                <span class="pill pill-danger">Stop</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-card p-3 mt-3">
+        <div class="fw-bold mb-1">Gợi ý</div>
+        <div class="text-muted" style="color:var(--muted)!important;">
+            Vào <b>Sản phẩm</b> để cập nhật tồn kho, giá, và theo dõi cảnh báo.
+        </div>
+    </div>
+</div>

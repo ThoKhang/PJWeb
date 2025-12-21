@@ -1,0 +1,85 @@
+﻿@model WEBNC.Models.SanPham
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Thêm sản phẩm";
+}
+
+<div class="cardx p-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <div style="font-weight:900;font-size:1.6rem;">Thêm sản phẩm</div>
+            <div class="text-muted">Nhập thông tin sản phẩm mới</div>
+        </div>
+        <a class="btn-soft" asp-area="Admin" asp-controller="SanPham" asp-action="Index">← Quay lại</a>
+    </div>
+
+    <form method="post">
+        <div class="row g-3">
+            <div class="col-12 col-lg-3">
+                <label class="form-label fw-bold">Mã sản phẩm</label>
+                <input asp-for="idSanPham" class="form-control" />
+                <span asp-validation-for="idSanPham" class="text-danger"></span>
+            </div>
+
+            <div class="col-12 col-lg-9">
+                <label class="form-label fw-bold">Tên sản phẩm</label>
+                <input asp-for="tenSanPham" class="form-control" />
+                <span asp-validation-for="tenSanPham" class="text-danger"></span>
+            </div>
+
+            <div class="col-12 col-lg-4">
+                <label class="form-label fw-bold">Công ty</label>
+                <select asp-for="idCongTy" class="form-select" asp-items="ViewBag.CongTy"></select>
+            </div>
+
+            <div class="col-12 col-lg-4">
+                <label class="form-label fw-bold">Loại sản phẩm</label>
+                <select asp-for="idLoaiSanPham" class="form-select" asp-items="ViewBag.Loai"></select>
+            </div>
+
+            <div class="col-12 col-lg-4">
+                <label class="form-label fw-bold">Giá</label>
+                <input asp-for="gia" class="form-control" />
+            </div>
+
+            <div class="col-12 col-lg-6">
+                <label class="form-label fw-bold">Ảnh đại diện (filename)</label>
+                <input asp-for="imageURL" class="form-control" placeholder="vd: CPU_12400F_1.png" />
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <label class="form-label fw-bold">SL hiện còn</label>
+                <input asp-for="soLuongHienCon" class="form-control" />
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <label class="form-label fw-bold">SL cảnh báo</label>
+                <input asp-for="soLuongCanDuoi" class="form-control" />
+            </div>
+
+            <div class="col-12">
+                <label class="form-label fw-bold">Mô tả</label>
+                <textarea asp-for="moTa" class="form-control" rows="3"></textarea>
+            </div>
+
+            <div class="col-12">
+                <label class="form-label fw-bold">Thông số</label>
+                <textarea asp-for="thongSoSanPham" class="form-control" rows="4"></textarea>
+            </div>
+
+            <div class="col-12">
+                <label class="form-label fw-bold">Ảnh liên quan (JSON string)</label>
+                <input asp-for="imageLienQuan" class="form-control" placeholder='["a.png","b.png"]' />
+            </div>
+        </div>
+
+        <div class="d-flex gap-2 mt-4">
+            <button type="submit" class="btn-brand">Lưu</button>
+            <a class="btn-soft" asp-area="Admin" asp-controller="SanPham" asp-action="Index">Hủy</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

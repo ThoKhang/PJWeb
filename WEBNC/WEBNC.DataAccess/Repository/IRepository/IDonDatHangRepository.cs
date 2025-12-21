@@ -6,5 +6,6 @@ namespace WEBNC.DataAccess.Repository.IRepository
     {
         void Update(DonDatHang obj);
         IEnumerable<DonDatHang> LayDonTheoNguoiDung(string idNguoiDung);
+        string GenerateNewOrderId();
     }
 }

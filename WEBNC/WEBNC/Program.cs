@@ -7,6 +7,7 @@ using WEBNC.Models;
 using WEBNC.Models.Momo;
 using WEBNC.Services;
 using WEBNC.Services.Momo;
+using WEBNC.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 //Momo API Payment
@@ -85,6 +86,7 @@ builder.Services.AddSession(options =>
 // 5. DI
 // ════════════════════════════════════════════
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddSingleton<TimeProvider>(TimeProvider.System);
 builder.Services.AddScoped<ChatManager>();
 

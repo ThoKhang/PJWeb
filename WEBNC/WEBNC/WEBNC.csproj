@@ -27,6 +27,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WEBNC.DataAccess\WEBNC.DataAccess.csproj" />
     <ProjectReference Include="..\WEBNC.Models\WEBNC.Models.csproj" />
+    <ProjectReference Include="..\WEBNC.Utility\WEBNC.Utility.csproj" />
   </ItemGroup>
 
   <ItemGroup>

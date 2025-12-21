@@ -18,5 +18,6 @@ namespace WEBNC.Models
         [ValidateNever]
         public XaPhuong xaPhuong { get; set; }
         public ICollection<DonDatHang> DonDatHangs { get; set; }
+        public bool IsOtpVerified { get; set; } = false;
     }
 }

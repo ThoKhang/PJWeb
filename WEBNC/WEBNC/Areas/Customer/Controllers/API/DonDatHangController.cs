@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -166,7 +166,7 @@ namespace WEBNC.Areas.Customer.Controllers.API
                 };
 
                 _unitOfWork.ChiTietDonHang.Add(chiTiet);
-                _unitOfWork.save();
+                _unitOfWork.Save();
 
                 return Ok(new
                 {
@@ -283,7 +283,7 @@ namespace WEBNC.Areas.Customer.Controllers.API
 
                 donHang.trangThai = "Đã hủy";
                 _unitOfWork.DonDatHang.Update(donHang);
-                _unitOfWork.save();
+                _unitOfWork.Save();
 
                 return Ok(new { success = true, message = "Đã hủy đơn hàng thành công." });
             }

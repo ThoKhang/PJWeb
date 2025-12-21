@@ -13,8 +13,7 @@ namespace WEBNC.Models
         [Key]
         public int idThanhToan { get; set; }
 
-        public string idDonDat { get; set; }
-
+         [Column(TypeName = "char(5)")]
         [ForeignKey("idDonDat")]
         public DonDatHang DonDatHang { get; set; }
 

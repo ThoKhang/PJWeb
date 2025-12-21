@@ -62,7 +62,7 @@ namespace WEBNC.Areas.Customer.Controllers.API
                 ngayDanhGia = DateTime.Now
             };
             _unitOfWork.DanhGia.Add(danhGiaSanPham);
-            _unitOfWork.save();
+            _unitOfWork.Save();
             if(hinhAnhs!=null && hinhAnhs.Count > 0)
             {
                 String uploadPath = Path.Combine(_env.WebRootPath, "images/danhgia");
@@ -83,7 +83,7 @@ namespace WEBNC.Areas.Customer.Controllers.API
                     };
                     _unitOfWork.HinhAnhDanhGia.Add(hinhAnhDanhGia);
                 }
-                _unitOfWork.save();
+                _unitOfWork.Save();
             }
             return Ok(new {success=true});
         }

@@ -1,0 +1,241 @@
+@model WEBNC.Models.ApplicationUser
+@{
+    ViewData["Title"] = "Phương thức thanh toán";
+    Layout = "_Layout";
+}
+
+<!-- Page Header Start -->
+<div class="container-fluid luxury-page-header">
+    <div class="container text-center py-5">
+        <h1 class="display-3 text-gold fw-bold text-shadow mb-3">PHƯƠNG THỨC THANH TOÁN</h1>
+        <ol class="breadcrumb justify-content-center mb-0 p-2 rounded-3">
+            <li class="breadcrumb-item">
+                <a href="/Customer/Home" class="text-white-50 text-decoration-none fw-semibold">Trang chủ</a>
+            </li>
+            <li class="breadcrumb-item active fw-semibold">
+                Thanh toán
+            </li>
+        </ol>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row g-5">
+            <!-- Payment Methods -->
+            <div class="col-lg-8">
+                <!-- User Info Section -->
+                <div class="bg-light rounded p-4 mb-4">
+                    <h4 class="mb-4">Thông tin người nhận</h4>
+                    <div class="p-3 border rounded bg-white">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="mb-0"><i class="fas fa-user me-2"></i>@Model?.hoTen</h5>
+                            <a href="/Identity/Account/Manage" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-edit me-1"></i>Thay đổi
+                            </a>
+                        </div>
+                        <p class="mb-1"><i class="fas fa-phone me-2"></i>@(Model?.PhoneNumber ?? "Chưa có số điện thoại")</p>
+                        <p class="mb-0"><i class="fas fa-map-marker-alt me-2"></i>@(Model?.soNha ?? "Chưa có địa chỉ")</p>
+                    </div>
+                </div>
+
+                <div class="bg-light rounded p-4 mb-4">
+                    <h4 class="mb-4">Chọn phương thức thanh toán</h4>
+                    
+                    <div class="form-check mb-3 p-3 border rounded">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="cod" value="cod" checked>
+                        <label class="form-check-label ms-2" for="cod">
+                            <h5 class="mb-1"><i class="fas fa-money-bill-wave me-2"></i>Thanh toán khi nhận hàng (COD)</h5>
+                            <p class="mb-0 text-muted">Thanh toán bằng tiền mặt khi nhận hàng</p>
+                        </label>
+                    </div>
+                    
+                    <div class="form-check mb-3 p-3 border rounded">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="momo" value="momo">
+                        <label class="form-check-label ms-2" for="momo">
+                            <h5 class="mb-1"><i class="fas fa-mobile-alt me-2"></i>Ví điện tử MoMo</h5>
+                            <p class="mb-0 text-muted">Thanh toán qua ứng dụng MoMo</p>
+                        </label>
+                    </div>
+                    
+                    <div class="form-check p-3 border rounded">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="banking" value="banking">
+                        <label class="form-check-label ms-2" for="banking">
+                            <h5 class="mb-1"><i class="fas fa-university me-2"></i>Chuyển khoản ngân hàng</h5>
+                            <p class="mb-0 text-muted">Chuyển khoản qua tài khoản ngân hàng</p>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="/Customer/Cart" class="btn btn-outline-secondary px-4 py-2">
+                        <i class="fas fa-arrow-left me-2"></i>Quay lại giỏ hàng
+                    </a>
+                    <button id="btnContinue" class="btn btn-primary px-4 py-2">
+                        Thanh Toán<i class="fas fa-arrow-right ms-2"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Order Summary -->
+            <div class="col-lg-4">
+                <div class="bg-light rounded p-4">
+                    <h4 class="mb-4">Đơn hàng của bạn</h4>
+                    
+                    <div id="order-items" class="mb-4 border-bottom pb-3">
+                        <!-- Items will be loaded here -->
+                        <div class="text-center py-3">
+                            <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Tạm tính:</span>
+                        <span class="subtotal-value">0 ₫</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Phí vận chuyển:</span>
+                        <span class="shipping-value">0 ₫</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-4">
+                        <h5 class="mb-0">Tổng tiền:</h5>
+                        <h5 class="mb-0 text-primary total-value">0 ₫</h5>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <small>Vui lòng kiểm tra lại đơn hàng trước khi thanh toán</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Load cart data
+            loadCartSummary();
+            
+            // Handle continue button click
+            $('#btnContinue').click(function() {
+                const paymentMethod = $('input[name="paymentMethod"]:checked').val();
+                
+                switch(paymentMethod) {
+                    case 'cod':
+                        // Submit form for COD
+                        var form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action = '/Customer/Checkout/ConfirmOrder';
+                        
+                        var input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = 'paymentMethod';
+                        input.value = 'cod';
+                        form.appendChild(input);
+                        
+                        document.body.appendChild(form);
+                        form.submit();
+                        break;
+                    case 'momo':
+                        // Submit form for Momo
+                        var form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action = '/Customer/Payment/CreatePaymentMomo';
+                        
+                        var inputName = document.createElement('input');
+                        inputName.type = 'hidden';
+                        inputName.name = 'FullName';
+                        inputName.value = @Json.Serialize(Model?.hoTen ?? "Khach hang");
+                        form.appendChild(inputName);
+
+                        var inputInfo = document.createElement('input');
+                        inputInfo.type = 'hidden';
+                        inputInfo.name = 'OrderInfo';
+                        inputInfo.value = 'Thanh toan don hang';
+                        form.appendChild(inputInfo);
+
+                        document.body.appendChild(form);
+                        form.submit();
+                        break;
+                    case 'banking':
+                        window.location.href = '/Customer/Checkout/BankTransfer';
+                        break;
+                }
+            });
+            
+            // Load cart summary
+            function loadCartSummary() {
+                fetch('/api/cart', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.status === 401) {
+                         window.location.href = '/Identity/Account/Login?returnUrl=' + encodeURIComponent(window.location.pathname);
+                         return;
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (!data || !data.data) return;
+                    
+                    const items = data.data;
+                    const itemsContainer = $('#order-items');
+                    itemsContainer.empty();
+                    
+                    let subtotal = 0;
+                    
+                    if (items.length === 0) {
+                        itemsContainer.html('<p class="text-center text-muted">Giỏ hàng trống</p>');
+                    }
+                    
+                    items.forEach(item => {
+                        const total = item.sanPham.gia * item.soLuongTrongGio;
+                        subtotal += total;
+                        
+                        const html = `
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="/images/${item.sanPham.imageURL}" class="img-fluid rounded-3 border" style="width: 60px; height: 60px; object-fit: cover;" alt="${item.sanPham.tenSanPham}">
+                                <div class="ms-3 flex-grow-1">
+                                    <h6 class="mb-0 text-truncate" style="max-width: 160px;" title="${item.sanPham.tenSanPham}">${item.sanPham.tenSanPham}</h6>
+                                    <small class="text-muted">${formatCurrency(item.sanPham.gia)} x ${item.soLuongTrongGio}</small>
+                                </div>
+                                <span class="fw-bold text-end" style="min-width: 80px;">${formatCurrency(total)}</span>
+                            </div>
+                        `;
+                        itemsContainer.append(html);
+                    });
+                    
+                    // For demo, shipping is free for orders over 500,000 VND
+                    const shipping = subtotal >= 500000 ? 0 : 30000;
+                    const total = subtotal + shipping;
+                    
+                    // Update UI
+                    $('.subtotal-value').text(formatCurrency(subtotal));
+                    $('.shipping-value').text(shipping === 0 ? 'Miễn phí' : formatCurrency(shipping));
+                    $('.total-value').text(formatCurrency(total));
+                    
+                    // Update hidden fields for payment forms
+                    $('input[name="Amount"]').val(total);
+                })
+                .catch(error => {
+                    console.error('Error loading cart:', error);
+                    $('#order-items').html('<p class="text-danger text-center">Không thể tải thông tin đơn hàng</p>');
+                });
+            }
+            
+            // Format currency
+            function formatCurrency(amount) {
+                return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+            }
+        });
+    </script>
+}

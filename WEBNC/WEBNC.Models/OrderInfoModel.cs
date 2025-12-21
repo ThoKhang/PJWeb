@@ -1,4 +1,4 @@
-﻿namespace WEBNC.Models
+﻿﻿namespace WEBNC.Models
 {
     public class OrderInfoModel
     {

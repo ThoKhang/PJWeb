@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,8 +13,9 @@ namespace WEBNC.Models
     public class DonDatHang
     {
         [Key]
+        [Column(TypeName = "char(5)")]
         public string idDonDat { get; set; }
-
+        
         [Required]
         [Column(TypeName = "nvarchar(450)")]
         public string? idNguoiDung { get; set; }

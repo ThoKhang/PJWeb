@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WEBNC.DataAccess.Repository.IRepository;
@@ -25,6 +25,9 @@ public class ChatController : ControllerBase
     [Authorize]
     public async Task<IActionResult> Send([FromBody] ChatRequest req)
     {
+        if (string.IsNullOrEmpty(req.Message))
+            return BadRequest(new { message = "Nội dung tin nhắn không được để trống" });
+
         string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         string userMessage = req.Message.ToLower().Trim();
 
@@ -40,7 +43,7 @@ public class ChatController : ControllerBase
                 title = "Cuộc trò chuyện mới"
             };
             _unitOfWork.ChatSession.Add(session);
-            _unitOfWork.save();
+            _unitOfWork.Save();
         }
 
         // 2. Lưu tin nhắn user (Chưa gọi save, sẽ gọi sau)
@@ -66,14 +69,14 @@ public class ChatController : ControllerBase
             // Lưu tin nhắn user và phản hồi cố định vào DB
             var aiMsgFixed = new ChatMessage { idSession = session.idSession, role = "ai", message = fixedReply };
             _unitOfWork.ChatMessage.Add(aiMsgFixed);
-            _unitOfWork.save();
+            _unitOfWork.Save();
 
             // Trả về JSON (Không dùng streaming) để cập nhật nhanh Frontend
             return Ok(new { reply = fixedReply });
         }
 
         // Nếu không phải câu chào, gọi save cho tin nhắn user và tiếp tục logic phức tạp
-        _unitOfWork.save();
+        _unitOfWork.Save();
 
 
         // ==========================================================
@@ -238,7 +241,7 @@ public class ChatController : ControllerBase
         // === 3b. Gửi đến AI (Ollama) và STREAMING PHẢN HỒI ===
 
         Response.ContentType = "application/octet-stream";
-        Response.Headers.Add("X-Content-Type-Options", "nosniff");
+        Response.Headers.Append("X-Content-Type-Options", "nosniff");
 
         var body = new
         {
@@ -291,7 +294,7 @@ public class ChatController : ControllerBase
         };
 
         _unitOfWork.ChatMessage.Add(aiMsg);
-        _unitOfWork.save();
+        _unitOfWork.Save();
 
         return new EmptyResult();
     }
@@ -319,5 +322,5 @@ public class ChatController : ControllerBase
 
 public class ChatRequest
 {
-    public string Message { get; set; }
+    public string Message { get; set; } = "";
 }

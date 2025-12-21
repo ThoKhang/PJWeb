@@ -69,7 +69,29 @@
                             </a>
                             <ul class="dropdown-menu border-0 shadow-lg mt-2 loaiSanPham">
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item py-2 text-primary fw-bold" asp-area="Customer" asp-controller="Home" asp-action="Index">Xem tất cả →</a></li>
+
+                                @if (ViewBag.DanhSachLoai != null)
+                                {
+                                    foreach (var loai in ViewBag.DanhSachLoai)
+                                    {
+                                        <li>
+                                            <a class="dropdown-item py-2"
+                                               href="javascript:void(0)"
+                                               data-idloaisanpham="@loai.idLoaiSanPham">
+                                                @loai.tenLoaiSanPham
+                                            </a>
+                                        </li>
+                                    }
+                                }
+
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item py-2 text-primary fw-bold"
+                                       href="javascript:void(0)"
+                                       data-idloaisanpham="">
+                                        Xem tất cả →
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>

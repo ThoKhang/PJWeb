@@ -12,8 +12,6 @@
         IDanhGiaRepository DanhGia { get; }
         IHinhAnhDanhGiaRepository HinhAnhDanhGia { get; }
         IXaPhuongRepository XaPhuong { get; }
-        IDanhGiaRepository DanhGia { get; }
-        IHinhAnhDanhGiaRepository HinhAnhDanhGia { get; }
         void Save();
     }
 }

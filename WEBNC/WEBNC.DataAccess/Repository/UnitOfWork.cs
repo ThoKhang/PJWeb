@@ -34,6 +34,9 @@ namespace WEBNC.DataAccess.Repository
         public IDanhGiaRepository DanhGia { get; private set; }
 
         public IHinhAnhDanhGiaRepository HinhAnhDanhGia {get; private set; }
+
+        public IXaPhuongRepository XaPhuong { get; private set; }
+
         public void Save()
         {
             _db.SaveChanges();

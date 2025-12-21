@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WEBNC.DataAccess.Repository.IRepository;
@@ -80,7 +80,7 @@ namespace WEBNC.Areas.Customer.Controllers.API
                 _unitOfWork.chiTietGioHang.IncrementCount(gioHangDb, gioHang.soLuongTrongGio);
                 _unitOfWork.chiTietGioHang.Update(gioHangDb);
 
-                _unitOfWork.save();
+                _unitOfWork.Save();
                 return Ok(new
                 {
                     message = "Cập nhật số lượng sản phẩm trong giỏ hàng",
@@ -91,7 +91,7 @@ namespace WEBNC.Areas.Customer.Controllers.API
             {
                 // Thêm mới
                 _unitOfWork.chiTietGioHang.Add(gioHang);
-                _unitOfWork.save();
+                _unitOfWork.Save();
                 return Ok(new
                 {
                     message = "Đã thêm sản phẩm vào giỏ hàng",

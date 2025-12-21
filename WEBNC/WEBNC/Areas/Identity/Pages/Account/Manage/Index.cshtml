@@ -1,36 +1,203 @@
-﻿@page
+@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "Hồ sơ cá nhân";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
-<div class="container py-4" style="min-height:473px;">
-    <h3>@ViewData["Title"]</h3>
-    <partial name="_StatusMessage" for="StatusMessage" />
+<style>
+    /* Tổng thể trang */
+    .profile-container {
+        background-color: #f8f9fa;
+        min-height: 500px;
+        border-radius: 15px;
+    }
 
-    <div class="row">
-        <div class="col-md-6">
-            <form id="profile-form" method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+    /* Card thiết kế hiện đại */
+    .profile-card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+        background: #ffffff;
+    }
 
-                <div class="form-floating mb-3">
-                    <input asp-for="Username" class="form-control" disabled />
-                    <label asp-for="Username"></label>
+    .section-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #0d6efd;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+    }
+
+        .section-title i {
+            margin-right: 10px;
+        }
+
+    /* Tùy chỉnh Select2 để khớp với Bootstrap Floating Labels */
+    .select2-container--default .select2-selection--single {
+        height: 58px !important;
+        display: flex;
+        align-items: center;
+        border: 1px solid #dee2e6;
+        border-radius: 0.5rem !important;
+        padding-top: 15px; /* Đẩy chữ xuống để cân bằng */
+    }
+
+    .select2-container--default.select2-container--focus .select2-selection--single {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+
+    .select2-container--default .select2-selection__rendered {
+        padding-left: 12px !important;
+        color: #212529 !important;
+    }
+
+    .select2-container--default .select2-selection__arrow {
+        height: 56px !important;
+    }
+
+    .select2-dropdown {
+        border-radius: 0.5rem !important;
+        border: 1px solid #86b7fe;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    /* Nút bấm */
+    .btn-save {
+        padding: 0.8rem 2.5rem;
+        font-weight: 600;
+        border-radius: 50px;
+        transition: all 0.3s;
+    }
+
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3);
+        }
+</style>
+
+<div class="container py-5 profile-container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="mb-4 text-center text-md-start">
+                <h2 class="fw-bold"><i class="fas fa-user-circle text-primary me-2"></i>Thông tin tài khoản</h2>
+                <p class="text-muted">Quản lý thông tin cá nhân và địa chỉ giao hàng của bạn</p>
+            </div>
+
+            <partial name="_StatusMessage" for="StatusMessage" />
+
+            <div class="card profile-card">
+                <div class="card-body p-4 p-md-5">
+                    <form id="profile-form" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                        <div class="row g-4">
+                            <div class="col-md-6 border-end-md">
+                                <h5 class="section-title">
+                                    <i class="fas fa-id-card"></i> Thông tin cơ bản
+                                </h5>
+
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Username" class="form-control bg-light" disabled />
+                                    <label asp-for="Username">Email / Tên đăng nhập</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Input.HoTen" class="form-control" placeholder="Họ và tên" />
+                                    <label asp-for="Input.HoTen">Họ và tên</label>
+                                    <span asp-validation-for="Input.HoTen" class="text-danger small"></span>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Số điện thoại" />
+                                    <label asp-for="Input.PhoneNumber">Số điện thoại</label>
+                                    <span asp-validation-for="Input.PhoneNumber" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <h5 class="section-title">
+                                    <i class="fas fa-map-marked-alt"></i> Địa chỉ nhận hàng
+                                </h5>
+
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Input.SoNha" class="form-control" placeholder="Số nhà, tên đường" />
+                                    <label asp-for="Input.SoNha">Số nhà, tên đường</label>
+                                    <span asp-validation-for="Input.SoNha" class="text-danger small"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label small fw-bold text-muted ms-1">Phường/Xã, Quận/Huyện</label>
+                                    <select asp-for="Input.IdPhuongXa" class="form-select select2-phuongxa">
+                                        <option value="">-- Chọn Phường/Xã --</option>
+                                    </select>
+                                    <span asp-validation-for="Input.IdPhuongXa" class="text-danger small"></span>
+                                </div>
+
+                                <div class="p-3 bg-light rounded-3 small text-muted border-start border-primary border-4">
+                                    Lưu ý: Địa chỉ này sẽ được ưu tiên sử dụng khi bạn thanh toán đơn hàng nhanh.
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4 op-5">
+
+                        <div class="d-flex justify-content-center justify-content-md-end">
+                            <button id="update-profile-button" type="submit" class="btn btn-primary btn-save">
+                                <i class="fas fa-check-circle me-2"></i>Cập nhật hồ sơ
+                            </button>
+                        </div>
+                    </form>
                 </div>
-
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.PhoneNumber" class="form-control" />
-                    <label asp-for="Input.PhoneNumber"></label>
-                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-                </div>
-
-                <button type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
-            </form>
+            </div>
         </div>
     </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Khởi tạo Select2 với cấu hình tiếng Việt
+            $('.select2-phuongxa').select2({
+                width: '100%',
+                placeholder: '🔍 Tìm kiếm Phường/Xã...',
+                allowClear: true,
+                language: {
+                    noResults: function() { return "Không tìm thấy kết quả"; },
+                    searching: function() { return "Đang tải dữ liệu..."; }
+                }
+            });
+
+            // Tải dữ liệu từ API
+            $.ajax({
+                url: '/api/DonDatHang/get-phuongxa',
+                method: 'GET',
+                success: function(data) {
+                    var select = $('.select2-phuongxa');
+
+                    // Thêm dữ liệu vào select
+                    $.each(data, function(index, item) {
+                        var option = new Option(item.text, item.id, false, false);
+                        select.append(option);
+                    });
+
+                    // Tự động chọn giá trị hiện tại của User
+                    var currentVal = '@Model.Input.IdPhuongXa';
+                    if (currentVal) {
+                        select.val(currentVal).trigger('change');
+                    }
+                },
+                error: function(err) {
+                    console.error("Lỗi khi tải danh sách Phường/Xã:", err);
+                }
+            });
+        });
+    </script>
 }

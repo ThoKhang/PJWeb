@@ -4,6 +4,7 @@ using WEBNC.Services.Momo;
 using WEBNC.DataAccess.Repository.IRepository;
 using System.Security.Claims;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Identity;
 
 namespace WEBNC.Areas.Customer.Controllers.API
 {
@@ -12,11 +13,13 @@ namespace WEBNC.Areas.Customer.Controllers.API
     {
         private readonly IMomoService _momoService;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public PaymentController(IMomoService momoPaymentService, IUnitOfWork unitOfWork)
+        public PaymentController(IMomoService momoPaymentService, IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager)
         {
             _momoService = momoPaymentService;
             _unitOfWork = unitOfWork;
+            _userManager = userManager;
         }
 
         // =============================
@@ -84,7 +87,7 @@ namespace WEBNC.Areas.Customer.Controllers.API
         // 3) NOTIFY URL (LƯU ĐƠN HÀNG)
         // =============================
         [HttpPost]
-        public IActionResult MomoNotify([FromBody] Dictionary<string, object> data)
+        public async Task<IActionResult> MomoNotify([FromBody] Dictionary<string, object> data)
         {
             try
             {
@@ -104,6 +107,9 @@ namespace WEBNC.Areas.Customer.Controllers.API
                 if (string.IsNullOrEmpty(userId))
                     return Ok(); // không xác định user → không lưu đơn
 
+                var user = await _userManager.FindByIdAsync(userId);
+                if (user == null) return Ok();
+
                 var cartItems = _unitOfWork.chiTietGioHang.GetAll(
                     u => u.idNguoiDung == userId,
                     includeProperties: "SanPham"
@@ -119,8 +125,11 @@ namespace WEBNC.Areas.Customer.Controllers.API
                     idNguoiDung = userId,
                     ngayDat = DateTime.Now,
                     trangThai = "Chờ xác nhận",
-                    thanhToan = "Đã thanh toán",
-                    ngayThanhToan = DateTime.Now
+                    thanhToan = "Momo",
+                    daThanhToan = true,
+                    ngayThanhToan = DateTime.Now,
+                    soNha = user.soNha ?? "",
+                    sdtGiaoHang = user.PhoneNumber ?? ""
                 };
 
                 _unitOfWork.DonDatHang.Add(donHang);
@@ -143,7 +152,7 @@ namespace WEBNC.Areas.Customer.Controllers.API
                 foreach (var item in cartItems)
                     _unitOfWork.chiTietGioHang.Remove(item);
 
-                _unitOfWork.save();
+                _unitOfWork.Save();
             }
             catch
             {

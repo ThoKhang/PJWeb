@@ -236,6 +236,7 @@ namespace WEBNC.Areas.Customer.Controllers.API
             var chiTiet = _unitOfWork.ChiTietDonHang.GetAll(c => c.idDonDat == id, includeProperties: "SanPham");
             var chiTietResult = chiTiet.Select(c => new
             {
+                idSanPham=c.idSanPham,
                 tenSanPham = c.SanPham?.tenSanPham ?? "Sản phẩm lỗi",
                 hinhAnh = c.SanPham?.imageURL ?? "",
                 soLuong = c.soluong,

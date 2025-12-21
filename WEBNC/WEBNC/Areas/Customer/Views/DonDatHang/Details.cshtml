@@ -2,7 +2,6 @@
     ViewData["Title"] = "Chi tiết đơn hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <input type="hidden" id="hiddenOrderId" value="@ViewBag.OrderId" />
 
 <div class="container mt-5">
@@ -51,8 +50,9 @@
                         <th class="text-center py-3" style="width: 100px;">Hình ảnh</th>
                         <th class="py-3">Tên sản phẩm</th>
                         <th class="text-center py-3" style="width: 100px;">Số lượng</th>
-                        <th class="text-end py-3" style="width: 150px;">Đơn giá</th>
-                        <th class="text-end py-3" style="width: 150px;">Thành tiền</th>
+                        <th class="text-center py-3" style="width: 150px;">Đơn giá</th>
+                        <th class="text-center py-3" style="width: 150px;">Thành tiền</th>
+                        <th class="text-center py-3" style="width: 150px;">Thực thi</th>
                     </tr>
                 </thead>
                 <tbody id="tblDetailsBody">
@@ -69,6 +69,7 @@
 
 @section Scripts {
     <script>
+        let trangThai;
         document.addEventListener("DOMContentLoaded", function () {
             const orderId = document.getElementById('hiddenOrderId').value;
 
@@ -138,7 +139,10 @@
             elStatus.className = "badge rounded-pill px-3 py-2 ";
 
             if (info.trangThai === 'Đã giao' || info.trangThai === 'Hoàn thành')
+            {
                 elStatus.classList.add("bg-success");
+                trangThai=info.trangThai;
+            }
             else if (info.trangThai.includes('Đã hủy'))
                 elStatus.classList.add("bg-danger");
             else
@@ -157,21 +161,40 @@
             items.forEach(item => {
                 // Xử lý ảnh: nếu null thì dùng ảnh mặc định
                 let imgPath = item.hinhAnh ? `/images/${item.hinhAnh}` : '/images/no-image.png';
-
-                html += `
-                    <tr>
-                        <td class="text-center">
-                            <img src="${imgPath}" class="rounded border shadow-sm" style="width: 70px; height: 70px; object-fit: cover;"
-                                 onerror="this.src='https://via.placeholder.com/70?text=No+Img'">
-                        </td>
-                        <td>
-                            <div class="fw-bold text-dark">${item.tenSanPham}</div>
+                if (trangThai === 'Đã giao' || trangThai === 'Hoàn thành'){
+                    let idSanPham = item.idSanPham;
+                    html += `
+                        <tr>
+                            <td class="text-center">
+                                <img src="${imgPath}" class="rounded border shadow-sm" style="width: 70px; height: 70px; object-fit: cover;"
+                                     onerror="this.src='https://via.placeholder.com/70?text=No+Img'">
                             </td>
-                        <td class="text-center fw-bold text-secondary">${item.soLuong}</td>
-                        <td class="text-end text-muted">${formatter.format(item.donGia)}</td>
-                        <td class="text-end fw-bold text-primary">${formatter.format(item.thanhTien)}</td>
-                    </tr>
-                `;
+                            <td>
+                                <div class="fw-bold text-dark">${item.tenSanPham}</div>
+                                </td>
+                            <td class="text-center fw-bold text-secondary">${item.soLuong}</td>
+                            <td class="text-center text-muted">${formatter.format(item.donGia)}</td>
+                            <td class="text-center fw-bold text-primary">${formatter.format(item.thanhTien)}</td>
+                            <td class="text-center fw-bold text-primary"><a href="/customer/DanhGia/Index?idSanPham=${idSanPham}" class="btn-binhLuan btn btn-primary">Bình luận</a></td>
+                        </tr>
+                    `;
+                }
+                else{
+                    html += `
+                        <tr>
+                            <td class="text-center">
+                                <img src="${imgPath}" class="rounded border shadow-sm" style="width: 70px; height: 70px; object-fit: cover;"
+                                     onerror="this.src='https://via.placeholder.com/70?text=No+Img'">
+                            </td>
+                            <td>
+                                <div class="fw-bold text-dark">${item.tenSanPham}</div>
+                                </td>
+                            <td class="text-center fw-bold text-secondary">${item.soLuong}</td>
+                            <td class="text-end text-muted">${formatter.format(item.donGia)}</td>
+                            <td class="text-end fw-bold text-primary">${formatter.format(item.thanhTien)}</td>
+                        </tr>
+                    `;
+                }
             });
             document.getElementById('tblDetailsBody').innerHTML = html;
         }

@@ -36,6 +36,28 @@ namespace WEBNC.Areas.Customer.Controllers.API
             return Ok(new { data = filtered });
         }
 
+        [HttpGet("search")]
+        public IActionResult Search([FromQuery] string q)
+        {
+            if (string.IsNullOrWhiteSpace(q))
+                return Ok(new { data = Enumerable.Empty<object>() });
+            q = q.Trim();
+            var products = _unitOfWork.SanPham.GetAll(
+                u => u.tenSanPham.ToLower().Contains(q.ToLower())
+                     || (u.moTa != null && u.moTa.ToLower().Contains(q.ToLower())),
+                includeProperties: "LoaiSanPham"
+            );
+            var result = products.Select(p => new
+            {
+                id = p.idSanPham,
+                tenSanPham = p.tenSanPham,
+                gia = p.gia,
+                imageURL = p.imageURL,
+                loai = p.LoaiSanPham != null ? p.LoaiSanPham.tenLoaiSanPham : ""
+            });
+            return Ok(new { data = result });
+        }
+
         [HttpGet("{id}")]
         public IActionResult SanPhamById(string? id)
         {

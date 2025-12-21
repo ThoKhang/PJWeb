@@ -37,5 +37,32 @@ namespace WEBNC.DataAccess.Repository
                 .ThenInclude(ct => ct.SanPham)
                 .ToList();
         }
+
+        public string GenerateNewOrderId()
+        {
+            var existingIds = _db.DonDatHang
+                .Select(d => d.idDonDat)
+                .Where(id => id.StartsWith("DH"))
+                .ToList();
+
+            if (!existingIds.Any())
+            {
+                return "DH001";
+            }
+
+            long maxId = 0;
+            foreach (var id in existingIds)
+            {
+                if (id.Length > 2 && long.TryParse(id.Substring(2), out long currentId))
+                {
+                    if (currentId > maxId)
+                    {
+                        maxId = currentId;
+                    }
+                }
+            }
+
+            return "DH" + (maxId + 1).ToString("D3");
+        }
     }
 }

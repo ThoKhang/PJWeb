@@ -1568,7 +1568,6 @@ namespace WEBNC.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("idDonDat")
-                        .IsRequired()
                         .HasColumnType("char(5)");
 
                     b.Property<string>("maGiaoDich")
@@ -2098,9 +2097,7 @@ namespace WEBNC.DataAccess.Migrations
                 {
                     b.HasOne("WEBNC.Models.DonDatHang", "DonDatHang")
                         .WithMany()
-                        .HasForeignKey("idDonDat")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("idDonDat");
 
                     b.Navigation("DonDatHang");
                 });

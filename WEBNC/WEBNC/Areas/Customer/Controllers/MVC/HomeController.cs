@@ -24,7 +24,7 @@ namespace WEBNC.Areas.Customer.Controllers
         }
         public IActionResult Details()
         {
-            return View();
+                return View();
         }
     }
 }

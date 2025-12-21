@@ -1,4 +1,4 @@
-﻿using WEBNC.DataAccess.Repository.IRepository;
+﻿﻿﻿﻿﻿﻿using WEBNC.DataAccess.Repository.IRepository;
 using WEBNC.Models;
 
 namespace WEBNC.DataAccess.Repository
@@ -33,7 +33,8 @@ namespace WEBNC.DataAccess.Repository
 
         public IDanhGiaRepository DanhGia { get; private set; }
 
-        public IHinhAnhDanhGiaRepository HinhAnhDanhGia {get; private set; }
+        public IXaPhuongRepository XaPhuong { get; private set; }
+        public IHinhAnhDanhGiaRepository HinhAnhDanhGia { get; private set; }
         public void Save()
         {
             _db.SaveChanges();

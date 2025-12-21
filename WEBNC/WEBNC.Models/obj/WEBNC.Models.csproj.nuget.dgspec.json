@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vduon\\OneDrive\\Desktop\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj": {}
+    "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vduon\\OneDrive\\Desktop\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj": {
+    "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vduon\\OneDrive\\Desktop\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj",
+        "projectUniqueName": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj",
         "projectName": "WEBNC.Models",
-        "projectPath": "C:\\Users\\vduon\\OneDrive\\Desktop\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj",
-        "packagesPath": "C:\\Users\\vduon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vduon\\OneDrive\\Desktop\\PJWeb\\WEBNC\\WEBNC.Models\\obj\\",
+        "projectPath": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC.Models\\WEBNC.Models.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "F:\\2025-2026\\2026\\C#\\PJWeb\\WEBNC\\WEBNC.Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\vduon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

@@ -46,3 +46,161 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+:root {
+    --primary-color: #f7a700; /* vàng cam chủ đạo */
+    --primary-color-dark: #e07c00; /* đậm hơn khi hover */
+    --header-bg: #fff7e0; /* nền header */
+    --text-main: #222;
+}
+
+/* Reset màu link mặc định */
+a {
+    color: var(--primary-color-dark);
+}
+
+    a:hover {
+        color: var(--primary-color);
+    }
+
+/* Nút primary (dùng chung toàn site) */
+.btn-primary {
+    color: #fff;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+        background-color: var(--primary-color-dark);
+        border-color: var(--primary-color-dark);
+    }
+
+/* HEADER */
+.main-header {
+    background: var(--header-bg);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* Logo */
+.header-logo-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ffcc4d, #ff9800);
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+.header-logo-text {
+    color: var(--primary-color-dark);
+    letter-spacing: 0.5px;
+}
+
+/* Nav link trái */
+.header-nav-link {
+    font-weight: 600;
+    color: #444 !important;
+    padding: 0.45rem 0.9rem !important;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+    .header-nav-link i {
+        font-size: 1rem;
+    }
+
+    .header-nav-link:hover,
+    .header-nav-link:focus,
+    .header-nav-link.show {
+        background-color: rgba(247, 167, 0, 0.12);
+        color: var(--primary-color-dark) !important;
+    }
+
+/* Dropdown menu danh mục */
+.loaiSanPham.dropdown-menu {
+    border-radius: 16px;
+    padding: 0.5rem 0.4rem;
+    min-width: 220px;
+}
+
+.loaiSanPham .dropdown-item {
+    font-size: 0.95rem;
+    padding: 0.4rem 1rem;
+}
+
+    .loaiSanPham .dropdown-item:hover {
+        background-color: rgba(247, 167, 0, 0.1);
+    }
+
+/* Thanh tìm kiếm ở giữa */
+.header-search {
+    max-width: 560px;
+}
+
+    .header-search .input-group {
+        border-radius: 999px;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        overflow: hidden;
+    }
+
+    .header-search .input-group-text {
+        color: #999;
+        padding-left: 1.1rem;
+        padding-right: 0.4rem;
+    }
+
+    .header-search input.form-control {
+        font-size: 0.95rem;
+        background: transparent;
+    }
+
+        .header-search input.form-control:focus {
+            box-shadow: none;
+        }
+
+/* Icon bên phải (cart, messenger, bell, account) */
+.header-icon-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #444 !important;
+    background-color: transparent;
+    transition: all 0.2s ease;
+}
+
+    .header-icon-btn i {
+        font-size: 1.1rem;
+    }
+
+    .header-icon-btn:hover {
+        background-color: rgba(247, 167, 0, 0.14);
+        color: var(--primary-color-dark) !important;
+    }
+
+/* Có thể áp dụng cho avatar / menu tài khoản trong _LoginPartial (nếu có class .user-menu-btn) */
+.user-menu-btn {
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    transition: all 0.2s ease;
+}
+
+    .user-menu-btn:hover {
+        background-color: rgba(247, 167, 0, 0.16);
+    }
+
+/* Giữ lại footer cũ nếu bạn đang dùng */
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}

@@ -35,17 +35,19 @@
 
 </head>
 <body>
-    <header class="border-bottom shadow-sm sticky-top bg-white lint bg-white">
+    <header class="main-header shadow-sm sticky-top">
         <nav class="navbar navbar-expand-lg navbar-light py-2 py-lg-3">
             <div class="container-fluid px-4 px-lg-5">
 
                 <!-- Logo -->
-                <a class="navbar-brand fw-bold fs-3 text-primary d-flex align-items-center" href="/">
-                    <i class="fas fa-store-alt text-primary me-2"></i>
-                    WEBNC
+                <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+                    <div class="header-logo-icon d-flex align-items-center justify-content-center">
+                        <i class="fas fa-store-alt"></i>
+                    </div>
+                    <span class="fw-bold fs-4 header-logo-text">WEBNC</span>
                 </a>
 
-                <!-- Toggler cho mobile -->
+                <!-- Toggler mobile -->
                 <button class="navbar-toggler border-0 shadow-none" type="button"
                         data-bs-toggle="collapse" data-bs-target="#navbarMain"
                         aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,59 +55,57 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarMain">
-
                     <!-- Menu trái -->
-                    <ul class="navbar-nav me-auto align-items-center gap-4">
+                    <ul class="navbar-nav me-auto align-items-center gap-2 gap-lg-4">
                         <li class="nav-item">
-                            <a class="nav-link fw-semibold text-dark hover-text-primary d-flex align-items-center gap-1 px-3 py-2 rounded-3 transition"
+                            <a class="nav-link header-nav-link"
                                asp-area="Customer" asp-controller="Home" asp-action="Index">
-                                <i class="fas fa-home"></i> Trang chủ
+                                <i class="fas fa-home me-1"></i> Trang chủ
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link fw-semibold text-dark hover-text-primary dropdown-toggle d-flex align-items-center gap-1 px-3 py-2 rounded-3"
+                            <a class="nav-link header-nav-link dropdown-toggle"
                                href="#" role="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-th-large"></i> Danh mục
+                                <i class="fas fa-th-large me-1"></i> Danh mục
                             </a>
                             <ul class="dropdown-menu border-0 shadow-lg mt-2 loaiSanPham">
+                                @* Các loại sản phẩm *@
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item py-2 text-primary fw-bold" asp-area="Customer" asp-controller="Home" asp-action="Index">Xem tất cả →</a></li>
+                                <li>
+                                    <a class="dropdown-item fw-semibold text-warning"
+                                       asp-area="Customer" asp-controller="Home" asp-action="Index">
+                                        Xem tất cả sản phẩm →
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
 
-                    <!-- Thanh tìm kiếm (giữa) -->
-                    <form class="d-flex align-items-center mx-lg-5 flex-grow-1 max-w-650"
+                    <!-- Thanh tìm kiếm: bỏ combobox "Tất cả" -->
+                    <form class="header-search mx-lg-4 flex-grow-1"
                           asp-area="Customer"
                           asp-controller="Product"
                           asp-action="Search"
                           method="get"
                           role="search">
-                        <div class="input-group input-group-lg border rounded-pill overflow-hidden shadow-sm">
-                            <select class="btn btn-outline-secondary border-0 rounded-pill-left"
-                                    style="width: 130px;"
-                                    name="category">
-                                <option selected value="Tất cả">Tất cả</option>
-                                <option value="Điện thoại">Điện thoại</option>
-                                <option value="Laptop">Laptop</option>
-                                <option value="Phụ kiện">Phụ kiện</option>
-                            </select>
-                            <input type="search" class="form-control border-0 ps-0"
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-text border-0 bg-transparent">
+                                <i class="fas fa-search"></i>
+                            </span>
+                            <input type="search"
+                                   class="form-control border-0"
                                    name="searchQuery"
-                                   placeholder="Bạn đang tìm gì hôm nay?..."
-                                   aria-label="Search">
-                            <button class="btn btn-primary rounded-pill-right px-4" type="submit">
-                                <i class="fas fa-search fs-5"></i>
-                            </button>
+                                   placeholder="Bạn muốn tìm gì hôm nay?..."
+                                   aria-label="Search" />
                         </div>
                     </form>
 
-                    <!-- Menu phải: Giỏ hàng + Tài khoản -->
-                    <ul class="navbar-nav align-items-center gap-3 ms-lg-4">
+                    <!-- Menu phải -->
+                    <ul class="navbar-nav align-items-center gap-2 gap-lg-3 ms-lg-2">
 
                         <!-- Giỏ hàng -->
-                        <li class="nav-item position-relative">
-                            <a id="cart-link" class="nav-link text-dark fs-4 hover-text-primary position-relative"
+                        <li class="nav-item">
+                            <a id="cart-link" class="nav-link header-icon-btn position-relative"
                                href="/Customer/Cart/Index">
                                 <i class="fas fa-shopping-cart"></i>
                                 <span id="cart-count-badge"
@@ -116,16 +116,17 @@
                             </a>
                         </li>
 
-                        <!-- Chatbox -->
+                        <!-- Chat -->
                         <li class="nav-item">
-                            <a class="nav-link text-dark fs-4 hover-text-primary" href="/Customer/Chat">
+                            <a class="nav-link header-icon-btn"
+                               href="/Customer/Chat">
                                 <i class="fab fa-facebook-messenger"></i>
                             </a>
                         </li>
 
                         <!-- Thông báo -->
                         <li class="nav-item">
-                            <a class="nav-link text-dark fs-4 hover-text-primary position-relative" href="#">
+                            <a class="nav-link header-icon-btn position-relative" href="#">
                                 <i class="far fa-bell"></i>
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
                                       style="font-size: 0.55rem;">•</span>
@@ -139,6 +140,7 @@
             </div>
         </nav>
     </header>
+
     <!-- FULL WIDTH CONTENT -->
     @RenderSection("FullWidthSlider", required: false)
 

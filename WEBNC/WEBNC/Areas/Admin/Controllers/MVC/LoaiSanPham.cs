@@ -9,13 +9,13 @@ namespace WEBNC.Areas.Admin.Controllers.MVC
         {
             return View();
         }
-        public IActionResult Upsert()
+        public IActionResult Create()
         {
-            return View();
+            return View("Upsert");
         }
-        public IActionResult Delete()
+        public IActionResult Edit(string id)
         {
-            return View();
+            return View("Upsert");
         }
     }
 }

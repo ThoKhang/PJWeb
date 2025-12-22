@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WEBNC.DataAccess.Repository.IRepository;
+using WEBNC.Models;
 
 [Area("Admin")]
 [Route("api/admin/loaisanpham")]
@@ -24,18 +25,31 @@ public class LoaiSanPhamController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(string id)
     {
-        var obj = _unitOfWork.LoaiSanPham.GetFirstOrDefault(x => x.idLoaiSanPham == id);
-        if (obj == null)
+        var loai = _unitOfWork.LoaiSanPham
+            .GetFirstOrDefault(x => x.idLoaiSanPham == id);
+        if (loai == null)
             return NotFound(new { message = "Không tồn tại" });
-        try
+        bool dangDuocSuDung = _unitOfWork.SanPham.GetAll(x => x.idLoaiSanPham == id).Any();
+        if (dangDuocSuDung)
+            return BadRequest(new{message = "Không thể xóa vì loại sản phẩm đang được sử dụng"});
+        _unitOfWork.LoaiSanPham.Remove(loai);
+        _unitOfWork.Save();
+        return Ok(new { success = true });
+    }
+    [HttpPost]
+    public IActionResult CreateOrUpdate([FromBody] LoaiSanPham model)
+    {
+        if (model == null)
+            return BadRequest();
+        var obj = _unitOfWork.LoaiSanPham.GetFirstOrDefault(x => x.idLoaiSanPham == model.idLoaiSanPham);
+        if (obj != null)
         {
-            _unitOfWork.LoaiSanPham.Remove(obj);
+            obj.tenLoaiSanPham = model.tenLoaiSanPham;
             _unitOfWork.Save();
-            return Ok(new { success = true });
+            return Ok(new { success = true, mode = "update" });
         }
-        catch
-        {
-            return BadRequest(new { message = "Loại sản phẩm đang được sử dụng" });
-        }
+        _unitOfWork.LoaiSanPham.Add(model);
+        _unitOfWork.Save();
+        return Ok(new { success = true, mode = "create" });
     }
 }

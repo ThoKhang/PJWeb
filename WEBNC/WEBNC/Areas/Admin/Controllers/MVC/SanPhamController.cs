@@ -10,11 +10,13 @@ public class SanPhamController : Controller
     {
         _unitOfWork = unitOfWork;
     }
-
     public IActionResult Index()
     {
-        var list = _unitOfWork.SanPham.GetAll(includeProperties: "LoaiSanPham");
-
-        return View(list);
+        return View();
+    }
+    public IActionResult Upsert(string? id)
+    {
+        ViewBag.Id = id;
+        return View();
     }
 }

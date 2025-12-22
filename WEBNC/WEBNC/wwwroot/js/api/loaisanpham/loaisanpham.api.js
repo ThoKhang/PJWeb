@@ -1,4 +1,5 @@
 ﻿import { API_BASE_URL } from "../../config/api.config-admin.js";
+
 export function getAllLoaiSanPham() {
     return fetch(`${API_BASE_URL}/api/admin/loaisanpham`)
         .then(res => res.json());

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WEBNC.DataAccess.Repository.IRepository;
+using WEBNC.Models;
 
 namespace WEBNC.Areas.Admin.Controllers
 {
@@ -32,6 +33,17 @@ namespace WEBNC.Areas.Admin.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpGet("{id}")]
+        public IActionResult GetById(string id)
+        {
+            var sp = _unitOfWork.SanPham.GetFirstOrDefault(
+                x => x.idSanPham == id,
+                includeProperties: "LoaiSanPham,congTy"
+            );
+            if (sp == null)
+                return NotFound();
+            return Ok(sp);
+        }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
@@ -53,5 +65,45 @@ namespace WEBNC.Areas.Admin.Controllers
                 return BadRequest(new { message = "Sản phẩm đang được sử dụng" });
             }
         }
+        [HttpPost("upsert")]
+        public IActionResult Upsert([FromForm] SanPham model, IFormFile? image)
+        {
+            if (model == null)
+                return BadRequest();
+            var sp = _unitOfWork.SanPham
+                .GetFirstOrDefault(x => x.idSanPham == model.idSanPham);
+            if (image != null)
+            {
+                var fileName = Guid.NewGuid() + Path.GetExtension(image.FileName);
+                var path = Path.Combine("wwwroot/images/sanpham", fileName);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    image.CopyTo(stream);
+                }
+
+                model.imageURL = "/images/sanpham/" + fileName;
+            }
+
+            if (sp == null)
+            {
+                _unitOfWork.SanPham.Add(model);
+            }
+            else
+            {
+                sp.tenSanPham = model.tenSanPham;
+                sp.gia = model.gia;
+                sp.soLuongHienCon = model.soLuongHienCon;
+                sp.idLoaiSanPham = model.idLoaiSanPham;
+                sp.idCongTy = model.idCongTy;
+
+                if (!string.IsNullOrEmpty(model.imageURL))
+                    sp.imageURL = model.imageURL;
+            }
+
+            _unitOfWork.Save();
+            return Ok(new { success = true });
+        }
+
     }
 }

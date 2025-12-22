@@ -1,0 +1,73 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var id = ViewBag.Id as string;
+}
+
+<div class="admin-card p-4">
+    <h3 class="fw-bold mb-2">
+        @(id == null ? "Thêm sản phẩm" : "Chỉnh sửa sản phẩm")
+    </h3>
+    <small class="text-muted">
+        @(id == null ? "Tạo sản phẩm mới" : "Cập nhật thông tin sản phẩm")
+    </small>
+
+    <hr />
+
+    <form id="frmSanPham" enctype="multipart/form-data">
+        <input type="hidden" id="idSanPham" value="@id" />
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Tên sản phẩm</label>
+                <input class="form-control" id="tenSanPham" />
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">Giá</label>
+                <input type="number" class="form-control" id="gia" />
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">Tồn kho</label>
+                <input type="number" class="form-control" id="soLuong" />
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Loại sản phẩm</label>
+                <select id="idLoaiSanPham" class="form-select"></select>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Công ty</label>
+                <select id="idCongTy" class="form-select"></select>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Hình ảnh</label>
+                <input type="file" id="image" class="form-control" />
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Ảnh hiện tại</label>
+                <div>
+                    <img id="previewImg"
+                         class="rounded border"
+                         style="max-height:120px; display:none;" />
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4 d-flex gap-2">
+            <button type="submit" class="btn btn-brand">
+                Lưu
+            </button>
+            <a href="/Admin/SanPham" class="btn btn-light">
+                Quay lại
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script type="module" src="~/js/pages/sanpham.upsert.js"></script>
+}

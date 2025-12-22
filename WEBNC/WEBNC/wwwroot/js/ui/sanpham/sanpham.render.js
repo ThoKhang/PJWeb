@@ -90,11 +90,12 @@
                 render: function (id) {
                     return `
                         <div class="d-flex justify-content-center gap-2">
-                            <a href="/Admin/SanPham/Edit/${id}"
+                           <a href="/Admin/SanPham/Upsert/${id}"
                                class="btn-mini"
                                title="Chỉnh sửa">
-                                <i class="fa-solid fa-pen-to-square"></i>
+                               <i class="fa-solid fa-pen-to-square"></i>
                             </a>
+
 
                             <button class="btn-mini btn-mini-danger btn-delete"
                                     data-id="${id}"

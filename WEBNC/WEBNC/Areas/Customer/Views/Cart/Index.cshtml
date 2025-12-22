@@ -2,91 +2,99 @@
     Layout = "_Layout";
 }
 
-<!-- Single Page Header start -->
-<div class="container-fluid luxury-page-header">
-    <div class="container text-center py-5">
-        <h1 class="display-3 text-gold fw-bold text-shadow mb-3">GIỎ HÀNG</h1>
+@section Styles {
+    <link rel="stylesheet" href="~/css/cart.css" />
+}
 
-        <ol class="breadcrumb justify-content-center mb-0 p-2 rounded-3">
+<!-- PAGE HEADER -->
+<div class="container-fluid cart-page-header">
+    <div class="container text-center py-4 py-md-5">
+        <h1 class="cart-title mb-3">GIỎ HÀNG</h1>
+
+        <ol class="breadcrumb cart-breadcrumb justify-content-center mb-0">
             <li class="breadcrumb-item">
-                <a href="/Customer/Home" class="text-white-50 text-decoration-none fw-semibold">Home</a>
+                <a href="/Customer/Home" class="text-decoration-none">Home</a>
             </li>
-            <li class="breadcrumb-item active fw-semibold" aria-current="page">
+            <li class="breadcrumb-item active" aria-current="page">
                 Cart
             </li>
         </ol>
     </div>
 </div>
 
+<!-- CART PAGE -->
+<div class="container-fluid py-4 py-md-5 cart-page">
+    <div class="container">
+        <div class="row g-4">
 
-<!-- Single Page Header End -->
-<!-- Cart Page Start -->
-<div class="container-fluid py-5">
-    <div class="container py-5">
-
-        <!-- TABLE GIỎ HÀNG -->
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col" style="text-align:center">Chọn</th>
-                        <th scope="col" style="padding-left:30px">Sản phẩm</th>
-                        <th scope="col">Loại</th>
-                        <th scope="col">Giá</th>
-                        <th scope="col">Số lượng</th>
-                        <th scope="col">Tổng</th>
-                        <th scope="col">Xóa</th>
-                    </tr>
-                </thead>
-
-                <tbody id="cart-body">
-                    <!-- JS sẽ render vào đây -->
-                </tbody>
-
-            </table>
-        </div>
-
-        <!-- CART TOTAL -->
-        <div class="row g-4 justify-content-end">
-            <div class="col-8"></div>
-
-            <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
-                <div class="bg-light rounded">
-                    <div class="p-4">
-                        <h1 class="display-6 mb-4 text-center">Chi tiết giỏ hàng<br/> <span class="fw-normal">Tổng tiền</span></h1>
-
-                        <div class="d-flex justify-content-between mb-4">
-                            <h5 class="mb-0 me-4">Thành tiền:</h5>
-                            <p class="mb-0 subtotal-value">0 ₫</p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <h5 class="mb-0 me-4">Shipping</h5>
-                            <p class="mb-0 shipping-value">0 ₫</p>
-                        </div>
+            <!-- TABLE GIỎ HÀNG -->
+            <div class="col-lg-8">
+                <div class="cart-table-wrapper shadow-sm bg-white rounded-4">
+                    <div class="d-flex justify-content-between align-items-center px-3 px-md-4 py-3 border-bottom">
+                        <h5 class="mb-0 fw-semibold">Sản phẩm trong giỏ</h5>
+                        <span id="cart-count-label" class="text-muted small">0 sản phẩm</span>
                     </div>
 
-                    <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-                        <h5 class="mb-0 ps-4 me-4">Tổng tiền</h5>
-                        <p class="mb-0 pe-4 total-value">0 ₫</p>
+                    <div class="table-responsive">
+                        <table class="table mb-0 align-middle cart-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="text-center">Chọn</th>
+                                    <th scope="col">Sản phẩm</th>
+                                    <th scope="col">Loại</th>
+                                    <th scope="col" class="text-end">Giá</th>
+                                    <th scope="col" class="text-center">Số lượng</th>
+                                    <th scope="col" class="text-end">Tổng</th>
+                                    <th scope="col" class="text-center">Xóa</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="cart-body">
+                                <!-- JS sẽ render vào đây -->
+                            </tbody>
+                        </table>
                     </div>
-                    <a href="/Customer/Checkout/PaymentMethod" class="btn btn-primary rounded-pill px-4 py-3 text-uppercase mb-4 ms-4">
-                        Thanh toán
-                    </a>
                 </div>
             </div>
+
+            <!-- CART TOTAL -->
+            <div class="col-lg-4">
+                <div class="cart-summary shadow-sm bg-white rounded-4">
+                    <div class="p-4 pb-3 border-bottom">
+                        <h5 class="mb-2 fw-semibold text-uppercase text-center">Chi tiết giỏ hàng</h5>
+                        <p class="text-muted text-center small mb-0">
+                            Kiểm tra lại sản phẩm và phí trước khi thanh toán.
+                        </p>
+                    </div>
+
+                    <div class="p-4">
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Thành tiền</span>
+                            <span class="subtotal-value fw-semibold">0 ₫</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Shipping</span>
+                            <span class="shipping-value fw-semibold">0 ₫</span>
+                        </div>
+
+                        <hr class="my-3" />
+
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <span class="fw-semibold fs-5">Tổng tiền</span>
+                            <span class="total-value fw-bold fs-4 text-primary">0 ₫</span>
+                        </div>
+
+                        <a href="/Customer/Checkout/PaymentMethod"
+                           class="btn btn-primary w-100 rounded-pill py-3 text-uppercase fw-semibold">
+                            Thanh toán
+                        </a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
-<style>
-    .cart-img {
-        width: 120px;
-        height: 120px;
-        object-fit: cover;
-        border-radius: 8px;
-        border: 1px solid #ddd;
-    }
-</style>
-<!-- Cart Page End -->
 
 <script src="~/js/cart.js"></script>

@@ -1,0 +1,171 @@
+﻿/* =========================
+   CART PAGE - CLEAN DESIGN
+========================= */
+
+:root {
+    --primary-color: #ff9800;
+    --primary-color-dark: #e07c00;
+    --cart-border: #e5e7eb;
+    --cart-bg: #f9fafb;
+    --cart-text-main: #111827;
+    --cart-text-muted: #6b7280;
+}
+
+/* HEADER TRANG GIỎ HÀNG - NỀN TRUNG TÍNH, KHÔNG CAM CHÓI */
+.cart-page-header {
+    background-color: var(--cart-bg);
+    border-bottom: 1px solid var(--cart-border);
+}
+
+.cart-title {
+    font-size: clamp(2rem, 3vw, 2.7rem);
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--cart-text-main);
+    text-transform: uppercase;
+}
+
+/* Breadcrumb nhỏ gọn, hiện đại */
+.cart-breadcrumb {
+    background-color: #ffffff;
+    display: inline-flex;
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+    font-size: 0.9rem;
+}
+
+    .cart-breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+        color: var(--cart-text-muted);
+    }
+
+    .cart-breadcrumb .breadcrumb-item a {
+        color: var(--cart-text-muted);
+    }
+
+    .cart-breadcrumb .breadcrumb-item.active {
+        color: var(--cart-text-main);
+        font-weight: 600;
+    }
+
+/* BACKGROUND NHẸ CHO PHẦN NỘI DUNG */
+.cart-page {
+    background-color: #f3f4f6;
+}
+
+/* ===== BẢNG GIỎ HÀNG ===== */
+.cart-table-wrapper {
+    border-radius: 18px;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.cart-table thead th {
+    background-color: #f9fafb;
+    border-bottom: 1px solid var(--cart-border);
+    color: var(--cart-text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+}
+
+.cart-table tbody tr {
+    border-bottom: 1px solid #eef2f7;
+}
+
+    .cart-table tbody tr:last-child {
+        border-bottom: none;
+    }
+
+.cart-table td {
+    font-size: 0.95rem;
+    vertical-align: middle;
+}
+
+/* ẢNH SẢN PHẨM (nếu JS dùng class này) */
+.cart-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 1px solid #e5e7eb;
+}
+
+/* INPUT SỐ LƯỢNG (nếu JS dùng class này) */
+.cart-qty-input {
+    width: 72px;
+    text-align: center;
+    border-radius: 999px;
+    border: 1px solid #e5e7eb;
+    padding: 0.3rem 0.4rem;
+    font-size: 0.9rem;
+}
+
+/* NÚT XOÁ (nếu JS dùng class này) */
+.cart-remove-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: none;
+    background-color: #fee2e2;
+    color: #ef4444;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-size: 0.9rem;
+}
+
+    .cart-remove-btn:hover {
+        background-color: #ef4444;
+        color: #ffffff;
+    }
+
+/* ===== CARD TỔNG TIỀN ===== */
+.cart-summary {
+    border-radius: 18px;
+    background-color: #ffffff;
+}
+
+    .cart-summary .text-primary {
+        color: var(--primary-color-dark) !important;
+    }
+
+    .cart-summary hr {
+        border-color: var(--cart-border);
+    }
+
+    /* Nút thanh toán cam, hiện đại */
+    .cart-summary .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+        .cart-summary .btn-primary:hover {
+            background-color: var(--primary-color-dark);
+            border-color: var(--primary-color-dark);
+        }
+
+/* RESPONSIVE */
+@media (max-width: 991.98px) {
+    .cart-page {
+        padding-top: 2rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .cart-title {
+        font-size: 1.7rem;
+    }
+
+    .cart-table thead {
+        font-size: 0.7rem;
+    }
+
+    .cart-img {
+        width: 64px;
+        height: 64px;
+    }
+}

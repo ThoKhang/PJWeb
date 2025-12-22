@@ -12,20 +12,22 @@ $(document).ready(function () {
             dataSrc: ""
         },
         columns: [
+            // Mã thanh toán
             { data: "idThanhToan" },
 
+            // Mã đơn hàng
             {
                 data: "donDatHang",
-                render: function (data) {
-                    return data && data.idDonDat ? data.idDonDat : "";
-                }
                 render: d => d?.idDonDat ?? "---"
             },
 
+            // Phương thức
             {
                 data: "phuongThuc",
                 render: p => `<span class="badge bg-info">${p}</span>`
             },
+
+            // Số tiền
             {
                 data: "soTien",
                 className: "text-end",
@@ -33,57 +35,56 @@ $(document).ready(function () {
                     v ? `${Number(v).toLocaleString("vi-VN")} ₫` : "---"
             },
 
+            // Trạng thái thanh toán
             {
                 data: "daThanhToan",
                 className: "text-center",
                 render: v => v
-                    ? `<span class="badge bg-success trang-thai-tt" data-status="paid">Đã thanh toán</span>`
-                    : `<span class="badge bg-warning trang-thai-tt" data-status="unpaid" style="cursor:pointer">
+                    ? `<span class="badge bg-success">Đã thanh toán</span>`
+                    : `<span class="badge bg-warning trang-thai-tt" style="cursor:pointer">
                             Chưa thanh toán
                        </span>`
             },
+
+            // Ngày thanh toán
             {
                 data: "ngayThanhToan",
-                render: d =>
-                    d ? new Date(d).toLocaleString("vi-VN") : "-"
+                render: d => d ? new Date(d).toLocaleString("vi-VN") : "-"
             },
 
+            // Mã giao dịch
             { data: "maGiaoDich" },
 
+            // Thao tác
             {
                 data: "idThanhToan",
                 className: "text-center",
                 orderable: false,
                 searchable: false,
                 render: function (id, type, row) {
+
                     const detailUrl = `/Admin/ThanhToan/Details/${id}`;
 
                     const markPaidBtn = row.daThanhToan
                         ? ""
-                        : `<button class="btn btn-sm btn-success btn-mark-paid me-1" data-id="${id}">
-                               <i class="fa fa-check"></i>
-                           </button>`;
+                        : `
+                            <button class="btn btn-sm btn-success btn-mark-paid me-1"
+                                    data-id="${id}">
+                                <i class="fa fa-check"></i>
+                            </button>
+                          `;
 
                     return `
                         <a href="${detailUrl}" class="btn btn-sm btn-info me-1">
-                            <i class="fa fa-info-circle"></i>
+                            <i class="fa fa-eye"></i>
                         </a>
                         ${markPaidBtn}
-                        <button class="btn btn-sm btn-danger btn-delete" data-id="${id}">
+                        <button class="btn btn-sm btn-danger btn-delete"
+                                data-id="${id}">
                             <i class="fa fa-trash"></i>
                         </button>
                     `;
                 }
-                render: id => `
-                    <a href="/Admin/ThanhToan/Details/${id}"
-                       class="btn btn-sm btn-info me-1">
-                        <i class="fa fa-eye"></i>
-                    </a>
-                    <button class="btn btn-sm btn-danger btn-delete"
-                            data-id="${id}">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                `
             }
         ],
         language: {
@@ -91,12 +92,10 @@ $(document).ready(function () {
         }
     });
 
-       //ĐÁNH DẤU ĐÃ THANH TOÁN
+    // ===== ĐÁNH DẤU ĐÃ THANH TOÁN =====
     $("#tblThanhToan").on("click", ".trang-thai-tt", function () {
 
-        const badge = $(this);
-        const row = table.row(badge.closest("tr")).data();
-
+        const row = table.row($(this).closest("tr")).data();
         if (row.daThanhToan) return;
 
         Swal.fire({
@@ -110,9 +109,7 @@ $(document).ready(function () {
             icon: "question",
             showCancelButton: true,
             confirmButtonText: "Xác nhận",
-            cancelButtonText: "Huỷ",
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33"
+            cancelButtonText: "Huỷ"
         }).then(result => {
 
             if (!result.isConfirmed) return;
@@ -121,14 +118,12 @@ $(document).ready(function () {
                 url: `/api/admin/thanhtoan/${row.idThanhToan}/mark-paid`,
                 type: "PATCH",
                 success: function () {
-
                     Swal.fire({
                         icon: "success",
                         title: "Đã cập nhật!",
                         timer: 1200,
                         showConfirmButton: false
                     });
-
                     table.ajax.reload(null, false);
                 },
                 error: function () {
@@ -138,7 +133,7 @@ $(document).ready(function () {
         });
     });
 
-       //XOÁ THANH TOÁN
+    // ===== XOÁ THANH TOÁN =====
     $("#tblThanhToan").on("click", ".btn-delete", function () {
 
         const id = $(this).data("id");
@@ -159,14 +154,12 @@ $(document).ready(function () {
                 url: `/api/admin/thanhtoan/${id}`,
                 type: "DELETE",
                 success: function () {
-
                     Swal.fire({
                         icon: "success",
                         title: "Đã xoá!",
                         timer: 1200,
                         showConfirmButton: false
                     });
-
                     table.ajax.reload(null, false);
                 },
                 error: function () {

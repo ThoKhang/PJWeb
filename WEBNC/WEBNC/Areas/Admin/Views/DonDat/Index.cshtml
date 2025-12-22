@@ -24,7 +24,6 @@
                         <th class="text-center">Trạng thái</th>
                         <th class="text-center">Thanh toán</th>
                         <th>Ngày đặt</th>
-                        <th class="text-center">Thao tác</th>
                     </tr>
                 </thead>
             </table>
@@ -77,16 +76,6 @@
                 {
                     data: 'ngayDat',
                     render: d => d ? new Date(d).toLocaleDateString('vi-VN') : ''
-                },
-                {
-                    data: 'idDonDat',
-                    className: 'text-center',
-                    render: id => `
-                        <a href="/Admin/DonDatHang/Details?id=${id}"
-                           class="btn btn-sm btn-info">
-                            <i class="fa fa-eye"></i>
-                        </a>
-                    `
                 }
             ]
         });

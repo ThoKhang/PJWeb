@@ -74,17 +74,26 @@
                         </li>
                     </ul>
 
-                    <!-- Thanh tìm kiếm (giữa) - đẹp như Shopee/Tiki -->
-                    <form class="d-flex align-items-center mx-lg-5 flex-grow-1 max-w-650" role="search">
+                    <!-- Thanh tìm kiếm (giữa) -->
+                    <form class="d-flex align-items-center mx-lg-5 flex-grow-1 max-w-650"
+                          asp-area="Customer"
+                          asp-controller="Product"
+                          asp-action="Search"
+                          method="get"
+                          role="search">
                         <div class="input-group input-group-lg border rounded-pill overflow-hidden shadow-sm">
-                            <select class="btn btn-outline-secondary border-0 rounded-pill-left" style="width: 130px;">
-                                <option selected>Tất cả</option>
-                                <option>Điện thoại</option>
-                                <option>Laptop</option>
-                                <option>Phụ kiện</option>
+                            <select class="btn btn-outline-secondary border-0 rounded-pill-left"
+                                    style="width: 130px;"
+                                    name="category">
+                                <option selected value="Tất cả">Tất cả</option>
+                                <option value="Điện thoại">Điện thoại</option>
+                                <option value="Laptop">Laptop</option>
+                                <option value="Phụ kiện">Phụ kiện</option>
                             </select>
                             <input type="search" class="form-control border-0 ps-0"
-                                   placeholder="Bạn đang tìm gì hôm nay?..." aria-label="Search">
+                                   name="searchQuery"
+                                   placeholder="Bạn đang tìm gì hôm nay?..."
+                                   aria-label="Search">
                             <button class="btn btn-primary rounded-pill-right px-4" type="submit">
                                 <i class="fas fa-search fs-5"></i>
                             </button>

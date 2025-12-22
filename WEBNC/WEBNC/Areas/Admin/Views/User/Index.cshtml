@@ -1,0 +1,49 @@
+﻿<h2>Quản lý người dùng</h2>
+
+<table id="tblUsers" class="table table-bordered table-striped" width="100%">
+    <thead>
+        <tr>
+            <th>Tài khoản</th>
+            <th>Email</th>
+            <th>Vai trò</th>
+            <th>OTP</th>
+            <th>Trạng thái</th>
+        </tr>
+    </thead>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#tblUsers').DataTable({
+            ajax: {
+                url: '/api/admin/users',
+                dataSrc: ''
+            },
+            columns: [
+                { data: 'userName' },
+                { data: 'email' },
+                {
+                    data: 'role',
+                    render: role => role
+                        ? `<span class="badge bg-primary">${role}</span>`
+                        : `<span class="badge bg-secondary">User</span>`
+                },
+                {
+                    data: 'isOtpVerified',
+                    render: v => v
+                        ? `<span class="badge bg-success">Đã xác thực</span>`
+                        : `<span class="badge bg-warning">Chưa xác thực</span>`
+                },
+                {
+                    data: 'emailConfirmed',
+                    render: v => v
+                        ? `<span class="badge bg-success">Active</span>`
+                        : `<span class="badge bg-danger">Inactive</span>`
+                }
+            ]
+        });
+    });
+</script>

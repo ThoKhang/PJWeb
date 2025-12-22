@@ -59,12 +59,14 @@ namespace WEBNC.Areas.Customer.Controllers.API
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(string id)
+        public IActionResult SanPhamById(string? id)
         {
-            var obj = _unitOfWork.LoaiSanPham.GetFirstOrDefault(x => x.idLoaiSanPham == id);
-            if (obj == null)
+            if (id == null || id == "")
+                return BadRequest();
+            var sanPham = _unitOfWork.SanPham.GetFirstOrDefault(item => item.idSanPham == id);
+            if (sanPham == null)
                 return NotFound();
-            return Ok(obj);
+            return Ok(new { data = sanPham });
         }
         [HttpGet("top")]
         public IActionResult TopSanPhamBanChay()

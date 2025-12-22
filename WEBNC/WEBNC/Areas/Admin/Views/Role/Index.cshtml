@@ -1,18 +1,59 @@
-﻿<h2>Quản lý Role</h2>
+﻿@{
+    ViewData["Title"] = "Quản lý Role";
+}
 
-<div class="mb-3">
-    <input type="text" id="txtRoleName" class="form-control w-25 d-inline"
-           placeholder="Tên role mới" />
-    <button id="btnAddRole" class="btn btn-primary ms-2">Thêm</button>
+@section Styles {
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+}
+
+<!-- HEADER -->
+<div class="admin-card p-3 mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <div>
+        <div class="crumb mb-1">Tài khoản • Vai trò</div>
+        <h2 class="mb-1 fw-bold">Quản lý Role</h2>
+        <div class="text-muted" style="font-size:13px;">
+            Thêm, chỉnh sửa và quản lý các vai trò trong hệ thống.
+        </div>
+    </div>
 </div>
 
-<table id="tblRoles" class="table table-bordered table-striped" width="100%">
-    <thead>
-        <tr style="text-align:center">
-            <th>Tên role</th>
-            <th>Thao tác</th>
-        </tr>
-    </thead>
-</table>
+<!-- FORM THÊM ROLE -->
+<div class="admin-card p-3 mb-4">
+    <div class="d-flex flex-wrap align-items-center gap-2">
+        <input type="text"
+               id="txtRoleName"
+               class="form-control input-admin"
+               style="max-width:260px;"
+               placeholder="Nhập tên role mới..." />
 
-<script type="module" src="~/js/pages/role.page.js"></script>
+        <button id="btnAddRole"
+                class="btn btn-brand">
+            <i class="fa-solid fa-plus me-1"></i>
+            Thêm role
+        </button>
+    </div>
+</div>
+
+<!-- BẢNG ROLE -->
+<div class="admin-card p-2">
+    <div class="table-wrap">
+        <table id="tblRoles"
+               class="table-admin display nowrap"
+               style="width:100%">
+            <thead>
+                <tr>
+                    <th>Tên role</th>
+                    <th style="min-width:140px;">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @* DataTables + role.page.js sẽ fill dữ liệu *@
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="module" src="~/js/pages/role.page.js"></script>
+}

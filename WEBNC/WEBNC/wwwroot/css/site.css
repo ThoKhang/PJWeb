@@ -29,6 +29,96 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+/* Header với gradient cam */
+.main-header {
+    background: linear-gradient(to right, #FF8C42, #FF6B35) !important;
+    border-bottom: none !important;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+
+.main-header .navbar {
+    background: transparent !important;
+}
+
+/* Màu chữ và icon trong header */
+.main-header .navbar-brand,
+.main-header .header-nav-link,
+.main-header .header-icon-btn,
+.main-header .header-logo-text,
+.main-header .header-logo-icon,
+.main-header .nav-link:not(.header-search .nav-link):not(.dropdown-item),
+.main-header .text-dark:not(.header-search .text-dark):not(.dropdown-item .text-dark),
+.main-header .text-primary:not(.header-search .text-primary):not(.dropdown-item .text-primary),
+.main-header i:not(.header-search i):not(.dropdown-menu i),
+.main-header .fas:not(.header-search .fas):not(.dropdown-menu .fas),
+.main-header .fab:not(.header-search .fab):not(.dropdown-menu .fab),
+.main-header .far:not(.header-search .far):not(.dropdown-menu .far) {
+    color: #ffffff !important;
+}
+
+/* Icon danh mục và profile - dễ nhìn hơn */
+.main-header .header-nav-link i,
+.main-header #navbarDropdownUser i,
+.main-header .nav-link i:not(.header-search i) {
+    color: #fff8e1 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 0 1px rgba(0, 0, 0, 0.2) !important;
+    font-weight: 600 !important;
+}
+
+/* Icon profile (user-circle) - làm nổi bật hơn */
+.main-header #navbarDropdownUser i.fa-user-circle {
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 0 2px rgba(0, 0, 0, 0.3) !important;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3)) !important;
+}
+
+/* Hover effect cho header */
+.main-header .header-nav-link:hover,
+.main-header .header-icon-btn:hover,
+.main-header .navbar-brand:hover {
+    color: #fff8e1 !important;
+    opacity: 0.9;
+}
+
+/* Navbar toggler cho mobile */
+.main-header .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.main-header .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Giữ nguyên thanh tìm kiếm - không ảnh hưởng */
+.main-header .header-search {
+    background: transparent !important;
+}
+
+.main-header .header-search .input-group {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 50px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.main-header .header-search .form-control {
+    background-color: transparent !important;
+    color: #333 !important;
+}
+
+.main-header .header-search .form-control::placeholder {
+    color: #999 !important;
+}
+
+.main-header .header-search .input-group-text {
+    background-color: transparent !important;
+    color: #666 !important;
+}
+
+.main-header .header-search i {
+    color: #666 !important;
+}
+
 .navbar {
     background: linear-gradient(to right, #ffffff, #f8f9fa);
 }
@@ -45,5 +135,42 @@ body {
 .form-control:focus {
     box-shadow: 0 0 6px rgba(13, 110, 253, 0.4);
     border-color: #0d6efd;
+}
+
+/* Màu icon trong dropdown menu profile */
+.dropdown-menu .fa-id-card,
+.dropdown-menu i.fa-id-card,
+.dropdown-item .fa-id-card,
+.dropdown-item i.fa-id-card,
+.dropdown-menu .text-secondary.fa-id-card,
+.dropdown-item .text-secondary.fa-id-card {
+    color: #258cfb !important; /* Xanh dương cho Hồ sơ cá nhân */
+}
+
+.dropdown-menu .fa-box-open,
+.dropdown-menu i.fa-box-open,
+.dropdown-item .fa-box-open,
+.dropdown-item i.fa-box-open,
+.dropdown-menu .text-success.fa-box-open,
+.dropdown-item .text-success.fa-box-open {
+    color: #28a745 !important; /* Xanh lá cho Lịch sử đơn hàng */
+}
+
+.dropdown-menu .fa-undo-alt,
+.dropdown-menu i.fa-undo-alt,
+.dropdown-item .fa-undo-alt,
+.dropdown-item i.fa-undo-alt,
+.dropdown-menu .text-warning.fa-undo-alt,
+.dropdown-item .text-warning.fa-undo-alt {
+    color: #ff9800 !important; /* Cam cho Lịch sử đổi trả */
+}
+
+.dropdown-menu .fa-sign-out-alt,
+.dropdown-menu i.fa-sign-out-alt,
+.dropdown-item .fa-sign-out-alt,
+.dropdown-item i.fa-sign-out-alt,
+#logoutForm .fa-sign-out-alt,
+#logoutForm i.fa-sign-out-alt {
+    color: #dc3545 !important; /* Đỏ cho Đăng xuất */
 }
 

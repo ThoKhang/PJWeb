@@ -26,7 +26,12 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddControllers() // <--- THÊM DÒNG NÀY
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler =
+            System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
 // ════════════════════════════════════════════
 // 2. Database
 // ════════════════════════════════════════════

@@ -6,7 +6,7 @@
     var selectedCategory = ViewBag.SelectedCategory;
 }
 
-<div class="container my-5">
+<div class="container my-5 product">
     <h2 class="mb-3">Kết quả tìm kiếm</h2>
 
     @if (!string.IsNullOrEmpty(searchQuery))
@@ -35,7 +35,7 @@
 
                                 <div class="product-details">
                                     <a href="/Customer/Home/Details?id=@product.idSanPham">
-                                        <i class="fa fa-eye fa-1x"></i>
+                                        <i class="fa fa-eye fa-1x text-white"></i>
                                     </a>
                                 </div>
                             </div>

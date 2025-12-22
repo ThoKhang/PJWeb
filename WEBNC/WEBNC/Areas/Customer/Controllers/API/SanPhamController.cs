@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WEBNC.DataAccess.Repository.IRepository;
@@ -34,6 +34,28 @@ namespace WEBNC.Areas.Customer.Controllers.API
             );
 
             return Ok(new { data = filtered });
+        }
+
+        [HttpGet("search")]
+        public IActionResult Search([FromQuery] string q)
+        {
+            if (string.IsNullOrWhiteSpace(q))
+                return Ok(new { data = Enumerable.Empty<object>() });
+            q = q.Trim();
+            var products = _unitOfWork.SanPham.GetAll(
+                u => u.tenSanPham.ToLower().Contains(q.ToLower())
+                     || (u.moTa != null && u.moTa.ToLower().Contains(q.ToLower())),
+                includeProperties: "LoaiSanPham"
+            );
+            var result = products.Select(p => new
+            {
+                id = p.idSanPham,
+                tenSanPham = p.tenSanPham,
+                gia = p.gia,
+                imageURL = p.imageURL,
+                loai = p.LoaiSanPham != null ? p.LoaiSanPham.tenLoaiSanPham : ""
+            });
+            return Ok(new { data = result });
         }
 
         [HttpGet("{id}")]
@@ -80,7 +102,7 @@ namespace WEBNC.Areas.Customer.Controllers.API
                 _unitOfWork.chiTietGioHang.IncrementCount(gioHangDb, gioHang.soLuongTrongGio);
                 _unitOfWork.chiTietGioHang.Update(gioHangDb);
 
-                _unitOfWork.save();
+                _unitOfWork.Save();
                 return Ok(new
                 {
                     message = "Cập nhật số lượng sản phẩm trong giỏ hàng",
@@ -91,7 +113,7 @@ namespace WEBNC.Areas.Customer.Controllers.API
             {
                 // Thêm mới
                 _unitOfWork.chiTietGioHang.Add(gioHang);
-                _unitOfWork.save();
+                _unitOfWork.Save();
                 return Ok(new
                 {
                     message = "Đã thêm sản phẩm vào giỏ hàng",

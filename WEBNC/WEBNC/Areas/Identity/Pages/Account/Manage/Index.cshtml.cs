@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
@@ -59,6 +59,15 @@ namespace WEBNC.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "Họ và tên")]
+            public string HoTen { get; set; }
+
+            [Display(Name = "Số nhà, tên đường")]
+            public string SoNha { get; set; }
+
+            [Display(Name = "Phường/Xã")]
+            public string IdPhuongXa { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
@@ -70,7 +79,10 @@ namespace WEBNC.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                HoTen = user.hoTen,
+                SoNha = user.soNha,
+                IdPhuongXa = user.idPhuongXa
             };
         }
 
@@ -107,6 +119,21 @@ namespace WEBNC.Areas.Identity.Pages.Account.Manage
                 if (!setPhoneResult.Succeeded)
                 {
                     StatusMessage = "Unexpected error when trying to set phone number.";
+                    return RedirectToPage();
+                }
+            }
+
+            // Update custom fields
+            if (Input.HoTen != user.hoTen || Input.SoNha != user.soNha || Input.IdPhuongXa != user.idPhuongXa)
+            {
+                user.hoTen = Input.HoTen;
+                user.soNha = Input.SoNha;
+                user.idPhuongXa = Input.IdPhuongXa;
+
+                var result = await _userManager.UpdateAsync(user);
+                if (!result.Succeeded)
+                {
+                    StatusMessage = "Unexpected error when trying to update profile.";
                     return RedirectToPage();
                 }
             }

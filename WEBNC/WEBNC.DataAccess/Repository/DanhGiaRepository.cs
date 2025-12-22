@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +16,7 @@ namespace WEBNC.DataAccess.Repository
             _db = db;
         }
 
-        public bool DaDanhGia(string idSanPham, string userId, string idDonDat)
+        public bool DaDanhGia(string idSanPham, string userId, string? idDonDat)
         {
             var danhGia = GetFirstOrDefault(u => u.idSanPham == idSanPham && u.userId == userId && u.idDonDat == idDonDat);
             return danhGia != null;

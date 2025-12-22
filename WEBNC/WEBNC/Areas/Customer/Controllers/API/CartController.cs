@@ -47,7 +47,7 @@ namespace WEBNC.Areas.Customer.Controllers.API
                 _unitOfWork.chiTietGioHang.Add(cart);
             }
 
-            _unitOfWork.save();
+            _unitOfWork.Save();
 
             return Ok(new { message = "Đã thêm vào giỏ hàng" });
         }
@@ -91,7 +91,7 @@ namespace WEBNC.Areas.Customer.Controllers.API
             if (cartItem == null)
                 return NotFound(new { success = false, message = "Không tìm thấy sản phẩm trong giỏ hàng" });
             _unitOfWork.chiTietGioHang.Remove(cartItem);
-            _unitOfWork.save();
+            _unitOfWork.Save();
             return Ok(new { success = true, message = "Đã xóa sản phẩm khỏi giỏ hàng" });
         }
         [HttpPut]
@@ -104,7 +104,7 @@ namespace WEBNC.Areas.Customer.Controllers.API
                 return NotFound();
             _unitOfWork.chiTietGioHang.IncrementCount(cart, 1);
             _unitOfWork.chiTietGioHang.Update(cart);
-            _unitOfWork.save();
+            _unitOfWork.Save();
             return Ok( new { soLuong = cart.soLuongTrongGio });
         }
         [HttpPut]
@@ -119,7 +119,7 @@ namespace WEBNC.Areas.Customer.Controllers.API
                 return NotFound();
             _unitOfWork.chiTietGioHang.DecrementCount(cart, 1);
             _unitOfWork.chiTietGioHang.Update(cart);
-            _unitOfWork.save();
+            _unitOfWork.Save();
             return Ok(new {soLuong=cart.soLuongTrongGio});
         }
     }

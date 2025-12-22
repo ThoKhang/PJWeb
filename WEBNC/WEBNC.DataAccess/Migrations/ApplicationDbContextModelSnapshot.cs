@@ -385,6 +385,9 @@ namespace WEBNC.DataAccess.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsOtpVerified")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -449,6 +452,7 @@ namespace WEBNC.DataAccess.Migrations
                             ConcurrencyStamp = "B3D2E5C5-A1E4-4D71-8B2E-C5D4B3A2C1D2",
                             Email = "minhhuy91@gmail.com",
                             EmailConfirmed = true,
+                            IsOtpVerified = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "MINHHUY91@GMAIL.COM",
                             NormalizedUserName = "MINHHUY91@GMAIL.COM",
@@ -1564,11 +1568,9 @@ namespace WEBNC.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("idDonDat")
-                        .IsRequired()
                         .HasColumnType("char(5)");
 
                     b.Property<string>("maGiaoDich")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ngayThanhToan")
@@ -2094,9 +2096,7 @@ namespace WEBNC.DataAccess.Migrations
                 {
                     b.HasOne("WEBNC.Models.DonDatHang", "DonDatHang")
                         .WithMany()
-                        .HasForeignKey("idDonDat")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("idDonDat");
 
                     b.Navigation("DonDatHang");
                 });

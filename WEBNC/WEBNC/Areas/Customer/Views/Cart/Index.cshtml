@@ -70,16 +70,9 @@
                         <h5 class="mb-0 ps-4 me-4">Tổng tiền</h5>
                         <p class="mb-0 pe-4 total-value">0 ₫</p>
                     </div>
-                    <form method="post" asp-area="Customer" asp-action="CreatePaymentMomo" asp-controller="Payment">
-                        <input type="hidden" name="Amount" value="0" />
-                        <input type="hidden" name="OrderId" value="@Guid.NewGuid().ToString()" />
-                        <input type="hidden" name="OrderInfo" value="Thanh Toán Momo tại cửa hàng" />
-                        <input type="hidden" name="FullName" value="@(User.Identity?.Name ?? "Khách hàng")" />
-                        <button class="btn btn-primary rounded-pill px-4 py-3 text-uppercase mb-4 ms-4" type="submit">
-                            Proceed Checkout
-                        </button>
-                    </form>
-
+                    <a href="/Customer/Checkout/PaymentMethod" class="btn btn-primary rounded-pill px-4 py-3 text-uppercase mb-4 ms-4">
+                        Thanh toán
+                    </a>
                 </div>
             </div>
         </div>

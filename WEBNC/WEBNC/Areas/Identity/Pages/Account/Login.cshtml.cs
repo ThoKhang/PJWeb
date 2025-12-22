@@ -78,14 +78,41 @@ namespace WEBNC.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
+                // 🔹 Tìm user theo Email trước
+                var user = await _userManager.FindByEmailAsync(Input.Email);
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Email hoặc mật khẩu không đúng.");
+                    return Page();
+                }
+
+                // 🔹 Đăng nhập dùng user thay vì string email
                 var result = await _signInManager.PasswordSignInAsync(
-                    Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                    user, Input.Password, Input.RememberMe, lockoutOnFailure: false);
 
                 if (result.Succeeded)
                 {
+                    if (!user.IsOtpVerified)
+                    {
+                        await _signInManager.SignOutAsync();
+                        ModelState.AddModelError(string.Empty, "Tài khoản chưa xác thực OTP.");
+                        return Page();
+                    }
+
+                    // 🔹 Nếu là Admin → vào khu vực Admin
+                    if (await _userManager.IsInRoleAsync(user, "Admin"))
+                    {
+                        _logger.LogInformation("Admin logged in.");
+                        //return LocalRedirect("/Admin");
+                        return LocalRedirect("/Admin/SanPham");
+                        //return LocalRedirect("/Admin/Home/Index");
+                    }
+
+                    // 🔹 User thường → về returnUrl
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
+
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
@@ -100,5 +127,6 @@ namespace WEBNC.Areas.Identity.Pages.Account
 
             return Page();
         }
+
     }
 }

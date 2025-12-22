@@ -24,7 +24,7 @@
             <option>3 tháng gần đây</option>
             <option>Năm nay</option>
         </select>
-        <button class="btn-mini">
+        <button class="btn-mini" id="btnRefreshDashboard">
             <i class="fa-solid fa-rotate me-1"></i> Làm mới
         </button>
     </div>
@@ -36,9 +36,9 @@
         <div class="admin-card p-3 h-100 d-flex flex-column">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <span class="text-muted" style="font-size:12px;">Doanh thu hôm nay</span>
-                <span class="pill pill-ok">+12%</span>
+                <span class="pill pill-ok" id="pillTodayRevenueDelta">Hôm nay</span>
             </div>
-            <div class="fw-bold" style="font-size:20px;">12.500.000 ₫</div>
+            <div class="fw-bold" style="font-size:20px;" id="txtTodayRevenue">0 ₫</div>
             <div class="text-muted" style="font-size:12px;">So với hôm qua</div>
         </div>
     </div>
@@ -47,9 +47,9 @@
         <div class="admin-card p-3 h-100 d-flex flex-column">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <span class="text-muted" style="font-size:12px;">Đơn hàng mới</span>
-                <span class="pill pill-ok">+8</span>
+                <span class="pill pill-ok" id="pillTodayOrdersDelta">Hôm nay</span>
             </div>
-            <div class="fw-bold" style="font-size:20px;">48 đơn</div>
+            <div class="fw-bold" style="font-size:20px;" id="txtTodayOrders">0 đơn</div>
             <div class="text-muted" style="font-size:12px;">Trong ngày hôm nay</div>
         </div>
     </div>
@@ -58,9 +58,9 @@
         <div class="admin-card p-3 h-100 d-flex flex-column">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <span class="text-muted" style="font-size:12px;">Người dùng mới</span>
-                <span class="pill pill-warn">+5</span>
+                <span class="pill pill-warn">7 ngày</span>
             </div>
-            <div class="fw-bold" style="font-size:20px;">112 người</div>
+            <div class="fw-bold" style="font-size:20px;" id="txtNewUsers">0 người</div>
             <div class="text-muted" style="font-size:12px;">Trong 7 ngày gần đây</div>
         </div>
     </div>
@@ -71,7 +71,7 @@
                 <span class="text-muted" style="font-size:12px;">Sản phẩm đang bán</span>
                 <span class="pill">Kho</span>
             </div>
-            <div class="fw-bold" style="font-size:20px;">320 sản phẩm</div>
+            <div class="fw-bold" style="font-size:20px;" id="txtActiveProducts">0 sản phẩm</div>
             <div class="text-muted" style="font-size:12px;">Đang còn hàng trong kho</div>
         </div>
     </div>
@@ -83,7 +83,7 @@
         <div class="admin-card p-3 h-100">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h5 class="mb-0">Doanh thu theo tháng</h5>
-                <span class="text-muted" style="font-size:12px;">Demo dữ liệu giả lập</span>
+                <span class="text-muted" style="font-size:12px;">Dữ liệu từ thanh toán</span>
             </div>
             <canvas id="chartRevenue" style="max-height:320px;"></canvas>
         </div>
@@ -97,19 +97,8 @@
             </div>
             <canvas id="chartOrders" style="max-height:260px;"></canvas>
 
-            <div class="mt-3" style="font-size:13px;">
-                <div class="d-flex align-items-center justify-content-between mb-1">
-                    <span>Hoàn thành</span>
-                    <span class="fw-bold">68%</span>
-                </div>
-                <div class="d-flex align-items-center justify-content-between mb-1">
-                    <span>Đang xử lý</span>
-                    <span class="fw-bold">22%</span>
-                </div>
-                <div class="d-flex align-items-center justify-content-between">
-                    <span>Đã hủy</span>
-                    <span class="fw-bold">10%</span>
-                </div>
+            <div class="mt-3" style="font-size:13px;" id="orderStatusSummary">
+                @* JS sẽ tự cập nhật tóm tắt nhỏ này nếu cần *@
             </div>
         </div>
     </div>
@@ -123,7 +112,7 @@
     </div>
 
     <div class="table-wrap">
-        <table class="table-admin mb-0">
+        <table class="table-admin mb-0" id="tblRecentOrders">
             <thead>
                 <tr>
                     <th>Mã đơn</th>
@@ -134,27 +123,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>#DH1023</td>
-                    <td>Nguyễn Văn A</td>
-                    <td>22/12/2025</td>
-                    <td>1.250.000 ₫</td>
-                    <td><span class="status ok">Hoàn thành</span></td>
-                </tr>
-                <tr>
-                    <td>#DH1024</td>
-                    <td>Trần Thị B</td>
-                    <td>22/12/2025</td>
-                    <td>850.000 ₫</td>
-                    <td><span class="status warn">Đang xử lý</span></td>
-                </tr>
-                <tr>
-                    <td>#DH1025</td>
-                    <td>Lê Văn C</td>
-                    <td>21/12/2025</td>
-                    <td>2.150.000 ₫</td>
-                    <td><span class="status bad">Đã hủy</span></td>
-                </tr>
+                @* JS sẽ fill dữ liệu *@
             </tbody>
         </table>
     </div>
@@ -162,53 +131,5 @@
 
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script>
-        const ctxRevenue = document.getElementById('chartRevenue');
-        const ctxOrders = document.getElementById('chartOrders');
-
-        if (ctxRevenue) {
-            new Chart(ctxRevenue, {
-                type: 'line',
-                data: {
-                    labels: ['Th1', 'Th2', 'Th3', 'Th4', 'Th5', 'Th6', 'Th7', 'Th8', 'Th9', 'Th10', 'Th11', 'Th12'],
-                    datasets: [{
-                        label: 'Doanh thu (triệu ₫)',
-                        data: [12, 9, 15, 18, 22, 19, 25, 28, 24, 30, 32, 35],
-                        tension: 0.35,
-                        fill: true,
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: { callback: v => v + 'M' }
-                        }
-                    }
-                }
-            });
-        }
-
-        if (ctxOrders) {
-            new Chart(ctxOrders, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Hoàn thành', 'Đang xử lý', 'Đã hủy'],
-                    datasets: [{ data: [68, 22, 10], borderWidth: 1 }]
-                },
-                options: {
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: { boxWidth: 14, font: { size: 12 } }
-                        }
-                    },
-                    cutout: '60%'
-                }
-            });
-        }
-    </script>
+    <script type="module" src="~/js/pages/dashboard.page.js"></script>
 }

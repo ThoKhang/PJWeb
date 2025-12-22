@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>ADMIN - WEBNC</title>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="d-flex">
+        <div style="width:220px; background:#343a40; color:white; min-height:100vh;">
+            <h5 class="p-3">ADMIN PANEL</h5>
+            <ul class="nav flex-column px-2">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="Admin" asp-controller="SanPham" asp-action="Index">
+                        Sản phẩm
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/Admin/LoaiSanPham">Loại SP</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="flex-fill p-4">
+            @RenderBody()
+        </div>
+    </div>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

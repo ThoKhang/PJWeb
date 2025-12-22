@@ -37,8 +37,8 @@ namespace WEBNC.DataAccess.Repository
         public IHinhAnhDanhGiaRepository HinhAnhDanhGia {get; private set; }
 
         public IXaPhuongRepository XaPhuong { get; private set; }
-
         public IThanhToanRepository ThanhToan { get; private set; }
+
 
         public void Save()
         {

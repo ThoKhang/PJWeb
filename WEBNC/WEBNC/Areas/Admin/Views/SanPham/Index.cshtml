@@ -1,20 +1,33 @@
-﻿@model IEnumerable<WEBNC.Models.SanPham>
-<table class="table table-bordered table-striped">
+﻿@{
+    ViewData["Title"] = "Quản lý sản phẩm";
+}
+
+<link rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+
+<h2 class="mb-3">Quản lý sản phẩm</h2>
+
+<div class="mb-3">
+    <a class="btn btn-primary" href="/Admin/SanPham/Create">
+        + Thêm sản phẩm
+    </a>
+</div>
+
+<table id="tblSanPham"
+       class="display table table-bordered table-striped"
+       style="width:100%">
     <thead>
         <tr>
-            <th>Tên Sản Phẩm</th>
-            <th>Loại Sản Phẩm</th>
-            <th>Mã công ty</th>
+            <th>Mã SP</th>
+            <th>Tên sản phẩm</th>
+            <th>Hình ảnh</th>
+            <th>Loại</th>
+            <th>Công ty</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Thao tác</th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td></td>
-                <td>@item.tenSanPham</td>
-                <td>@item.idLoaiSanPham</td>
-                <td>@item.idCongTy</td>
-            </tr>
-        }
 </table>
+
+<script type="module" src="~/js/pages/sanpham.page.js"></script>

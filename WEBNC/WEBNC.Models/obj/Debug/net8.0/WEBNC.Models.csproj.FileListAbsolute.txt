@@ -76,3 +76,16 @@ C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.
 C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\refint\WEBNC.Models.dll
 C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.pdb
 C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\ref\WEBNC.Models.dll
+E:\PJWeb\WEBNC\WEBNC.Models\bin\Debug\net8.0\WEBNC.Models.deps.json
+E:\PJWeb\WEBNC\WEBNC.Models\bin\Debug\net8.0\WEBNC.Models.dll
+E:\PJWeb\WEBNC\WEBNC.Models\bin\Debug\net8.0\WEBNC.Models.pdb
+E:\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.csproj.AssemblyReference.cache
+E:\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.GeneratedMSBuildEditorConfig.editorconfig
+E:\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.AssemblyInfoInputs.cache
+E:\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.AssemblyInfo.cs
+E:\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.csproj.CoreCompileInputs.cache
+E:\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.sourcelink.json
+E:\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.dll
+E:\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\refint\WEBNC.Models.dll
+E:\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.pdb
+E:\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\ref\WEBNC.Models.dll

@@ -9,5 +9,9 @@ namespace WEBNC.Areas.Admin.Controllers.MVC
         {
             return View();
         }
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }

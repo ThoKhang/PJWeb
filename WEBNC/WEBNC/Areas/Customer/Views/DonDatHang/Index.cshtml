@@ -158,26 +158,12 @@
                         </a>
                 `;
 
-                if (statusText === 'Chờ xác nhận') {
                     actionButtons += `
                         <button onclick="cancelOrder('${item.idDonDat}')" class="btn btn-outline-danger btn-sm btn-action">
                             <i class="fas fa-trash-alt me-1"></i> Hủy
                         </button>
                     `;
-                }
 
-                if (statusText === 'Đã giao' || statusText === 'Hoàn thành') {
-                    actionButtons += `
-                        <a href="/Customer/DanhGia/Index?orderId=${item.idDonDat}" class="btn btn-primary btn-sm btn-action">
-                            <i class="fas fa-star me-1"></i> Đánh giá
-                        </a>
-                    `;
-                    actionButtons += `
-                        <a href="/Customer/YeuCauDoiTra/Index?idDonDat=${item.idDonDat}" class="btn btn-warning btn-sm btn-action text-dark" title="Yêu cầu đổi trả">
-                            <i class="fas fa-undo-alt me-1"></i> Đổi trả
-                        </a>
-                    `;
-                }
                 actionButtons += `</div>`;
 
                 html += `

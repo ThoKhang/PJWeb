@@ -1,0 +1,118 @@
+﻿@{
+    ViewData["Title"] = "Quản lý đánh giá";
+}
+
+<link rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+
+<h2 class="mb-3">Quản lý đánh giá & bình luận</h2>
+
+<table id="tblDanhGia"
+       class="display table table-bordered table-striped"
+       style="width:100%">
+    <thead>
+        <tr>
+            <th style="width:6%">ID</th>
+            <th style="width:12%">Sản phẩm</th>
+            <th style="width:12%">Người dùng</th>
+            <th style="width:8%" class="text-center">Sao</th>
+            <th>Nội dung</th>
+            <th style="width:14%">Ngày</th>
+            <th style="width:10%" class="text-center">Thao tác</th>
+        </tr>
+    </thead>
+</table>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/js/pages/danhgia.page.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            const table = $('#tblDanhGia').DataTable({
+                ajax: {
+                    url: '/api/admin/danhgia',
+                    dataSrc: ''
+                },
+                columns: [
+                    { data: 'idDanhGia' },
+                    {
+                        data: 'sanPham',
+                        render: sp => sp?.tenSanPham ?? '---'
+                    },
+                    {
+                        data: 'user',
+                        render: u => u?.userName ?? 'Ẩn danh'
+                    },
+                    {
+                        data: 'soSao',
+                        className: 'text-center',
+                        render: s => `<span class="badge bg-warning">${s} ★</span>`
+                    },
+                    {
+                        data: 'noiDung',
+                        render: n => n
+                            ? `<span title="${n}">${n.substring(0, 50)}...</span>`
+                            : ''
+                    },
+                    {
+                        data: 'ngayDanhGia',
+                        render: d => new Date(d).toLocaleString('vi-VN')
+                    },
+                    {
+                        data: 'idDanhGia',
+                        className: 'text-center',
+                        orderable: false,
+                        render: id => `
+                            <button class="btn btn-sm btn-danger btn-delete"
+                                    data-id="${id}">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        `
+                    }
+                ],
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json"
+                }
+            });
+            // XOÁ ĐÁNH GIÁ
+            $('#tblDanhGia').on('click', '.btn-delete', function () {
+                const id = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Xoá đánh giá?',
+                    text: 'Hành động này không thể hoàn tác!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Xoá',
+                    cancelButtonText: 'Huỷ',
+                    confirmButtonColor: '#d33'
+                }).then(result => {
+
+                    if (!result.isConfirmed) return;
+
+                    $.ajax({
+                        url: `/api/admin/danhgia/${id}`,
+                        type: 'DELETE',
+                        success: function () {
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Đã xoá!',
+                                timer: 1200,
+                                showConfirmButton: false
+                            });
+
+                            table.ajax.reload(null, false);
+                        },
+                        error: function () {
+                            Swal.fire('Lỗi', 'Không thể xoá đánh giá!', 'error');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+}

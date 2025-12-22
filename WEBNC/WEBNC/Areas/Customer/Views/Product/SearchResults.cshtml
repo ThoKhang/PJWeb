@@ -1,0 +1,48 @@
+@model IEnumerable<WEBNC.Models.SanPham>
+
+@{
+    ViewData["Title"] = "Kết quả tìm kiếm";
+    var searchQuery = ViewBag.SearchQuery;
+    var selectedCategory = ViewBag.SelectedCategory;
+}
+
+<div class="container my-5">
+    <h2 class="mb-3">Kết quả tìm kiếm</h2>
+    @if (!string.IsNullOrEmpty(searchQuery))
+    {
+        <p class="text-muted">Từ khóa: <strong>@searchQuery</strong></p>
+    }
+    @if (Model.Any())
+    {
+        <div class="row g-4">
+            @foreach (var product in Model)
+            {
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="product-item rounded">
+                        <div class="product-item-inner border rounded">
+                            <div class="product-item-inner-item">
+                                <img src="/images/@product.imageURL" class="img-fluid w-100 rounded-top" alt="@product.tenSanPham" style="width:auto;height:250px">
+                                <div class="product-new">New</div>
+                                <div class="product-details">
+                                    <a href="/Customer/Home/Details?id=@product.idSanPham"><i class="fa fa-eye fa-1x"></i></a>
+                                </div>
+                            </div>
+                            <div class="text-center rounded-bottom p-4">
+                                <a href="#" class="d-block mb-2">@product.LoaiSanPham?.tenLoaiSanPham</a>
+                                <a href="#" class="d-block h4">@product.tenSanPham</a>
+                                <del class="me-2 fs-5">@product.gia.ToString("N0") đ</del>
+                                <p class="fs-5 text-dark d-inline">@product.gia.ToString("N0") đ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            Không tìm thấy sản phẩm nào phù hợp với từ khóa "@searchQuery"
+        </div>
+    }
+</div>

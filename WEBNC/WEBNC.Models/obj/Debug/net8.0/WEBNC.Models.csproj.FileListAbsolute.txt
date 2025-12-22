@@ -76,16 +76,3 @@ C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.
 C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\refint\WEBNC.Models.dll
 C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.pdb
 C:\Users\vduon\OneDrive\Desktop\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\ref\WEBNC.Models.dll
-D:\3_BaiTap\PJWEB\PJWeb\WEBNC\WEBNC.Models\bin\Debug\net8.0\WEBNC.Models.deps.json
-D:\3_BaiTap\PJWEB\PJWeb\WEBNC\WEBNC.Models\bin\Debug\net8.0\WEBNC.Models.dll
-D:\3_BaiTap\PJWEB\PJWeb\WEBNC\WEBNC.Models\bin\Debug\net8.0\WEBNC.Models.pdb
-D:\3_BaiTap\PJWEB\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.csproj.AssemblyReference.cache
-D:\3_BaiTap\PJWEB\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.GeneratedMSBuildEditorConfig.editorconfig
-D:\3_BaiTap\PJWEB\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.AssemblyInfoInputs.cache
-D:\3_BaiTap\PJWEB\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.AssemblyInfo.cs
-D:\3_BaiTap\PJWEB\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.csproj.CoreCompileInputs.cache
-D:\3_BaiTap\PJWEB\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.sourcelink.json
-D:\3_BaiTap\PJWEB\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.dll
-D:\3_BaiTap\PJWEB\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\refint\WEBNC.Models.dll
-D:\3_BaiTap\PJWEB\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\WEBNC.Models.pdb
-D:\3_BaiTap\PJWEB\PJWeb\WEBNC\WEBNC.Models\obj\Debug\net8.0\ref\WEBNC.Models.dll

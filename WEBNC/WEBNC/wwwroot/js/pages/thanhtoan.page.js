@@ -4,6 +4,9 @@ $(document).ready(function () {
     const table = $("#tblThanhToan").DataTable({
         processing: true,
         serverSide: false,
+        autoWidth: false,
+        responsive: true,
+        order: [[0, "desc"]],
         ajax: {
             url: "/api/admin/thanhtoan",
             type: "GET",
@@ -14,8 +17,6 @@ $(document).ready(function () {
             {
                 data: "donDatHang",
                 render: function (data) {
-                    // chỉnh lại property cho đúng với model DonDatHang của bạn
-                    // ví dụ: data?.idDonDat hoặc data?.maDon
                     return data && data.idDonDat ? data.idDonDat : "";
                 }
             },
@@ -54,7 +55,7 @@ $(document).ready(function () {
 
                     const markPaidBtn = row.daThanhToan
                         ? ""
-                        : `<button class="btn btn-sm btn-success btn-mark-paid" data-id="${id}">
+                        : `<button class="btn btn-sm btn-success btn-mark-paid me-1" data-id="${id}">
                                <i class="fa fa-check"></i>
                            </button>`;
 

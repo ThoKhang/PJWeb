@@ -133,7 +133,6 @@ namespace WEBNC.Areas.Customer.Controllers.MVC
                     donGia = item.SanPham.gia
                 });
             }
-
             var thanhToan = new ThanhToan
             {
                 idDonDat = orderId,
@@ -150,7 +149,25 @@ namespace WEBNC.Areas.Customer.Controllers.MVC
             _unitOfWork.Save();
 
             return RedirectToAction("Index", "DonDatHang");
+
+            //var thanhToan = new ThanhToan
+            //{
+            //    idDonDat = orderId,
+            //    phuongThuc = method,
+            //    soTien = tongTien,
+            //    daThanhToan = method == "MOMO",
+            //    ngayThanhToan = DateTime.Now,
+            //    maGiaoDich = null
+            //};
+
+            //_unitOfWork.ThanhToan.Add(thanhToan);
+            //_unitOfWork.chiTietGioHang.RemoveRange(cartItems);
+
+            //_unitOfWork.Save();
+
+            //return RedirectToAction("Index", "DonDatHang");
         }
+
         public IActionResult BankTransfer()
         {
             return View();

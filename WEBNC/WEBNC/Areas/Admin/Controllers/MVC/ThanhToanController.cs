@@ -15,10 +15,7 @@ namespace WEBNC.Areas.Admin.Controllers.MVC
 
         public IActionResult Index()
         {
-            var list = _unitOfWork.ThanhToan
-                .GetAll(includeProperties: "DonDatHang");
-
-            return View(list);
+            return View();
         }
 
         public IActionResult Details(int id)

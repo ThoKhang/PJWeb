@@ -20,12 +20,11 @@ namespace WEBNC.Areas.Admin.Controllers.API
         [HttpGet]
         public IActionResult GetAll()
         {
-            var objList = _unitOfWork.ThanhToan
-                .GetAll(includeProperties: "DonDatHang");
+            var objList = _unitOfWork.ThanhToan.GetAll();
 
             // ❌ Đừng trả NotFound khi không có dữ liệu
-            // if (objList == null || !objList.Any())
-            //     return NotFound();
+            if (objList == null || !objList.Any())
+                return NotFound();
 
             // ✅ Luôn trả về 200 với list (kể cả rỗng)
             return Ok(objList);

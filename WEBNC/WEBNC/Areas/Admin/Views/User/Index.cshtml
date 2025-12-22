@@ -1,67 +1,131 @@
-﻿<div class="container-fluid">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <div>
-            <h3 class="fw-bold mb-0">Quản lý người dùng</h3>
-            <small class="text-muted">Quản lý tài khoản, vai trò và trạng thái người dùng</small>
-        </div>
+﻿@{
+    ViewData["Title"] = "Quản lý người dùng";
+}
 
-        <a href="/Admin/User/Create" class="btn btn-primary">
-            <i class="fa-solid fa-user-plus me-1"></i>
-            Thêm người dùng
-        </a>
+@section Styles {
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+}
+
+<!-- HEADER: đồng bộ admin-card -->
+<div class="admin-card p-3 mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <div>
+        <div class="crumb mb-1">Tài khoản • Người dùng</div>
+        <h2 class="mb-1 fw-bold">Quản lý người dùng</h2>
+        <div class="text-muted" style="font-size:13px;">
+            Quản lý tài khoản, vai trò và trạng thái người dùng trong hệ thống.
+        </div>
     </div>
-    <div class="card shadow-sm">
-        <div class="card-body">
 
-            <table id="tblUsers"
-                   class="table table-hover align-middle table-bordered w-100">
-                <thead class="table-light">
-                    <tr>
-                        <th>Tài khoản</th>
-                        <th>Email</th>
-                        <th class="text-center">Vai trò</th>
-                        <th class="text-center">OTP</th>
-                        <th class="text-center">Trạng thái</th>
-                    </tr>
-                </thead>
-            </table>
+    <a href="/Admin/User/Create" class="btn btn-brand">
+        <i class="fa-solid fa-user-plus me-1"></i>
+        Thêm người dùng
+    </a>
+</div>
 
-        </div>
+<!-- BẢNG: dùng table-admin + table-wrap -->
+<div class="admin-card p-2">
+    <div class="table-wrap">
+        <table id="tblUsers"
+               class="table-admin display nowrap"
+               style="width:100%">
+            <thead>
+                <tr>
+                    <th>Tài khoản</th>
+                    <th>Email</th>
+                    <th>Vai trò</th>
+                    <th>OTP</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+        </table>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#tblUsers').DataTable({
+                ajax: {
+                    url: '/api/admin/users',
+                    dataSrc: ''
+                },
+                autoWidth: false,
+                responsive: true,
 
-<script>
-    $(document).ready(function () {
-        $('#tblUsers').DataTable({
-            ajax: {
-                url: '/api/admin/users',
-                dataSrc: ''
-            },
-            columns: [
-                { data: 'userName' },
-                { data: 'email' },
-                {
-                    data: 'role',
-                    render: role => role
-                        ? `<span class="badge bg-primary">${role}</span>`
-                        : `<span class="badge bg-secondary">User</span>`
-                },
-                {
-                    data: 'isOtpVerified',
-                    render: v => v
-                        ? `<span class="badge bg-success">Đã xác thực</span>`
-                        : `<span class="badge bg-warning">Chưa xác thực</span>`
-                },
-                {
-                    data: 'emailConfirmed',
-                    render: v => v
-                        ? `<span class="badge bg-success">Active</span>`
-                        : `<span class="badge bg-danger">Inactive</span>`
+                columns: [
+                    // Tài khoản
+                    {
+                        data: 'userName',
+                        render: function (u) {
+                            if (!u) return '';
+                            return `<span class="fw-semibold">${u}</span>`;
+                        }
+                    },
+
+                    // Email
+                    { data: 'email' },
+
+                    // Vai trò
+                    {
+                        data: 'role',
+                        render: function (role) {
+                            if (!role) {
+                                return `<span class="badge-soft">User</span>`;
+                            }
+                            return `<span class="badge-soft">${role}</span>`;
+                        }
+                    },
+
+                    // OTP
+                    {
+                        data: 'isOtpVerified',
+                        render: function (v) {
+                            return v
+                                ? `<span class="status ok">Đã xác thực</span>`
+                                : `<span class="status warn">Chưa xác thực</span>`;
+                        }
+                    },
+
+                    // Trạng thái
+                    {
+                        data: 'emailConfirmed',
+                        render: function (v) {
+                            return v
+                                ? `<span class="status ok">Active</span>`
+                                : `<span class="status bad">Inactive</span>`;
+                        }
+                    }
+                ],
+
+                // Việt hóa + bố cục đẹp cho DataTables
+                dom:
+                    "<'dt-top d-flex flex-wrap justify-content-between align-items-center'<'dt-left'l><'dt-right'f>>" +
+                    "rt" +
+                    "<'dt-bottom d-flex flex-wrap justify-content-between align-items-center'<'dt-left'i><'dt-right'p>>",
+
+                language: {
+                    lengthMenu: "Hiển thị _MENU_ dòng",
+                    search: "Tìm kiếm:",
+                    info: "Hiển thị _START_ đến _END_ của _TOTAL_ dòng",
+                    infoEmpty: "Không có dữ liệu",
+                    infoFiltered: "(lọc từ _MAX_ dòng)",
+                    zeroRecords: "Không tìm thấy kết quả phù hợp",
+                    paginate: {
+                        first: "Đầu",
+                        last: "Cuối",
+                        next: "›",
+                        previous: "‹"
+                    },
+                    loadingRecords: "Đang tải...",
+                    processing: "Đang xử lý..."
                 }
-            ]
+            });
+
+            // placeholder cho ô tìm kiếm
+            $('#tblUsers_filter input')
+                .attr('placeholder', 'Tìm theo tài khoản, email, vai trò...')
+                .css('width', '260px');
         });
-    });
-</script>
+    </script>
+}

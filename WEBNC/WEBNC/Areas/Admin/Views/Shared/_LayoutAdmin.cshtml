@@ -1,51 +1,172 @@
-﻿<!DOCTYPE html>
-<html>
+﻿@{
+    Layout = null;  // ✨ RẤT QUAN TRỌNG: không dùng layout cha nữa
+
+    var controller = (ViewContext.RouteData.Values["controller"]?.ToString() ?? "");
+    string Active(string c) => string.Equals(controller, c, StringComparison.OrdinalIgnoreCase) ? "active" : "";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
 <head>
     <meta charset="utf-8" />
     <title>ADMIN - WEBNC</title>
-    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-</head>
-<body>
-    <div class="d-flex">
-        <div style="width:220px; background:#343a40; color:white; min-height:100vh;">
-            <h5 class="p-3">ADMIN PANEL</h5>
-            <ul class="nav flex-column px-2">
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" asp-area="Admin" asp-controller="SanPham" asp-action="Index">
-                        Sản phẩm
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" asp-area="Admin" asp-controller="LoaiSanPham" asp-action="Index">Loại sản phẩm</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" asp-area="Admin" asp-controller="User" asp-action="Index">Người dùng</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" asp-area="Admin" asp-controller="Role" asp-action="Index">Vai trò</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" asp-area="Admin" asp-controller="ThanhToan" asp-action="Index">Thanh toán</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" asp-area="Admin" asp-controller="DonDat" asp-action="Index">Đơn hàng</a>
-                </li>
-            </ul>
-        </div>
 
-        <div class="flex-fill p-4">
+    <!-- CSS chung -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <!-- Theme admin -->
+    <link rel="stylesheet" href="~/css/admin.css" />
+
+    @RenderSection("Styles", required: false)
+</head>
+<body class="admin-body">
+    <div class="admin-overlay" id="adminOverlay"></div>
+
+    <div class="admin-shell">
+        <!-- SIDEBAR -->
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="sb-head">
+                <div class="sb-brand">
+                    <div class="sb-logo">A</div>
+                    <div class="sb-title">
+                        <b>ADMIN PANEL</b>
+                        <span>Quản trị hệ thống</span>
+                    </div>
+                </div>
+                <button id="btnSidebarClose" class="sb-close" type="button">✕</button>
+            </div>
+
+            <div class="sb-menu">
+                <a class="sb-link @Active("Dashboard")"
+                   asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+                    <div class="sb-ico"><i class="fa-solid fa-gauge-high"></i></div>
+                    <div class="sb-meta">
+                        <b>Dashboard</b>
+                        <span>Tổng quan</span>
+                    </div>
+                </a>
+
+                <a class="sb-link @Active("SanPham")"
+                   asp-area="Admin" asp-controller="SanPham" asp-action="Index">
+                    <div class="sb-ico"><i class="fa-solid fa-box-open"></i></div>
+                    <div class="sb-meta">
+                        <b>Sản phẩm</b>
+                        <span>Thêm / Sửa / Xóa</span>
+                    </div>
+                </a>
+
+                <a class="sb-link @Active("LoaiSanPham")"
+                   asp-area="Admin" asp-controller="LoaiSanPham" asp-action="Index">
+                    <div class="sb-ico"><i class="fa-solid fa-tags"></i></div>
+                    <div class="sb-meta">
+                        <b>Loại sản phẩm</b>
+                        <span>Danh mục</span>
+                    </div>
+                </a>
+
+                <a class="sb-link @Active("User")"
+                   asp-area="Admin" asp-controller="User" asp-action="Index">
+                    <div class="sb-ico"><i class="fa-solid fa-users"></i></div>
+                    <div class="sb-meta">
+                        <b>Người dùng</b>
+                        <span>Tài khoản</span>
+                    </div>
+                </a>
+
+                <a class="sb-link @Active("Role")"
+                   asp-area="Admin" asp-controller="Role" asp-action="Index">
+                    <div class="sb-ico"><i class="fa-solid fa-user-shield"></i></div>
+                    <div class="sb-meta">
+                        <b>Vai trò</b>
+                        <span>Nhóm quyền</span>
+                    </div>
+                </a>
+
+                <a class="sb-link @Active("ThanhToan")"
+                   asp-area="Admin" asp-controller="ThanhToan" asp-action="Index">
+                    <div class="sb-ico"><i class="fa-solid fa-credit-card"></i></div>
+                    <div class="sb-meta">
+                        <b>Thanh toán</b>
+                        <span>Giao dịch</span>
+                    </div>
+                </a>
+
+                <a class="sb-link @Active("DonDat")"
+                   asp-area="Admin" asp-controller="DonDat" asp-action="Index">
+                    <div class="sb-ico"><i class="fa-solid fa-receipt"></i></div>
+                    <div class="sb-meta">
+                        <b>Đơn hàng</b>
+                        <span>Quản lý đơn</span>
+                    </div>
+                </a>
+            </div>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="flex-fill p-4">
+            <div class="d-flex align-items-center gap-2 mb-3">
+                <button id="btnSidebarOpen"
+                        class="btn btn-light"
+                        type="button"
+                        style="border-radius:50%; width:42px; height:42px;">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <h2 class="mb-0">
+                    @((ViewData["Title"] as string) ?? "Quản lý")
+                </h2>
+            </div>
+
             @RenderBody()
-        </div>
+        </main>
     </div>
+
+    <!-- JS chung -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- JS điều khiển sidebar -->
+    <script>
+        (function () {
+            const sb = document.getElementById("adminSidebar");
+            const overlay = document.getElementById("adminOverlay");
+            const btnClose = document.getElementById("btnSidebarClose");
+            const btnOpen = document.getElementById("btnSidebarOpen");
+
+            const isMobile = () => window.innerWidth <= 992;
+
+            function openSidebar() {
+                sb.classList.remove("is-collapsed");
+                if (isMobile()) overlay.classList.add("show");
+            }
+
+            function closeSidebar() {
+                sb.classList.add("is-collapsed");
+                overlay.classList.remove("show");
+            }
+
+            if (btnClose) btnClose.addEventListener("click", closeSidebar);
+            if (btnOpen) btnOpen.addEventListener("click", openSidebar);
+            if (overlay) overlay.addEventListener("click", closeSidebar);
+
+            function handleResize() {
+                if (isMobile()) {
+                    sb.classList.add("is-collapsed");
+                    overlay.classList.remove("show");
+                } else {
+                    sb.classList.remove("is-collapsed");
+                    overlay.classList.remove("show");
+                }
+            }
+
+            handleResize();
+            window.addEventListener("resize", handleResize);
+        })();
+    </script>
 
     @RenderSection("Scripts", required: false)
 </body>
 </html>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-

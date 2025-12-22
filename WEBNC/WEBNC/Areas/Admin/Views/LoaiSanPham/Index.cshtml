@@ -1,26 +1,51 @@
 ﻿@{
     ViewData["Title"] = "Quản lý loại sản phẩm";
 }
-<link rel="stylesheet"
-      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
 
-<h2 class="mb-3">Quản lý loại sản phẩm</h2>
+@section Styles {
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+}
 
-<div class="mb-3">
-    <a class="btn btn-primary" href="/Admin/LoaiSanPham/Create">
-        + Thêm loại sản phẩm
+<!-- HEADER CARD -->
+<div class="admin-card p-3 mb-4 d-flex align-items-center justify-content-between flex-wrap gap-3">
+    <div>
+        <div class="crumb mb-1" style="font-size:12px;">
+            Sản phẩm • Loại sản phẩm
+        </div>
+        <h2 class="mb-1" style="font-weight:700; font-size:24px;">
+            Quản lý loại sản phẩm
+        </h2>
+        <div class="text-muted" style="font-size:13px;">
+            Thêm mới, chỉnh sửa và xóa các loại sản phẩm trong hệ thống.
+        </div>
+    </div>
+
+    <a class="btn btn-brand" href="/Admin/LoaiSanPham/Create">
+        <i class="fa-solid fa-plus me-1"></i> Thêm loại sản phẩm
     </a>
 </div>
 
-<table id="tblLoaiSanPham"
-       class="display table table-bordered table-striped"
-       style="width:100%">
-    <thead>
-        <tr>
-            <th style="width:20%">Mã loại</th>
-            <th style="width:50%">Tên loại sản phẩm</th>
-            <th style="width:30%">Thao tác</th>
-        </tr>
-    </thead>
-</table>
-<script type="module" src="~/js/pages/loaisanpham.page.js"></script>
+<!-- BẢNG LOẠI SẢN PHẨM -->
+<div class="admin-card p-2">
+    <div class="table-wrap">
+        <table id="tblLoaiSanPham"
+               class="table-admin display nowrap"
+               style="width:100%">
+            <thead>
+                <tr>
+                    <th>Mã loại</th>
+                    <th>Tên loại sản phẩm</th>
+                    <th style="min-width:140px;">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @* DataTables + initLoaiSanPhamTable sẽ fill dữ liệu *@
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="module" src="~/js/pages/loaisanpham.page.js"></script>
+}

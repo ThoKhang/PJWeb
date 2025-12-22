@@ -1,31 +1,65 @@
-﻿@{
+@{
     ViewData["Title"] = "Quản lý thanh toán";
 }
 
-<link rel="stylesheet"
-      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+@section Styles {
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+}
 
-<h2 class="mb-3">Quản lý thanh toán</h2>
+<!-- HEADER -->
+<div class="admin-card p-3 mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <div>
+        <div class="crumb mb-1" style="font-size:12px;">
+            Thanh toán • Danh sách
+        </div>
+        <h2 class="mb-1" style="font-weight:700; font-size:24px;">
+            Quản lý thanh toán
+        </h2>
+        <div class="text-muted" style="font-size:13px;">
+            Theo dõi trạng thái thanh toán, số tiền và mã giao dịch.
+        </div>
+    </div>
 
-<table id="tblThanhToan"
-       class="display table table-bordered table-striped"
-       style="width:100%">
-    <thead>
-        <tr>
-            <th style="width:8%">Mã TT</th>
-            <th style="width:10%">Mã đơn</th>
-            <th style="width:12%">Phương thức</th>
-            <th style="width:12%">Số tiền</th>
-            <th style="width:10%">Đã thanh toán</th>
-            <th style="width:18%">Ngày thanh toán</th>
-            <th style="width:15%">Mã giao dịch</th>
-            <th style="width:15%">Thao tác</th>
-        </tr>
-    </thead>
-</table>
+    <div class="d-flex flex-wrap align-items-center gap-2">
+        <button class="btn-mini" type="button" id="btnRefreshThanhToan">
+            <i class="fa-solid fa-rotate me-1"></i> Làm mới
+        </button>
+    </div>
+</div>
+
+<!-- BẢNG THANH TOÁN -->
+<div class="admin-card p-2">
+    <div class="table-wrap">
+        <table id="tblThanhToan"
+               class="table-admin display nowrap w-100">
+            <thead>
+                <tr>
+                    <th style="width:8%">Mã TT</th>
+                    <th style="width:10%">Mã đơn</th>
+                    <th style="width:12%">Phương thức</th>
+                    <th style="width:12%">Số tiền</th>
+                    <th style="width:10%">Trạng thái</th>
+                    <th style="width:18%">Ngày thanh toán</th>
+                    <th style="width:15%">Mã giao dịch</th>
+                    <th style="width:15%">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @* DataTables + thanhtoan.page.js sẽ tự fill *@
+            </tbody>
+        </table>
+    </div>
+</div>
 
 @section Scripts {
     <script type="module" src="~/js/pages/thanhtoan.page.js"></script>
+
+
+    <script>
+        document.getElementById("btnRefreshThanhToan")
+            ?.addEventListener("click", () => location.reload());
+    </script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 }

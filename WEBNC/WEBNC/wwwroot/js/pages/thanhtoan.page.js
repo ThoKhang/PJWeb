@@ -1,7 +1,12 @@
-﻿// wwwroot/js/pages/thanhtoan.page.js
+// wwwroot/js/pages/thanhtoan.page.js
 $(document).ready(function () {
 
     const table = $("#tblThanhToan").DataTable({
+        processing: true,
+        serverSide: false,
+        autoWidth: false,
+        responsive: true,
+        order: [[0, "desc"]],
         ajax: {
             url: "/api/admin/thanhtoan",
             dataSrc: ""
@@ -11,6 +16,9 @@ $(document).ready(function () {
 
             {
                 data: "donDatHang",
+                render: function (data) {
+                    return data && data.idDonDat ? data.idDonDat : "";
+                }
                 render: d => d?.idDonDat ?? "---"
             },
 
@@ -46,6 +54,26 @@ $(document).ready(function () {
                 data: "idThanhToan",
                 className: "text-center",
                 orderable: false,
+                searchable: false,
+                render: function (id, type, row) {
+                    const detailUrl = `/Admin/ThanhToan/Details/${id}`;
+
+                    const markPaidBtn = row.daThanhToan
+                        ? ""
+                        : `<button class="btn btn-sm btn-success btn-mark-paid me-1" data-id="${id}">
+                               <i class="fa fa-check"></i>
+                           </button>`;
+
+                    return `
+                        <a href="${detailUrl}" class="btn btn-sm btn-info me-1">
+                            <i class="fa fa-info-circle"></i>
+                        </a>
+                        ${markPaidBtn}
+                        <button class="btn btn-sm btn-danger btn-delete" data-id="${id}">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    `;
+                }
                 render: id => `
                     <a href="/Admin/ThanhToan/Details/${id}"
                        class="btn btn-sm btn-info me-1">

@@ -1,57 +1,176 @@
 ﻿@{
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Dashboard";
 
+    // Nếu muốn tận dụng ViewBag TotalProduct / LowStock / OutStock từ controller
     int total = (int)(ViewBag.TotalProduct ?? 0);
     int low = (int)(ViewBag.LowStock ?? 0);
     int outS = (int)(ViewBag.OutStock ?? 0);
 }
 
-<div class="admin-card p-3 p-lg-4">
-    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
-        <div>
-            <div class="fw-bold fs-3">Dashboard</div>
-            <div class="text-muted" style="color:var(--muted)!important;">Tổng quan nhanh hệ thống</div>
-        </div>
-        <span class="pill">Cập nhật: @DateTime.Now.ToString("dd/MM/yyyy HH:mm")</span>
-    </div>
+@section Styles {
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+}
 
-    <div class="row g-3">
-        <div class="col-12 col-lg-4">
-            <div class="admin-card soft p-3 d-flex align-items-center justify-content-between">
-                <div>
-                    <div class="text-muted" style="color:var(--muted)!important;font-weight:700;">Tổng sản phẩm</div>
-                    <div class="fw-bold fs-3">@total</div>
-                </div>
-                <span class="pill pill-ok">OK</span>
-            </div>
-        </div>
-
-        <div class="col-12 col-lg-4">
-            <div class="admin-card soft p-3 d-flex align-items-center justify-content-between">
-                <div>
-                    <div class="text-muted" style="color:var(--muted)!important;font-weight:700;">Sắp hết hàng</div>
-                    <div class="fw-bold fs-3">@low</div>
-                </div>
-                <span class="pill pill-warn">Cảnh báo</span>
-            </div>
-        </div>
-
-        <div class="col-12 col-lg-4">
-            <div class="admin-card soft p-3 d-flex align-items-center justify-content-between">
-                <div>
-                    <div class="text-muted" style="color:var(--muted)!important;font-weight:700;">Hết hàng</div>
-                    <div class="fw-bold fs-3">@outS</div>
-                </div>
-                <span class="pill pill-danger">Stop</span>
-            </div>
+<!-- HEADER -->
+<div class="admin-card p-3 mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <div>
+        <div class="crumb mb-1">Tổng quan • Dashboard</div>
+        <h2 class="mb-1 fw-bold">Tổng quan hệ thống</h2>
+        <div class="text-muted" style="font-size:13px;">
+            Theo dõi nhanh doanh thu, đơn hàng và người dùng trong hệ thống.
         </div>
     </div>
 
-    <div class="admin-card p-3 mt-3">
-        <div class="fw-bold mb-1">Gợi ý</div>
-        <div class="text-muted" style="color:var(--muted)!important;">
-            Vào <b>Sản phẩm</b> để cập nhật tồn kho, giá, và theo dõi cảnh báo.
+    <div class="d-flex flex-wrap align-items-center gap-2">
+        <select class="form-select input-admin" style="max-width: 180px;">
+            <option>7 ngày gần đây</option>
+            <option>30 ngày gần đây</option>
+            <option>3 tháng gần đây</option>
+            <option>Năm nay</option>
+        </select>
+        <button class="btn-mini" id="btnRefreshDashboard">
+            <i class="fa-solid fa-rotate me-1"></i> Làm mới
+        </button>
+    </div>
+</div>
+
+<!-- CARD THỐNG KÊ NHANH -->
+<div class="row g-3 mb-4">
+    <!-- Doanh thu hôm nay -->
+    <div class="col-md-3 col-sm-6">
+        <div class="admin-card p-3 h-100 d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="text-muted" style="font-size:12px;">Doanh thu hôm nay</span>
+                <span class="pill pill-ok" id="pillTodayRevenueDelta">Hôm nay</span>
+            </div>
+            <div class="fw-bold" style="font-size:20px;" id="txtTodayRevenue">0 ₫</div>
+            <div class="text-muted" style="font-size:12px;">So với hôm qua</div>
+        </div>
+    </div>
+
+    <!-- Đơn hàng hôm nay -->
+    <div class="col-md-3 col-sm-6">
+        <div class="admin-card p-3 h-100 d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="text-muted" style="font-size:12px;">Đơn hàng mới</span>
+                <span class="pill pill-ok" id="pillTodayOrdersDelta">Hôm nay</span>
+            </div>
+            <div class="fw-bold" style="font-size:20px;" id="txtTodayOrders">0 đơn</div>
+            <div class="text-muted" style="font-size:12px;">Trong ngày hôm nay</div>
+        </div>
+    </div>
+
+    <!-- Người dùng mới -->
+    <div class="col-md-3 col-sm-6">
+        <div class="admin-card p-3 h-100 d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="text-muted" style="font-size:12px;">Người dùng mới</span>
+                <span class="pill pill-warn">7 ngày</span>
+            </div>
+            <div class="fw-bold" style="font-size:20px;" id="txtNewUsers">0 người</div>
+            <div class="text-muted" style="font-size:12px;">Trong 7 ngày gần đây</div>
+        </div>
+    </div>
+
+    <!-- Sản phẩm đang bán -->
+    <div class="col-md-3 col-sm-6">
+        <div class="admin-card p-3 h-100 d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="text-muted" style="font-size:12px;">Sản phẩm đang bán</span>
+                <span class="pill">Kho</span>
+            </div>
+            <div class="fw-bold" style="font-size:20px;" id="txtActiveProducts">0 sản phẩm</div>
+            <div class="text-muted" style="font-size:12px;">Đang còn hàng trong kho</div>
         </div>
     </div>
 </div>
+
+<!-- HÀNG BIỂU ĐỒ -->
+<div class="row g-3 mb-4">
+    <div class="col-lg-8">
+        <div class="admin-card p-3 h-100">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="mb-0">Doanh thu theo tháng</h5>
+                <span class="text-muted" style="font-size:12px;">Dữ liệu từ thanh toán</span>
+            </div>
+            <canvas id="chartRevenue" style="max-height:320px;"></canvas>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="admin-card p-3 h-100">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="mb-0">Tỉ lệ đơn theo trạng thái</h5>
+            </div>
+            <canvas id="chartOrders" style="max-height:260px;"></canvas>
+
+            <div class="mt-3" style="font-size:13px;" id="orderStatusSummary">
+                @* JS sẽ tự cập nhật tóm tắt nhỏ này *@
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- THỐNG KÊ TỒN KHO (dùng ViewBag) -->
+<div class="row g-3 mb-4">
+    <div class="col-lg-4 col-md-6">
+        <div class="admin-card soft p-3 d-flex align-items-center justify-content-between">
+            <div>
+                <div class="text-muted" style="font-weight:700;">Tổng sản phẩm</div>
+                <div class="fw-bold fs-4">@total</div>
+            </div>
+            <span class="pill pill-ok">OK</span>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6">
+        <div class="admin-card soft p-3 d-flex align-items-center justify-content-between">
+            <div>
+                <div class="text-muted" style="font-weight:700;">Sắp hết hàng</div>
+                <div class="fw-bold fs-4">@low</div>
+            </div>
+            <span class="pill pill-warn">Cảnh báo</span>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6">
+        <div class="admin-card soft p-3 d-flex align-items-center justify-content-between">
+            <div>
+                <div class="text-muted" style="font-weight:700;">Hết hàng</div>
+                <div class="fw-bold fs-4">@outS</div>
+            </div>
+            <span class="pill pill-danger">Stop</span>
+        </div>
+    </div>
+</div>
+
+<!-- ĐƠN HÀNG MỚI GẦN ĐÂY -->
+<div class="admin-card p-3">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="mb-0">Đơn hàng mới gần đây</h5>
+        <a href="/Admin/ThanhToan/Index" class="btn-mini">Xem tất cả</a>
+    </div>
+
+    <div class="table-wrap">
+        <table class="table-admin mb-0" id="tblRecentOrders">
+            <thead>
+                <tr>
+                    <th>Mã đơn</th>
+                    <th>Khách hàng</th>
+                    <th>Ngày đặt</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                @* JS sẽ fill dữ liệu *@
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="~/js/pages/dashboard.page.js"></script>
+}

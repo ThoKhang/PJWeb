@@ -386,3 +386,95 @@ body.admin-body {
         height: calc(100vh - 24px);
     }
 }
+/* ===== DataTables UI đẹp hơn ===== */
+
+.dataTables_wrapper {
+    font-size: 14px;
+}
+
+/* Show entries + Search */
+.dataTables_length,
+.dataTables_filter {
+    padding: 8px 10px;
+}
+
+    .dataTables_length label,
+    .dataTables_filter label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: var(--muted);
+    }
+
+    .dataTables_length select {
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        padding: 4px 10px;
+        background: #fff;
+        outline: none;
+    }
+
+    .dataTables_filter input {
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        padding: 6px 12px;
+        outline: none;
+        background: #fff;
+    }
+
+        .dataTables_filter input:focus,
+        .dataTables_length select:focus {
+            border-color: rgba(14,165,233,.55);
+            box-shadow: 0 0 0 .15rem rgba(14,165,233,.15);
+        }
+
+/* Info + paginate */
+.dataTables_info {
+    padding: 8px 10px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.dataTables_paginate {
+    padding: 4px 10px 12px;
+}
+
+    .dataTables_paginate .paginate_button {
+        border-radius: 999px !important;
+        border: 1px solid transparent !important;
+        padding: 4px 9px !important;
+        margin: 0 2px !important;
+        font-size: 13px;
+        color: var(--muted) !important;
+        background: transparent !important;
+    }
+
+        .dataTables_paginate .paginate_button.current,
+        .dataTables_paginate .paginate_button:hover {
+            border-color: rgba(148,163,184,.6) !important;
+            background: #fff !important;
+            color: var(--text) !important;
+        }
+
+/* Căn giữa cột hình + thao tác */
+#tblSanPham td:nth-child(3),
+#tblSanPham td:last-child {
+    text-align: center;
+}
+
+/* Ảnh sản phẩm */
+#tblSanPham td img.thumb {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    object-fit: cover;
+    background: #fff;
+}
+
+/* Hơi gọn lại hàng */
+#tblSanPham td {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}

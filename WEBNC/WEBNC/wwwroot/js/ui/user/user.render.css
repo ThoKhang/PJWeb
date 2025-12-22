@@ -1,0 +1,98 @@
+﻿export function initUserTable() {
+    const $table = $('#tblUsers');
+    if ($.fn.DataTable.isDataTable($table))
+
+{
+    $table.DataTable().clear().destroy();
+}
+
+$table.DataTable({
+        ajax: {
+            url: "/api/admin/users",
+            dataSrc: ""
+        },
+
+        autoWidth: false,
+        responsive: true,
+
+        columns: [
+            { data: "userName" },
+
+            { data: "email" },
+
+            {
+                data: "role",
+                render: r =>
+                    `<span class="badge-soft">${r ?? "User"}</span>`
+            },
+
+            {
+                data: "isOtpVerified",
+                render: v =>
+                    v
+                        ? `<span class="status ok">Đã xác thực</span>`
+                        : `<span class="status warn">Chưa xác thực</span>`
+            },
+
+            {
+                data: "emailConfirmed",
+                render: v =>
+                    v
+                        ? `<span class="status ok">Active</span>`
+                        : `<span class="status bad">Inactive</span>`
+            },
+
+            {
+                data: "id",
+                orderable: false,
+                searchable: false,
+                render: id => `
+                    <div class="d-flex gap-2 justify-content-center">
+
+                        <a href="/Admin/User/Edit/${id}"
+                           class="btn-mini"
+                           title="Chỉnh sửa">
+                           <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+
+                        <button class="btn-mini btn-mini-danger btn-delete"
+                                data-id="${id}"
+                                title="Xóa">
+                           <i class="fa-solid fa-trash"></i>
+                        </button>
+
+                    </div>
+                `
+            }
+        ],
+
+        columnDefs: [
+            { width: "18%", targets: 0 },
+            { width: "22%", targets: 1 },
+            { width: "15%", targets: 2 },
+            { width: "15%", targets: 3 },
+            { width: "15%", targets: 4 },
+            { width: "15%", targets: 5 }
+        ],
+
+        dom:
+            "<'dt-top d-flex justify-content-between align-items-center'<'dt-left'l><'dt-right'f>>" +
+            "rt" +
+            "<'dt-bottom d-flex justify-content-between align-items-center'<'dt-left'i><'dt-right'p>>",
+
+        language: {
+            lengthMenu: "Hiển thị _MENU_ dòng",
+            search: "Tìm kiếm:",
+            info: "Hiển thị _START_ đến _END_ của _TOTAL_",
+            zeroRecords: "Không tìm thấy dữ liệu",
+            paginate: {
+                next: "›",
+                previous: "‹"
+            }
+        }
+    });
+
+$('#tblUsers_filter input')
+.attr("placeholder", "Tìm theo tài khoản, email, vai trò...")
+.css("width", "260px");
+}

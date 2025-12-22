@@ -10,130 +10,105 @@
     int outS = Model?.Count(x => x.soLuongHienCon <= 0) ?? 0;
 }
 
-<div class="admin-card p-3 p-lg-4">
-    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
-        <div>
-            <div class="fw-bold fs-3">Quản lý sản phẩm</div>
-            <div class="text-muted" style="color: var(--muted) !important;">
-                Danh sách / tìm kiếm / cập nhật tồn kho &amp; giá
-            </div>
+@section Styles {
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+}
+
+<!-- HEADER CARD -->
+<div class="admin-card p-3 mb-4 d-flex align-items-center justify-content-between flex-wrap gap-3">
+    <div>
+        <div class="crumb mb-1" style="font-size:12px;">
+            Sản phẩm • Danh sách
         </div>
-
-        <div class="d-flex flex-wrap gap-2">
-            <form method="get" class="d-flex gap-2">
-                <input name="q" value="@q" class="form-control input-admin" style="min-width:300px"
-                       placeholder="Tìm mã / tên / công ty / loại..." />
-                <button class="btn btn-mini" type="submit">Tìm</button>
-            </form>
-
-            <a class="btn btn-brand"
-               asp-area="Admin" asp-controller="SanPham" asp-action="Create">
-                + Thêm mới
-            </a>
+        <h2 class="mb-1" style="font-weight:700; font-size:24px;">
+            Quản lý sản phẩm
+        </h2>
+        <div class="text-muted" style="font-size:13px;">
+            Xem, thêm mới, chỉnh sửa và xóa sản phẩm trong hệ thống.
         </div>
     </div>
 
-    <div class="row g-3 mb-3">
-        <div class="col-12 col-lg-4">
-            <div class="admin-card soft p-3 d-flex align-items-center justify-content-between">
-                <div>
-                    <div class="text-muted" style="color:var(--muted)!important;font-weight:700;">Tổng sản phẩm</div>
-                    <div class="fw-bold fs-3">@total</div>
-                </div>
-                <span class="pill pill-ok">Danh sách</span>
-            </div>
-        </div>
+    <div class="d-flex align-items-center gap-2 flex-wrap">
+        <button class="btn-mini" type="button" id="btnRefreshProduct">
+            <i class="fa-solid fa-rotate me-1"></i> Làm mới
+        </button>
 
-        <div class="col-12 col-lg-4">
-            <div class="admin-card soft p-3 d-flex align-items-center justify-content-between">
-                <div>
-                    <div class="text-muted" style="color:var(--muted)!important;font-weight:700;">Sắp hết hàng</div>
-                    <div class="fw-bold fs-3">@low</div>
-                </div>
-                <span class="pill pill-warn">Cảnh báo</span>
-            </div>
-        </div>
+        <a class="btn btn-brand" href="/Admin/SanPham/Create">
+            <i class="fa-solid fa-plus me-1"></i> Thêm sản phẩm
+        </a>
+    </div>
+</div>
 
-        <div class="col-12 col-lg-4">
-            <div class="admin-card soft p-3 d-flex align-items-center justify-content-between">
-                <div>
-                    <div class="text-muted" style="color:var(--muted)!important;font-weight:700;">Hết hàng</div>
-                    <div class="fw-bold fs-3">@outS</div>
+<!-- THỐNG KÊ NHANH THEO TỒN KHO -->
+<div class="row g-3 mb-3">
+    <div class="col-12 col-lg-4">
+        <div class="admin-card soft p-3 d-flex align-items-center justify-content-between">
+            <div>
+                <div class="text-muted" style="color:var(--muted)!important;font-weight:700;">
+                    Tổng sản phẩm
                 </div>
-                <span class="pill pill-danger">Stop</span>
+                <div class="fw-bold fs-3">@total</div>
             </div>
+            <span class="pill pill-ok">Danh sách</span>
         </div>
     </div>
 
+    <div class="col-12 col-lg-4">
+        <div class="admin-card soft p-3 d-flex align-items-center justify-content-between">
+            <div>
+                <div class="text-muted" style="color:var(--muted)!important;font-weight:700;">
+                    Sắp hết hàng
+                </div>
+                <div class="fw-bold fs-3">@low</div>
+            </div>
+            <span class="pill pill-warn">Cảnh báo</span>
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-4">
+        <div class="admin-card soft p-3 d-flex align-items-center justify-content-between">
+            <div>
+                <div class="text-muted" style="color:var(--muted)!important;font-weight:700;">
+                    Hết hàng
+                </div>
+                <div class="fw-bold fs-3">@outS</div>
+            </div>
+            <span class="pill pill-danger">Stop</span>
+        </div>
+    </div>
+</div>
+
+<!-- BẢNG SẢN PHẨM (DataTables fill bằng JS) -->
+<div class="admin-card p-2">
     <div class="table-wrap">
-        <table class="table table-admin align-middle">
+        <table id="tblSanPham"
+               class="table-admin display nowrap"
+               style="width:100%">
             <thead>
                 <tr>
-                    <th style="width:78px">Ảnh</th>
-                    <th style="width:110px">Mã</th>
-                    <th>Tên</th>
-                    <th style="width:160px">Công ty</th>
-                    <th style="width:160px">Loại</th>
-                    <th class="text-end" style="width:140px">Giá</th>
-                    <th class="text-center" style="width:160px">Tồn kho</th>
-                    <th class="text-end" style="width:220px">Thao tác</th>
+                    <th>Mã SP</th>
+                    <th>Sản phẩm</th>
+                    <th>Hình ảnh</th>
+                    <th>Loại</th>
+                    <th>Công ty</th>
+                    <th>Giá</th>
+                    <th>Tồn kho</th>
+                    <th style="min-width:130px;">Thao tác</th>
                 </tr>
             </thead>
-
             <tbody>
-                @foreach (var sp in Model)
-                {
-                    bool isOut = sp.soLuongHienCon <= 0;
-                    bool isLow = !isOut && sp.soLuongHienCon <= sp.soLuongCanDuoi;
-
-                    string statusClass = isOut ? "bad" : (isLow ? "warn" : "ok");
-                    string statusText = isOut ? "Hết hàng" : (isLow ? "Sắp hết" : "Còn hàng");
-
-                    <tr>
-                        <td>
-                            <img class="thumb"
-                                 src="@(string.IsNullOrWhiteSpace(sp.imageURL) ? "/images/noimage.png" : "/images/" + sp.imageURL)"
-                                 onerror="this.src='/images/noimage.png';" />
-                        </td>
-
-                        <td>
-                            <span class="badge-soft">@sp.idSanPham</span>
-                        </td>
-
-                        <td>
-                            <div class="fw-bold">@sp.tenSanPham</div>
-                            <div class="text-muted" style="color:var(--muted)!important;font-size:12px;">
-                                SL cảnh báo: @sp.soLuongCanDuoi
-                            </div>
-                        </td>
-
-                        <td>@sp.congTy?.tenCongTy</td>
-                        <td>@sp.LoaiSanPham?.tenLoaiSanPham</td>
-
-                        <td class="text-end fw-bold">@string.Format("{0:N0}", sp.gia)</td>
-
-                        <td class="text-center">
-                            <div class="status @statusClass">
-                                <span>●</span> @statusText
-                            </div>
-                            <div class="text-muted" style="color:var(--muted)!important;font-size:12px;">
-                                @sp.soLuongHienCon
-                            </div>
-                        </td>
-
-                        <td class="text-end">
-                            <a class="btn btn-mini me-1"
-                               asp-area="Admin" asp-controller="SanPham" asp-action="Edit" asp-route-id="@sp.idSanPham">
-                                ✏️ Sửa
-                            </a>
-                            <a class="btn btn-mini btn-mini-danger"
-                               asp-area="Admin" asp-controller="SanPham" asp-action="Delete" asp-route-id="@sp.idSanPham">
-                                🗑️ Xóa
-                            </a>
-                        </td>
-                    </tr>
-                }
+                @* DataTables + sanpham.page.js sẽ fill bằng AJAX *@
             </tbody>
         </table>
     </div>
 </div>
+
+@section Scripts {
+    <script type="module" src="~/js/pages/sanpham.page.js"></script>
+
+    <script>
+        document.getElementById("btnRefreshProduct")
+            ?.addEventListener("click", () => location.reload());
+    </script>
+}

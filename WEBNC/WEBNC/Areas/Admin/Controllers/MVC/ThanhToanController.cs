@@ -12,12 +12,10 @@ namespace WEBNC.Areas.Admin.Controllers.MVC
         {
             _unitOfWork = unitOfWork;
         }
-
         public IActionResult Index()
         {
             var list = _unitOfWork.ThanhToan
                 .GetAll(includeProperties: "DonDatHang");
-
             return View(list);
         }
 
@@ -25,7 +23,6 @@ namespace WEBNC.Areas.Admin.Controllers.MVC
         {
             var obj = _unitOfWork.ThanhToan
                 .GetFirstOrDefault(x => x.idThanhToan == id, includeProperties: "DonDatHang");
-
             if (obj == null)
                 return NotFound();
 

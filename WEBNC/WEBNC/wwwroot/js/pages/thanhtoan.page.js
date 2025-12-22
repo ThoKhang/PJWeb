@@ -1,73 +1,61 @@
 ﻿// wwwroot/js/pages/thanhtoan.page.js
-
 $(document).ready(function () {
+
     const table = $("#tblThanhToan").DataTable({
-        processing: true,
-        serverSide: false,
         ajax: {
             url: "/api/admin/thanhtoan",
-            type: "GET",
             dataSrc: ""
         },
         columns: [
             { data: "idThanhToan" },
+
             {
                 data: "donDatHang",
-                render: function (data) {
-                    // chỉnh lại property cho đúng với model DonDatHang của bạn
-                    // ví dụ: data?.idDonDat hoặc data?.maDon
-                    return data && data.idDonDat ? data.idDonDat : "";
-                }
+                render: d => d?.idDonDat ?? "---"
             },
-            { data: "phuongThuc" },
+
+            {
+                data: "phuongThuc",
+                render: p => `<span class="badge bg-info">${p}</span>`
+            },
             {
                 data: "soTien",
-                render: function (data) {
-                    if (data == null) return "";
-                    return Number(data).toLocaleString("vi-VN") + " ₫";
-                }
+                className: "text-end",
+                render: v =>
+                    v ? `${Number(v).toLocaleString("vi-VN")} ₫` : "---"
             },
+
             {
                 data: "daThanhToan",
-                render: function (data) {
-                    return data
-                        ? '<span class="badge bg-success">Đã thanh toán</span>'
-                        : '<span class="badge bg-secondary">Chưa thanh toán</span>';
-                }
+                className: "text-center",
+                render: v => v
+                    ? `<span class="badge bg-success trang-thai-tt" data-status="paid">Đã thanh toán</span>`
+                    : `<span class="badge bg-warning trang-thai-tt" data-status="unpaid" style="cursor:pointer">
+                            Chưa thanh toán
+                       </span>`
             },
             {
                 data: "ngayThanhToan",
-                render: function (data) {
-                    if (!data) return "-";
-                    const dt = new Date(data);
-                    if (isNaN(dt.getTime())) return data;
-                    return dt.toLocaleString("vi-VN");
-                }
+                render: d =>
+                    d ? new Date(d).toLocaleString("vi-VN") : "-"
             },
+
             { data: "maGiaoDich" },
+
             {
                 data: "idThanhToan",
+                className: "text-center",
                 orderable: false,
-                searchable: false,
-                render: function (id, type, row) {
-                    const detailUrl = `/Admin/ThanhToan/Details/${id}`;
-
-                    const markPaidBtn = row.daThanhToan
-                        ? ""
-                        : `<button class="btn btn-sm btn-success btn-mark-paid" data-id="${id}">
-                               <i class="fa fa-check"></i>
-                           </button>`;
-
-                    return `
-                        <a href="${detailUrl}" class="btn btn-sm btn-info me-1">
-                            <i class="fa fa-info-circle"></i>
-                        </a>
-                        ${markPaidBtn}
-                        <button class="btn btn-sm btn-danger btn-delete" data-id="${id}">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    `;
-                }
+                render: id => `
+                    <a href="/Admin/ThanhToan/Details/${id}"
+                       class="btn btn-sm btn-info me-1">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <button class="btn btn-sm btn-danger btn-delete"
+                            data-id="${id}">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                `
             }
         ],
         language: {
@@ -75,62 +63,86 @@ $(document).ready(function () {
         }
     });
 
-    // Xoá thanh toán
+       //ĐÁNH DẤU ĐÃ THANH TOÁN
+    $("#tblThanhToan").on("click", ".trang-thai-tt", function () {
+
+        const badge = $(this);
+        const row = table.row(badge.closest("tr")).data();
+
+        if (row.daThanhToan) return;
+
+        Swal.fire({
+            title: "Xác nhận thanh toán?",
+            html: `
+                Đơn hàng: <b>${row.donDatHang?.idDonDat ?? ""}</b><br>
+                Số tiền: <b class="text-success">
+                    ${Number(row.soTien).toLocaleString("vi-VN")} ₫
+                </b>
+            `,
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Xác nhận",
+            cancelButtonText: "Huỷ",
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33"
+        }).then(result => {
+
+            if (!result.isConfirmed) return;
+
+            $.ajax({
+                url: `/api/admin/thanhtoan/${row.idThanhToan}/mark-paid`,
+                type: "PATCH",
+                success: function () {
+
+                    Swal.fire({
+                        icon: "success",
+                        title: "Đã cập nhật!",
+                        timer: 1200,
+                        showConfirmButton: false
+                    });
+
+                    table.ajax.reload(null, false);
+                },
+                error: function () {
+                    Swal.fire("Lỗi", "Không thể cập nhật thanh toán!", "error");
+                }
+            });
+        });
+    });
+
+       //XOÁ THANH TOÁN
     $("#tblThanhToan").on("click", ".btn-delete", function () {
+
         const id = $(this).data("id");
 
         Swal.fire({
             title: "Xoá thanh toán?",
-            text: "Bạn sẽ không thể khôi phục lại bản ghi này!",
+            text: "Hành động này không thể hoàn tác!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Xoá",
-            cancelButtonText: "Huỷ"
+            cancelButtonText: "Huỷ",
+            confirmButtonColor: "#d33"
         }).then(result => {
+
             if (!result.isConfirmed) return;
 
             $.ajax({
                 url: `/api/admin/thanhtoan/${id}`,
                 type: "DELETE",
                 success: function () {
-                    Swal.fire("Đã xoá!", "Thanh toán đã được xoá.", "success");
+
+                    Swal.fire({
+                        icon: "success",
+                        title: "Đã xoá!",
+                        timer: 1200,
+                        showConfirmButton: false
+                    });
+
                     table.ajax.reload(null, false);
                 },
-                error: function (xhr) {
-                    const msg =
-                        (xhr.responseJSON && xhr.responseJSON.message) ||
-                        "Không thể xoá thanh toán này.";
-                    Swal.fire("Lỗi", msg, "error");
-                }
-            });
-        });
-    });
-
-    // Đánh dấu đã thanh toán
-    $("#tblThanhToan").on("click", ".btn-mark-paid", function () {
-        const id = $(this).data("id");
-
-        Swal.fire({
-            title: "Đánh dấu đã thanh toán?",
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonText: "Đồng ý",
-            cancelButtonText: "Huỷ"
-        }).then(result => {
-            if (!result.isConfirmed) return;
-
-            $.ajax({
-                url: `/api/admin/thanhtoan/${id}/mark-paid`,
-                type: "PATCH",
-                success: function () {
-                    Swal.fire("Thành công", "Đã cập nhật trạng thái thanh toán.", "success");
-                    table.ajax.reload(null, false);
-                },
-                error: function (xhr) {
-                    const msg =
-                        (xhr.responseJSON && xhr.responseJSON.message) ||
-                        "Không thể cập nhật thanh toán.";
-                    Swal.fire("Lỗi", msg, "error");
+                error: function () {
+                    Swal.fire("Lỗi", "Không thể xoá thanh toán!", "error");
                 }
             });
         });

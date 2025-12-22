@@ -2,81 +2,151 @@
     ViewData["Title"] = "Quản lý đánh giá";
 }
 
-<link rel="stylesheet"
-      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+@section Styles {
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+}
 
-<h2 class="mb-3">Quản lý đánh giá & bình luận</h2>
+<!-- HEADER -->
+<div class="admin-card p-3 mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <div>
+        <div class="crumb mb-1" style="font-size:12px;">
+            Đánh giá • Danh sách
+        </div>
+        <h2 class="mb-1 fw-bold">Quản lý đánh giá &amp; bình luận</h2>
+        <div class="text-muted" style="font-size:13px;">
+            Theo dõi nội dung đánh giá, số sao và người dùng.
+        </div>
+    </div>
 
-<table id="tblDanhGia"
-       class="display table table-bordered table-striped"
-       style="width:100%">
-    <thead>
-        <tr>
-            <th style="width:6%">ID</th>
-            <th style="width:12%">Sản phẩm</th>
-            <th style="width:12%">Người dùng</th>
-            <th style="width:8%" class="text-center">Sao</th>
-            <th>Nội dung</th>
-            <th style="width:14%">Ngày</th>
-            <th style="width:10%" class="text-center">Thao tác</th>
-        </tr>
-    </thead>
-</table>
+    <button class="btn-mini" id="btnRefreshDanhGia">
+        <i class="fa-solid fa-rotate me-1"></i> Làm mới
+    </button>
+</div>
+
+<!-- BẢNG ĐÁNH GIÁ -->
+<div class="admin-card p-2">
+    <div class="table-wrap">
+        <table id="tblDanhGia"
+               class="table-admin display nowrap w-100">
+            <thead>
+                <tr>
+                    <th style="width:6%">ID</th>
+                    <th style="width:18%">Sản phẩm</th>
+                    <th style="width:14%">Người dùng</th>
+                    <th style="width:8%" class="text-center">Sao</th>
+                    <th>Nội dung</th>
+                    <th style="width:16%">Ngày</th>
+                    <th style="width:10%" class="text-center">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @* DataTables sẽ fill bằng AJAX *@
+            </tbody>
+        </table>
+    </div>
+</div>
 
 @section Scripts {
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="~/js/pages/danhgia.page.js"></script>
-
     <script>
-        $(document).ready(function () {
+        $(function () {
             const table = $('#tblDanhGia').DataTable({
+                processing: true,
+                serverSide: false,
+                responsive: true,
+                autoWidth: false,
                 ajax: {
                     url: '/api/admin/danhgia',
                     dataSrc: ''
                 },
                 columns: [
+                    // ID
                     { data: 'idDanhGia' },
+
+                    // SẢN PHẨM
                     {
                         data: 'sanPham',
-                        render: sp => sp?.tenSanPham ?? '---'
+                        render: function (sp) {
+                            if (!sp || !sp.tenSanPham) return '---';
+
+                            const full = sp.tenSanPham;
+                            const shortText = full.length > 35
+                                ? full.substring(0, 35) + '...'
+                                : full;
+
+                            return `<span title="${full}">${shortText}</span>`;
+                        }
                     },
+
+                    // NGƯỜI DÙNG
                     {
                         data: 'user',
-                        render: u => u?.userName ?? 'Ẩn danh'
+                        render: function (u) {
+                            return u && u.userName ? u.userName : 'Ẩn danh';
+                        }
                     },
+
+                    // SỐ SAO
                     {
                         data: 'soSao',
                         className: 'text-center',
-                        render: s => `<span class="badge bg-warning">${s} ★</span>`
+                        render: function (s) {
+                            return `
+                                <span class="badge bg-warning text-dark">
+                                    ${s} ★
+                                </span>`;
+                        }
                     },
+
+                    // NỘI DUNG (rút ngắn)
                     {
                         data: 'noiDung',
-                        render: n => n
-                            ? `<span title="${n}">${n.substring(0, 50)}...</span>`
-                            : ''
+                        render: function (n) {
+                            if (!n) return '';
+                            const shortText = n.length > 60
+                                ? n.substring(0, 60) + '...'
+                                : n;
+
+                            return `<span title="${n}">${shortText}</span>`;
+                        }
                     },
+
+                    // NGÀY ĐÁNH GIÁ
                     {
                         data: 'ngayDanhGia',
-                        render: d => new Date(d).toLocaleString('vi-VN')
+                        render: function (d) {
+                            if (!d) return '';
+                            const dt = new Date(d);
+                            if (isNaN(dt)) return d;
+                            return dt.toLocaleString('vi-VN');
+                        }
                     },
+
+                    // THAO TÁC
                     {
                         data: 'idDanhGia',
                         className: 'text-center',
                         orderable: false,
-                        render: id => `
-                            <button class="btn btn-sm btn-danger btn-delete"
-                                    data-id="${id}">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        `
+                        searchable: false,
+                        render: function (id) {
+                            return `
+                                <button class="btn btn-sm btn-danger btn-delete"
+                                        data-id="${id}">
+                                    <i class="fa fa-trash"></i>
+                                </button>`;
+                        }
                     }
                 ],
                 language: {
-                    url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json"
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json'
                 }
             });
+
+            // nút Làm mới
+            $('#btnRefreshDanhGia').on('click', function () {
+                table.ajax.reload(null, false);
+            });
+
             // XOÁ ĐÁNH GIÁ
             $('#tblDanhGia').on('click', '.btn-delete', function () {
                 const id = $(this).data('id');
@@ -90,14 +160,12 @@
                     cancelButtonText: 'Huỷ',
                     confirmButtonColor: '#d33'
                 }).then(result => {
-
                     if (!result.isConfirmed) return;
 
                     $.ajax({
                         url: `/api/admin/danhgia/${id}`,
                         type: 'DELETE',
                         success: function () {
-
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Đã xoá!',

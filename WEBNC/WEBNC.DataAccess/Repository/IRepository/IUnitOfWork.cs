@@ -11,6 +11,8 @@
         IChatMessageRepository ChatMessage { get; }
         IDanhGiaRepository DanhGia { get; }
         IHinhAnhDanhGiaRepository HinhAnhDanhGia { get; }
-        void save();
+        IXaPhuongRepository XaPhuong { get; }
+        IThanhToanRepository ThanhToan { get; }
+        void Save();
     }
 }

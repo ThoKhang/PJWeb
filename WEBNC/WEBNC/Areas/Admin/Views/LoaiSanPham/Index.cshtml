@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Quản lý loại sản phẩm";
+}
+<link rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+
+<h2 class="mb-3">Quản lý loại sản phẩm</h2>
+
+<div class="mb-3">
+    <a class="btn btn-primary" href="/Admin/LoaiSanPham/Create">
+        + Thêm loại sản phẩm
+    </a>
+</div>
+
+<table id="tblLoaiSanPham"
+       class="display table table-bordered table-striped"
+       style="width:100%">
+    <thead>
+        <tr>
+            <th style="width:20%">Mã loại</th>
+            <th style="width:50%">Tên loại sản phẩm</th>
+            <th style="width:30%">Thao tác</th>
+        </tr>
+    </thead>
+</table>
+<script type="module" src="~/js/pages/loaisanpham.page.js"></script>

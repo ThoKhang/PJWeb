@@ -1,4 +1,4 @@
-﻿using WEBNC.Models;
+using WEBNC.Models;
 
 namespace WEBNC.DataAccess.Repository.IRepository
 {
@@ -6,7 +6,7 @@ namespace WEBNC.DataAccess.Repository.IRepository
     {
         void Update(DanhGiaSanPham obj);
         IEnumerable<DanhGiaSanPham> GetDanhGiaBySanPham(string idSanPham);
-        bool DaDanhGia(string idSanPham, string userId, string idDonDat);
+        bool DaDanhGia(string idSanPham, string userId, string? idDonDat);
         double TinhDiemTrungBinh(string idSanPham);
     }
 }

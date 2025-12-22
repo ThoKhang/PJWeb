@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>ADMIN - WEBNC</title>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+    <div class="d-flex">
+        <div style="width:220px; background:#343a40; color:white; min-height:100vh;">
+            <h5 class="p-3">ADMIN PANEL</h5>
+            <ul class="nav flex-column px-2">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="Admin" asp-controller="SanPham" asp-action="Index">
+                        Sản phẩm
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="Admin" asp-controller="LoaiSanPham" asp-action="Index">Loại sản phẩm</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="Admin" asp-controller="User" asp-action="Index">Người dùng</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="Admin" asp-controller="Role" asp-action="Index">Vai trò</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="Admin" asp-controller="ThanhToan" asp-action="Index">Thanh toán</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="flex-fill p-4">
+            @RenderBody()
+        </div>
+    </div>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+

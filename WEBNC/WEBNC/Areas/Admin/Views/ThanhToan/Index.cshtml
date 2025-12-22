@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Quản lý thanh toán";
+}
+
+<link rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+
+<h2 class="mb-3">Quản lý thanh toán</h2>
+
+<table id="tblThanhToan"
+       class="display table table-bordered table-striped"
+       style="width:100%">
+    <thead>
+        <tr>
+            <th style="width:8%">Mã TT</th>
+            <th style="width:10%">Mã đơn</th>
+            <th style="width:12%">Phương thức</th>
+            <th style="width:12%">Số tiền</th>
+            <th style="width:10%">Đã thanh toán</th>
+            <th style="width:18%">Ngày thanh toán</th>
+            <th style="width:15%">Mã giao dịch</th>
+            <th style="width:15%">Thao tác</th>
+        </tr>
+    </thead>
+</table>
+
+@section Scripts {
+    <script type="module" src="~/js/pages/thanhtoan.page.js"></script>
+}

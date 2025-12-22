@@ -1,16 +1,34 @@
-﻿<h2>Quản lý người dùng</h2>
+﻿<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h3 class="fw-bold mb-0">Quản lý người dùng</h3>
+            <small class="text-muted">Quản lý tài khoản, vai trò và trạng thái người dùng</small>
+        </div>
 
-<table id="tblUsers" class="table table-bordered table-striped" width="100%">
-    <thead>
-        <tr>
-            <th>Tài khoản</th>
-            <th>Email</th>
-            <th>Vai trò</th>
-            <th>OTP</th>
-            <th>Trạng thái</th>
-        </tr>
-    </thead>
-</table>
+        <a href="/Admin/User/Create" class="btn btn-primary">
+            <i class="fa-solid fa-user-plus me-1"></i>
+            Thêm người dùng
+        </a>
+    </div>
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <table id="tblUsers"
+                   class="table table-hover align-middle table-bordered w-100">
+                <thead class="table-light">
+                    <tr>
+                        <th>Tài khoản</th>
+                        <th>Email</th>
+                        <th class="text-center">Vai trò</th>
+                        <th class="text-center">OTP</th>
+                        <th class="text-center">Trạng thái</th>
+                    </tr>
+                </thead>
+            </table>
+
+        </div>
+    </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>

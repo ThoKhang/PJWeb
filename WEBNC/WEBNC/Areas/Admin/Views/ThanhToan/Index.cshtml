@@ -31,8 +31,7 @@
 <!-- BẢNG THANH TOÁN -->
 <div class="admin-card p-2">
     <div class="table-wrap">
-        <table id="tblThanhToan"
-               class="table-admin display nowrap w-100">
+        <table id="tblThanhToan" class="table-admin display nowrap w-100">
             <thead>
                 <tr>
                     <th style="width:8%">Mã TT</th>
@@ -45,13 +44,18 @@
                     <th style="width:15%">Thao tác</th>
                 </tr>
             </thead>
-            <tbody>
-                @* DataTables + thanhtoan.page.js sẽ tự fill *@
-            </tbody>
+            <tbody></tbody>
         </table>
     </div>
 </div>
 
 @section Scripts {
-    <script type="module" src="~/js/pages/thanhtoan.page.js"></script>
+    <!-- DataTables JS (bắt buộc) -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <!-- SweetAlert2 (bạn đang dùng Swal) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Page JS -->
+    <script src="~/js/pages/thanhtoan.page.js" asp-append-version="true"></script>
 }

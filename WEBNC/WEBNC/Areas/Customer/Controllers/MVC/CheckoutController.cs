@@ -140,7 +140,7 @@ namespace WEBNC.Areas.Customer.Controllers.MVC
                 phuongThuc = method,
                 soTien = tongTien,
                 daThanhToan = method == "MOMO",
-                ngayThanhToan = method == "MOMO" ? DateTime.Now : null,
+                ngayThanhToan = DateTime.Now,
                 maGiaoDich = null
             };
 
@@ -151,6 +151,8 @@ namespace WEBNC.Areas.Customer.Controllers.MVC
 
             return RedirectToAction("Index", "DonDatHang");
         }
+
+
         public IActionResult BankTransfer()
         {
             return View();

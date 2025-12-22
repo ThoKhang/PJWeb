@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using WEBNC.DataAccess.Repository.IRepository;
 using WEBNC.Models;
 
-namespace WEBNC.Areas.Customer.Controllers.MVC
+namespace WEBNC.Areas.Customer.Controllers
 {
     [Area("Customer")]
     public class ProductController : Controller
@@ -14,33 +14,40 @@ namespace WEBNC.Areas.Customer.Controllers.MVC
             _unitOfWork = unitOfWork;
         }
 
-        [HttpGet]
-        public IActionResult Search(string query, string category = "all")
+        // Trang liệt kê tất cả sản phẩm (nếu cần)
+        public IActionResult Index()
         {
-            var keyword = (query ?? "").Trim();
+            var products = _unitOfWork.SanPham.GetAll(includeProperties: "LoaiSanPham");
+            return View(products);
+        }
 
-            var products = string.IsNullOrEmpty(keyword)
-                ? _unitOfWork.SanPham.GetAll(includeProperties: "LoaiSanPham")
-                : _unitOfWork.SanPham.GetAll(
-                    u => u.tenSanPham.ToLower().Contains(keyword.ToLower())
-                         || (u.moTa != null && u.moTa.ToLower().Contains(keyword.ToLower())),
-                    includeProperties: "LoaiSanPham"
-                  );
+        // /Customer/Product/Search?searchQuery=abc&category=Điện thoại
+        [HttpGet]
+        public IActionResult Search(string? searchQuery, string? category)
+        {
+            var products = _unitOfWork.SanPham.GetAll(includeProperties: "LoaiSanPham");
 
-            if (!string.IsNullOrEmpty(category) && category != "all")
+            if (!string.IsNullOrWhiteSpace(searchQuery))
             {
-                var cat = category.Trim().ToLower();
+                var q = searchQuery.Trim().ToLower();
                 products = products.Where(p =>
-                    p.LoaiSanPham != null &&
-                    p.LoaiSanPham.tenLoaiSanPham != null &&
-                    p.LoaiSanPham.tenLoaiSanPham.Trim().ToLower() == cat
-                );
+                    (!string.IsNullOrEmpty(p.tenSanPham) && p.tenSanPham.ToLower().Contains(q)) ||
+                    (!string.IsNullOrEmpty(p.moTa) && p.moTa.ToLower().Contains(q)));
             }
 
-            ViewBag.SearchQuery = keyword;
+            if (!string.IsNullOrWhiteSpace(category) && category != "Tất cả")
+            {
+                var c = category.Trim().ToLower();
+                products = products.Where(p =>
+                    p.LoaiSanPham != null &&
+                    !string.IsNullOrEmpty(p.LoaiSanPham.tenLoaiSanPham) &&
+                    p.LoaiSanPham.tenLoaiSanPham.ToLower() == c);
+            }
+
+            ViewBag.SearchQuery = searchQuery;
             ViewBag.SelectedCategory = category;
 
-            return View("SearchResults", products);
+            return View("Search", products);
         }
     }
 }

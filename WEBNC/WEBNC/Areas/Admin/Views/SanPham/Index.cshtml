@@ -1,5 +1,13 @@
-﻿@{
+@model List<WEBNC.Models.SanPham>
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Quản lý sản phẩm";
+    var q = ViewBag.Q as string;
+
+    int total = Model?.Count ?? 0;
+    int low = Model?.Count(x => x.soLuongHienCon > 0 && x.soLuongHienCon <= x.soLuongCanDuoi) ?? 0;
+    int outS = Model?.Count(x => x.soLuongHienCon <= 0) ?? 0;
 }
 
 @section Styles {
@@ -32,7 +40,46 @@
     </div>
 </div>
 
-<!-- BẢNG SẢN PHẨM -->
+<!-- THỐNG KÊ NHANH THEO TỒN KHO -->
+<div class="row g-3 mb-3">
+    <div class="col-12 col-lg-4">
+        <div class="admin-card soft p-3 d-flex align-items-center justify-content-between">
+            <div>
+                <div class="text-muted" style="color:var(--muted)!important;font-weight:700;">
+                    Tổng sản phẩm
+                </div>
+                <div class="fw-bold fs-3">@total</div>
+            </div>
+            <span class="pill pill-ok">Danh sách</span>
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-4">
+        <div class="admin-card soft p-3 d-flex align-items-center justify-content-between">
+            <div>
+                <div class="text-muted" style="color:var(--muted)!important;font-weight:700;">
+                    Sắp hết hàng
+                </div>
+                <div class="fw-bold fs-3">@low</div>
+            </div>
+            <span class="pill pill-warn">Cảnh báo</span>
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-4">
+        <div class="admin-card soft p-3 d-flex align-items-center justify-content-between">
+            <div>
+                <div class="text-muted" style="color:var(--muted)!important;font-weight:700;">
+                    Hết hàng
+                </div>
+                <div class="fw-bold fs-3">@outS</div>
+            </div>
+            <span class="pill pill-danger">Stop</span>
+        </div>
+    </div>
+</div>
+
+<!-- BẢNG SẢN PHẨM (DataTables fill bằng JS) -->
 <div class="admin-card p-2">
     <div class="table-wrap">
         <table id="tblSanPham"

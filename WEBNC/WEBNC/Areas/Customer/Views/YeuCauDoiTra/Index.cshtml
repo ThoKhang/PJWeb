@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "Yêu cầu đổi trả hàng";
+    // Lấy ID đơn đặt từ URL (Query String)
+    var idDonDat = Context.Request.Query["idDonDat"];
+}
+
+<div class="container mt-4">
+
+    <h3 class="mb-3 text-danger">🔄 Đổi trả sản phẩm</h3>
+    <p class="text-muted">Chúng tôi rất tiếc nếu sản phẩm không làm bạn hài lòng.</p>
+
+    <hr />
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-danger text-white fw-bold">
+                    <i class="fas fa-file-alt me-2"></i>Phiếu yêu cầu đổi trả
+                </div>
+
+                <div class="card-body p-4">
+                    @if (string.IsNullOrEmpty(idDonDat))
+                    {
+                        <div class="alert alert-warning">
+                            Không tìm thấy mã đơn hàng. Vui lòng truy cập từ lịch sử đơn hàng.
+                        </div>
+                        <a href="/" class="btn btn-secondary">Quay về trang chủ</a>
+                    }
+                    else
+                    {
+                        <form id="formDoiTra">
+                            <input type="hidden" id="hiddenIdDonDat" value="@idDonDat" />
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Mã đơn hàng</label>
+                                <input type="text" class="form-control bg-light" value="@idDonDat" disabled readonly />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Lý do đổi trả <span class="text-danger">*</span></label>
+                                <textarea id="txtLyDo-@idDonDat"
+                                      class="form-control"
+                                      rows="5"
+                                      placeholder="Vui lòng mô tả chi tiết lý do (sản phẩm lỗi, sai màu, hư hỏng...)"
+                                      required></textarea>
+                                <div class="form-text">Tối đa 300 ký tự.</div>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a href="/Customer/DonDatHang/Index" class="btn btn-outline-secondary me-md-2">Hủy bỏ</a>
+
+                                <button type="submit"
+                                        id="btnSubmit-@idDonDat"
+                                        class="btn btn-danger">
+                                    <i class="fas fa-paper-plane me-1"></i> Gửi yêu cầu
+                                </button>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-info mt-3">
+        <strong>Lưu ý:</strong> Yêu cầu sẽ được nhân viên xem xét trong vòng 24h. Vui lòng giữ nguyên hiện trạng sản phẩm.
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script type="module">
+        // Import hàm xử lý từ file module chúng ta đã tạo trước đó
+        import { submitYeuCauDoiTra } from "/js/ui/doitra/submitDoiTra.js";
+
+        const form = document.getElementById("formDoiTra");
+
+        if (form) {
+            form.addEventListener("submit", async function (e) {
+                e.preventDefault(); // Chặn reload trang
+
+                // Lấy ID đơn đặt từ hidden input
+                const idDonDat = document.getElementById("hiddenIdDonDat").value;
+
+                // Gọi hàm logic tách biệt
+                await submitYeuCauDoiTra(idDonDat);
+            });
+        }
+    </script>
+}

@@ -1,0 +1,51 @@
+﻿@model WEBNC.Models.SanPham
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Xóa sản phẩm";
+}
+
+<div class="cardx p-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <div style="font-weight:900;font-size:1.6rem;">Xóa sản phẩm</div>
+            <div class="text-muted">Xác nhận trước khi xóa</div>
+        </div>
+        <a class="btn-soft" asp-area="Admin" asp-controller="SanPham" asp-action="Index">← Quay lại</a>
+    </div>
+
+    <div class="cardx p-3 mb-3">
+        <div class="row g-3 align-items-center">
+            <div class="col-auto">
+                <div style="width:64px;height:64px;border-radius:18px;overflow:hidden;border:1px solid rgba(17,24,39,.08);background:rgba(255,255,255,.6);display:grid;place-items:center;">
+                    <img src="~/img/@Model.imageURL" onerror="this.style.display='none'; this.parentElement.innerHTML='🖼️';"
+                         style="width:100%;height:100%;object-fit:cover;" />
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="fw-bold" style="font-size:1.1rem">@Model.tenSanPham</div>
+                <div class="text-muted">Mã: <span class="badge-soft">@Model.idSanPham</span></div>
+                <div class="text-muted">Công ty: @Model.congTy?.tenCongTy • Loại: @Model.LoaiSanPham?.tenLoaiSanPham</div>
+            </div>
+
+            <div class="col-auto text-end">
+                <div class="fw-bold">@string.Format("{0:N0}", Model.gia) đ</div>
+                <div class="text-muted">Tồn: @Model.soLuongHienCon</div>
+            </div>
+        </div>
+    </div>
+
+    <form method="post">
+        <input type="hidden" name="id" value="@Model.idSanPham" />
+        <div class="alert" style="background: rgba(239,68,68,.12); border: 1px solid rgba(239,68,68,.22); border-radius: 16px;">
+            <b style="color:#b91c1c;">Cảnh báo:</b> Hành động này không thể hoàn tác.
+        </div>
+
+        <div class="d-flex gap-2 mt-3">
+            <button type="submit" class="btn" style="background: linear-gradient(135deg,#ef4444,#f97316); border:none; color:#fff; font-weight:900; border-radius:14px; padding:.55rem .9rem;">
+                Xóa luôn
+            </button>
+            <a class="btn-soft" asp-area="Admin" asp-controller="SanPham" asp-action="Index">Hủy</a>
+        </div>
+    </form>
+</div>

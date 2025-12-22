@@ -26,6 +26,16 @@ $(function () {
             },
 
             // 3️⃣ Phương thức
+            // Mã thanh toán
+            { data: "idThanhToan" },
+
+            // Mã đơn hàng
+            {
+                data: "donDatHang",
+                render: d => d?.idDonDat ?? "---"
+            },
+
+            // Phương thức
             {
                 data: "phuongThuc",
                 render: function (p) {
@@ -34,7 +44,6 @@ $(function () {
                     return '<span class="badge bg-info">' + p + '</span>';
                 }
             },
-
             // 4️⃣ Số tiền
             {
                 data: "soTien",
@@ -44,7 +53,6 @@ $(function () {
                     return Number(v).toLocaleString("vi-VN") + " ₫";
                 }
             },
-
             // 5️⃣ Trạng thái
             {
                 data: "daThanhToan",
@@ -72,6 +80,27 @@ $(function () {
             { data: "maGiaoDich" },
 
             // 8️⃣ Thao tác
+            // Trạng thái thanh toán
+            {
+                data: "daThanhToan",
+                className: "text-center",
+                render: v => v
+                    ? `<span class="badge bg-success">Đã thanh toán</span>`
+                    : `<span class="badge bg-warning trang-thai-tt" style="cursor:pointer">
+                            Chưa thanh toán
+                       </span>`
+            },
+
+            // Ngày thanh toán
+            {
+                data: "ngayThanhToan",
+                render: d => d ? new Date(d).toLocaleString("vi-VN") : "-"
+            },
+
+            // Mã giao dịch
+            { data: "maGiaoDich" },
+
+            // Thao tác
             {
                 data: "idThanhToan",
                 className: "text-center",
@@ -93,6 +122,28 @@ $(function () {
                         '<button class="btn btn-sm btn-danger btn-delete" data-id="' + id + '">' +
                         '<i class="fa fa-trash"></i>' +
                         '</button>';
+
+                    const detailUrl = `/Admin/ThanhToan/Details/${id}`;
+
+                    const markPaidBtn = row.daThanhToan
+                        ? ""
+                        : `
+                            <button class="btn btn-sm btn-success btn-mark-paid me-1"
+                                    data-id="${id}">
+                                <i class="fa fa-check"></i>
+                            </button>
+                          `;
+
+                    return `
+                        <a href="${detailUrl}" class="btn btn-sm btn-info me-1">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        ${markPaidBtn}
+                        <button class="btn btn-sm btn-danger btn-delete"
+                                data-id="${id}">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    `;
                 }
             }
         ],
@@ -100,7 +151,6 @@ $(function () {
             url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json"
         }
     });
-
     // 🔄 Làm mới (reload dữ liệu bảng, không reload trang)
     $("#btnRefreshThanhToan").on("click", function () {
         table.ajax.reload(null, false);
@@ -110,6 +160,11 @@ $(function () {
     $("#tblThanhToan").on("click", ".btn-mark-paid", function () {
         var id = $(this).data("id");
         var row = table.row($(this).closest("tr")).data();
+    // ===== ĐÁNH DẤU ĐÃ THANH TOÁN =====
+    $("#tblThanhToan").on("click", ".trang-thai-tt", function () {
+
+        const row = table.row($(this).closest("tr")).data();
+        if (row.daThanhToan) return;
 
         Swal.fire({
             title: "Xác nhận thanh toán?",
@@ -122,6 +177,8 @@ $(function () {
             confirmButtonText: "Xác nhận",
             cancelButtonText: "Huỷ"
         }).then(function (result) {
+        }).then(result => {
+
             if (!result.isConfirmed) return;
 
             $.ajax({
@@ -143,7 +200,7 @@ $(function () {
         });
     });
 
-    // 🗑 Xoá thanh toán
+    // ===== XOÁ THANH TOÁN =====
     $("#tblThanhToan").on("click", ".btn-delete", function () {
         var id = $(this).data("id");
 

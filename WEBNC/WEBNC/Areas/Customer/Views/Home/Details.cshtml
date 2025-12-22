@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var idSanPham = Context.Request.Query["id"].ToString();
+}
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8" />
@@ -717,9 +720,8 @@
             <div class="tab-content" >
                 <p id="thongSoSanPham">@* thông số sản phẩm *@</p>
             </div>
-            <div class="tab-content">
-                <p>Đánh giá từ khách hàng: ...</p>
-                <!-- Thêm đánh giá -->
+            <div class="tab-content dgBLuan">
+                <p class="text-muted">Đang tải đánh giá...</p>
             </div>
 
             <!-- Related Products -->
@@ -754,6 +756,79 @@
         //start bình luận
         // var binhLuan = document.querySelector('.btn')
         //end bình luận
+    </script>
+    <script>
+        const idSanPham = "@idSanPham";
+        async function loadDanhGiaChoSanPham() {
+            const container = document.querySelector(".dgBLuan");
+            if (!container) 
+                return;
+            if (!idSanPham) {
+                container.innerHTML =
+                    `<p class="text-danger">Không xác định được sản phẩm.</p>`;
+                return;
+            }
+            const res = await fetch(`/api/DanhGia?idSanPham=${idSanPham}`);
+            if (!res.ok) {
+                container.innerHTML =
+                    `<p class="text-danger">Không tải được đánh giá.</p>`;
+                return;
+            }
+            const data = await res.json();
+            console.log(data);
+            const danhGiaList = Array.isArray(data)
+                ? data
+                : (data.danhGiaList || []);
+
+            container.innerHTML = "";
+            if (danhGiaList.length === 0) {
+                container.innerHTML =
+                    `<p class="text-muted">Chưa có đánh giá nào cho sản phẩm này.</p>`;
+                return;
+            }
+            if (data.diemTrungBinh) {
+                container.innerHTML += `
+                    <div class="mb-3">
+                        <strong>⭐ Điểm trung bình:</strong>
+                        <span class="text-warning fs-5 ms-2">
+                            ${data.diemTrungBinh} ★
+                        </span>
+                    </div>
+                    <hr/>
+                `;
+            }
+
+            danhGiaList.forEach(dg => {
+                let html = `
+                    <div class="border rounded p-3 mb-3">
+                        <div class="d-flex justify-content-between">
+                            <strong>${dg.userName ?? "Ẩn danh"}</strong>
+                            <span class="text-warning">${dg.soSao} ★</span>
+                        </div>
+                        <p class="mt-2 mb-1">${dg.noiDung ?? ""}</p>
+                        <small class="text-muted">
+                            ${new Date(dg.ngayDanhGia).toLocaleString('vi-VN')}
+                        </small>
+                `;
+
+                if (dg.hinhAnhs?.length) {
+                    html += `<div class="mt-2">`;
+                    dg.hinhAnhs.forEach(img => {
+                        html += `
+                            <img src="${img}"
+                                 style="width:70px;height:70px;object-fit:cover"
+                                 class="rounded me-2 mb-2" />
+                        `;
+                    });
+                    html += `</div>`;
+                }
+
+                html += `</div>`;
+                container.innerHTML += html;
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", loadDanhGiaChoSanPham);
     </script>
 </body>
 </html>

@@ -12,8 +12,11 @@ namespace WEBNC.Models
     {
         [Key]
         public int idThanhToan { get; set; }
+        [Required]
+        [Column(TypeName = "char(5)")]
+        public string idDonDat { get; set; }
 
-         [Column(TypeName = "char(5)")]
+        [Column(TypeName = "char(5)")]
         [ForeignKey("idDonDat")]
         public DonDatHang DonDatHang { get; set; }
 
@@ -25,6 +28,6 @@ namespace WEBNC.Models
 
         public DateTime? ngayThanhToan { get; set; }
 
-        public string maGiaoDich { get; set; }
+        public string ?maGiaoDich { get; set; }
     }
 }

@@ -1,0 +1,178 @@
+﻿@{
+    ViewData["Title"] = "Thêm người dùng";
+}
+<style>
+    body {
+        background-color: #f5f6fa;
+    }
+
+    .card {
+        animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @@keyframes fadeIn {
+    from
+    {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row justify-content-center mt-4">
+        <div class="col-lg-5 col-md-7">
+
+            <!-- Card -->
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-header bg-primary text-white rounded-top-4">
+                    <h5 class="mb-0">
+                        <i class="fa-solid fa-user-plus me-2"></i>
+                        Thêm người dùng
+                    </h5>
+                </div>
+
+                <div class="card-body p-4">
+                    <form id="frmCreateUser">
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Tên đăng nhập</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-user"></i>
+                                </span>
+                                <input class="form-control" id="userName"
+                                       placeholder="Nhập tên đăng nhập" required />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Email</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </span>
+                                <input class="form-control" id="email"
+                                       placeholder="Email" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Số điện thoại</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-phone"></i>
+                                </span>
+                                <input class="form-control" id="phone"
+                                       placeholder="Số điện thoại" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Mật khẩu</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-lock"></i>
+                                </span>
+                                <input type="password" class="form-control" id="password"
+                                       placeholder="Mật khẩu" required />
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Vai trò</label>
+                            <select class="form-select" id="roleSelect" required>
+                                <option value="">-- Chọn vai trò --</option>
+                            </select>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="/Admin/User" class="btn btn-outline-secondary">
+                                <i class="fa-solid fa-arrow-left me-1"></i>
+                                Quay lại
+                            </a>
+
+                            <button type="submit" class="btn btn-success px-4">
+                                <i class="fa-solid fa-floppy-disk me-1"></i>
+                                Lưu
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    async function loadRoles() {
+        const res = await fetch('/api/admin/roles');
+        if (!res.ok) {
+            Swal.fire('Lỗi', 'Không lấy được danh sách role', 'error');
+            return;
+        }
+
+        const roles = await res.json();
+        const select = $('#roleSelect');
+
+        select.empty();
+        select.append('<option value="">-- Chọn vai trò --</option>');
+
+        roles.forEach(r => {
+            select.append(`<option value="${r.name}">${r.name}</option>`);
+        });
+    }
+
+    $(document).ready(async function () {
+        await loadRoles();
+
+        $('#frmCreateUser').submit(async function (e) {
+            e.preventDefault();
+
+            const data = {
+                userName: $('#userName').val().trim(),
+                email: $('#email').val().trim(),
+                phoneNumber: $('#phone').val().trim(),
+                password: $('#password').val(),
+                roleName: $('#roleSelect').val()
+            };
+
+            if (!data.roleName) {
+                Swal.fire('Thiếu thông tin', 'Vui lòng chọn vai trò', 'warning');
+                return;
+            }
+
+            const res = await fetch('/api/admin/users/create', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (res.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: 'Đã tạo người dùng',
+                    timer: 1200,
+                    showConfirmButton: false
+                }).then(() => {
+                    window.location.href = '/Admin/User';
+                });
+            } else {
+                const err = await res.json();
+                Swal.fire('Lỗi', err.message || 'Không thể tạo user', 'error');
+            }
+        });
+    });
+</script>

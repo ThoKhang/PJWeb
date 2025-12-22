@@ -1,19 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using WEBNC.DataAccess.Repository.IRepository;
 
-namespace WEBNC.Areas.Admin.Controllers
+namespace WEBNC.Areas.Admin.Controllers.API
 {
-    public class SanPhamController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class SanPhamController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
         public SanPhamController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-        public IActionResult Index()
+        public IActionResult GetAll()
         {
             IEnumerable<Models.SanPham> objList = _unitOfWork.SanPham.GetAll(includeProperties: "LoaiSanPham,CongTy");
-            return View(objList);
+            return Ok(objList);
         }
     }
 }

@@ -1571,7 +1571,6 @@ namespace WEBNC.DataAccess.Migrations
                         .HasColumnType("char(5)");
 
                     b.Property<string>("maGiaoDich")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ngayThanhToan")

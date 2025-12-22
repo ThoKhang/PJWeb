@@ -1,7 +1,8 @@
 // wwwroot/js/pages/thanhtoan.page.js
-$(document).ready(function () {
 
-    const table = $("#tblThanhToan").DataTable({
+$(function () {
+
+    var table = $("#tblThanhToan").DataTable({
         processing: true,
         serverSide: false,
         autoWidth: false,
@@ -9,9 +10,22 @@ $(document).ready(function () {
         order: [[0, "desc"]],
         ajax: {
             url: "/api/admin/thanhtoan",
+            type: "GET",
             dataSrc: ""
         },
         columns: [
+            // 1️⃣ Mã thanh toán
+            { data: "idThanhToan" },
+
+            // 2️⃣ Mã đơn đặt hàng
+            {
+                data: "donDatHang",
+                render: function (d) {
+                    return d && d.idDonDat ? d.idDonDat : "---";
+                }
+            },
+
+            // 3️⃣ Phương thức
             // Mã thanh toán
             { data: "idThanhToan" },
 
@@ -24,17 +38,48 @@ $(document).ready(function () {
             // Phương thức
             {
                 data: "phuongThuc",
-                render: p => `<span class="badge bg-info">${p}</span>`
+                render: function (p) {
+                    if (!p)
+                        return '<span class="badge bg-secondary">Không rõ</span>';
+                    return '<span class="badge bg-info">' + p + '</span>';
+                }
             },
-
-            // Số tiền
+            // 4️⃣ Số tiền
             {
                 data: "soTien",
                 className: "text-end",
-                render: v =>
-                    v ? `${Number(v).toLocaleString("vi-VN")} ₫` : "---"
+                render: function (v) {
+                    if (v == null) return "---";
+                    return Number(v).toLocaleString("vi-VN") + " ₫";
+                }
+            },
+            // 5️⃣ Trạng thái
+            {
+                data: "daThanhToan",
+                className: "text-center",
+                render: function (v) {
+                    if (v) {
+                        return '<span class="badge bg-success">Đã thanh toán</span>';
+                    }
+                    return '<span class="badge bg-warning">Chưa thanh toán</span>';
+                }
             },
 
+            // 6️⃣ Ngày thanh toán
+            {
+                data: "ngayThanhToan",
+                render: function (d) {
+                    if (!d) return "-";
+                    var dt = new Date(d);
+                    if (isNaN(dt.getTime())) return d;
+                    return dt.toLocaleString("vi-VN");
+                }
+            },
+
+            // 7️⃣ Mã giao dịch
+            { data: "maGiaoDich" },
+
+            // 8️⃣ Thao tác
             // Trạng thái thanh toán
             {
                 data: "daThanhToan",
@@ -62,6 +107,21 @@ $(document).ready(function () {
                 orderable: false,
                 searchable: false,
                 render: function (id, type, row) {
+                    var detailUrl = "/Admin/ThanhToan/Details/" + id;
+
+                    var markPaidBtn = row.daThanhToan ? "" :
+                        '<button class="btn btn-sm btn-success btn-mark-paid me-1" data-id="' + id + '">' +
+                        '<i class="fa fa-check"></i>' +
+                        '</button>';
+
+                    return '' +
+                        '<a href="' + detailUrl + '" class="btn btn-sm btn-info me-1">' +
+                        '<i class="fa fa-info-circle"></i>' +
+                        '</a>' +
+                        markPaidBtn +
+                        '<button class="btn btn-sm btn-danger btn-delete" data-id="' + id + '">' +
+                        '<i class="fa fa-trash"></i>' +
+                        '</button>';
 
                     const detailUrl = `/Admin/ThanhToan/Details/${id}`;
 
@@ -91,7 +151,15 @@ $(document).ready(function () {
             url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json"
         }
     });
+    // 🔄 Làm mới (reload dữ liệu bảng, không reload trang)
+    $("#btnRefreshThanhToan").on("click", function () {
+        table.ajax.reload(null, false);
+    });
 
+    // ✅ Đánh dấu đã thanh toán (nút màu xanh)
+    $("#tblThanhToan").on("click", ".btn-mark-paid", function () {
+        var id = $(this).data("id");
+        var row = table.row($(this).closest("tr")).data();
     // ===== ĐÁNH DẤU ĐÃ THANH TOÁN =====
     $("#tblThanhToan").on("click", ".trang-thai-tt", function () {
 
@@ -100,22 +168,21 @@ $(document).ready(function () {
 
         Swal.fire({
             title: "Xác nhận thanh toán?",
-            html: `
-                Đơn hàng: <b>${row.donDatHang?.idDonDat ?? ""}</b><br>
-                Số tiền: <b class="text-success">
-                    ${Number(row.soTien).toLocaleString("vi-VN")} ₫
-                </b>
-            `,
+            html:
+                "Đơn hàng: <b>" + (row.donDatHang ? row.donDatHang.idDonDat : "") + "</b><br>" +
+                "Số tiền: <b class=\"text-success\">" +
+                Number(row.soTien).toLocaleString("vi-VN") + " ₫</b>",
             icon: "question",
             showCancelButton: true,
             confirmButtonText: "Xác nhận",
             cancelButtonText: "Huỷ"
+        }).then(function (result) {
         }).then(result => {
 
             if (!result.isConfirmed) return;
 
             $.ajax({
-                url: `/api/admin/thanhtoan/${row.idThanhToan}/mark-paid`,
+                url: "/api/admin/thanhtoan/" + id + "/mark-paid",
                 type: "PATCH",
                 success: function () {
                     Swal.fire({
@@ -135,8 +202,7 @@ $(document).ready(function () {
 
     // ===== XOÁ THANH TOÁN =====
     $("#tblThanhToan").on("click", ".btn-delete", function () {
-
-        const id = $(this).data("id");
+        var id = $(this).data("id");
 
         Swal.fire({
             title: "Xoá thanh toán?",
@@ -146,12 +212,11 @@ $(document).ready(function () {
             confirmButtonText: "Xoá",
             cancelButtonText: "Huỷ",
             confirmButtonColor: "#d33"
-        }).then(result => {
-
+        }).then(function (result) {
             if (!result.isConfirmed) return;
 
             $.ajax({
-                url: `/api/admin/thanhtoan/${id}`,
+                url: "/api/admin/thanhtoan/" + id,
                 type: "DELETE",
                 success: function () {
                     Swal.fire({
@@ -168,4 +233,5 @@ $(document).ready(function () {
             });
         });
     });
+
 });

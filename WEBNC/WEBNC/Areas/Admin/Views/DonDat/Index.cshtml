@@ -1,14 +1,21 @@
 ﻿@{
     ViewData["Title"] = "Quản lý đơn hàng";
 }
-<link rel="stylesheet"
-      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
 
-<div class="container-fluid">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <div>
-            <h3 class="fw-bold mb-0">Quản lý đơn hàng</h3>
-            <small class="text-muted">Theo dõi và quản lý trạng thái đơn hàng</small>
+@section Styles {
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+}
+
+<!-- HEADER -->
+<div class="admin-card p-3 mb-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <div>
+        <div class="crumb mb-1" style="font-size:12px;">
+            Đơn hàng • Danh sách
+        </div>
+        <h2 class="mb-1 fw-bold">Quản lý đơn hàng</h2>
+        <div class="text-muted" style="font-size:13px;">
+            Theo dõi và cập nhật trạng thái đơn hàng trong hệ thống.
         </div>
     </div>
     <div class="card shadow-sm">
@@ -28,42 +35,111 @@
                 </thead>
             </table>
 
-        </div>
+    <button class="btn-mini" id="btnRefreshDonHang">
+        <i class="fa-solid fa-rotate me-1"></i> Làm mới
+    </button>
+</div>
+
+<!-- TABLE -->
+<div class="admin-card p-2">
+    <div class="table-wrap">
+        <table id="tblDonHang"
+               class="table-admin display nowrap w-100">
+            <thead>
+                <tr>
+                    <th>Mã đơn</th>
+                    <th>Khách hàng</th>
+                    <th>SĐT giao hàng</th>
+                    <th class="text-center">Trạng thái</th>
+                    <th class="text-center">Thanh toán</th>
+                    <th>Ngày đặt</th>
+                    <th class="text-center">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    $(document).ready(function () {
-        $('#tblDonHang').DataTable({
-            ajax: {
-                url: '/api/admin/dondathang',
-                dataSrc: ''
-            },
-            columns: [
-                { data: 'idDonDat' },
-                {
-                    data: 'nguoiDung',
-                    render: u => u ? u.userName : '---'
+
+@section Scripts {
+
+    <script>
+        $(function () {
+
+            let table = $("#tblDonHang").DataTable({
+                processing: true,
+                serverSide: false,
+                responsive: true,
+                autoWidth: false,
+                order: [[0, "desc"]],
+                ajax: {
+                    url: "/api/admin/dondathang",
+                    type: "GET",
+                    dataSrc: ""
                 },
-                { data: 'sdtGiaoHang' },
+                columns: [
+                    { data: "idDonDat" },
+
                     {
-                data: 'trangThai',
-                    className: 'text-center',
-                    render: s => {
-                        let color = 'secondary';
-                        if (s === 'Chờ xác nhận') color = 'warning';
-                        if (s === 'Đã duyệt') color = 'primary';
-                        if (s === 'Đang giao') color = 'info';
-                        if (s === 'Đã giao') color = 'success';
-                        return `
-                            <span class="badge bg-${color} trang-thai-don" data-status="${s}" style="cursor:pointer">
-                                ${s}
-                            </span>
-                        `;
+                        data: "nguoiDung",
+                        render: u => u?.userName ?? "---"
+                    },
+
+                    { data: "sdtGiaoHang" },
+
+                    {
+                        data: "trangThai",
+                        className: "text-center",
+                        render: s => {
+                            let color = "secondary";
+                            if (s === "Chờ xác nhận") color = "warning";
+                            if (s === "Đã duyệt") color = "primary";
+                            if (s === "Đang giao") color = "info";
+                            if (s === "Đã giao") color = "success";
+
+                            return `
+                                <span class="badge bg-${color} trang-thai-don"
+                                      data-status="${s}"
+                                      style="cursor:pointer">
+                                    ${s}
+                                </span>`;
+                        }
+                    },
+
+                    {
+                        data: "daThanhToan",
+                        className: "text-center",
+                        render: v =>
+                            v
+                            ? `<span class="badge bg-success">Đã thanh toán</span>`
+                            : `<span class="badge bg-danger">Chưa thanh toán</span>`
+                    },
+
+                    {
+                        data: "ngayDat",
+                        render: d => {
+                            if (!d) return "";
+                            let dt = new Date(d);
+                            return isNaN(dt)
+                                ? d
+                                : dt.toLocaleDateString("vi-VN");
+                        }
+                    },
+
+                    {
+                        data: "idDonDat",
+                        className: "text-center",
+                        render: id =>
+                            `<a href="/Admin/DonDatHang/Details?id=${id}"
+                                class="btn btn-sm btn-info">
+                                <i class="fa fa-eye"></i>
+                            </a>`
                     }
+                ],
+                language: { url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json" }
+            });
                 }
                 ,
                 {
@@ -132,17 +208,55 @@
                         showConfirmButton: false
                     });
 
-                    $('#tblDonHang').DataTable().ajax.reload(null, false);
-                },
-                error: function () {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Thất bại!',
-                        text: 'Không thể cập nhật trạng thái đơn hàng'
-                    });
-                }
-            });
-        });
-    });
-</script>
+            $("#btnRefreshDonHang").on("click", () => table.ajax.reload(null, false));
 
+            function nextStatus(current) {
+                if (current === "Chờ xác nhận") return "Đã duyệt";
+                if (current === "Đã duyệt") return "Đang giao";
+                if (current === "Đang giao") return "Đã giao";
+                return null;
+            }
+
+            $("#tblDonHang").on("click", ".trang-thai-don", function () {
+
+                const badge = $(this);
+                const oldStatus = badge.data("status");
+                const row = table.row(badge.closest("tr")).data();
+
+                if (oldStatus === "Đã giao") return;
+
+                const newStatus = nextStatus(oldStatus);
+                if (!newStatus) return;
+
+                Swal.fire({
+                    title: "Xác nhận cập nhật?",
+                    html: `<b>${oldStatus}</b> → <b class="text-primary">${newStatus}</b>`,
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonText: "Xác nhận",
+                    cancelButtonText: "Hủy",
+                }).then(res => {
+                    if (!res.isConfirmed) return;
+
+                    $.ajax({
+                        url: "/api/admin/dondathang/update-status",
+                        type: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                            idDonDat: row.idDonDat,
+                            trangThai: newStatus
+                        }),
+                        success: () => {
+                            Swal.fire("OK!", "Cập nhật thành công", "success");
+                            table.ajax.reload(null, false);
+                        },
+                        error: () => Swal.fire("Lỗi", "Không cập nhật được", "error")
+                    });
+                });
+
+            });
+
+        });
+    </script>
+
+}

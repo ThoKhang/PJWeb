@@ -1,0 +1,159 @@
+﻿@{
+    ViewData["Title"] = "Quản lý đơn hàng";
+}
+<link rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h3 class="fw-bold mb-0">Quản lý đơn hàng</h3>
+            <small class="text-muted">Theo dõi và quản lý trạng thái đơn hàng</small>
+        </div>
+    </div>
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <table id="tblDonHang"
+                   class="table table-hover align-middle table-bordered w-100">
+                <thead class="table-light">
+                    <tr>
+                        <th>Mã đơn</th>
+                        <th>Khách hàng</th>
+                        <th>SĐT giao hàng</th>
+                        <th class="text-center">Trạng thái</th>
+                        <th class="text-center">Thanh toán</th>
+                        <th>Ngày đặt</th>
+                        <th class="text-center">Thao tác</th>
+                    </tr>
+                </thead>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $(document).ready(function () {
+        $('#tblDonHang').DataTable({
+            ajax: {
+                url: '/api/admin/dondathang',
+                dataSrc: ''
+            },
+            columns: [
+                { data: 'idDonDat' },
+                {
+                    data: 'nguoiDung',
+                    render: u => u ? u.userName : '---'
+                },
+                { data: 'sdtGiaoHang' },
+                    {
+                data: 'trangThai',
+                    className: 'text-center',
+                    render: s => {
+                        let color = 'secondary';
+                        if (s === 'Chờ xác nhận') color = 'warning';
+                        if (s === 'Đã duyệt') color = 'primary';
+                        if (s === 'Đang giao') color = 'info';
+                        if (s === 'Đã giao') color = 'success';
+                        return `
+                            <span class="badge bg-${color} trang-thai-don" data-status="${s}" style="cursor:pointer">
+                                ${s}
+                            </span>
+                        `;
+                    }
+                }
+                ,
+                {
+                    data: 'daThanhToan',
+                    className: 'text-center',
+                    render: v => v
+                        ? `<span class="badge bg-success">Đã thanh toán</span>`
+                        : `<span class="badge bg-danger">Chưa thanh toán</span>`
+                },
+                {
+                    data: 'ngayDat',
+                    render: d => d ? new Date(d).toLocaleDateString('vi-VN') : ''
+                },
+                {
+                    data: 'idDonDat',
+                    className: 'text-center',
+                    render: id => `
+                        <a href="/Admin/DonDatHang/Details?id=${id}"
+                           class="btn btn-sm btn-info">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                    `
+                }
+            ]
+        });
+    });
+</script>
+<script>
+    function getNextStatus(current) {
+        switch (current) {
+            case 'Chờ xác nhận': return 'Đã duyệt';
+            case 'Đã duyệt': return 'Đang giao';
+            case 'Đang giao': return 'Đã giao';
+            default: return null;
+        }
+    }
+
+    $(document).on('click', '.trang-thai-don', function () {
+        const badge = $(this);
+        const currentStatus = badge.data('status');
+        const row = $('#tblDonHang').DataTable().row(badge.closest('tr')).data();
+
+        if (currentStatus === 'Đã giao') return;
+
+        const nextStatus = getNextStatus(currentStatus);
+        if (!nextStatus) return;
+
+        Swal.fire({
+            title: 'Xác nhận thay đổi?',
+            html: `
+                <b>${currentStatus}</b>
+                <br>→
+                <br><b class="text-primary">${nextStatus}</b>
+            `,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Xác nhận',
+            cancelButtonText: 'Hủy',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33'
+        }).then((result) => {
+            if (!result.isConfirmed) return;
+            $.ajax({
+                url: '/api/admin/dondathang/update-status',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    idDonDat: row.idDonDat,
+                    trangThai: nextStatus
+                }),
+                success: function () {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Cập nhật thành công!',
+                        timer: 1200,
+                        showConfirmButton: false
+                    });
+
+                    $('#tblDonHang').DataTable().ajax.reload(null, false);
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thất bại!',
+                        text: 'Không thể cập nhật trạng thái đơn hàng'
+                    });
+                }
+            });
+        });
+    });
+</script>
+
